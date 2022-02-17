@@ -2,17 +2,20 @@ import { Animated, Easing, View } from "react-native";
 import { useRef } from "react";
 import loop = Animated.loop;
 import { BlurView } from "expo-blur";
+import Logo from "module/common/component/display/Logo/Logo";
 
 const LogoAnimation = ({ radius = 50 }: { radius: number }): JSX.Element => {
     return (
-        <View style={{ backgroundColor: "#000000", width: 400, height: 400, alignItems: "center", justifyContent: "center" }}>
-            <Circle color={"#E4AF4C"} size={radius * 2} degree={0} radius={radius} slot={0} />
-            <Circle color={"#15C8BD"} size={radius * 2} degree={60} radius={radius} slot={2} />
-            <Circle color={"#47B5D6"} size={radius * 2} degree={120} radius={radius} slot={4} />
-            <Circle color={"#623EDF"} size={radius * 2} degree={180} radius={radius} slot={1} />
-            <Circle color={"#924AD9"} size={radius * 2} degree={240} radius={radius} slot={3} />
-            <Circle color={"#FF66B0"} size={radius * 2} degree={300} radius={radius} slot={5} />
-            <BlurView intensity={80} style={{ width: 400, height: 400, alignItems: "center", justifyContent: "center" }} />
+        <View style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }}>
+            <Circle color={"#E4AF4C"} size={radius * 2.5} degree={0} radius={radius} slot={0} />
+            <Circle color={"#924AD9"} size={radius * 2.5} degree={240} radius={radius} slot={3} />
+            <Circle color={"#FF66B0"} size={radius * 2.5} degree={300} radius={radius} slot={5} />
+            <Circle color={"#15C8BD"} size={radius * 2.5} degree={60} radius={radius} slot={2} />
+            <Circle color={"#47B5D6"} size={radius * 2.5} degree={120} radius={radius} slot={4} />
+            <Circle color={"#623EDF"} size={radius * 2.5} degree={180} radius={radius} slot={1} />
+            <BlurView intensity={120} tint="dark" style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }} >
+                <Logo direction={"vertical"} size={"lg"} appearance={"light"} />
+            </BlurView>
         </View>
     );
 };
@@ -53,22 +56,24 @@ const Circle = ({
                     easing: Easing.linear,
                 }),
             ),
-            Animated.sequence([
-                Animated.delay(animationDelayStart),
-                Animated.timing(scale, {
-                    useNativeDriver: true,
-                    toValue: 1.5,
-                    duration: scaleAnimationDuration,
-                    easing: Easing.linear,
-                }),
-                Animated.timing(scale, {
-                    useNativeDriver: true,
-                    toValue: 0.75,
-                    duration: scaleAnimationDuration,
-                    easing: Easing.linear,
-                }),
-                Animated.delay(animationDelayEnd),
-            ]),
+            Animated.loop(
+                Animated.sequence([
+                    Animated.delay(animationDelayStart),
+                    Animated.timing(scale, {
+                        useNativeDriver: true,
+                        toValue: 1.25,
+                        duration: scaleAnimationDuration,
+                        easing: Easing.linear,
+                    }),
+                    Animated.timing(scale, {
+                        useNativeDriver: true,
+                        toValue: 0.75,
+                        duration: scaleAnimationDuration,
+                        easing: Easing.linear,
+                    }),
+                    Animated.delay(animationDelayEnd),
+                ]),
+            ),
         ]),
     ).start();
 
