@@ -4,7 +4,7 @@ import loop = Animated.loop;
 import { BlurView } from "expo-blur";
 import Logo from "module/common/component/display/Logo/Logo";
 
-const LogoAnimation = ({ radius = 50 }: { radius: number }): JSX.Element => {
+const LogoAnimation = ({ radius = 40 }: { radius: number }): JSX.Element => {
     return (
         <View style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }}>
             <Circle color={"#E4AF4C"} size={radius * 2.5} degree={0} radius={radius} slot={0} />
@@ -14,7 +14,7 @@ const LogoAnimation = ({ radius = 50 }: { radius: number }): JSX.Element => {
             <Circle color={"#47B5D6"} size={radius * 2.5} degree={120} radius={radius} slot={4} />
             <Circle color={"#623EDF"} size={radius * 2.5} degree={180} radius={radius} slot={1} />
             <BlurView intensity={120} tint="dark" style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }} >
-                <Logo direction={"vertical"} size={"lg"} appearance={"light"} />
+                <Logo direction={"vertical"} size={"lg"} appearance={"light"} showText={false} />
             </BlurView>
         </View>
     );
