@@ -4,7 +4,7 @@ import { LogoPageIconRoot } from "./LogoPage.styles";
 import { ReactNode } from "react";
 
 export interface LogoPageProps {
-    children: ReactNode;
+    children?: React.ReactNode;
 }
 
 const LogoPage = ({ children }: LogoPageProps): JSX.Element => {
