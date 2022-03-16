@@ -16,15 +16,10 @@ const NoTransactionsComponent = (): JSX.Element => {
 
 const TransactionsList = (): JSX.Element => {
     const {
-        state: { selectedAccount, cells },
+        state: { selectedAccount },
     } = useWallet();
 
-    const {
-        data = [],
-        refetch,
-        isFetching,
-        isLoading,
-    } = useGetTransactions(selectedAccount !== undefined ? cells[selectedAccount].address : undefined);
+    const { data = [], refetch, isFetching, isLoading } = useGetTransactions(selectedAccount);
 
     return (
         <List

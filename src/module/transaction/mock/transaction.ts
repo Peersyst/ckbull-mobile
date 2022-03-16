@@ -1,4 +1,4 @@
-import { Transaction } from "../types";
+import { Transaction } from "@peersyst/ckb-peersyst-sdk";
 
 export const transaction: Transaction = {
     status: "confirmed",

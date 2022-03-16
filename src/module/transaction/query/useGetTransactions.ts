@@ -1,9 +1,7 @@
 import { useQuery } from "react-query";
-import getTransactions from "module/transaction/mock/getTransactions";
+import { ckbSdkInstance } from "module/common/service/CkbSdkService";
 
-const useGetTransactions = (address?: string) =>
-    useQuery(["transactions", address], (): any =>
-        address ? getTransactions(address) : new Promise((resolve) => setTimeout(() => resolve([]), 400)),
-    );
+const useGetTransactions = (account?: number) =>
+    useQuery(["transactions", account], (): any => ckbSdkInstance.getTransactionsFromAccount(account));
 
 export default useGetTransactions;

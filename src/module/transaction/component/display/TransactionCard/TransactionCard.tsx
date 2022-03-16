@@ -1,4 +1,4 @@
-import { Transaction } from "module/transaction/types";
+import { Transaction } from "@peersyst/ckb-peersyst-sdk";
 import { Col, Row, Typography } from "react-native-components";
 import { TransactionCardRoot, TransactionIcon } from "module/transaction/component/display/TransactionCard/TransactionCard.styles";
 import formatDate from "utils/formatDate";

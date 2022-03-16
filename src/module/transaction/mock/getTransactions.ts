@@ -1,4 +1,4 @@
-import { Transaction } from "module/transaction/types";
+import { Transaction } from "@peersyst/ckb-peersyst-sdk";
 import { transactions } from "module/transaction/mock/transaction";
 
 //eslint-disable-next-line @typescript-eslint/no-unused-vars

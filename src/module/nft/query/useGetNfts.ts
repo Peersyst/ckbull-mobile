@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import getNfts from "module/nft/mock/getNfts";
+import { ckbSdkInstance } from "module/common/service/CkbSdkService";
 
-export default function (address?: string): any {
-    return useQuery(["nfts", address], () => (address ? getNfts(address) : new Promise((resolve) => setTimeout(() => resolve([]), 400))));
+export default function (account?: number): any {
+    return useQuery(["nfts", account], () => ckbSdkInstance.getNfts());
 }

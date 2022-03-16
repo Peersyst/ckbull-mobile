@@ -1,4 +1,4 @@
-import { Nft } from "module/nft/types";
+import { Nft } from "@peersyst/ckb-peersyst-sdk";
 import { nfts } from "module/nft/mock/nft";
 
 //eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,4 +1,4 @@
-import generateMnemonic from "module/wallet/mock/generateMnemonic";
+import { WalletService } from "@peersyst/ckb-peersyst-sdk";
 import { Col, Typography, useTabs } from "react-native-components";
 import Card from "module/common/component/surface/Card/Card";
 import { translate } from "locale";
@@ -6,6 +6,7 @@ import Button from "module/common/component/input/Button/Button";
 import useCreateWallet from "module/wallet/hook/useCreateWallet";
 import { CreateWalletScreens } from "module/wallet/navigator/CreateWalletNavigatorGroup";
 import MnemonicList from "module/wallet/component/display/MnemonicList/MnemonicList";
+import { ckbSdkInstance } from "module/common/service/CkbSdkService";
 
 const WalletMnemonicScreen = (): JSX.Element => {
     const setTab = useTabs()[1];
@@ -16,7 +17,9 @@ const WalletMnemonicScreen = (): JSX.Element => {
         setTab(CreateWalletScreens.PICK_WALLET_MNEMONIC);
     };
 
-    const mnemonic = generateMnemonic();
+    const mnemonicStr = WalletService.createNewMnemonic();
+    ckbSdkInstance.initialize(mnemonicStr);
+    const mnemonic = mnemonicStr.split(" ");
 
     return (
         <Col flex={1} gap={30} justifyContent="flex-end">

@@ -15,14 +15,9 @@ const NoNftsComponent = (): JSX.Element => {
 
 const NftsList = (): JSX.Element => {
     const {
-        state: { selectedAccount, cells },
+        state: { selectedAccount },
     } = useWallet();
-    const {
-        data = [],
-        refetch,
-        isFetching,
-        isLoading,
-    } = useGetNfts(selectedAccount !== undefined ? cells[selectedAccount].address : undefined);
+    const { data = [], refetch, isFetching, isLoading } = useGetNfts(selectedAccount);
 
     return (
         <List
