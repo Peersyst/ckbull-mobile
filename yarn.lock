@@ -1094,10 +1094,29 @@
     js-xxhash "^1.0.4"
     lodash.isequal "^4.5.0"
 
+"@ckb-lumos/base@0.18.0-rc6":
+  version "0.18.0-rc6"
+  resolved "https://registry.yarnpkg.com/@ckb-lumos/base/-/base-0.18.0-rc6.tgz#47fba5c619359e0715b191d806608f22bf96d52d"
+  integrity sha512-c/bgMljQaLYtB1HXioEDQUOKt+XyHnm7aB5JSaJm5GQHZsmgstf1H+XfOT6GWH2GyvC2FgltQxXt03DI5Er4vg==
+  dependencies:
+    "@ckb-lumos/bi" "0.18.0-rc6"
+    "@ckb-lumos/toolkit" "0.18.0-rc6"
+    "@types/lodash.isequal" "^4.5.5"
+    blake2b "^2.1.3"
+    js-xxhash "^1.0.4"
+    lodash.isequal "^4.5.0"
+
 "@ckb-lumos/bi@0.18.0-rc5":
   version "0.18.0-rc5"
   resolved "https://registry.yarnpkg.com/@ckb-lumos/bi/-/bi-0.18.0-rc5.tgz#3fe09c54e5c4b65b91e66d3a109b75b771a2f5a7"
   integrity sha512-diy7zGd1lqtEaz7ZB8uUEiobX7nTWC60NdZ/HWH90CG2g3g1HhDBkrSVkrASzEnH6N6hbH+YBUzOngpJ8HMZRA==
+  dependencies:
+    jsbi "^4.1.0"
+
+"@ckb-lumos/bi@0.18.0-rc6":
+  version "0.18.0-rc6"
+  resolved "https://registry.yarnpkg.com/@ckb-lumos/bi/-/bi-0.18.0-rc6.tgz#9c9754ebe7bd95ebcf907f5cac9e4619273d6056"
+  integrity sha512-5qWS+7ssrV6CqM0qMuSILbqUto93VDJNBdr6yA2Q1y+3/WCXmP8LkZ7aczCHaNH4Vpv9VpQjCtps8LXaZIBqug==
   dependencies:
     jsbi "^4.1.0"
 
@@ -1110,6 +1129,18 @@
     "@ckb-lumos/bi" "0.18.0-rc5"
     "@ckb-lumos/rpc" "0.18.0-rc5"
     "@ckb-lumos/toolkit" "0.18.0-rc5"
+    cross-fetch "^3.1.4"
+    events "^3.3.0"
+
+"@ckb-lumos/ckb-indexer@0.18.0-rc6":
+  version "0.18.0-rc6"
+  resolved "https://registry.yarnpkg.com/@ckb-lumos/ckb-indexer/-/ckb-indexer-0.18.0-rc6.tgz#f1695f4a5024dd1b4ad61972cc57da52571b6285"
+  integrity sha512-GlqYXuZu7MWDnNFeNo4KgGEXMm1WJz3nrZgdKNmUJnK9n9LVPov/fVyt7FAEJosfAGhNiHhWwimXm0RaK54MIg==
+  dependencies:
+    "@ckb-lumos/base" "0.18.0-rc6"
+    "@ckb-lumos/bi" "0.18.0-rc6"
+    "@ckb-lumos/rpc" "0.18.0-rc6"
+    "@ckb-lumos/toolkit" "0.18.0-rc6"
     cross-fetch "^3.1.4"
     events "^3.3.0"
 
@@ -1126,6 +1157,19 @@
     "@ckb-lumos/toolkit" "0.18.0-rc5"
     immutable "^4.0.0-rc.12"
 
+"@ckb-lumos/common-scripts@0.18.0-rc6":
+  version "0.18.0-rc6"
+  resolved "https://registry.yarnpkg.com/@ckb-lumos/common-scripts/-/common-scripts-0.18.0-rc6.tgz#cde64a50f517115300f627822f85ffb1ed07b4e1"
+  integrity sha512-OC3nqaIkK4lqoQsY5RyxXlzv7wekMImkaDgYu75PAwnRnypT8ZuByeGFZtFtYmIWKKopR8IM5fwvUIjPIk3QWg==
+  dependencies:
+    "@ckb-lumos/base" "0.18.0-rc6"
+    "@ckb-lumos/bi" "0.18.0-rc6"
+    "@ckb-lumos/config-manager" "0.18.0-rc6"
+    "@ckb-lumos/helpers" "0.18.0-rc6"
+    "@ckb-lumos/rpc" "0.18.0-rc6"
+    "@ckb-lumos/toolkit" "0.18.0-rc6"
+    immutable "^4.0.0-rc.12"
+
 "@ckb-lumos/config-manager@0.18.0-rc5":
   version "0.18.0-rc5"
   resolved "https://registry.yarnpkg.com/@ckb-lumos/config-manager/-/config-manager-0.18.0-rc5.tgz#b5c23fd07371f9ea45826c3f260a26b9bc051c84"
@@ -1133,6 +1177,16 @@
   dependencies:
     "@ckb-lumos/base" "0.18.0-rc5"
     "@ckb-lumos/bi" "0.18.0-rc5"
+    "@types/deep-freeze-strict" "^1.1.0"
+    deep-freeze-strict "^1.1.1"
+
+"@ckb-lumos/config-manager@0.18.0-rc6":
+  version "0.18.0-rc6"
+  resolved "https://registry.yarnpkg.com/@ckb-lumos/config-manager/-/config-manager-0.18.0-rc6.tgz#00bc093222283ba77508dc5e883c4f1154c64c74"
+  integrity sha512-Eyh9cZ+yEmc15C6pxqz4Inz6NsA0N861IwWhnZXND6eeFUn7jky2foJrJaTogztTBtbIzbqf+0gU7C4R0mgxLg==
+  dependencies:
+    "@ckb-lumos/base" "0.18.0-rc6"
+    "@ckb-lumos/bi" "0.18.0-rc6"
     "@types/deep-freeze-strict" "^1.1.0"
     deep-freeze-strict "^1.1.1"
 
@@ -1148,6 +1202,18 @@
     sha3 "^2.1.3"
     uuid "^8.3.0"
 
+"@ckb-lumos/hd@0.18.0-rc6":
+  version "0.18.0-rc6"
+  resolved "https://registry.yarnpkg.com/@ckb-lumos/hd/-/hd-0.18.0-rc6.tgz#4bc3c5cafc63a5cab6e828ae5b99775c4a0a14ff"
+  integrity sha512-ED5jB1D5slPUJQuK2uqkUZf9JwONv0RQIFeSAN+w7GDM1rStmVGOzPBZWMpK+rxwERlJNF1wvrje2nOWjulpdw==
+  dependencies:
+    "@ckb-lumos/base" "0.18.0-rc6"
+    "@ckb-lumos/bi" "0.18.0-rc6"
+    bn.js "^5.1.3"
+    elliptic "^6.5.4"
+    sha3 "^2.1.3"
+    uuid "^8.3.0"
+
 "@ckb-lumos/helpers@0.18.0-rc5":
   version "0.18.0-rc5"
   resolved "https://registry.yarnpkg.com/@ckb-lumos/helpers/-/helpers-0.18.0-rc5.tgz#7a63d6841b9478ec43194768ebff62f3fbefe359"
@@ -1157,6 +1223,18 @@
     "@ckb-lumos/bi" "0.18.0-rc5"
     "@ckb-lumos/config-manager" "0.18.0-rc5"
     "@ckb-lumos/toolkit" "0.18.0-rc5"
+    bech32 "^2.0.0"
+    immutable "^4.0.0-rc.12"
+
+"@ckb-lumos/helpers@0.18.0-rc6":
+  version "0.18.0-rc6"
+  resolved "https://registry.yarnpkg.com/@ckb-lumos/helpers/-/helpers-0.18.0-rc6.tgz#a7a1b37d79681284add236b8d4d820fa8a54fb2a"
+  integrity sha512-0LmFWBiUe49++PjcA9bU+Gb5clsYFp0hbZKlVmBPXqxw52fKbhEdT0ZzVHa8jesbeizOM/fVTFNaFJc6S45XFw==
+  dependencies:
+    "@ckb-lumos/base" "0.18.0-rc6"
+    "@ckb-lumos/bi" "0.18.0-rc6"
+    "@ckb-lumos/config-manager" "0.18.0-rc6"
+    "@ckb-lumos/toolkit" "0.18.0-rc6"
     bech32 "^2.0.0"
     immutable "^4.0.0-rc.12"
 
@@ -1175,6 +1253,21 @@
     "@ckb-lumos/rpc" "0.18.0-rc5"
     "@ckb-lumos/toolkit" "0.18.0-rc5"
 
+"@ckb-lumos/lumos@^0.18.0-rc6":
+  version "0.18.0-rc6"
+  resolved "https://registry.yarnpkg.com/@ckb-lumos/lumos/-/lumos-0.18.0-rc6.tgz#2deb0d8fa62115b910a39f0abcb5ea4ae92e8868"
+  integrity sha512-L7gaN4hAaGl7lluLUozMMwuGljvOnbkn4H1EPzCTIUNKXgLKVmhXfDJRgwGduCipIhSTcZcIeUZpYYLTOimjJQ==
+  dependencies:
+    "@ckb-lumos/base" "0.18.0-rc6"
+    "@ckb-lumos/bi" "0.18.0-rc6"
+    "@ckb-lumos/ckb-indexer" "0.18.0-rc6"
+    "@ckb-lumos/common-scripts" "0.18.0-rc6"
+    "@ckb-lumos/config-manager" "0.18.0-rc6"
+    "@ckb-lumos/hd" "0.18.0-rc6"
+    "@ckb-lumos/helpers" "0.18.0-rc6"
+    "@ckb-lumos/rpc" "0.18.0-rc6"
+    "@ckb-lumos/toolkit" "0.18.0-rc6"
+
 "@ckb-lumos/rpc@0.18.0-rc5":
   version "0.18.0-rc5"
   resolved "https://registry.yarnpkg.com/@ckb-lumos/rpc/-/rpc-0.18.0-rc5.tgz#cabdcf71894185c87c14acab39e69a5505ff25b5"
@@ -1184,10 +1277,24 @@
     "@ckb-lumos/bi" "0.18.0-rc5"
     "@ckb-lumos/toolkit" "0.18.0-rc5"
 
+"@ckb-lumos/rpc@0.18.0-rc6":
+  version "0.18.0-rc6"
+  resolved "https://registry.yarnpkg.com/@ckb-lumos/rpc/-/rpc-0.18.0-rc6.tgz#a8bbaf5869d77aac919fcfc7a8d1ffe63d2231fe"
+  integrity sha512-0C/yW9BiEUpILzAOZ/D1J2ZLTUt1jyoJ/Qu2RgovEeQYBCkWavJdIV+3fS4mKxqZ8XOyIckOfjA0Fsmp1dLfgA==
+  dependencies:
+    "@ckb-lumos/base" "0.18.0-rc6"
+    "@ckb-lumos/bi" "0.18.0-rc6"
+    "@ckb-lumos/toolkit" "0.18.0-rc6"
+
 "@ckb-lumos/toolkit@0.18.0-rc5":
   version "0.18.0-rc5"
   resolved "https://registry.yarnpkg.com/@ckb-lumos/toolkit/-/toolkit-0.18.0-rc5.tgz#b6bef090276c01bcfb8c11c4f524994f0edc29af"
   integrity sha512-A+QPaPo+Aad6Bqk/Ci84kh9MWVSEPFNsewbGMnP5Sph9JoINa8uYm+xE1JjfKLFRIV1X5oQDJwKkPklECPZiOg==
+
+"@ckb-lumos/toolkit@0.18.0-rc6":
+  version "0.18.0-rc6"
+  resolved "https://registry.yarnpkg.com/@ckb-lumos/toolkit/-/toolkit-0.18.0-rc6.tgz#e11849aab895bd152b953ce0cd25101970111d06"
+  integrity sha512-s4VweBERcelCupeaAZlspaAXJFZH9BGlLkPbYUDbVuNz7Fmss39FqKQOJohS9rBqLkeINxO4BmuSjdCaqnuDfg==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
@@ -1756,6 +1863,15 @@
   resolved "git+https://github.com/Peersyst/ckb-peersyst-sdk#8a05172b571362fa1b81c0dbab3ab26e9ba90bbb"
   dependencies:
     "@ckb-lumos/lumos" "^0.18.0-rc5"
+    "@rather-labs/nrc-721-sdk" "0.0.15"
+    cross-fetch "^3.1.5"
+    rimraf "^3.0.2"
+
+"@peersyst/ckb-peersyst-sdk@git+https://github.com/Peersyst/ckb-peersyst-sdk#v1.0.0":
+  version "1.0.0"
+  resolved "git+https://github.com/Peersyst/ckb-peersyst-sdk#10f224968dd59fb544151da07d6009aa4b38affd"
+  dependencies:
+    "@ckb-lumos/lumos" "^0.18.0-rc6"
     "@rather-labs/nrc-721-sdk" "0.0.15"
     cross-fetch "^3.1.5"
     rimraf "^3.0.2"

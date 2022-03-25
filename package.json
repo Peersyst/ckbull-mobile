@@ -16,7 +16,7 @@
         "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0"
     },
     "dependencies": {
-        "@peersyst/ckb-peersyst-sdk": "git+https://github.com/Peersyst/ckb-peersyst-sdk",
+        "@peersyst/ckb-peersyst-sdk": "git+https://github.com/Peersyst/ckb-peersyst-sdk#v1.0.0",
         "@peersyst/react-hooks": "^1.1.2",
         "@peersyst/react-native-styled": "^0.1.0",
         "@peersyst/react-types": "^1.2.0",
