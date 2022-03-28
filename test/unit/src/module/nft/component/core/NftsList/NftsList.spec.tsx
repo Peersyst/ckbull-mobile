@@ -1,5 +1,5 @@
 import * as UseWallet from "module/wallet/hook/useWallet";
-import * as GetNfts from "module/nft/mock/getNfts";
+import { ckbSdkInstance } from "module/common/service/CkbSdkService";
 import { render, SuccessApiCall } from "test-utils";
 import { nfts } from "mocks/nft";
 import NftsList from "module/nft/component/core/NftsList/NftsList";
@@ -14,7 +14,7 @@ describe("NftsList tests", () => {
 
     test("Renders correctly", async () => {
         jest.spyOn(UseWallet, "default").mockReturnValue(mockedUseWallet);
-        jest.spyOn(GetNfts, "default").mockReturnValue(SuccessApiCall(nfts));
+        jest.spyOn(ckbSdkInstance, "getNfts").mockReturnValue(SuccessApiCall(nfts));
 
         const screen = render(<NftsList />);
 
@@ -25,7 +25,7 @@ describe("NftsList tests", () => {
 
     test("Renders correctly without transactions", async () => {
         jest.spyOn(UseWallet, "default").mockReturnValue(mockedUseWallet);
-        jest.spyOn(GetNfts, "default").mockReturnValue(SuccessApiCall([]));
+        jest.spyOn(ckbSdkInstance, "getNfts").mockReturnValue(SuccessApiCall([]));
         const screen = render(<NftsList />);
         await waitFor(() => expect(screen.getAllByText(translate("no_nfts"))));
     });

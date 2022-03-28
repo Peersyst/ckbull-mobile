@@ -1,3 +1,4 @@
+import { WalletService } from "@peersyst/ckb-peersyst-sdk";
 import { render } from "test-utils";
 import WalletMnemonicScreen from "module/wallet/screen/WalletMnemonicScreen";
 import { translate } from "locale";
@@ -5,6 +6,7 @@ import { fireEvent } from "@testing-library/react-native";
 import * as UseCreateWalletState from "module/wallet/hook/useCreateWallet";
 import * as UseTabs from "module/common/component/base/navigation/Tabs/hook/useTabs";
 import { CreateWalletScreens } from "module/wallet/navigator/CreateWalletNavigatorGroup";
+import generateMnemonic from "module/wallet/mock/generateMnemonic";
 
 describe("WalletMnemonicScreen tests", () => {
     afterAll(() => {
@@ -12,6 +14,7 @@ describe("WalletMnemonicScreen tests", () => {
     });
 
     test("Renders correctly", () => {
+        jest.spyOn(WalletService, "createNewMnemonic").mockReturnValue(generateMnemonic().join(" "));
         const screen = render(<WalletMnemonicScreen />);
 
         screen.getByText(translate("keep_this_safe"));
@@ -25,6 +28,7 @@ describe("WalletMnemonicScreen tests", () => {
 
     test("Sets wallet mnemonic state and navigates to enter wallet mnemonic", () => {
         const setMnemonic = jest.fn();
+        jest.spyOn(WalletService, "createNewMnemonic").mockReturnValue(generateMnemonic().join(" "));
         jest.spyOn(UseCreateWalletState, "default").mockReturnValue({
             state: { name: undefined, pin: undefined, mnemonic: undefined },
             setName: jest.fn(),
