@@ -30,16 +30,17 @@ export const theme = createTheme({
             ...defaultTheme.palette.status,
             success: "#36b930",
         },
+        address: ["#47B5D6", "#924AD9", "#E4AF4C", "#15C8BD", "#623EDF", "#FF66B0"],
     },
     typography: {
         h1: {
-            fontSize: 24,
+            fontSize: 22,
         },
         h2: {
-            fontSize: 20,
+            fontSize: 18,
         },
         h3: {
-            fontSize: 18,
+            fontSize: 16,
         },
         h4: undefined,
         h5: undefined,
@@ -48,6 +49,6 @@ export const theme = createTheme({
         subtitle2: undefined,
     },
     borderRadius: 24,
-    toolbarHeight: 55,
+    toolbarHeight: 44,
     translate,
 });

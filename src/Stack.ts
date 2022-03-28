@@ -6,11 +6,13 @@ export type MainStackParamsList = {
     Main: undefined;
     Home: undefined;
     Settings: undefined;
+    GeneralSettings: undefined;
+    SecuritySettings: undefined;
     Notifications: undefined;
     Dao: undefined;
     News: undefined;
     Send: undefined;
-    Receive: undefined;
+    Receive: { address: string };
 };
 export type RootStackParamsList = {
     //Auth
