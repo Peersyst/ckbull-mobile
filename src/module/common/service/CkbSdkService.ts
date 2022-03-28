@@ -20,19 +20,19 @@ export class CKBSDKService {
         }
     }
 
-    async getCKBBalance(accountId = 0): Promise<CKBBalance> {
+    async getCKBBalance(): Promise<CKBBalance> {
         this.isInitialized();
-        return this.wallet.getCKBBalance(accountId);
+        return this.wallet.getCKBBalance();
     }
 
-    async getTransactionsFromAccount(accountId = 0): Promise<Transaction[]> {
+    async getTransactions(): Promise<Transaction[]> {
         this.isInitialized();
-        return this.wallet.getTransactions(accountId);
+        return this.wallet.getTransactions();
     }
 
-    async getNfts(accountId = 0): Promise<Nft[]> {
+    async getNfts(): Promise<Nft[]> {
         this.isInitialized();
-        return this.wallet.getNftsBalance(accountId);
+        return this.wallet.getNftsBalance();
     }
 }
 

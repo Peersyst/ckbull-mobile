@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import { ckbSdkInstance } from "module/common/service/CkbSdkService";
 
-const useGetTransactions = (account?: number) =>
-    useQuery(["transactions", account], (): any => ckbSdkInstance.getTransactionsFromAccount(account));
+const useGetTransactions = () => useQuery(["transactions"], (): any => ckbSdkInstance.getTransactions());
 
 export default useGetTransactions;

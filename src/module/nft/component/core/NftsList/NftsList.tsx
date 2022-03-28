@@ -1,4 +1,3 @@
-import useWallet from "module/wallet/hook/useWallet";
 import useGetNfts from "module/nft/query/useGetNfts";
 import NftCard from "module/nft/component/display/NftCard/NftCard";
 import { translate } from "locale";
@@ -6,10 +5,7 @@ import MainList from "module/main/component/display/MainList/MainList";
 import EmptyListComponent from "module/common/component/display/EmptyListComponent/EmptyListComponent";
 
 const NftsList = (): JSX.Element => {
-    const {
-        state: { selectedAccount },
-    } = useWallet();
-    const { data = [], refetch, isLoading } = useGetNfts(selectedAccount);
+    const { data = [], refetch, isLoading } = useGetNfts();
 
     return (
         <MainList

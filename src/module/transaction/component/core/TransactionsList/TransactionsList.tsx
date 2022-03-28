@@ -1,16 +1,11 @@
 import TransactionCard from "module/transaction/component/display/TransactionCard/TransactionCard";
 import useGetTransactions from "module/transaction/query/useGetTransactions";
-import useWallet from "module/wallet/hook/useWallet";
 import { translate } from "locale";
 import MainList from "module/main/component/display/MainList/MainList";
 import EmptyListComponent from "module/common/component/display/EmptyListComponent/EmptyListComponent";
 
 const TransactionsList = (): JSX.Element => {
-    const {
-        state: { selectedAccount },
-    } = useWallet();
-
-    const { data = [], refetch, isLoading } = useGetTransactions(selectedAccount);
+    const { data = [], refetch, isLoading } = useGetTransactions();
 
     return (
         <MainList
