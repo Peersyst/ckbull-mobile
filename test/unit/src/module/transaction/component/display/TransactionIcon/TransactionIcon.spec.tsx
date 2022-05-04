@@ -1,6 +1,6 @@
 import { render } from "test-utils";
 import TransactionIcon from "module/transaction/component/display/TransactionIcon/TransactionIcon";
-import { TransactionType } from "@peersyst/ckb-peersyst-sdk";
+import { TransactionType } from "module/transaction/types";
 
 describe("TransactionIcon tests", () => {
     test("Renders SendIcon", () => {
@@ -32,9 +32,7 @@ describe("TransactionIcon tests", () => {
     });
 
     test("Renders SmartContractIcon", () => {
-        const screen = render(<TransactionIcon type={TransactionType.SMART_CONTRACT_SEND} />);
-        expect(screen.getByTestId("SmartContractIcon")).toBeDefined();
-        screen.rerender(<TransactionIcon type={TransactionType.SMART_CONTRACT_RECEIVE} />);
+        const screen = render(<TransactionIcon type={TransactionType.SMART_CONTRACT} />);
         expect(screen.getByTestId("SmartContractIcon")).toBeDefined();
     });
 

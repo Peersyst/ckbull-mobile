@@ -1,15 +1,19 @@
 import { useQuery } from "react-query";
 import { QueryResult } from "query-utils";
-import { DAOUnlockableAmount } from "@peersyst/ckb-peersyst-sdk";
-import { serviceInstancesMap } from "module/wallet/state/WalletState";
-import useSelectedWalletIndex from "module/wallet/hook/useSelectedWalletIndex";
+import useWalletState from "module/wallet/hook/useWalletState";
+import { DAOUnlockableAmount } from "module/common/service/mock/CkbServiceMock.types";
 
 const useGetDAOUnlockableAmounts = (index?: number): QueryResult<DAOUnlockableAmount[]> => {
-    const selectedWalletIndex = useSelectedWalletIndex();
-    const usedIndex = index ?? selectedWalletIndex;
-    return useQuery(["daoUnlockableAmounts", usedIndex], () => serviceInstancesMap.get(usedIndex)!.getDAOUnlockableAmounts() ?? [], {
-        refetchInterval: 15000,
-    });
+    const {
+        state: { wallets, selectedWallet },
+    } = useWalletState();
+    let usedIndex = 0;
+    if (index !== undefined) usedIndex = index;
+    else if (selectedWallet !== undefined) {
+        usedIndex = selectedWallet < wallets.length ? selectedWallet : wallets.length - 1;
+    }
+    const serviceInstance = wallets[0].serviceInstance;
+    return useQuery(["daoUnlockableAmounts", usedIndex], () => serviceInstance?.getDAOUnlockableAmounts());
 };
 
 export default useGetDAOUnlockableAmounts;

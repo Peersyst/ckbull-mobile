@@ -2,9 +2,11 @@ import { createBackdrop, ExposedBackdropProps, TabPanel, Tabs } from "react-nati
 import { translate } from "locale";
 import { useState } from "react";
 import GlassNavigatorModal from "module/common/component/navigation/GlassNavigatorModal/GlassNavigatorModal";
+import useGetFee from "module/transaction/query/useGetFee";
+import { useRecoilValue } from "recoil";
+import settingsState from "module/settings/state/SettingsState";
 import SelectAccountAndDepositScreen from "module/dao/screen/SelectAccountAndDepositScreen/SelectAccountAndDepositScreen";
 import WithdrawConfirmationScreen from "module/dao/screen/WithdrawConfirmationScreen/WithdrawConfirmationScreen";
-import { FeeRate } from "@peersyst/ckb-peersyst-sdk";
 
 export enum WithdrawScreens {
     SELECT_ACCOUNT,
@@ -18,12 +20,14 @@ export interface WithdrawForm {
 }
 
 export interface WithdrawSummary extends WithdrawForm {
-    feeRate?: FeeRate;
+    feeRate?: string;
 }
 
 const WithdrawModal = createBackdrop((props: ExposedBackdropProps) => {
     const [activeIndex, setActiveIndex] = useState(WithdrawScreens.SELECT_ACCOUNT);
+    const { fee } = useRecoilValue(settingsState);
     const [withdrawInfo, setWithdrawInfo] = useState<WithdrawSummary>({ receiverIndex: 0, depositIndex: 0 });
+    useGetFee(fee);
 
     return (
         <GlassNavigatorModal

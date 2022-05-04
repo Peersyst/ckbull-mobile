@@ -5,6 +5,7 @@ import Button from "module/common/component/input/Button/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
 import sendRecoilState from "module/transaction/state/SendState";
 import { useState } from "react";
+import useGetFee from "module/transaction/query/useGetFee";
 import useGetBalance from "module/wallet/query/useGetBalance";
 import settingsState from "module/settings/state/SettingsState";
 import { SendScreens } from "module/transaction/component/core/SendModal/SendModal";
@@ -14,48 +15,40 @@ import Card from "module/common/component/surface/Card/Card";
 import ControlledSuspense from "module/common/component/base/feedback/ControlledSuspense/ControlledSuspense";
 import { DepositScreens } from "module/dao/component/core/DepositModal/DepositModal";
 import CenteredLoader from "module/common/component/feedback/CenteredLoader/CenteredLoader";
-import { MINIMUM_DAO_DEPOSIT } from "@env";
-import { convertCKBToMini } from "module/wallet/utils/convertCKBToMini";
 
 export interface SendAmountAndMessageResult {
     amount: string;
     message: string;
 }
 
-export interface SendSetAmountScreenProps {
+interface SendSetAmountScreenProps {
     type?: "dao" | "send";
 }
 
 const SendSetAmountScreen = ({ type = "send" }: SendSetAmountScreenProps): JSX.Element => {
     const [sendState, setSendState] = useRecoilState(sendRecoilState);
     const [amount, setAmount] = useState(sendState.amount || "");
-    const { fee } = useRecoilValue(settingsState);
+    const { fee: selectedFee } = useRecoilValue(settingsState);
+    const { data: fee, isLoading: feeIsLoading } = useGetFee(selectedFee);
     const { data: balance, isLoading: balanceIsLoading } = useGetBalance(sendState.senderWalletIndex);
     const setTab = useSetTab();
 
     const handleSubmit = ({ amount, message }: SendAmountAndMessageResult): void => {
-        const finalAmount = convertCKBToMini(amount).toString();
-        setSendState((oldState) => ({ ...oldState, amount: finalAmount, message, fee }));
+        setSendState((oldState) => ({ ...oldState, amount, message, fee }));
         setTab(type === "send" ? SendScreens.CONFIRMATION : DepositScreens.CONFIRMATION);
     };
 
     return (
-        <ControlledSuspense isLoading={balanceIsLoading} fallback={<CenteredLoader color="black" />}>
+        <ControlledSuspense isLoading={feeIsLoading || balanceIsLoading} fallback={<CenteredLoader color="black" />}>
             <Form onSubmit={handleSubmit}>
                 <Col gap="15%">
                     <CKBAmountInputContainer>
-                        <CKBAmountInput
-                            type={type}
-                            fee={fee}
-                            amount={amount}
-                            setAmount={setAmount}
-                            freeBalance={balance?.freeBalance ?? 0}
-                        />
+                        <CKBAmountInput fee={fee!} amount={amount} setAmount={setAmount} freeBalance={balance?.freeBalance || BigInt(0)} />
                     </CKBAmountInputContainer>
                     {type === "dao" ? (
                         <Card>
                             <Typography variant="body1" textAlign="center">
-                                {translate("deposit_warning", { dao_min_deposit: MINIMUM_DAO_DEPOSIT })}
+                                {translate("deposit_warning")}
                             </Typography>
                         </Card>
                     ) : (

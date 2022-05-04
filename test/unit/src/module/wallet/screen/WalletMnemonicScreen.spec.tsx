@@ -3,15 +3,8 @@ import WalletMnemonicScreen from "module/wallet/screen/WalletMnemonicScreen";
 import { translate } from "locale";
 import { fireEvent } from "@testing-library/react-native";
 import * as UseCreateWalletState from "module/wallet/hook/useCreateWallet";
-import { WalletService } from "@peersyst/ckb-peersyst-sdk";
 
 describe("WalletMnemonicScreen tests", () => {
-    const mnemonicArr = ["witch", "collapse", "practice", "feed", "shame", "open", "despair", "creek", "road", "again", "ice", "least"];
-
-    beforeAll(() => {
-        jest.spyOn(WalletService, "createNewMnemonic").mockReturnValue(mnemonicArr.join(" "));
-    });
-
     afterAll(() => {
         jest.restoreAllMocks();
     });
@@ -45,7 +38,20 @@ describe("WalletMnemonicScreen tests", () => {
         const nextButton = screen.getByText(translate("next"));
         fireEvent.press(nextButton);
 
-        expect(setMnemonic).toHaveBeenCalledWith(mnemonicArr);
+        expect(setMnemonic).toHaveBeenCalledWith([
+            "witch",
+            "collapse",
+            "practice",
+            "feed",
+            "shame",
+            "open",
+            "despair",
+            "creek",
+            "road",
+            "again",
+            "ice",
+            "least",
+        ]);
         expect(handleNextScreen).toHaveBeenCalled();
     });
 });

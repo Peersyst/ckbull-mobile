@@ -1,10 +1,9 @@
 import SelectFee from "module/settings/components/core/SelectFee/SelectFee";
-import { defaultSettingsState } from "module/settings/state/SettingsState";
+import { defaultSettingsState, FeeRate } from "module/settings/state/SettingsState";
 import { fireEvent, render } from "test-utils";
 import * as Recoil from "recoil";
 import { translate } from "locale";
 import { SettingsStorage } from "module/settings/SettingsStorage";
-import { FeeRate } from "@peersyst/ckb-peersyst-sdk";
 
 describe("Test for the SelectFee component", () => {
     test("Renders correctly", () => {

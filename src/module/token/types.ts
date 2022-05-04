@@ -1,4 +1,8 @@
-import { TokenType as TokenSDKType } from "@peersyst/ckb-peersyst-sdk";
+export interface TokenSDKType {
+    args: string;
+    codeHash: string;
+    hashType: string;
+}
 
 export interface TokenType extends TokenSDKType {
     imageUri: string;
@@ -6,6 +10,8 @@ export interface TokenType extends TokenSDKType {
     name: string;
     description: string;
 }
+
+export type TokenListType = Pick<TokenType, "name" | "description" | "tokenName" | "imageUri" | "args">;
 
 export interface TokenAmount {
     type: TokenType;

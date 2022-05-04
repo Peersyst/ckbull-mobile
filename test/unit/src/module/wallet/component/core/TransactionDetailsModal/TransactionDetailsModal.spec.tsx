@@ -3,7 +3,7 @@ import TransactionDetailsModal from "module/transaction/component/core/Transacti
 import { createTransaction, receivedTransaction, sentTransaction } from "mocks/transaction";
 import { translate } from "locale";
 import { formatAddress } from "@peersyst/react-utils";
-import { TransactionType } from "@peersyst/ckb-peersyst-sdk";
+import { TransactionType } from "module/transaction/types";
 
 describe("TransactionDetailsModal test", () => {
     test("Renders SEND_CKB correctly", () => {
@@ -12,6 +12,7 @@ describe("TransactionDetailsModal test", () => {
         expect(screen.getByText(translate("sent"))).toBeDefined();
         expect(screen.getByText(translate("receiver"))).toBeDefined();
         expect(screen.getByText(formatAddress(sentTransaction.outputs[0].address, "middle", 8))).toBeDefined();
+        expect(screen.getByText(translate("message"))).toBeDefined();
         expect(screen.getByText(translate("hash"))).toBeDefined();
         expect(screen.getByText(sentTransaction.transactionHash)).toBeDefined();
     });
@@ -24,6 +25,7 @@ describe("TransactionDetailsModal test", () => {
         expect(screen.getByText(formatAddress(receivedTransaction.inputs[0].address, "middle", 6))).toBeDefined();
         expect(screen.getByText(formatAddress(receivedTransaction.inputs[1].address, "middle", 6))).toBeDefined();
         expect(screen.getByText(formatAddress(receivedTransaction.inputs[2].address, "middle", 6))).toBeDefined();
+        expect(screen.getByText(translate("message"))).toBeDefined();
         expect(screen.getByText(translate("hash"))).toBeDefined();
         expect(screen.getByText(receivedTransaction.transactionHash)).toBeDefined();
     });

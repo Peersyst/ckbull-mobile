@@ -1,13 +1,14 @@
 import { QueryResult } from "query-utils";
 import { useQuery } from "react-query";
 import { TokenAmount } from "../types";
-import { serviceInstancesMap } from "module/wallet/state/WalletState";
-import useSelectedWalletIndex from "module/wallet/hook/useSelectedWalletIndex";
+import useWalletState from "module/wallet/hook/useWalletState";
 
 const useGetTokens = (index?: number): QueryResult<TokenAmount[]> => {
-    const selectedWallet = useSelectedWalletIndex();
-    const usedIndex = index ?? selectedWallet;
-    const serviceInstance = serviceInstancesMap.get(usedIndex);
+    const {
+        state: { wallets, selectedWallet },
+    } = useWalletState();
+    const usedIndex = index ?? selectedWallet ?? 0;
+    const serviceInstance = wallets[usedIndex].serviceInstance;
     return useQuery(["tokens", usedIndex], () => serviceInstance?.getTokensBalance());
 };
 

@@ -1,4 +1,4 @@
-import { Nft } from "@peersyst/ckb-peersyst-sdk";
+import { Nft } from "module/nft/types";
 
 export const nft: Nft = {
     tokenId: "1",

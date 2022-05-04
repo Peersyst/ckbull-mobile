@@ -1,10 +1,8 @@
-import { Col, Form, useToast } from "react-native-components";
+import { Col, Form } from "react-native-components";
 import MnemonicInput from "module/wallet/component/input/MnemonicInput/MnemonicInput";
 import Button from "module/common/component/input/Button/Button";
 import useCreateWallet from "module/wallet/hook/useCreateWallet";
 import { useEffect, useState } from "react";
-import { WalletService } from "@peersyst/ckb-peersyst-sdk";
-import { translate } from "locale";
 
 export interface MnemonicForm {
     mnemonic: string[];
@@ -18,7 +16,6 @@ export interface EnterWalletMnemonicScreenProps {
 const EnterWalletMnemonicScreen = ({ onSubmit, submitText }: EnterWalletMnemonicScreenProps): JSX.Element => {
     const { setMnemonic } = useCreateWallet();
     const [submitted, setSubmitted] = useState(false);
-    const { showToast } = useToast();
 
     useEffect(() => {
         if (submitted) {
@@ -29,13 +26,8 @@ const EnterWalletMnemonicScreen = ({ onSubmit, submitText }: EnterWalletMnemonic
 
     const handleSubmit = ({ mnemonic }: MnemonicForm) => {
         if (!submitted) {
-            const valid = WalletService.validateMnemonic(mnemonic.join(" "));
-            if (valid) {
-                setMnemonic(mnemonic);
-                setSubmitted(true);
-            } else {
-                showToast(translate("incorrect_mnemonic"), { type: "error" });
-            }
+            setMnemonic(mnemonic);
+            setSubmitted(true);
         }
     };
 

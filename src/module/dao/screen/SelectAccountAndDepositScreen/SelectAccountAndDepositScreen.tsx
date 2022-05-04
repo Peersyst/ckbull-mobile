@@ -1,20 +1,20 @@
 import { Col, Form, useSetTab } from "react-native-components";
 import FormGroup from "module/common/component/input/FormGroup/FormGroup";
 import { translate } from "locale";
+import Button from "module/common/component/input/Button/Button";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
 import { WithdrawForm, WithdrawScreens, WithdrawSummary } from "module/dao/component/core/WithdrawModal/WithdrawModal";
 import useGetDAOUnlockableAmounts from "module/dao/query/useGetDAOUnlockableAmounts";
 import { ErrorMessageText, WithdrawSelectorCard } from "./SelectAccountAndDepositScreen.styles";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import useWalletState from "module/wallet/hook/useWalletState";
 import ControlledSuspense from "module/common/component/base/feedback/ControlledSuspense/ControlledSuspense";
 import { useRecoilValue } from "recoil";
 import settingsState from "module/settings/state/SettingsState";
+import useGetFee from "module/transaction/query/useGetFee";
 import DepositsSelector from "module/dao/component/input/DepositsSelector/DepositsSelector";
 import CenteredLoader from "module/common/component/feedback/CenteredLoader/CenteredLoader";
 import useGetBalance from "module/wallet/query/useGetBalance";
-import { convertMiniToCKB } from "module/wallet/utils/convertMiniToCKB";
-import WithdrawButton from "./WithdrawButton";
 
 interface WithdrawSelectAccountScreenProps {
     setWithdrawInfo: Dispatch<SetStateAction<WithdrawSummary>>;
@@ -23,7 +23,8 @@ interface WithdrawSelectAccountScreenProps {
 const SelectAccountAndDepositScreen = ({ setWithdrawInfo }: WithdrawSelectAccountScreenProps) => {
     //Hooks
     const setTab = useSetTab();
-    const { fee } = useRecoilValue(settingsState);
+    const { fee: selectedFee } = useRecoilValue(settingsState);
+    const { data: fee, isLoading: feeIsLoading } = useGetFee(selectedFee);
     const {
         state: { selectedWallet: defaultSelectedWallet, wallets },
     } = useWalletState();
@@ -36,10 +37,10 @@ const SelectAccountAndDepositScreen = ({ setWithdrawInfo }: WithdrawSelectAccoun
                 : defaultSelectedWallet
             : 0;
     const [selectedWallet, setSelectedWallet] = useState<number>(finalSelectedWallet);
-    const [selectedDeposit, setSelectedDeposit] = useState<number>(0);
     const [isFirstTime, setIsFirstTime] = useState<boolean>(true);
-    const { data: unlockableDeposits = [], isLoading: depositsIsLoading } = useGetDAOUnlockableAmounts(selectedWallet);
-    const { data: { freeBalance } = {}, isLoading: balanceLoading } = useGetBalance(selectedWallet);
+    const { data = [], isLoading: depositsIsLoading } = useGetDAOUnlockableAmounts(selectedWallet);
+    const { data: { freeBalance = 0 } = {}, isLoading: balanceLoading } = useGetBalance(selectedWallet);
+    const unlockableDeposits = useMemo(() => data.filter((deposit) => deposit.unlockable), [data]);
     const [errMsg, setErrMsg] = useState<string>();
 
     useEffect(() => {
@@ -49,13 +50,10 @@ const SelectAccountAndDepositScreen = ({ setWithdrawInfo }: WithdrawSelectAccoun
     }, [depositsIsLoading]);
 
     useEffect(() => {
-        if (freeBalance === undefined) return;
-        if (freeBalance < convertMiniToCKB(fee)) {
-            setErrMsg(
-                translate("not_enough_balance_for_fees") + ".\n" + translate("transaction_fee", { fee: convertMiniToCKB(fee) || "-" }),
-            );
+        if (freeBalance < Number(fee)) {
+            setErrMsg(translate("not_enough_balance_for_fees") + ".\n" + translate("transaction_fee", { fee: fee || "-" }));
         } else setErrMsg(undefined);
-    }, [selectedWallet]);
+    }, [selectedWallet, feeIsLoading]);
 
     //Functions
     const handleSubmit = (withdrawInfo: WithdrawForm) => {
@@ -64,7 +62,10 @@ const SelectAccountAndDepositScreen = ({ setWithdrawInfo }: WithdrawSelectAccoun
     };
 
     return (
-        <ControlledSuspense isLoading={(isFirstTime && depositsIsLoading) || balanceLoading} fallback={<CenteredLoader color="black" />}>
+        <ControlledSuspense
+            isLoading={feeIsLoading || (isFirstTime && (depositsIsLoading || balanceLoading))}
+            fallback={<CenteredLoader color="black" />}
+        >
             <Form onSubmit={handleSubmit}>
                 <Col>
                     <Col gap={20}>
@@ -81,23 +82,18 @@ const SelectAccountAndDepositScreen = ({ setWithdrawInfo }: WithdrawSelectAccoun
                         <WithdrawSelectorCard>
                             <FormGroup label={`${translate("select_deposit")}:`} style={{ height: 80 }}>
                                 <ControlledSuspense isLoading={depositsIsLoading} activityIndicatorSize={"large"}>
-                                    <DepositsSelector
-                                        onChange={(deposit) => setSelectedDeposit(deposit as number)}
-                                        value={selectedDeposit}
-                                        name="depositIndex"
-                                        deposits={unlockableDeposits}
-                                        required
-                                        defaultValue={0}
-                                    />
+                                    <DepositsSelector name="depositIndex" deposits={unlockableDeposits} required defaultValue={0} />
                                 </ControlledSuspense>
                             </FormGroup>
                         </WithdrawSelectorCard>
-                        <WithdrawButton
-                            unlockableDeposits={unlockableDeposits}
-                            buttonLoading={balanceLoading || depositsIsLoading}
-                            selectedDeposit={selectedDeposit}
-                            errMsg={errMsg}
-                        />
+                        <Button
+                            variant="outlined"
+                            fullWidth
+                            loading={balanceLoading || depositsIsLoading}
+                            disabled={errMsg !== undefined || unlockableDeposits.length === 0}
+                        >
+                            {translate("next")}
+                        </Button>
                         {errMsg && (
                             <ErrorMessageText variant="body2" fontWeight="bold" textAlign="center">
                                 {errMsg}

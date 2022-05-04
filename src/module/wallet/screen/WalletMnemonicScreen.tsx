@@ -1,11 +1,10 @@
-import { WalletService } from "@peersyst/ckb-peersyst-sdk";
+import generateMnemonic from "module/wallet/mock/generateMnemonic";
 import { Col, Typography } from "react-native-components";
 import Card from "module/common/component/surface/Card/Card";
 import { translate } from "locale";
 import Button from "module/common/component/input/Button/Button";
 import useCreateWallet from "module/wallet/hook/useCreateWallet";
 import MnemonicList from "module/wallet/component/display/MnemonicList/MnemonicList";
-import { useMemo } from "react";
 
 export interface WalletMnemonicScreenProps {
     onNextScreen: () => void;
@@ -19,10 +18,7 @@ const WalletMnemonicScreen = ({ onNextScreen }: WalletMnemonicScreenProps): JSX.
         onNextScreen();
     };
 
-    const mnemonic = useMemo(() => {
-        const mnemonicStr = WalletService.createNewMnemonic();
-        return mnemonicStr.split(" ");
-    }, []);
+    const mnemonic = generateMnemonic();
 
     return (
         <Col flex={1} gap={30} justifyContent="flex-end">

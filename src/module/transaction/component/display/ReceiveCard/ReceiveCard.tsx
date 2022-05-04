@@ -6,10 +6,9 @@ import { Col, Row, Typography, useModal } from "react-native-components";
 import GoBack from "../../navigation/GoBack";
 import ReceiveModal from "../../core/ReceiveModal/ReceiveModal";
 import useSelectedWallet from "module/wallet/hook/useSelectedWallet";
-import { serviceInstancesMap } from "module/wallet/state/WalletState";
 
 const ReceiveCardContent = styled(Col, { justifyContent: "space-between" })(({ dimensions }) => ({
-    height: dimensions.height * 0.3,
+    height: dimensions.height * 0.25,
     paddingHorizontal: "2%",
     paddingBottom: dimensions.height * 0.005,
 }));
@@ -19,8 +18,7 @@ const TextAddress = styled(Typography, { textTransform: "uppercase" })(() => ({
 }));
 
 const ReceiveCard = (): JSX.Element => {
-    const { index } = useSelectedWallet();
-    const serviceInstance = serviceInstancesMap.get(index);
+    const { serviceInstance } = useSelectedWallet();
     const address = serviceInstance?.getAddress();
     const { hideModal } = useModal();
 
@@ -28,7 +26,7 @@ const ReceiveCard = (): JSX.Element => {
         <Card>
             <ReceiveCardContent>
                 <Row justifyContent="space-between" alignItems="center">
-                    <TextAddress variant="body1">{address}</TextAddress>
+                    <TextAddress variant="h3">{address}</TextAddress>
                     <CopyToClipboardIcon filled text={address || ""} toastMessage={translate("address_copied")} />
                 </Row>
                 <Typography variant="body2">{translate("receive_info")}</Typography>

@@ -1,4 +1,4 @@
-import { TransactionType } from "@peersyst/ckb-peersyst-sdk";
+import { TransactionType } from "module/transaction/types";
 
 export default function (type: TransactionType): boolean {
     switch (type) {

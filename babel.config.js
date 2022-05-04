@@ -30,7 +30,6 @@ module.exports = function (api) {
                     },
                 },
             ],
-            ["@babel/plugin-proposal-async-generator-functions"],
         ],
     };
 };

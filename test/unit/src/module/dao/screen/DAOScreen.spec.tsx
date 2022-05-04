@@ -4,13 +4,13 @@ import { render, SuccessApiCall } from "test-utils";
 import { translate } from "locale";
 import * as UseWalletState from "module/wallet/hook/useWalletState";
 import { mockedUseWallet } from "mocks/useWalletState";
-import { CKBSDKService } from "module/common/service/CkbSdkService";
+import { CkbServiceMock } from "module/common/service/mock/CkbServiceMock";
 
 describe("Test for the DAOScreen", () => {
     test("Renders correctly", async () => {
         jest.spyOn(UseWalletState, "default").mockReturnValue(mockedUseWallet);
-        jest.spyOn(CKBSDKService.prototype, "getTransactions").mockReturnValue([]);
-        jest.spyOn(CKBSDKService.prototype, "getDAOBalance").mockReturnValue(SuccessApiCall(MockedDAOBalance));
+        jest.spyOn(CkbServiceMock.prototype, "getTransactions").mockReturnValue(SuccessApiCall([]));
+        jest.spyOn(CkbServiceMock.prototype, "getDAOBalance").mockReturnValue(SuccessApiCall(MockedDAOBalance));
         const screen = render(<DAOScreen />);
         //DAO Card
         //Balance

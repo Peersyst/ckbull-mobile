@@ -3,7 +3,11 @@ import useWalletState from "module/wallet/hook/useWalletState";
 
 export default function (): Wallet {
     const {
-        state: { wallets, selectedWallet = 0 },
+        state: { wallets, selectedWallet },
     } = useWalletState();
-    return selectedWallet > wallets.length - 1 ? wallets[wallets.length - 1] : wallets[selectedWallet];
+    let usedIndex = 0;
+    if (selectedWallet !== undefined) {
+        usedIndex = selectedWallet < wallets.length ? selectedWallet : wallets.length - 1;
+    }
+    return wallets[usedIndex];
 }

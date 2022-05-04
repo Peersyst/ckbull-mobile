@@ -22,10 +22,8 @@ const DepositSummary = ({ amount, fee, senderName, senderAddress }: DepositSumma
                 <SummaryField label={translate("estimated_apc")}>
                     {daoBalance !== undefined ? `${getAPC(daoBalance)}%` : `${translate("loading_apc")}...`}
                 </SummaryField>
-            </Col>
-            <Col>
-                <SummaryText variant="body2" textAlign="center">
-                    <SummaryText variant="body2" fontWeight="bold" textAlign="center">
+                <SummaryText variant="body1" textAlign="center">
+                    <SummaryText variant="body1" fontWeight="bold">
                         {`${translate("attention")} `}
                     </SummaryText>
                     {translate("deposit_summary_warning")}
