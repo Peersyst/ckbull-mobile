@@ -1,5 +1,7 @@
 import { Animated, Easing, View } from "react-native";
 import { useRef } from "react";
+import { BlurView } from "expo-blur";
+import LogoCol from "module/common/component/display/Logos/LogoCol/LogoCol";
 
 const LogoAnimation = ({ radius = 40 }: { radius: number }): JSX.Element => {
     return (
@@ -10,9 +12,9 @@ const LogoAnimation = ({ radius = 40 }: { radius: number }): JSX.Element => {
             <Circle color={"#924AD9"} size={radius * 2.5} degree={240} radius={radius} slot={3} />
             <Circle color={"#47B5D6"} size={radius * 2.5} degree={120} radius={radius} slot={4} />
             <Circle color={"#FF66B0"} size={radius * 2.5} degree={300} radius={radius} slot={5} />
-            {/*<BlurView intensity={120} tint="dark" style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }} >
-                <Logo direction={"vertical"} size={"lg"} appearance={"light"} showText={false} />
-            </BlurView>*/}
+            <BlurView intensity={120} tint="dark" style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }} >
+                <LogoCol />
+            </BlurView>
         </View>
     );
 };
@@ -39,7 +41,7 @@ const Circle = ({
 
     const scale = useRef(new Animated.Value(0.75)).current;
 
-    const scaleAnimationDuration = animationTime / 6;
+    const scaleAnimationDuration = animationTime / 7;
     const animationDelayStart = slot * scaleAnimationDuration;
     const animationDelayEnd = animationTime - scaleAnimationDuration * 2 - animationDelayStart;
 

@@ -4,6 +4,7 @@ import { LogoPageIconRoot } from "./LogoPage.styles";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { LogoPageProvider } from "module/common/component/layout/LogoPage/LogoPageContext";
 import { Animated } from "react-native";
+import LogoAnimation from "module/common/component/display/LogoAnimation/LogoAnimation";
 
 export interface LogoPageProps {
     children?: ReactNode;
@@ -24,6 +25,7 @@ const LogoPage = ({ children }: LogoPageProps): JSX.Element => {
 
     return (
         <BasePage appearance="dark" header={false}>
+            <LogoAnimation />
             <LogoPageIconRoot style={{ flex: logoAnim }}>
                 <LogoCol />
             </LogoPageIconRoot>
