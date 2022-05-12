@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { StyleProp, TextStyle } from "react-native";
-import { TranslateFn } from "../input/TextInput/utils";
+import { ShadowPropTypesIOSStatic, TextStyle } from "react-native";
+import { ValidatorFactory, ValidatorKey } from "../input/TextInput/Validators";
 import { JSXElementConstructor } from "react";
+import { ToastAnimation, ToastPosition } from "../feedback/Toast";
 
 export type PaletteMode = "light" | "dark";
 
@@ -32,18 +33,18 @@ export type TypographyVariants =
     | "button";
 export interface TypographyVariantsOverrides {}
 export interface DefaultThemeTypography {
-    h1: StyleProp<TextStyle>;
-    h2: StyleProp<TextStyle>;
-    h3: StyleProp<TextStyle>;
-    h4: StyleProp<TextStyle>;
-    h5: StyleProp<TextStyle>;
-    h6: StyleProp<TextStyle>;
-    subtitle1: StyleProp<TextStyle>;
-    subtitle2: StyleProp<TextStyle>;
-    body1: StyleProp<TextStyle>;
-    body2: StyleProp<TextStyle>;
-    button: StyleProp<TextStyle>;
-    caption: StyleProp<TextStyle>;
+    h1: TextStyle;
+    h2: TextStyle;
+    h3: TextStyle;
+    h4: TextStyle;
+    h5: TextStyle;
+    h6: TextStyle;
+    subtitle1: TextStyle;
+    subtitle2: TextStyle;
+    body1: TextStyle;
+    body2: TextStyle;
+    button: TextStyle;
+    caption: TextStyle;
 }
 export interface ThemeTypography extends DefaultThemeTypography {}
 
@@ -65,25 +66,45 @@ export interface DefaultThemePalette {
 }
 export interface ThemePalette extends DefaultThemePalette {}
 
+export type Shadow = ShadowPropTypesIOSStatic & { elevation?: number | undefined };
+
 export interface DefaultThemeZIndex {
+    header: number;
     popover: number;
     modal: number;
     selectMenu: number;
     toast: number;
 }
+
 export interface ThemeZIndex extends DefaultThemeZIndex {}
+
+export interface ExtraValidators {}
+
+export type BlockchainLinksTypes = "address" | "tx";
+export interface BlockchainLinksTypesOverrides {}
+export interface DefaultBlockchainLinks {
+    address: string;
+    tx: string;
+}
+export interface BlockchainLinks extends DefaultBlockchainLinks {}
+
+export type TranslateKeys = ValidatorKey | "copied_to_clipboard";
+export type TranslateFn<T extends TranslateKeys = TranslateKeys> = (w: T, opts?: Record<string, string>) => string;
 
 export interface DefaultTheme {
     icons: ThemeIcons;
     typography: ThemeTypography;
     fonts?: ThemeFonts;
     palette: ThemePalette;
-    shadows: string[];
+    shadows: Shadow[];
     borderRadius: number;
-    /*skeletonAnimations: SkeletonAnimation;
+    toolbarHeight: number;
+    /*skeletonAnimations: SkeletonAnimation;*/
     toastAnimation: ToastAnimation;
-    toastPosition: ToastPosition;*/
+    toastPosition: ToastPosition;
     zIndex: ThemeZIndex;
     translate: TranslateFn;
+    validators: Record<keyof ExtraValidators, ValidatorFactory<unknown>>;
+    blockchainLinks: BlockchainLinks;
 }
 export interface Theme extends DefaultTheme {}

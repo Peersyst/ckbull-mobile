@@ -1,8 +1,9 @@
 import { ViewStyle, TextStyle, ButtonProps as NativeButtonProps } from "react-native";
 import { ReactElement, ReactNode } from "react";
 import { SX } from "@peersyst/react-native-styled";
+import { SizeType } from "module/common/types";
 
-export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonSize = SizeType;
 
 export type ButtonVariant = "contained" | "text" | "outlined";
 
@@ -30,13 +31,6 @@ export interface ButtonRootProps {
 
 export interface ButtonContainerProps {
     isLoading: boolean;
-}
-
-export interface ButtonSxProps {
-    variant?: ButtonVariant;
-    size?: ButtonSize;
-    pressed?: boolean;
-    disabled?: boolean;
 }
 
 /**
@@ -78,7 +72,7 @@ export interface ButtonProps extends Omit<NativeButtonProps, "title" | "color" |
     /**
      * Button sx
      */
-    sx?: SX<ButtonSxProps, ButtonStyles>;
+    sx?: SX<ButtonStyles>;
     /**
      * Button's text content
      */

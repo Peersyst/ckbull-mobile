@@ -1,11 +1,9 @@
 import { ButtonRoot, ButtonLoader, ButtonContent } from "./Button.styles";
 import { ButtonProps } from "./Button.types";
 import { TouchableWithoutFeedback, ActivityIndicator, Text } from "react-native";
-import { useContext, useMemo, useState } from "react";
-import { useStyled } from "@peersyst/react-native-styled";
+import { useContext, useState } from "react";
 import { Icon } from "../../display/Icon";
 import useButtonStyles from "./hooks/useButtonStyles";
-import { deepmerge } from "@peersyst/react-utils";
 import { FormContext } from "../Form";
 
 const Button = ({
@@ -19,22 +17,17 @@ const Button = ({
     fullWidth = false,
     disabled: disabledProp = false,
     variant = "contained",
-    style,
-    sx: sxProp,
+    style = {},
     ...rest
 }: ButtonProps): JSX.Element => {
     const [pressed, setPressed] = useState(false);
 
     const { handleSubmit, valid } = useContext(FormContext);
     const onPress = onPressProp || handleSubmit;
-    const disabled = disabledProp || valid === false;
+    const disabled = disabledProp || !valid;
 
-    const sx = useStyled(sxProp, { variant, size, disabled, pressed });
-    const styles = useMemo(() => deepmerge(style, sx()), [style, sx]);
-    const { textStyle, rootStyle } = useButtonStyles(styles || {}, variant, size, disabled, pressed);
-
+    const { textStyle, rootStyle } = useButtonStyles(style, variant, size, disabled, pressed);
     const pressable = !disabled && !loading;
-
     return (
         <TouchableWithoutFeedback
             onPress={(e) => pressable && onPress?.(e)}
@@ -43,7 +36,7 @@ const Button = ({
             onPressOut={() => pressable && setPressed(false)}
             {...rest}
         >
-            <ButtonRoot style={rootStyle} fullWidth={fullWidth}>
+            <ButtonRoot style={{ ...rootStyle, justifyContent: "center" }} fullWidth={fullWidth}>
                 {loading && (
                     <ButtonLoader>
                         {loadingElement ? (
@@ -56,7 +49,7 @@ const Button = ({
                         )}
                     </ButtonLoader>
                 )}
-                <ButtonContent isLoading={loading}>
+                <ButtonContent isLoading={loading} style={{ justifyContent: rootStyle["justifyContent"] || "center" }}>
                     {leftIcon && <Icon style={textStyle}>{leftIcon}</Icon>}
                     <Text style={textStyle}>{children}</Text>
                     {rightIcon && <Icon style={textStyle}>{rightIcon}</Icon>}

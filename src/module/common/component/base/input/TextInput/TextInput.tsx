@@ -1,13 +1,12 @@
 import { TextInputProps } from "./TextInput.types";
 import { Input, InvalidIcon, TextInputRoot, ValidIcon } from "./TextInput.styles";
-import { NativeSyntheticEvent, TextInputFocusEventData, Text } from "react-native";
+import { NativeSyntheticEvent, TextInputFocusEventData, Text, TextStyle } from "react-native";
 import { useControlled } from "@peersyst/react-hooks";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTextInputValidation } from "./hooks/useTextInputValidation";
 import { useFormNotification } from "../Form";
-import { useStyled, useTheme } from "@peersyst/react-native-styled";
+import { useTheme } from "@peersyst/react-native-styled";
 import useTextInputStyles from "./hooks/useTextInputStyles";
-import { deepmerge } from "@peersyst/react-utils";
 import { Col } from "../../layout/Col";
 import { Icon } from "../../display/Icon";
 import { IconButton } from "../IconButton";
@@ -32,11 +31,11 @@ const TextInput = ({
     hideTextElement: hideTextElementProp,
     clearable = false,
     clearElement: clearElementProp,
-    style: styleProp,
-    sx: sxProp,
+    style = {},
     onFocus,
     onBlur,
     secureTextEntry = false,
+    input,
     ...rest
 }: TextInputProps): JSX.Element => {
     const [value, setValue] = useControlled(defaultValue, valueProp, onChange);
@@ -69,16 +68,13 @@ const TextInput = ({
     const invalid = modified && !valid;
     const showValid = modified && valid && showValidProp;
 
-    const sx = useStyled(sxProp, { invalid, showValid, focused, disabled, readonly });
-
-    const styles = useMemo(() => deepmerge(styleProp, sx()), [styleProp, sx]);
     const {
         inputStyle: { placeholderColor = undefined, highlightColor = undefined, ...inputStyles } = {},
         errorStyle,
         hintStyle,
         rootStyle,
-    } = useTextInputStyles(styles || {}, invalid, showValid, disabled, focused);
-    const iconStyle = { ...inputStyles, fontSize: (inputStyles.fontSize || 0) + 4 };
+    } = useTextInputStyles(style, invalid, showValid, disabled, focused);
+    const iconStyle: TextStyle = { ...inputStyles, lineHeight: undefined, height: undefined, fontSize: (inputStyles.fontSize || 0) + 4 };
 
     const {
         icons: { invalid: Invalid, valid: Valid, show: Show, hide: Hide, cross: Cross },
@@ -90,7 +86,7 @@ const TextInput = ({
     const clearElement = clearElementProp || <Cross />;
 
     return (
-        <Col gap={5}>
+        <Col gap={5} style={{ width: "100%" }}>
             <TextInputRoot style={rootStyle}>
                 {prefix && <Icon style={iconStyle}>{prefix}</Icon>}
                 <Input
@@ -98,11 +94,12 @@ const TextInput = ({
                     selectionColor={highlightColor}
                     style={inputStyles}
                     value={value}
-                    onChangeText={(t) => setValue(t)}
+                    onChangeText={setValue}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                     editable={editable}
                     secureTextEntry={showText}
+                    as={input}
                     {...rest}
                 />
                 {clearable && !!value && editable && (
@@ -122,7 +119,8 @@ const TextInput = ({
                 )}
                 {suffix && <Icon style={iconStyle}>{suffix}</Icon>}
             </TextInputRoot>
-            {invalid ? <Text style={errorStyle}>{errors.join(", ")}</Text> : hint && <Text style={hintStyle}>{hint}</Text>}
+            {invalid && <Text style={errorStyle}>{errors.join(", ")}</Text>}
+            {hint && <Text style={hintStyle}>{hint}</Text>}
         </Col>
     );
 };

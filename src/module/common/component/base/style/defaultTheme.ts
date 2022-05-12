@@ -1,9 +1,9 @@
-import { Theme } from "./theme.types";
+import { DefaultTheme } from "./theme.types";
 import shadows from "./shadows";
 import { typography } from "./typography";
 import { CrossIcon, ErrorIcon, HideIcon, InfoIcon, InvalidIcon, ShowIcon, SuccessIcon, WarningIcon } from "../assets/icons";
 
-export const defaultTheme: Theme = {
+export const defaultTheme: DefaultTheme = {
     icons: {
         info: InfoIcon,
         error: ErrorIcon,
@@ -32,14 +32,20 @@ export const defaultTheme: Theme = {
     },
     shadows,
     borderRadius: 5,
-    /*skeletonAnimations: "wave",
+    toolbarHeight: 56,
+    /*skeletonAnimations: "wave",*/
     toastAnimation: "fadingSlide",
-    toastPosition: "top-right",*/
+    toastPosition: "top",
     zIndex: {
+        header: 10,
         popover: 10,
         modal: 100,
         selectMenu: 5,
         toast: 9999,
     },
     translate: (w: string) => w,
+    blockchainLinks: {
+        address: "https://explorer.harmony.one/address/",
+        tx: "https://explorer.harmony.one/tx/",
+    },
 };

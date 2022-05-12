@@ -24,6 +24,9 @@ export default function (): UseDefaultStylesResult {
             borderWidth: 2,
             borderColor: theme.palette.primary,
         },
+        text: {
+            borderColor: "transparent",
+        },
     };
 
     const defaultDisabledStyles: ButtonStyleWithVariant = {
@@ -42,23 +45,27 @@ export default function (): UseDefaultStylesResult {
         contained: {
             backgroundColor: darken(theme.palette.primary, 0.1),
         },
+        text: {
+            backgroundColor: "transparent",
+            textDecorationLine: "underline",
+        },
     };
 
     const defaultSizeStyles: ButtonSizeStyle = {
         sm: {
             paddingHorizontal: 10,
             height: 32,
-            fontSize: 13,
+            fontSize: 11,
         },
         md: {
             paddingHorizontal: 12,
             height: 40,
-            fontSize: 14,
+            fontSize: 12,
         },
         lg: {
             paddingHorizontal: 14,
             height: 48,
-            fontSize: 15,
+            fontSize: 13,
         },
     };
 

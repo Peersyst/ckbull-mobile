@@ -8,11 +8,14 @@ export function createTheme({
     typography,
     palette,
     borderRadius,
-    /*toastAnimation,
-    toastPosition,*/
+    toastAnimation,
+    toastPosition,
     zIndex,
     /*skeletonAnimations,*/
     translate,
+    toolbarHeight,
+    validators,
+    blockchainLinks,
     ...rest
 }: CreateTheme): Theme {
     return {
@@ -21,11 +24,14 @@ export function createTheme({
         palette: deepmerge(defaultTheme.palette, palette),
         shadows: defaultTheme.shadows,
         borderRadius: borderRadius || defaultTheme.borderRadius,
-        /*toastAnimation: toastAnimation || defaultTheme.toastAnimation,
-        toastPosition: toastPosition || defaultTheme.toastPosition,*/
+        toastAnimation: toastAnimation || defaultTheme.toastAnimation,
+        toastPosition: toastPosition || defaultTheme.toastPosition,
         zIndex: { ...defaultTheme.zIndex, ...zIndex },
         /*skeletonAnimations: skeletonAnimations || defaultTheme.skeletonAnimations,*/
         translate: translate || defaultTheme.translate,
+        toolbarHeight: toolbarHeight || defaultTheme.toolbarHeight,
+        validators: validators || {},
+        blockchainLinks: { ...defaultTheme.blockchainLinks, ...blockchainLinks },
         ...rest,
     };
 }
