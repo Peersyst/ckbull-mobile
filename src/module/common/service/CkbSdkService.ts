@@ -32,7 +32,7 @@ export function getTokenTypeFromScript(scriptType: ScriptType) {
     return getTokenTypeFromIndex(tokenIndex, scriptType);
 }
 
-export const connectionService = new ConnectionService(CKB_URL, INDEXER_URL, Environments.Testnet);
+export const connectionService = new ConnectionService(CKB_URL, INDEXER_URL, Environments.Mainnet);
 
 export class CKBSDKService {
     private connectionService: ConnectionService;

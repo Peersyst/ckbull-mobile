@@ -1,4 +1,4 @@
-import { FeeRate } from "ckb-peersyst-sdk";
+import { Environments, FeeRate } from "ckb-peersyst-sdk";
 import { LocaleType } from "locale";
 import getDefaultLocale from "locale/utils/getDefaultLocale";
 import { atom } from "recoil";
@@ -17,7 +17,7 @@ export interface SettingsState {
     loading?: boolean;
 }
 
-export const defaultSettingsState: SettingsState = { locale: getDefaultLocale(), fiat: "usd", network: "testnet", fee: FeeRate.NORMAL };
+export const defaultSettingsState: SettingsState = { locale: getDefaultLocale(), fiat: "usd", network: Environments.Mainnet, fee: FeeRate.NORMAL };
 
 const settingsState = atom<SettingsState>({
     key: "settings",
