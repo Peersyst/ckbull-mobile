@@ -15,8 +15,8 @@ describe("Test for the select network", () => {
         jest.spyOn(Recoil, "useRecoilState").mockReturnValue(mockedRecoilState as any);
         const screen = render(<SelectNetwork />);
         expect(screen.getAllByText(translate("select_your_network"))).toHaveLength(2);
-        expect(screen.getByText(translate("network_name", { name: "Mainnet" }))).toHaveLength(2);
-        expect(screen.getAllByText(translate("network_name", { name: "Testnet" }))).toBeDefined();
+        expect(screen.getAllByText(translate("network_name", { name: "Mainnet" }))).toHaveLength(2);
+        expect(screen.getByText(translate("network_name", { name: "Testnet" }))).toBeDefined();
     });
     test("Change the network correctly", () => {
         jest.useFakeTimers();
