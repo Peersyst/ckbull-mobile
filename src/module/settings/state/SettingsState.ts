@@ -17,7 +17,12 @@ export interface SettingsState {
     loading?: boolean;
 }
 
-export const defaultSettingsState: SettingsState = { locale: getDefaultLocale(), fiat: "usd", network: Environments.Mainnet, fee: FeeRate.NORMAL };
+export const defaultSettingsState: SettingsState = {
+    locale: getDefaultLocale(),
+    fiat: "usd",
+    network: Environments.Mainnet,
+    fee: FeeRate.NORMAL,
+};
 
 const settingsState = atom<SettingsState>({
     key: "settings",
