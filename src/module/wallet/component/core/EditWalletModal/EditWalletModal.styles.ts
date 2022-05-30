@@ -1,6 +1,6 @@
 import styled from "@peersyst/react-native-styled";
-import Glass from "module/common/component/surface/Glass/Glass";
+import GlassModal from "module/common/component/feedback/GlassModal/GlassModal";
 
-export const EditWalletModalRoot = styled(Glass)(({ dimensions: { height } }) => ({
+export const EditWalletModalRoot = styled(GlassModal)(({ dimensions: { height } }) => ({
     height: height > 680 ? height * 0.6 : height * 0.55,
 }));

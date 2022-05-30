@@ -1,19 +1,19 @@
 import {
     CKBBalance,
     ConnectionService,
-    Environments,
-    WalletService,
-    Nft,
-    WalletState,
     DAOBalance,
-    TransactionType,
-    ScriptType,
     DAOUnlockableAmount,
+    Environments,
+    Nft,
+    ScriptType,
     Transaction,
+    TransactionType,
+    WalletService,
+    WalletState,
 } from "ckb-peersyst-sdk";
 import { tokenAmountZeroBalanceList, tokensList, UknownToken } from "module/token/mock/token";
 import { Chain, DepositInDAOParams, FullTransaction, SendTransactionParams, WithdrawOrUnlockParams } from "./CkbSdkService.types";
-import { CKB_TESTNET_URL, INDEXER_TESTNET_URL, CKB_MAINNET_URL, INDEXER_MAINNET_URL } from "@env";
+import { MAINNET_NODE, TESTNET_NODE } from "@env";
 import { TokenAmount, TokenType } from "module/token/types";
 
 export function getTokenIndexTypeFromScript(scriptType: ScriptType): number {
@@ -32,8 +32,8 @@ export function getTokenTypeFromScript(scriptType: ScriptType) {
     return getTokenTypeFromIndex(tokenIndex, scriptType);
 }
 
-export const testnetConnectionService = new ConnectionService(CKB_TESTNET_URL, INDEXER_TESTNET_URL, Environments.Testnet);
-export const mainnetConnectionService = new ConnectionService(CKB_MAINNET_URL, INDEXER_MAINNET_URL, Environments.Mainnet);
+export const testnetConnectionService = new ConnectionService(TESTNET_NODE + "rpc", TESTNET_NODE + "indexer", Environments.Testnet);
+export const mainnetConnectionService = new ConnectionService(MAINNET_NODE + "rpc", MAINNET_NODE + "indexer", Environments.Mainnet);
 
 export class CKBSDKService {
     private connectionService: ConnectionService;
@@ -45,8 +45,17 @@ export class CKBSDKService {
         walletState?: WalletState,
         onSync?: (walletState: WalletState) => Promise<void>,
         onSyncStart?: () => void,
+        node?: string,
     ) {
-        this.connectionService = chain === "testnet" ? testnetConnectionService : mainnetConnectionService;
+        if (node) {
+            this.connectionService = new ConnectionService(
+                node + "rpc",
+                node + "indexer",
+                chain === "testnet" ? Environments.Testnet : Environments.Mainnet,
+            );
+        } else {
+            this.connectionService = chain === "testnet" ? testnetConnectionService : mainnetConnectionService;
+        }
         this.wallet = new WalletService(this.connectionService, mnemonic, walletState, onSync, onSyncStart);
     }
 
@@ -55,6 +64,12 @@ export class CKBSDKService {
             return { ...transaction, token: getTokenTypeFromScript(transaction.scriptType).tokenName };
         }
         return transaction;
+    }
+
+    //static inspectNode(node: string): Promise<Chain> {}
+
+    changeNode(node: string): void {
+        this.connectionService = new ConnectionService(node + "rpc", node + "indexer", this.connectionService.getEnvironment());
     }
 
     async synchronize(): Promise<WalletState> {

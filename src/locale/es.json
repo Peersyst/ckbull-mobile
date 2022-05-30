@@ -172,5 +172,19 @@
     "processing": "Procesando...",
     "testnet_warning": "Esto es una versión de Testnet. No envíes CKB de Mainnet a esta cuenta.",
     "dismiss": "Cerrar",
-    "pending_transaction_text": "Tienes una transacción no cometida. Por favor, espera a que esté cometida para poder enviar una nueva."
+    "pending_transaction_text": "Tienes una transacción no cometida. Por favor, espera a que esté cometida para poder enviar una nueva.",
+    "testnet": "testnet",
+    "mainnet": "mainnet",
+    "advanced_settings": "Ajustes avanzados",
+    "change_node": "Cambiar nodo de %network%",
+    "add_a_node": "Añade un nodo",
+    "add": "Añadir",
+    "introduce_a_node_url": "Introduce una url de un nodo",
+    "invalid_url": "Url inválida",
+    "failed_to_connect_with_node": "No se ha podido conectar con el nodo",
+    "network_detected": "%network% detectada",
+    "network_detected_text": "El nodo que has introducido es un nodo de %network%. Quieres cambiar tu red a %network%?",
+    "default_node": "Nodo por defecto",
+    "change": "Cambiar",
+    "node_changed": "Nodo de %network% cambiado a %node%"
 }

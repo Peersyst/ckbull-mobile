@@ -27,12 +27,19 @@ export function useLoad(): boolean {
                 }));
 
                 //Get the settings from storage and set it to the state
-                const settings = (await SettingsStorage.getAllSettings()) || defaultSettingsState;
+                const settings = { ...defaultSettingsState, ...((await SettingsStorage.getAllSettings()) || {}) };
                 setSettingsState(settings);
 
                 for (let i = 0; i < wallets.length; i += 1) {
                     const { testnet, mainnet, mnemonic } = wallets.find((w) => w.index === i)!;
-                    await createServiceInstance(i, mnemonic, testnet?.initialState, mainnet?.initialState);
+                    await createServiceInstance(
+                        i,
+                        mnemonic,
+                        testnet?.initialState,
+                        mainnet?.initialState,
+                        settings.testnetNode.selected,
+                        settings.mainnetNode.selected,
+                    );
                 }
 
                 //Use another thread

@@ -172,5 +172,19 @@
     "processing": "洗印",
     "testnet_warning": "这是一个测试网版本。不要将主网 CKB 发送到该账户。",
     "dismiss": "解雇",
-    "pending_transaction_text": "\n您有一个未提交的事务。请等到它承诺发送一个新的。"
+    "pending_transaction_text": "\n您有一个未提交的事务。请等到它承诺发送一个新的。",
+    "testnet": "testnet",
+    "mainnet": "mainnet",
+    "advanced_settings": "高级设置",
+    "change_node": "更改 %network% 节点",
+    "add_a_node": "添加节点",
+    "add": "添加",
+    "introduce_a_node_url": "引入一个节点url",
+    "invalid_url": "无效的网址",
+    "failed_to_connect_with_node": "连接节点失败",
+    "network_detected": "检测到 %network%",
+    "network_detected_text": "您提供的节点是 %network% 节点。是否要切换到 %network%？",
+    "default_node": "默认节点",
+    "change": "改变",
+    "node_changed": "%network% 节点更改为 %node%"
 }

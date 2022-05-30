@@ -172,5 +172,19 @@
     "processing": "Processing...",
     "testnet_warning": "This is a Testnet version. Do not send Mainnet CKB to this account.",
     "dismiss": "Dismiss",
-    "pending_transaction_text": "You have an uncommitted transaction. Please, wait until it is committed to send a new one."
+    "pending_transaction_text": "You have an uncommitted transaction. Please, wait until it is committed to send a new one.",
+    "testnet": "testnet",
+    "mainnet": "mainnet",
+    "advanced_settings": "Advanced settings",
+    "change_node": "Change %network% node",
+    "add_a_node": "Add a node",
+    "add": "Add",
+    "introduce_a_node_url": "Introduce a node url",
+    "invalid_url": "Invalid url",
+    "failed_to_connect_with_node": "Failed to connect with the node",
+    "network_detected": "%network% detected",
+    "network_detected_text": "The node you provided is a %network% node. Do you want to switch to %network%?",
+    "default_node": "Default node",
+    "change": "Change",
+    "node_changed": "%network% node changed to %node%"
 }

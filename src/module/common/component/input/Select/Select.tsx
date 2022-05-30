@@ -1,7 +1,7 @@
 import { SelectHeader, SelectRoot } from "module/common/component/input/Select/Select.styles";
 import { SelectProps as BaseSelectProps } from "react-native-components";
 
-export interface SelectProps extends Omit<BaseSelectProps, "header" | "footer"> {
+export interface SelectProps extends Omit<BaseSelectProps, "header"> {
     title?: string;
 }
 

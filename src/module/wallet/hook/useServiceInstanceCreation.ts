@@ -11,11 +11,13 @@ const useServiceInstanceCreation = (): ((
     mnemonic: string[],
     testnetInitialState?: WalletState,
     mainnetInitialState?: WalletState,
+    testnetNode?: "default" | string,
+    mainnetNode?: "default" | string,
 ) => Promise<void>) => {
     const setWalletState = useSetRecoilState(walletState);
     const invalidateWalletQueries = useWalletQueriesInvalidation();
 
-    return async (index, mnemonic, testnetInitialState, mainnetInitialState) => {
+    return async (index, mnemonic, testnetInitialState, mainnetInitialState, testnetNode, mainnetNode) => {
         if (!serviceInstancesMap.has(index)) {
             const stringMnemonic = mnemonic.join(" ");
             const onSync = async (chain: Chain, walletState: WalletState) => {
@@ -39,6 +41,7 @@ const useServiceInstanceCreation = (): ((
                     testnetInitialState,
                     (walletState) => onSync("testnet", walletState),
                     onSyncStart,
+                    testnetNode !== "default" ? testnetNode : undefined,
                 ),
                 mainnet: new CKBSDKService(
                     "mainnet",
@@ -46,6 +49,7 @@ const useServiceInstanceCreation = (): ((
                     mainnetInitialState,
                     (walletState) => onSync("mainnet", walletState),
                     onSyncStart,
+                    mainnetNode !== "default" ? mainnetNode : undefined,
                 ),
             });
         }

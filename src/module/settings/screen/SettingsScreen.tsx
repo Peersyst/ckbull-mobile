@@ -10,6 +10,7 @@ const SettingsScreen = ({ navigation }: BottomTabScreenNavigatonProps): JSX.Elem
         <BaseSecondaryScreen title={translate("settings")} back={false} navigation={navigation}>
             <Col gap={"4%"}>
                 <SettingsMenu label={translate("general_settings")} location={MainBottomScreens.GENERAL_SETTINGS} />
+                <SettingsMenu label={translate("advanced_settings")} location={MainBottomScreens.ADVANCED_SETTINGS} />
                 <SettingsMenu label={translate("security_settings")} location={MainBottomScreens.SECURITY_SETTINGS} />
             </Col>
         </BaseSecondaryScreen>
