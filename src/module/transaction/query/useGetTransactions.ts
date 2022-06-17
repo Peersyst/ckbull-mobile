@@ -28,7 +28,7 @@ const useGetTransactions = ({ index, filter }: UseGetTransactionsOptions = {}) =
         return filter
             ? [...uncommitedTransactions, ...filteredTransacations].filter(filter)
             : [...uncommitedTransactions, ...filteredTransacations];
-    }, [uncommitedTransactions, transactions, filter]);
+    }, [uncommitedTransactions, transactions]);
 
     return {
         data: txs,

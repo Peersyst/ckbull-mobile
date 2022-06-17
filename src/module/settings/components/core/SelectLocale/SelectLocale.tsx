@@ -27,7 +27,7 @@ const SelectLocale = (): JSX.Element => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setSettings((s) => ({ ...s, loading: true }));
         i18n.locale = value;
-        await SettingsStorage.set({ locale: value });
+        SettingsStorage.set({ locale: value });
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setTimeout(() => setSettings((s) => ({ ...s, locale: value, loading: false })), 1000);
     };

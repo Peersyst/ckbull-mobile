@@ -31,14 +31,14 @@ const DeleteOneWallet = () => {
                 onPinConfirmed: async () => {
                     //If only 1 wallet erase all data
                     if (wallets.length === 1) {
-                        await WalletStorage.clearAll();
+                        WalletStorage.clearAll();
                         serviceInstancesMap.clear();
-                        await SettingsStorage.clear();
-                        await queryClient.invalidateQueries();
+                        SettingsStorage.clear();
+                        queryClient.invalidateQueries();
                         resetWalletState();
                     } else {
                         //Remove wallet from storage
-                        await WalletStorage.removeWallet(index);
+                        WalletStorage.removeWallet(index);
                         //Remove wallet from state
                         setWalletState((state) => {
                             return {
@@ -53,8 +53,8 @@ const DeleteOneWallet = () => {
                         for (let i = 0; i < serviceInstancesSize; i++) {
                             if (i > index) {
                                 serviceInstancesMap.set(i - 1, serviceInstancesMap.get(i)!);
-                                await invalidateWalletQueries(i - 1, "testnet");
-                                await invalidateWalletQueries(i - 1, "mainnet");
+                                invalidateWalletQueries(i - 1, "testnet");
+                                invalidateWalletQueries(i - 1, "mainnet");
                             }
                         }
                         //Delete last service instance and queries from last position

@@ -8,7 +8,7 @@ const useGetBalance = (index?: number) => {
     const selectedWallet = useSelectedWalletIndex();
     const usedIndex = index ?? selectedWallet;
     return useQuery(["balance", usedIndex, network], () => serviceInstancesMap.get(usedIndex)?.[network]?.getCKBBalance(), {
-        refetchInterval: 1500,
+        refetchInterval: 10000,
     });
 };
 

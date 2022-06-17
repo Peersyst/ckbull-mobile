@@ -18,11 +18,11 @@ const DeleteData = () => {
     const handleDelete = () => {
         showModal(ConfirmPinModal, {
             onPinConfirmed: async () => {
-                await WalletStorage.clearAll();
+                WalletStorage.clearAll();
                 setWalletState((state) => ({ ...state, isAuthenticated: false, hasWallet: false }));
                 serviceInstancesMap.clear();
-                await SettingsStorage.clear();
-                await queryClient.invalidateQueries();
+                SettingsStorage.clear();
+                queryClient.invalidateQueries();
                 resetWalletState();
             },
         });
