@@ -56,8 +56,10 @@ describe("AddNodeModal and AltNetworkDialog tests", () => {
         fireEvent.press(screen.getByText(translate("add")));
         await waitFor(() => expect(screen.getByText(translate("network_detected", { network: translate("mainnet") }))).toBeDefined());
         fireEvent.press(screen.getByText(translate("change")));
+        // should be mainnet but as useSelectedNetwork is mocked to always return testnet, assert has to be done with testnet
+        await waitFor(() => expect(addNodeToStorage).toHaveBeenCalledWith("testnet", MAINNET_URL));
+        // This one in fact, is called with mainnet, before addNodeToStorage and is the one that triggers useSelectedNetwork to change and update
         expect(setNetwork).toHaveBeenCalledWith("mainnet");
-        await waitFor(() => expect(addNodeToStorage).toHaveBeenCalledWith("mainnet", MAINNET_URL));
         expect(addNode).toHaveBeenCalledWith(MAINNET_URL);
         expect(handleNodeAdded).toHaveBeenCalledWith(MAINNET_URL);
     });
