@@ -21,17 +21,21 @@ export const ButtonRoot = styled(Button)<ButtonRootProps>(({ theme, appearance }
             fontSize: 14,
             paddingHorizontal: 30,
         },
-        outlined: {
-            ...outlined[appearance],
-        },
         pressed: {
             ...pressed[appearance],
-            filled: {
-                ...pressedFilled[appearance],
+            variant: {
+                filled: {
+                    ...pressedFilled[appearance],
+                },
             },
         },
-        filled: {
-            ...filled[appearance],
+        variant: {
+            filled: {
+                ...filled[appearance],
+            },
+            outlined: {
+                ...outlined[appearance],
+            },
         },
         disabled: {
             borderColor: theme.palette.disabled,

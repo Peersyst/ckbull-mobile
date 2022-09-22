@@ -15,7 +15,7 @@ describe("Button tests", () => {
                 Press me
             </Button>,
         );
-        expect(screen.getByRole("button").props.style.outlined.borderColor).toEqual(lightTheme.palette.white);
+        expect(screen.getByRole("button").props.style.variant.outlined.borderColor).toEqual(lightTheme.palette.white);
     });
     test("Renders correctly gray appearance", () => {
         const screen = render(
@@ -23,7 +23,7 @@ describe("Button tests", () => {
                 Press me
             </Button>,
         );
-        expect(screen.getByRole("button").props.style.outlined.borderColor).toEqual(lightTheme.palette.darkGray);
+        expect(screen.getByRole("button").props.style.variant.outlined.borderColor).toEqual(lightTheme.palette.darkGray);
     });
     test("onPress is called", () => {
         const onPress = jest.fn();
