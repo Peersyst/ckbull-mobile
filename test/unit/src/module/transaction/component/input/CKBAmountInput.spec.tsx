@@ -1,5 +1,6 @@
+import { translate } from "locale";
 import CKBAmountInput from "module/transaction/component/input/CKBAmountInput/CKBAmountInput";
-import { fireEvent, render, waitFor, translate } from "test-utils";
+import { fireEvent, render, waitFor } from "test-utils";
 
 describe("CKBAmount Input test", () => {
     test("Renders correctly", async () => {

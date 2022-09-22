@@ -1,4 +1,5 @@
 import { Col, Form, useSetTab, Suspense } from "@peersyst/react-native-components";
+import { translate } from "locale";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
 import { WithdrawForm, WithdrawScreens, WithdrawSummary } from "module/dao/component/core/WithdrawModal/WithdrawModal";
 import useGetDAOUnlockableAmounts from "module/dao/query/useGetDAOUnlockableAmounts";
@@ -12,7 +13,6 @@ import CenteredLoader from "module/common/component/feedback/CenteredLoader/Cent
 import useGetBalance from "module/wallet/query/useGetBalance";
 import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
 import WithdrawButton from "./WithdrawButton";
-import { useTranslate } from "module/common/hook/useTranslate";
 
 interface WithdrawSelectAccountScreenProps {
     setWithdrawInfo: Dispatch<SetStateAction<WithdrawSummary>>;
@@ -20,7 +20,6 @@ interface WithdrawSelectAccountScreenProps {
 
 const SelectAccountAndDepositScreen = ({ setWithdrawInfo }: WithdrawSelectAccountScreenProps) => {
     //Hooks
-    const translate = useTranslate();
     const setTab = useSetTab();
     const { fee: feeInShannons } = useRecoilValue(settingsState);
     const {

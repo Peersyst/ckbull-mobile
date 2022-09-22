@@ -1,4 +1,5 @@
-import { render, translate } from "test-utils";
+import { translate } from "locale";
+import { render } from "test-utils";
 import AddWalletCard from "module/wallet/component/display/AddWalletCard/AddWalletCard";
 
 describe("AddWalletCard tests", () => {

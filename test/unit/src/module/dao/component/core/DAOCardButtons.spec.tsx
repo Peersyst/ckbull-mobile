@@ -1,5 +1,6 @@
+import { translate } from "locale";
 import DAOCardButtons from "module/dao/component/core/DAOAccountCard/DAOCardButtons/DAOCardButtons";
-import { fireEvent, render, translate } from "test-utils";
+import { fireEvent, render } from "test-utils";
 import * as Genesys from "@peersyst/react-native-components";
 import DepositModal from "module/dao/component/core/DepositModal/DepositModal";
 import WithdrawModal from "module/dao/component/core/WithdrawModal/WithdrawModal";

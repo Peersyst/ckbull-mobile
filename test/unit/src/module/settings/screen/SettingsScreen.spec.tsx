@@ -1,4 +1,5 @@
-import { fireEvent, render, translate } from "test-utils";
+import { fireEvent, render } from "test-utils";
+import { translate } from "locale";
 import SettingsScreen from "module/settings/screen/SettingsScreen";
 import * as Navigation from "@react-navigation/native";
 import { MainBottomScreens } from "module/main/component/navigation/MainBottomNavigatorGroup/MainBottomNavigatorGroup";

@@ -1,5 +1,6 @@
+import { translate } from "locale";
 import GeneralSettingsScreen from "module/settings/screen/GeneralSettingsScreen";
-import { render, translate } from "test-utils";
+import { render } from "test-utils";
 import * as Recoil from "recoil";
 import { defaultSettingsState } from "module/settings/state/SettingsState";
 

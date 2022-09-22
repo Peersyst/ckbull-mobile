@@ -1,4 +1,5 @@
-import { render, translate } from "test-utils";
+import { render } from "test-utils";
+import { translate } from "locale";
 import HomeScreen from "module/home/screen/HomeScreen";
 import * as UseWalletState from "module/wallet/hook/useWalletState";
 import { mockedUseWallet } from "mocks/useWalletState";

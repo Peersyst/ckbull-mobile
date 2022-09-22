@@ -1,6 +1,7 @@
-import { render, translate } from "test-utils";
+import { render } from "test-utils";
 import TransactionLabel from "module/transaction/component/display/TransactionLabel/TransactionLabel";
 import { TransactionType } from "ckb-peersyst-sdk";
+import { translate } from "locale";
 
 describe("TransactionLabel tests", () => {
     test("Renders correctly", () => {

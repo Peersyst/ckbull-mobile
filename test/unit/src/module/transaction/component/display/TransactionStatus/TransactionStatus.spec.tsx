@@ -1,6 +1,7 @@
-import { render, translate } from "test-utils";
+import { render } from "test-utils";
 import TransactionStatus from "module/transaction/component/display/TransactionStatus/TransactionStatus";
 import { TransactionStatus as TransactionStatusType } from "ckb-peersyst-sdk";
+import { translate } from "locale";
 
 describe("TransactionStatus tests", () => {
     test("Renders pending", () => {

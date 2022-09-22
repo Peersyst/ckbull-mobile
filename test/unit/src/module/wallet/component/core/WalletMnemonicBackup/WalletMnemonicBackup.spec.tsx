@@ -1,7 +1,8 @@
 import { WalletStorage } from "module/wallet/WalletStorage";
-import { render, SuccessApiCall, translate } from "test-utils";
+import { render, SuccessApiCall } from "test-utils";
 import WalletMnemonicBackup from "module/wallet/component/core/WalletsBackupModal/WalletMnemonicBackup/WalletMnemonicBackup";
 import { fireEvent, waitFor } from "@testing-library/react-native";
+import { translate } from "locale";
 
 const mnemonic = ["Pizza", "Fries", "Ball", "Car"];
 

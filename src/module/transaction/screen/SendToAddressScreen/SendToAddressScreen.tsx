@@ -10,6 +10,7 @@ import {
     useSetTab,
     useToast,
 } from "@peersyst/react-native-components";
+import { translate } from "locale";
 import TextField from "module/common/component/input/TextField/TextField";
 import { ScanIcon } from "module/common/icons/ScanIcon";
 import { useTheme } from "@peersyst/react-native-styled";
@@ -23,7 +24,6 @@ import { useRecoilState } from "recoil";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
 import useUncommittedTransaction from "module/transaction/hook/useUncommittedTransaction";
 import useSelectedNetwork from "module/settings/hook/useSelectedNetwork";
-import { useTranslate } from "module/common/hook/useTranslate";
 
 export interface SendForm {
     sender: number;
@@ -31,7 +31,6 @@ export interface SendForm {
 }
 
 const SendToAddressScreen = () => {
-    const translate = useTranslate();
     const [sendState, setSendState] = useRecoilState(sendRecoilState);
     const [receiverAddress, setReceiverAddress] = useState(sendState.receiverAddress || "");
     const [scanQr, setScanQr] = useState(false);

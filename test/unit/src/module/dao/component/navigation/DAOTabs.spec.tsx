@@ -1,4 +1,5 @@
-import { render, translate } from "test-utils";
+import { render } from "test-utils";
+import { translate } from "locale";
 import { fireEvent, waitFor } from "@testing-library/react-native";
 import DAOTabs from "module/dao/navigation/DAOTabs/DAOTabs";
 import { mockedDAODeposits, mockedDAOUnlocks } from "mocks/DAOTransaction";
@@ -23,14 +24,14 @@ describe("DAOTabs tests", () => {
         await waitFor(() => expect(screen.getByText("01/01/2022 - 00:00")));
         expect(screen.getByText(translate("deposits"))).toBeDefined();
         fireEvent.press(screen.getByText(translate("withdrawals")));
-        await waitFor(() => expect(screen.getAllByText(translate("nothing_to_show", { ns: "error" }))));
+        await waitFor(() => expect(screen.getAllByText(translate("nothing_to_show"))));
     });
     test("Renders correctly with completed withdrawals", async () => {
         jest.spyOn(UseWalletState, "default").mockReturnValue(mockedUseWallet);
         jest.spyOn(serviceInstancesMap, "get").mockReturnValue({ testnet: sdkInstance, mainnet: sdkInstance });
         jest.spyOn(sdkInstance, "getTransactions").mockReturnValue(mockedDAOUnlocks);
         const screen = render(<DAOTabs />);
-        await waitFor(() => expect(screen.getAllByText(translate("nothing_to_show", { ns: "error" }))));
+        await waitFor(() => expect(screen.getAllByText(translate("nothing_to_show"))));
         expect(screen.getByText(translate("deposits"))).toBeDefined();
         fireEvent.press(screen.getByText(translate("withdrawals")));
         await waitFor(() => expect(screen.getByText("10/01/2022 - 00:00")));

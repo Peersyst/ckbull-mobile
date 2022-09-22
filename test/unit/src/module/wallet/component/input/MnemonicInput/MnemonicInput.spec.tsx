@@ -1,5 +1,6 @@
-import { render, translate } from "test-utils";
+import { render } from "test-utils";
 import MnemonicInput from "module/wallet/component/input/MnemonicInput/MnemonicInput";
+import { translate } from "locale";
 import { fireEvent } from "@testing-library/react-native";
 
 describe("MnemonicInput tests", () => {

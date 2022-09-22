@@ -1,7 +1,8 @@
 import { formatHash } from "@peersyst/react-utils";
+import { translate } from "locale";
 import { CKBSDKService } from "module/common/service/CkbSdkService";
 import SendSummary from "module/transaction/screen/SendConfirmationScreen/SendSummary";
-import { render, translate } from "test-utils";
+import { render } from "test-utils";
 
 describe("Test for the SendSummary component", () => {
     test("Renders correctly", () => {

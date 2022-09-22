@@ -1,6 +1,7 @@
-import { act, render, translate } from "test-utils";
+import { act, render } from "test-utils";
 import { useEffect, useState } from "react";
 import LoadingModal from "module/common/component/feedback/LoadingModal/LoadingModal";
+import { translate } from "locale";
 
 const SuccessLoadingModal = (): JSX.Element => {
     const [success, setSuccess] = useState(false);

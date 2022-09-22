@@ -8,7 +8,6 @@ import { deepmerge } from "@peersyst/react-utils";
 import { NavigationContainer } from "@react-navigation/native";
 import { ModalProvider } from "@peersyst/react-native-components";
 import { ConfigProvider } from "config";
-import i18n from "../../src/locale/i18n";
 
 export interface CreateWrapperConfig {
     queryClientConfig?: QueryClientConfig;
@@ -55,8 +54,6 @@ const customRenderHook = <TProps, TResult>(
     { queryClientConfig, ...rest }: Omit<RenderHookOptions<TProps>, "wrapper"> & CreateWrapperConfig = {},
 ): RenderHookResult<TProps, TResult> => renderHook<TProps, TResult>(callback, { wrapper: createWrapper({ queryClientConfig }), ...rest });
 
-const translate: (...params: any) => string = i18n.t;
-
 export * from "@testing-library/react-native";
 export * from "@testing-library/jest-native";
 export { customRender as render };
@@ -64,4 +61,3 @@ export * from "./fail-api-call";
 export * from "./success-api-call";
 export * from "./wait";
 export { customRenderHook as renderHook };
-export { translate };
