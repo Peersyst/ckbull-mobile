@@ -70,6 +70,7 @@ jest.mock("@peersyst/react-native-components", () => {
         __esModule: true,
         ...jest.requireActual("@peersyst/react-native-components"),
         Backdrop: MockBackdrop,
+        Modal: MockBackdrop,
     };
 });
 
