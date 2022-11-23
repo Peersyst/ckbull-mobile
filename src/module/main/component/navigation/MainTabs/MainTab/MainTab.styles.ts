@@ -1,6 +1,6 @@
 import styled from "@peersyst/react-native-styled";
 import { Paper, Tab } from "react-native-components";
-import { ViewStyle } from "react-native";
+import { Platform, ViewStyle } from "react-native";
 
 export const MainTabRoot = styled(Tab)(() => ({
     flex: 1,
@@ -19,7 +19,8 @@ export const MainTabContent = styled(Paper)<MainTabContentProps>(({ active }) =>
               },
               shadowRadius: 2,
               shadowOpacity: 0.15,
-              elevation: 18,
+              elevation: 0,
+              ...(Platform.OS === "android" && { borderWidth: 1, borderBottomWidth: 0, borderColor: "rgba(0, 0, 0, 0.03)" }),
           }
         : {
               backgroundColor: "transparent",
