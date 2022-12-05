@@ -5,7 +5,7 @@ import * as NrcSdk from "@rather-labs/nrc-721-sdk";
 import { Logger } from "../../utils/logger";
 import { ConnectionService, Environments } from "../connection.service";
 import { ScriptType } from "../transaction.service";
-import { NftScript, NftSdk } from "./nft.types";
+import { NftScript, NftSdk, ReadNftResponse } from "./nft.types";
 
 export interface Nft {
     tokenId: string;
@@ -125,7 +125,17 @@ export class NftService {
         }
 
         if (isNftCell) {
-            const nft = await this.nftSdk!.nftCell.read(cellTypeScript);
+            let nft: ReadNftResponse;
+
+            try {
+                nft = await this.nftSdk.nftCell.read(cellTypeScript);
+            } catch {
+                return {
+                    tokenId: "",
+                    tokenUri: "",
+                    nftName: "",
+                };
+            }
 
             return {
                 tokenId: nft.tokenId,

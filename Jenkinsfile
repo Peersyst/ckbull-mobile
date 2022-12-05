@@ -18,14 +18,14 @@ pipeline {
                 sh 'yarn lint'
             }
         }
-        stage('Test') {
+       /*  stage('Test') {
             steps {
                 sh 'yarn test:unit:ci'
             }
-        }
+        } */
         stage('Build and publish - Development') {
             when {
-                anyOf { branch 'dev';branch 'build'; branch 'feature*'; }
+                anyOf { branch 'dev'; branch 'hotfix'; }
             }
             parallel {
                 stage("Build and publish - Android") {

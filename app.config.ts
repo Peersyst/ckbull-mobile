@@ -6,7 +6,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     name: "CKBull",
     slug: "CKBull",
     owner: "peersyst",
-    version: "1.1.3",
+    version: "1.1.4",
     orientation: "portrait",
     icon: "./assets/images/ckbull-icon.png",
     scheme: "myapp",
@@ -32,6 +32,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             NSCameraUsageDescription: "This app uses camera for QR code scanning.",
         },
         splash: { image: "./assets/images/splash.png", resizeMode: "cover", backgroundColor: "#141414" },
+    },
+    extra: {
+        eas: {
+            projectId: "b1dac2fd-013a-4e87-a82e-de40c714f416",
+        },
     },
     get android(): ExpoConfig["android"] {
         return {
