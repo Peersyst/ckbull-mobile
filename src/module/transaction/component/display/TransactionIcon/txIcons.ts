@@ -1,5 +1,5 @@
 import { TransactionType } from "ckb-peersyst-sdk";
-import { ArrowDownCircleIcon, ArrowUpCircleIcon, DatabaseIcon } from "icons";
+import { ArrowDownCircleIcon, ArrowUpCircleIcon } from "icons";
 
 interface TxIcon {
     Icon: typeof ArrowUpCircleIcon;
