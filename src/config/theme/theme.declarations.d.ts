@@ -15,25 +15,22 @@ declare module "@peersyst/react-native-components" {
     }
 
     export interface ThemePalette {
-        // CKBULL
         white: string;
         black: string;
-        darkGray: string;
-        darkLightGray: string;
-        darkerGray: string;
-        darkGray2: string;
-        darkLightGray2: string;
-        fullBlack: string;
-        lightGray: string;
-        lighterGray: string;
-        darkFont: string;
         turquoise: string;
         violet: string;
         pink: string;
         appbar: string;
         paper: string;
-        wallet: string[];
-        // NEAR
+        blue: string;
+        green: string;
+        verdigris: string;
+        gold: string;
+        red: string;
+        aqua: string;
+        purple: string;
+        lilac: string;
+        orange: string;
         gray: {
             0: string;
             100: string;
@@ -41,27 +38,9 @@ declare module "@peersyst/react-native-components" {
             600: string;
             900: string;
         };
-        blue: string;
-        green: string;
-        gold: string;
-        red: string;
-        aqua: string;
-        purple: string;
-        lilac: string;
-        orange: string;
         gradient: {
-            lilacBlue: [string, string];
-            lilacOrange: [string, string];
-            lilacRed: [string, string];
-            blueGreen: [string, string];
-            blueTurquoise: [string, string];
-            bluePurple: [string, string];
-            purpleLilac: [string, string];
-            purpleTurquoise: [string, string];
-            purpleRed: [string, string];
-            redOrange: [string, string];
-            orangeYellow: [string, string];
-            greenYellow: [string, string];
+            greenBlue: [string, string];
+            greenVerdigris: [string, string];
         };
         overlay: {
             "80%": string;
@@ -79,6 +58,7 @@ declare module "@peersyst/react-native-components" {
             "12%": string;
             "8%": string;
         };
+        wallet: string[];
     }
 
     export interface TypographyVariantsOverrides {

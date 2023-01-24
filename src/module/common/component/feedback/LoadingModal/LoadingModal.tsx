@@ -13,7 +13,7 @@ const LoadingModal = ({ loading, successMessage, error, success, ...backdropProp
 
     const { palette } = useTheme();
     const white = palette.white;
-    const logoGradient = palette.mode === "dark" ? palette.gradient.blueTurquoise : [white, white];
+    const logoGradient = palette.mode === "dark" ? palette.gradient.greenBlue : [white, white];
 
     useEffect(() => {
         if (!open) setOpen(loading || success || error);
