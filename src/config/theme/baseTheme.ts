@@ -1,44 +1,41 @@
 import { Theme } from "@peersyst/react-native-components";
 
 //Base colors
-export const blue = "#5F8AFA";
-export const green = "#1ED882";
-export const verdigris = "#34AEAE";
+export const white = "#FFFFFF";
+export const black = "#292929";
 export const gold = "#FFC860";
 export const red = "#F54565";
-export const aqua = "#4FD1D9";
-export const purple = "#5735CA";
-export const lilac = "#A463B0";
 export const orange = "#E3935B";
+export const blue = "#5F8AFA";
+export const purple = "#5735CA";
+export const violet = "#6D45F5";
+
+//Base Green
+export const green: Theme["palette"]["green"] = {
+    200: "#1ED882",
+    600: "#52BD8C",
+    800: "#34AEAE",
+};
 
 //Base gradients
 export const gradient: Theme["palette"]["gradient"] = {
-    greenBlue: [green, blue],
-    greenVerdigris: [green, verdigris],
-};
-
-export const statusTheme: Theme["palette"]["status"] = {
-    info: blue,
-    success: green,
-    warning: orange,
-    error: red,
+    greenDarkGreen: [green["200"], green["800"]],
+    greenViolet: [green["200"], violet],
 };
 
 export const baseTheme: Partial<Theme["palette"]> = {
-    primary: blue,
-    white: "#FFFFFF",
-    black: "#000000",
-    verdigris,
-    blue,
-    green,
+    primary: green["200"],
+    white,
+    black,
     gold,
     red,
-    aqua,
-    purple,
-    lilac,
     orange,
+    blue,
+    purple,
+    violet,
+    green,
     gradient,
-    wallet: [blue, green, red, gold, aqua, purple, lilac, orange],
+    wallet: [violet, green["200"], red, gold, purple, blue, orange],
 };
 
 export const WALLET_GRADIENT_LENGTH = baseTheme?.wallet?.length || 0;

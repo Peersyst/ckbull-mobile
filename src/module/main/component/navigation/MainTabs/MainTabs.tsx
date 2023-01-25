@@ -15,7 +15,7 @@ const MainTabs = ({ tabs }: MainTabsProps): JSX.Element => {
             <Tabs gap={0} index={index} onIndexChange={setIndex} style={{ flex: 1 }}>
                 <TabGroup
                     renderIndicator={true}
-                    indicator={<LinearGradient start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} colors={palette.gradient.greenBlue} />}
+                    indicator={<LinearGradient start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} colors={palette.gradient.greenViolet} />}
                 >
                     {tabs.map(({ title }, index) => {
                         return (

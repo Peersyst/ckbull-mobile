@@ -9,6 +9,6 @@ export const MainTabsRoot = styled(Paper)(() => ({
 
 export const TabGroup = styled(BaseTabGroup)(({ theme }) => ({
     borderBottomWidth: 1,
-    borderColor: theme.palette.overlay["8%"],
+    borderColor: theme.palette.overlay[700]["8%"],
     justifyContent: "center",
 }));

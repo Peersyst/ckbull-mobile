@@ -2,6 +2,46 @@
 import "@peersyst/react-native-styled";
 import { Theme as RNCTheme } from "@peersyst/react-native-components";
 
+export interface ThemeOverlay {
+    "80%": string;
+    "60%": string;
+    "48%": string;
+    "32%": string;
+    "24%": string;
+    "16%": string;
+    "12%": string;
+    "8%": string;
+}
+
+export interface ThemeOverlays {
+    100: ThemeOverlay;
+    300: ThemeOverlay;
+    500: ThemeOverlay;
+    700: ThemeOverlay;
+    900: ThemeOverlay;
+}
+
+export interface ThemeGreen {
+    200: string;
+    600: string;
+    800: string;
+}
+
+export interface ThemeGray {
+    0: string;
+    100: string;
+    200: string;
+    300: string;
+    400: string;
+    500: string;
+    600: string;
+    700: string;
+    800: string;
+    900: string;
+}
+
+export type ThemeGradient = [string, string];
+
 // Custom components theme
 declare module "@peersyst/react-native-components" {
     export interface Theme {
@@ -14,51 +54,29 @@ declare module "@peersyst/react-native-components" {
         borderRadiusXs?: number;
     }
 
+    export interface ThemeGradients {
+        greenDarkGreen: ThemeGradient;
+        greenViolet: ThemeGradient;
+    }
+
     export interface ThemePalette {
         white: string;
         black: string;
-        turquoise: string;
-        violet: string;
-        pink: string;
-        appbar: string;
-        paper: string;
-        blue: string;
-        green: string;
-        verdigris: string;
         gold: string;
         red: string;
-        aqua: string;
-        purple: string;
-        lilac: string;
         orange: string;
-        gray: {
-            0: string;
-            100: string;
-            300: string;
-            600: string;
-            900: string;
-        };
-        gradient: {
-            greenBlue: [string, string];
-            greenVerdigris: [string, string];
-        };
-        overlay: {
-            "80%": string;
-            "60%": string;
-            "40%": string;
-            "20%": string;
-            "12%": string;
-            "8%": string;
-        };
-        altOverlay: {
-            "80%": string;
-            "60%": string;
-            "40%": string;
-            "20%": string;
-            "12%": string;
-            "8%": string;
-        };
+        purple: string;
+        violet: string;
+        blue: string;
+        green: ThemeGreen;
+        gray: ThemeGray;
+        gradient: ThemeGradients;
+        overlay: ThemeOverlays;
+        //Utils
         wallet: string[];
+        appbar: string;
+        bottomBar: string;
+        paper: string;
     }
 
     export interface TypographyVariantsOverrides {

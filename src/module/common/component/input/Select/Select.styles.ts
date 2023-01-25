@@ -9,8 +9,8 @@ export const SelectRoot = styled(Select)(({ theme }) => ({
             backgroundColor: theme.palette.background,
             borderWidth: 1,
             borderStyle: "solid",
-            borderColor: theme.palette.overlay["12%"],
-            placeholderColor: theme.palette.overlay["12%"],
+            borderColor: theme.palette.overlay[300]["24%"],
+            placeholderColor: theme.palette.gray[300],
             paddingHorizontal: 20,
             icon: {
                 color: theme.palette.gray[300],

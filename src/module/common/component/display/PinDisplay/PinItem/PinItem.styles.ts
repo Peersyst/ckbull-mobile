@@ -6,6 +6,6 @@ export interface PinItemRootProps {
 }
 
 export const PinItemRoot = styled(Icon)<PinItemRootProps>(({ theme, active }) => ({
-    color: active ? theme.palette.text : theme.palette.overlay["12%"],
+    color: active ? theme.palette.text : theme.palette.overlay[100]["12%"],
     fontSize: 5,
 }));

@@ -7,5 +7,5 @@ export const ContainerRoot = styled(View)(({ theme }) => ({
     borderWidth: 1,
     paddingVertical: 16,
     paddingHorizontal: 20,
-    borderColor: theme.palette.overlay["8%"],
+    borderColor: theme.palette.overlay[700]["8%"],
 }));

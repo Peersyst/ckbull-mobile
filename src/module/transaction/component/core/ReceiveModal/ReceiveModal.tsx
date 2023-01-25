@@ -24,7 +24,7 @@ const ReceiveModal = createBackdrop<ExposedBackdropProps>(({ close, ...rest }) =
         <CardNavigatorModal navbar={{ back: true, title: t("receive") }} {...rest}>
             <Col gap={24} flex={1} alignItems="center" justifyContent="flex-end">
                 <QRCode />
-                <Typography textAlign="center" variant="body3Regular" color={(palette) => palette.overlay["60%"]}>
+                <Typography textAlign="center" variant="body3Regular" color={(palette) => palette.overlay[500]["60%"]}>
                     {t("receive_info")}
                 </Typography>
                 <Container>
