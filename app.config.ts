@@ -32,11 +32,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         },
         splash: { image: "./assets/images/splash.png", resizeMode: "cover", backgroundColor: "#141414" },
     },
-    extra: {
-        eas: {
-            projectId: "1b97d88a-b249-45d2-8b0d-aa1724191c39",
-        },
-    },
     get android(): ExpoConfig["android"] {
         return {
             package: "com.peersyst.ckbull",
@@ -58,7 +53,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
     extra: {
         eas: {
-            projectId: "1b97d88a-b249-45d2-8b0d-aa1724191c39",
+            projectId: "b1dac2fd-013a-4e87-a82e-de40c714f416",
         },
     },
 });
