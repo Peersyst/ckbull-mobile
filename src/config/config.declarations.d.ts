@@ -23,6 +23,7 @@ declare module "@peersyst/react-native-components" {
         maxNumberOfDecimals: number;
         enableMainnet: boolean;
         tokenName: string;
+        newsRSSUrl: string;
     }
 
     export interface CreateConfig {
@@ -40,6 +41,7 @@ declare module "@peersyst/react-native-components" {
         maxNumberOfDecimals: number;
         enableMainnet: boolean;
         tokenName: string;
+        newsRSSUrl: string;
     }
 
     export interface ExtraValidators {
