@@ -1,5 +1,5 @@
 import { createTheme, Theme } from "@peersyst/react-native-components";
-import { baseTheme, blue, green, orange } from "./baseTheme";
+import { basePalette, blue, green, orange } from "./basePalette";
 import { theme } from "./theme";
 import { ThemeOverlay, ThemeOverlays } from "./theme.declarations";
 
@@ -21,7 +21,7 @@ const gray: Theme["palette"]["gray"] = {
     400: "#707070",
     450: "#494E4E",
     500: "#404040",
-    600: "#3F4246",
+    600: "#8C8C8C",
     700: "#292929",
     800: "#262626",
     900: "#1A1A1A",
@@ -95,7 +95,7 @@ const overlay: ThemeOverlays = {
 const lightTheme = createTheme({
     ...theme,
     palette: {
-        ...baseTheme,
+        ...basePalette,
         red,
         status,
         mode: "dark",
