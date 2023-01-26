@@ -17,7 +17,7 @@ export const PadItemRoot = styled(View)(({ theme, dimensions }) => {
 });
 
 export const Item = styled(Text)(({ theme, dimensions: { height } }) => {
-    const finalFont = theme.typography[height < 700 ? "h4Strong" : "h3Strong"];
+    const finalFont = theme.typography[height < 700 ? "title2Strong" : "title1Strong"];
     return {
         ...finalFont,
         color: theme.palette.text,
@@ -25,7 +25,7 @@ export const Item = styled(Text)(({ theme, dimensions: { height } }) => {
 });
 
 export const ItemIcon = styled(Icon)(({ theme, dimensions: { height } }) => {
-    const finalFont = theme.typography[height < 700 ? "h4Strong" : "h3Strong"];
+    const finalFont = theme.typography[height < 700 ? "title2Strong" : "title1Strong"];
     return {
         color: theme.palette.text,
         fontSize: finalFont.fontSize,

@@ -37,7 +37,7 @@ const WalletCard = ({ wallet: { name, index, synchronizing } }: WalletCardProps)
                     spinnerProps={{ color: (p) => p.white, size: 42 }}
                     onPress={changeCurrencyMode}
                     balance={showFiat ? "10" : freeBalance || 0}
-                    variant="h3Strong"
+                    variant="h1Strong"
                     color={(p) => p.white}
                     units={showFiat ? fiat : "token"}
                     unitsPosition={showFiat ? "left" : "right"}

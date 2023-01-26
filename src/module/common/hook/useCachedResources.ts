@@ -1,8 +1,8 @@
 import { FontAwesome } from "@expo/vector-icons";
+import { DrukTextWide_Heavy, AktivGrotesk_Medium, AktivGrotesk_Regular, AktivGrotesk_Bold } from "../../../asset/fonts";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
-import { Manrope_300Light, Manrope_400Regular, Manrope_600SemiBold } from "@expo-google-fonts/manrope";
 
 export default function useCachedResources() {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -16,9 +16,10 @@ export default function useCachedResources() {
                 // Load fonts
                 await Font.loadAsync({
                     ...FontAwesome.font,
-                    Manrope_300Light,
-                    Manrope_400Regular,
-                    Manrope_600SemiBold,
+                    DrukTextWide_Heavy,
+                    AktivGrotesk_Regular,
+                    AktivGrotesk_Medium,
+                    AktivGrotesk_Bold,
                 });
             } catch (e) {
                 // We might want to provide this error information to an error reporting service
