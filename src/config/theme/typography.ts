@@ -3,27 +3,42 @@ import { TextStyle } from "react-native";
 
 export type FontWeight = "strong" | "regular" | "light";
 
-export const MANROPE: Record<FontWeight, string> = {
-    light: "Manrope_300Light",
-    regular: "Manrope_400Regular",
-    strong: "Manrope_600SemiBold",
+export type TypographyVariant = "h1" | "h2" | "title1" | "title2" | "body1" | "body2" | "body3" | "body4";
+
+export const ACTIVE_GROTESK: Record<FontWeight, string> = {
+    light: "AktivGrotesk_Regular",
+    regular: "AktivGrotesk_Medium",
+    strong: "AktivGrotesk_Bold",
 };
 
-export const FONT_STYLE: Record<string, TextStyle> = {
-    h1: { fontSize: 48 },
-    h2: { fontSize: 40 },
-    h3: { fontSize: 32 },
-    h4: { fontSize: 22 },
+export const DRUK_TEXT_WIDE: Record<FontWeight, string> = {
+    light: "DrukTextWide_Heavy",
+    regular: "DrukTextWide_Heavy",
+    strong: "DrukTextWide_Heavy",
+};
+
+export const FONT_STYLE: Record<TypographyVariant, TextStyle> = {
+    h1: { fontSize: 28 },
+    h2: { fontSize: 20 },
+    title1: { fontSize: 32 },
+    title2: { fontSize: 22 },
     body1: { fontSize: 18 },
     body2: { fontSize: 16 },
     body3: { fontSize: 14 },
     body4: { fontSize: 12 },
 };
 
-export function createTypographyVariant(tag: keyof typeof FONT_STYLE, fontWeight: FontWeight, style: TextStyle = {}): TextStyle {
+export function isHeading(variant: TypographyVariant): boolean {
+    return variant.indexOf("h") === 0;
+}
+export function getFontFamily(variant: TypographyVariant, fontWeight: FontWeight): string {
+    return isHeading(variant) ? DRUK_TEXT_WIDE[fontWeight] : ACTIVE_GROTESK[fontWeight];
+}
+
+export function createTypographyVariant(typographyVariant: TypographyVariant, fontWeight: FontWeight, style: TextStyle = {}): TextStyle {
     return {
-        ...FONT_STYLE[tag],
-        fontFamily: MANROPE[fontWeight],
+        ...FONT_STYLE[typographyVariant],
+        fontFamily: getFontFamily(typographyVariant, fontWeight),
         ...style,
     };
 }
@@ -37,28 +52,30 @@ const typography: CreateTheme["typography"] = {
         fontSize: 18,
     },
     h3: {
-        fontFamily: "Manrope_400Regular",
+        fontFamily: "AktivGrotesk_Regular",
         fontSize: 16,
     },
     body1: {
-        fontFamily: "Manrope_600SemiBold",
+        fontFamily: "AktivGrotesk_Medium",
     },
     body2: {
-        fontFamily: "Manrope_400Regular",
+        fontFamily: "AktivGrotesk_Regular",
     },
-    // NEAR
+    //Druk Text Wide Web
     h1Strong: createTypographyVariant("h1", "strong"),
     h1Regular: createTypographyVariant("h1", "regular"),
     h1Light: createTypographyVariant("h1", "light"),
     h2Strong: createTypographyVariant("h2", "strong"),
     h2Regular: createTypographyVariant("h2", "regular"),
     h2Light: createTypographyVariant("h2", "light"),
-    h3Strong: createTypographyVariant("h3", "strong"),
-    h3Regular: createTypographyVariant("h3", "regular"),
-    h3Light: createTypographyVariant("h3", "light"),
-    h4Strong: createTypographyVariant("h4", "strong"),
-    h4Regular: createTypographyVariant("h4", "regular"),
-    h4Light: createTypographyVariant("h4", "light"),
+
+    // Activ Grotesk
+    title1Strong: createTypographyVariant("title1", "strong"),
+    title1Regular: createTypographyVariant("title1", "regular"),
+    title1Light: createTypographyVariant("title1", "light"),
+    title2Strong: createTypographyVariant("title2", "strong"),
+    title2Regular: createTypographyVariant("title2", "regular"),
+    title2Light: createTypographyVariant("title2", "light"),
     body1Strong: createTypographyVariant("body1", "strong"),
     body1Regular: createTypographyVariant("body1", "regular"),
     body1Light: createTypographyVariant("body1", "light"),
