@@ -9,7 +9,7 @@ export const DarkLoadingModalOverlay = styled(View)(({ theme }) => ({
     position: "absolute",
     width: "100%",
     height: "100%",
-    backgroundColor: theme.palette.mode === "dark" ? theme.palette.altOverlay["80%"] : "transparent",
+    backgroundColor: theme.palette.mode === "dark" ? theme.palette.overlay[500]["80%"] : "transparent",
 }));
 
 export const LoadingModalRoot = styled(GradientPage, { gradient: true })(() => ({

@@ -9,15 +9,15 @@ export const ChipRoot = styled(View)<ChipRootProps>(({ theme, variant, fullWidth
     justifyContent: "center",
     borderRadius: theme.borderRadius,
     alignSelf: fullWidth ? undefined : "flex-start",
-    backgroundColor: variant === "filled" ? theme.palette.gray[900] : "transparent",
+    backgroundColor: variant === "filled" ? theme.palette.gray[700] : "transparent",
     ...(variant === "outlined" && {
         borderWidth: 2,
         borderStyle: "solid",
-        borderColor: theme.palette.overlay["8%"],
+        borderColor: theme.palette.overlay[700]["8%"],
     }),
 }));
 
 export const ChipText = styled(Text)<ChipTextProps>(({ theme, variant }) => ({
     ...theme.typography.body3Strong,
-    color: variant === "filled" ? theme.palette.gray[0] : theme.palette.overlay["60%"],
+    color: variant === "filled" ? theme.palette.gray[0] : theme.palette.overlay[700]["60%"],
 }));

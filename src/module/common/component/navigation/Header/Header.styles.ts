@@ -4,7 +4,7 @@ import styled from "@peersyst/react-native-styled";
 export const HeaderRoot = styled(Toolbar)(({ theme, safeAreaInsets }) => {
     return {
         zIndex: theme.zIndex.header,
-        backgroundColor: theme.palette.background,
+        backgroundColor: theme.palette.component.appbar,
         position: "absolute",
         top: 0,
         left: 0,

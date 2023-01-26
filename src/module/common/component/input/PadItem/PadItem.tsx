@@ -9,7 +9,7 @@ const PadItem = ({ item, style, onPress }: PadItemProps) => {
 
     return (
         <PadItemRoot style={style}>
-            <RippleAnimCircle onPress={onPress} duration={400} size={70} scaleStart={0.6} color2={theme.palette.altOverlay["20%"]} />
+            <RippleAnimCircle onPress={onPress} duration={400} size={70} scaleStart={0.6} color2={theme.palette.overlay[100]["24%"]} />
             {Number(item) < 10 ? <Item>{item}</Item> : <ItemIcon>{item === "X" ? <CrossIcon /> : <BackIcon />}</ItemIcon>}
         </PadItemRoot>
     );

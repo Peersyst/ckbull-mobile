@@ -7,7 +7,7 @@ export const TransactionIconRoot = styled(Col)<TransactionIconCompponentProps>((
     width: 44,
     height: 44,
     borderRadius: 44,
-    backgroundColor: active ? alpha(p.blue, 0.12) : p.overlay["8%"],
+    backgroundColor: active ? alpha(p.blue, 0.12) : p.overlay[500]["8%"],
 }));
 
 export const TxIcon = styledWithAs(Icon)<TransactionIconCompponentProps>(({ theme: { palette: p }, active }) => ({

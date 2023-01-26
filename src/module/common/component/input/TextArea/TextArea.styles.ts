@@ -5,14 +5,14 @@ export const TextAreaRoot = styled(TextArea)(({ theme }) => ({
     component: {
         borderRadius: theme.borderRadiusSm,
         backgroundColor: theme.palette.background,
-        color: theme.palette.text,
-        borderWidth: 1,
+        color: theme.palette.component.input.displayColor,
+        borderWidth: theme.borderWidth,
         borderStyle: "solid",
-        borderColor: theme.palette.overlay["12%"],
+        borderColor: theme.palette.component.input.borderColor,
         paddingHorizontal: 20,
         input: {
             ...theme.typography.body2Strong,
-            placeholderColor: theme.palette.overlay["12%"],
+            placeholderColor: theme.palette.component.input.placeholderColor,
             highlightColor: theme.palette.primary,
         },
     },

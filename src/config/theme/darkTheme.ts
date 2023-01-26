@@ -1,97 +1,125 @@
 import { createTheme, Theme } from "@peersyst/react-native-components";
 import { theme } from "./theme";
+import { baseTheme, black, blue, green, orange } from "./baseTheme";
+import { ThemeOverlay, ThemeOverlays } from "./theme.declarations";
 
+//Custom light theme colors
+export const red = "#C21212";
+
+//Light status
+export const status: Theme["palette"]["status"] = {
+    info: blue,
+    success: green["200"],
+    warning: orange,
+    error: red,
+};
+
+//Grays
 const gray: Theme["palette"]["gray"] = {
-    0: "#262626",
-    100: "#3F4246",
-    300: "#A7A7A7",
-    600: "#dcdcdc",
     900: "#FFFFFF",
-};
-const blue = "#5F8AFA";
-const green = "#AAD055";
-const gold = "#FFC860";
-const red = "#DB5555";
-const aqua = "#4FD1D9";
-const purple = "#6B6EF9";
-const lilac = "#A463B0";
-const orange = "#E3935B";
-const gradient: Theme["palette"]["gradient"] = {
-    lilacBlue: [lilac, blue],
-    lilacOrange: [lilac, orange],
-    lilacRed: [lilac, red],
-    blueGreen: [blue, green],
-    blueTurquoise: [blue, aqua],
-    bluePurple: [blue, purple],
-    purpleLilac: [purple, lilac],
-    purpleTurquoise: [purple, aqua],
-    purpleRed: [purple, red],
-    redOrange: [red, orange],
-    orangeYellow: [orange, gold],
-    greenYellow: [green, gold],
-};
-const overlay: Theme["palette"]["overlay"] = {
-    "80%": "#FFFFFFCC",
-    "60%": "#FFFFFF99",
-    "40%": "#FFFFFF66",
-    "20%": "#FFFFFF33",
-    "12%": "#FFFFFF1F",
-    "8%": "#FFFFFF14",
-};
-const altOverlay: Theme["palette"]["altOverlay"] = {
-    "80%": "#262626CC",
-    "60%": "#26262699",
-    "40%": "#26262666",
-    "20%": "#26262633",
-    "12%": "#2626261F",
-    "8%": "#26262614",
+    800: "#EBEBEB",
+    700: "#A7A7A7",
+    600: "#8C8C8C",
+    500: "#707070",
+    450: "#494E4E",
+    400: "#404040",
+    300: "#3F4246",
+    200: "#292929",
+    100: "#262626",
+    0: "#1A1A1A",
 };
 
+//Overlays
+//Overlay100 - #000000
+const overlay100: ThemeOverlay = {
+    "8%": "#00000014",
+    "12%": "#0000001F",
+    "16%": "#00000029",
+    "24%": "#0000003D",
+    "32%": "#00000052",
+    "48%": "#0000007A",
+    "60%": "#00000099",
+    "80%": "#000000CC",
+};
+//Overlay300 - #262626
+const overlay300: ThemeOverlay = {
+    "8%": "#26262614",
+    "12%": "#2626261F",
+    "16%": "#26262629",
+    "24%": "#2626263D",
+    "32%": "#26262652",
+    "48%": "#2626267A",
+    "60%": "#26262699",
+    "80%": "#262626CC",
+};
+//Overlay500 - #292929
+const overlay500: ThemeOverlay = {
+    "8%": "#29292914",
+    "12%": "#2929291F",
+    "16%": "#29292929",
+    "24%": "#2929293D",
+    "32%": "#29292952",
+    "48%": "#2929297A",
+    "60%": "#29292999",
+    "80%": "#292929CC",
+};
+//Overlay700 - #a7a7a7
+const overlay700: ThemeOverlay = {
+    "8%": "#A7A7A714",
+    "12%": "#A7A7A71F",
+    "16%": "#A7A7A729",
+    "24%": "#A7A7A73D",
+    "32%": "#A7A7A752",
+    "48%": "#A7A7A77A",
+    "60%": "#A7A7A799",
+    "80%": "#A7A7A7CC",
+};
+//Overlay900 - #FFFFFF
+const overlay900: ThemeOverlay = {
+    "8%": "#FFFFFF14",
+    "12%": "#FFFFFF1F",
+    "16%": "#FFFFFF29",
+    "24%": "#FFFFFF3D",
+    "32%": "#FFFFFF52",
+    "48%": "#FFFFFF7A",
+    "60%": "#FFFFFF99",
+    "80%": "#FFFFFFCC",
+};
+
+const overlay: ThemeOverlays = {
+    100: overlay100,
+    300: overlay300,
+    500: overlay500,
+    700: overlay700,
+    900: overlay900,
+};
+
+//Dark theme
 const darkTheme = createTheme({
     ...theme,
     palette: {
-        mode: "dark",
-        background: gray[0],
-        primary: blue,
-        text: gray[900],
-        // CKBULL
-        white: "#FFFFFF",
-        black: "#0B0D1E",
-        fullBlack: "#000000",
-        darkGray: "#707070",
-        darkLightGray: "#B0B0B0",
-        darkLightGray2: "#808080",
-        darkGray2: "#444444",
-        darkFont: "#343434",
-        turquoise: "#15C8BD",
-        violet: "#924AD9",
-        pink: "#FF66B0",
-        darkerGray: "#141414",
-        lightGray: "#F4F4F4",
-        lighterGray: "#EFEFEF",
-        wallet: ["#15C8BD", "#47B5D6", "#623EDF", "#924AD9", "#FF66B0", "#E4AF4C"],
-        // NEAR
-        gray,
-        blue,
-        green,
-        gold,
+        ...baseTheme,
         red,
-        aqua,
-        purple,
-        lilac,
-        orange,
-        gradient,
+        status,
+        mode: "dark",
+        background: black,
+        text: gray[900],
+        gray,
         overlay,
-        status: {
-            info: blue,
-            success: green,
-            warning: orange,
-            error: red,
+        backdrop: overlay["500"]["48%"],
+        glass: overlay[100]["32%"],
+        component: {
+            label: gray[900],
+            appbar: black,
+            paper: gray[0],
+            bottomBar: gray[0],
+            borderColor: overlay["900"]["8%"],
+            input: {
+                placeholderColor: gray[500],
+                borderColor: overlay[700]["24%"],
+                displayColor: gray[600],
+            },
         },
-        appbar: gray[0],
-        paper: gray[0],
-        backdrop: overlay["60%"],
-        altOverlay,
     },
 });
 

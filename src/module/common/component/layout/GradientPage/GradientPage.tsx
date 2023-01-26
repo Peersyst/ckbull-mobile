@@ -27,8 +27,8 @@ const GradientPage = ({
         }).start();
     }, [gradient]);
 
-    const backgroundColor = backgroundColorStyle || palette.gradient.blueTurquoise[0];
-    const secondaryBackgroundColor = secondaryBackgroundColorStyle || palette.gradient.blueTurquoise[1];
+    const backgroundColor = backgroundColorStyle || palette.gradient.greenViolet[0];
+    const secondaryBackgroundColor = secondaryBackgroundColorStyle || palette.gradient.greenViolet[1];
 
     return (
         <GradientPageRoot style={{ backgroundColor, ...style }} {...rest}>

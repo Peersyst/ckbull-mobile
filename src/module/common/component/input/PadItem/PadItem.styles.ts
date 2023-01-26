@@ -10,7 +10,7 @@ export const PadItemRoot = styled(View)(({ theme, dimensions }) => {
         width: size,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: theme.palette.overlay["12%"],
+        backgroundColor: theme.palette.overlay[100]["12%"],
         borderRadius: 9999,
         overflow: "hidden",
     };

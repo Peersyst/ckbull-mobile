@@ -6,4 +6,5 @@ export const theme = createTheme({
     borderRadius: 16,
     borderRadiusSm: 8,
     borderRadiusXs: 4,
+    borderWidth: 1,
 });

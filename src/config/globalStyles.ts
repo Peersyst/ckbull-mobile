@@ -2,7 +2,7 @@ import { CreateGlobalStyles } from "@peersyst/react-native-components";
 
 const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) => ({
     Divider: {
-        backgroundColor: palette.overlay["8%"],
+        backgroundColor: palette.component.borderColor,
     },
     DottedPagination: {
         gap: 6,
@@ -24,15 +24,16 @@ const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) =>
     },
     Label: {
         label: {
+            color: palette.component.label,
             ...typography.body2Strong,
         },
     },
     Paper: {
-        backgroundColor: palette.paper,
+        backgroundColor: palette.component.paper,
     },
     Typography: {
         light: {
-            color: palette.gray[300],
+            color: palette.gray[200],
             opacity: 1,
         },
     },

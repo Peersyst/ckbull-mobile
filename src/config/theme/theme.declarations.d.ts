@@ -2,82 +2,94 @@
 import "@peersyst/react-native-styled";
 import { Theme as RNCTheme } from "@peersyst/react-native-components";
 
+export interface ThemeOverlay {
+    "80%": string;
+    "60%": string;
+    "48%": string;
+    "32%": string;
+    "24%": string;
+    "16%": string;
+    "12%": string;
+    "8%": string;
+}
+
+export interface ThemeOverlays {
+    100: ThemeOverlay;
+    300: ThemeOverlay;
+    500: ThemeOverlay;
+    700: ThemeOverlay;
+    900: ThemeOverlay;
+}
+
+export interface ThemeGreen {
+    200: string;
+    600: string;
+    800: string;
+}
+
+export interface ThemeGray {
+    0: string;
+    100: string;
+    200: string;
+    300: string;
+    400: string;
+    450: string;
+    500: string;
+    600: string;
+    700: string;
+    800: string;
+    900: string;
+}
+
+export type ThemeGradient = [string, string];
+
 // Custom components theme
 declare module "@peersyst/react-native-components" {
     export interface Theme {
         borderRadiusSm: number;
         borderRadiusXs: number;
+        borderWidth: number;
     }
 
     export interface CreateTheme {
         borderRadiusSm?: number;
         borderRadiusXs?: number;
+        borderWidth?: number;
+    }
+
+    export interface ThemeGradients {
+        greenDarkGreen: ThemeGradient;
+        greenViolet: ThemeGradient;
     }
 
     export interface ThemePalette {
-        // CKBULL
+        secondary: string;
         white: string;
         black: string;
-        darkGray: string;
-        darkLightGray: string;
-        darkerGray: string;
-        darkGray2: string;
-        darkLightGray2: string;
-        fullBlack: string;
-        lightGray: string;
-        lighterGray: string;
-        darkFont: string;
-        turquoise: string;
-        violet: string;
-        pink: string;
-        appbar: string;
-        paper: string;
-        wallet: string[];
-        // NEAR
-        gray: {
-            0: string;
-            100: string;
-            300: string;
-            600: string;
-            900: string;
-        };
-        blue: string;
-        green: string;
         gold: string;
         red: string;
-        aqua: string;
-        purple: string;
-        lilac: string;
         orange: string;
-        gradient: {
-            lilacBlue: [string, string];
-            lilacOrange: [string, string];
-            lilacRed: [string, string];
-            blueGreen: [string, string];
-            blueTurquoise: [string, string];
-            bluePurple: [string, string];
-            purpleLilac: [string, string];
-            purpleTurquoise: [string, string];
-            purpleRed: [string, string];
-            redOrange: [string, string];
-            orangeYellow: [string, string];
-            greenYellow: [string, string];
-        };
-        overlay: {
-            "80%": string;
-            "60%": string;
-            "40%": string;
-            "20%": string;
-            "12%": string;
-            "8%": string;
-        };
-        altOverlay: {
-            "80%": string;
-            "60%": string;
-            "40%": string;
-            "20%": string;
-            "12%": string;
-            "8%": string;
+        purple: string;
+        violet: string;
+        blue: string;
+        glass: string;
+        green: ThemeGreen;
+        gray: ThemeGray;
+        gradient: ThemeGradients;
+        overlay: ThemeOverlays;
+        //Utils
+        wallet: string[];
+        component: {
+            appbar: string;
+            bottomBar: string;
+            paper: string;
+            borderColor: string;
+            label: string;
+            input: {
+                borderColor: string;
+                placeholderColor: string;
+                displayColor: string;
+            };
         };
     }
 

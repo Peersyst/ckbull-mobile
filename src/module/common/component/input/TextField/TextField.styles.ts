@@ -24,15 +24,15 @@ export const TextFieldRoot = styled(TextField)<TextFieldRootProps>(({ theme, siz
         component: {
             input: {
                 ...inputSizeStyles[size],
-                placeholderColor: theme.palette.overlay["12%"],
+                placeholderColor: theme.palette.component.input.placeholderColor,
                 highlightColor: theme.palette.primary,
             },
             borderRadius: theme.borderRadiusSm,
             backgroundColor: theme.palette.background,
-            color: theme.palette.text,
-            borderWidth: 1,
+            color: theme.palette.component.input.displayColor,
+            borderWidth: theme.borderWidth,
             borderStyle: "solid",
-            borderColor: theme.palette.overlay["12%"],
+            borderColor: theme.palette.component.input.borderColor,
             paddingHorizontal: 20,
         },
     };
