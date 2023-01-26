@@ -1,6 +1,6 @@
 import { createTheme, Theme } from "@peersyst/react-native-components";
 import { theme } from "./theme";
-import { baseTheme, blue, green, orange } from "./baseTheme";
+import { baseTheme, black, blue, green, orange } from "./baseTheme";
 import { ThemeOverlay, ThemeOverlays } from "./theme.declarations";
 
 //Custom light theme colors
@@ -21,6 +21,7 @@ const gray: Theme["palette"]["gray"] = {
     700: "#A7A7A7",
     600: "#8C8C8C",
     500: "#707070",
+    450: "#494E4E",
     400: "#404040",
     300: "#3F4246",
     200: "#292929",
@@ -93,6 +94,7 @@ const overlay: ThemeOverlays = {
     900: overlay900,
 };
 
+//Dark theme
 const darkTheme = createTheme({
     ...theme,
     palette: {
@@ -100,13 +102,24 @@ const darkTheme = createTheme({
         red,
         status,
         mode: "dark",
-        background: gray[0],
+        background: black,
         text: gray[900],
         gray,
         overlay,
-        appbar: gray[0],
-        paper: gray[0],
         backdrop: overlay["500"]["48%"],
+        glass: overlay[100]["32%"],
+        component: {
+            label: gray[900],
+            appbar: black,
+            paper: gray[0],
+            bottomBar: gray[0],
+            borderColor: overlay["900"]["8%"],
+            input: {
+                placeholderColor: gray[500],
+                borderColor: overlay[700]["24%"],
+                displayColor: gray[600],
+            },
+        },
     },
 });
 

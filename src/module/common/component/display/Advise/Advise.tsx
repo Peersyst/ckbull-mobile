@@ -14,7 +14,7 @@ const Advise = ({ title, text, style }: AdviseProps): JSX.Element => (
             {title}
         </Typography>
         {text && (
-            <Typography variant="body3Regular" textAlign="center" color={(palette) => palette.gray["600"]}>
+            <Typography variant="body3Regular" textAlign="center" color={(palette) => palette.gray["450"]}>
                 {text}
             </Typography>
         )}

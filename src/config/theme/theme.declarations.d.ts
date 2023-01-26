@@ -33,6 +33,7 @@ export interface ThemeGray {
     200: string;
     300: string;
     400: string;
+    450: string;
     500: string;
     600: string;
     700: string;
@@ -47,11 +48,13 @@ declare module "@peersyst/react-native-components" {
     export interface Theme {
         borderRadiusSm: number;
         borderRadiusXs: number;
+        borderWidth: number;
     }
 
     export interface CreateTheme {
         borderRadiusSm?: number;
         borderRadiusXs?: number;
+        borderWidth?: number;
     }
 
     export interface ThemeGradients {
@@ -60,6 +63,7 @@ declare module "@peersyst/react-native-components" {
     }
 
     export interface ThemePalette {
+        secondary: string;
         white: string;
         black: string;
         gold: string;
@@ -68,15 +72,25 @@ declare module "@peersyst/react-native-components" {
         purple: string;
         violet: string;
         blue: string;
+        glass: string;
         green: ThemeGreen;
         gray: ThemeGray;
         gradient: ThemeGradients;
         overlay: ThemeOverlays;
         //Utils
         wallet: string[];
-        appbar: string;
-        bottomBar: string;
-        paper: string;
+        component: {
+            appbar: string;
+            bottomBar: string;
+            paper: string;
+            borderColor: string;
+            label: string;
+            input: {
+                borderColor: string;
+                placeholderColor: string;
+                displayColor: string;
+            };
+        };
     }
 
     export interface TypographyVariantsOverrides {

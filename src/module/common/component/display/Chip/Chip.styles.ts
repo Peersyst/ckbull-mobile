@@ -13,7 +13,7 @@ export const ChipRoot = styled(View)<ChipRootProps>(({ theme, variant, fullWidth
     ...(variant === "outlined" && {
         borderWidth: 2,
         borderStyle: "solid",
-        borderColor: theme.palette.overlay[500]["8%"],
+        borderColor: theme.palette.overlay[700]["8%"],
     }),
 }));
 

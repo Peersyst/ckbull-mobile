@@ -2,7 +2,7 @@ import { Theme } from "@peersyst/react-native-components";
 
 //Base colors
 export const white = "#FFFFFF";
-export const black = "#292929";
+export const black = "#000000";
 export const gold = "#FFC860";
 export const red = "#F54565";
 export const orange = "#E3935B";
@@ -23,8 +23,10 @@ export const gradient: Theme["palette"]["gradient"] = {
     greenViolet: [green["200"], violet],
 };
 
+//Base theme
 export const baseTheme: Partial<Theme["palette"]> = {
     primary: green["200"],
+    secondary: violet,
     white,
     black,
     gold,
