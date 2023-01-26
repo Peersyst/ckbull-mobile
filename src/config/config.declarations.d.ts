@@ -5,11 +5,10 @@ import { TFunction } from "react-i18next";
 
 declare module "@peersyst/react-native-components" {
     export interface ConfigTypes {
-        TranslateFn: TFunction<"translation">;
+        TranslateFn: TFunction<"error">;
     }
 
     export interface Config {
-        backendUrl: string;
         minimumTransactionAmount: number;
         minimumDaoDeposit: number;
         mainnetExplorerLink: string;
@@ -23,10 +22,11 @@ declare module "@peersyst/react-native-components" {
         mainnetExplorerApi: string;
         maxNumberOfDecimals: number;
         enableMainnet: boolean;
+        tokenName: string;
+        newsRSSUrl: string;
     }
 
     export interface CreateConfig {
-        backendUrl: string;
         minimumTransactionAmount: number;
         minimumDaoDeposit: number;
         mainnetExplorerLink: string;
@@ -40,6 +40,8 @@ declare module "@peersyst/react-native-components" {
         mainnetExplorerApi: string;
         maxNumberOfDecimals: number;
         enableMainnet: boolean;
+        tokenName: string;
+        newsRSSUrl: string;
     }
 
     export interface ExtraValidators {

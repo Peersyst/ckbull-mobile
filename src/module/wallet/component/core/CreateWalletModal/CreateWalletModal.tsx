@@ -1,8 +1,8 @@
 import { createModal, ExposedBackdropProps, TabPanel, Tabs } from "@peersyst/react-native-components";
 import SetWalletNameScreen from "module/wallet/screen/SetWalletNameScreen";
-import WalletAdvisesScreen from "module/wallet/screen/WalletAdvisesScreen/WalletAdvisesScreen";
+import WalletAdvisesScreen from "module/wallet/screen/WalletAdvisesScreen";
 import WalletMnemonicScreen from "module/wallet/screen/WalletMnemonicScreen";
-import PickWalletMnemonicScreen from "module/wallet/screen/PickWalletMnemonicScreen";
+import PickWalletMnemonicScreen from "module/wallet/screen/PickWalletMnemonicScreen/PickWalletMnemonicScreen";
 import { useState } from "react";
 import AddWalletModal from "module/wallet/component/core/AddWalletModal/AddWalletModal";
 import { useTranslate } from "module/common/hook/useTranslate";

@@ -17,7 +17,7 @@ export interface EnterWalletMnemonicScreenProps {
 }
 
 const EnterWalletMnemonicScreen = ({ onSubmit, submitText }: EnterWalletMnemonicScreenProps): JSX.Element => {
-    const translate = useTranslate();
+    const translateError = useTranslate("error");
     const { setMnemonic } = useCreateWallet();
     const [submitted, setSubmitted] = useState(false);
     const { showToast } = useToast();
@@ -37,7 +37,7 @@ const EnterWalletMnemonicScreen = ({ onSubmit, submitText }: EnterWalletMnemonic
                 setSubmitted(true);
             } else {
                 notificationAsync(NotificationFeedbackType.Error);
-                showToast(translate("incorrect_mnemonic"), { type: "error" });
+                showToast(translateError("incorrect_mnemonic"), { type: "error" });
             }
         }
     };
@@ -45,9 +45,9 @@ const EnterWalletMnemonicScreen = ({ onSubmit, submitText }: EnterWalletMnemonic
     return (
         <Col justifyContent="flex-end" flex={1}>
             <Form onSubmit={handleSubmit}>
-                <Col gap={20} style={{ marginTop: 5 }}>
+                <Col gap={24} style={{ marginTop: 5 }}>
                     <MnemonicInput />
-                    <Button type="submit" fullWidth variant="outlined" style={{ marginHorizontal: 20 }}>
+                    <Button type="submit" fullWidth>
                         {submitText}
                     </Button>
                 </Col>

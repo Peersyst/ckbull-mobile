@@ -4,13 +4,14 @@ import { LanguageDetectorAsyncModule } from "i18next";
 import { LocaleType } from "locale";
 
 export function getDefaultLocale(): LocaleType {
-    const locales: LocaleType[] = ["en", "es", "zh"];
-    const systemLocale = Localization.locale.slice(0, 2);
-    return locales.find((l) => systemLocale === l) ?? "en";
+    const locales: LocaleType[] = ["en", "es"];
+    const systemLocaleEnd = Localization.locale.slice(-2).toLowerCase();
+    const systemLocaleStart = Localization.locale.slice(0, 2).toLowerCase();
+    return locales.find((l) => systemLocaleStart === l || systemLocaleEnd === l) ?? "en";
 }
 
 export async function initLang(): Promise<LocaleType> {
-    const storedLocale = await SettingsStorage.getLocale();
+    const storedLocale = await SettingsStorage?.getLocale();
     return storedLocale || getDefaultLocale();
 }
 
