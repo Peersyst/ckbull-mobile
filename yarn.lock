@@ -1217,11 +1217,6 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@expo-google-fonts/manrope@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@expo-google-fonts/manrope/-/manrope-0.2.2.tgz#c4dcef24d1825fd74e2f852e1f1383ea0deaf791"
-  integrity sha512-lveLEh77CUVWdOyvjAkB1DIZSS03WYbUCSvGPmqXfPeYIvnnXnuX68DWjY8eeGti5ALAwc1yYz1I7cqc0/xI9g==
-
 "@expo/bunyan@4.0.0", "@expo/bunyan@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@expo/bunyan/-/bunyan-4.0.0.tgz#be0c1de943c7987a9fbd309ea0b1acd605890c7b"
