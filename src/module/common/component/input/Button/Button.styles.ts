@@ -8,19 +8,19 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
         borderRadius: rounded ? 10000 : undefined,
         //Size Styles
         lg: {
-            ...theme.typography.body2Strong,
+            ...theme.typography.body2Regular,
             height: 52,
             paddingHorizontal: 18,
             paddingVertical: 12,
         },
         md: {
-            ...theme.typography.body2Strong,
+            ...theme.typography.body2Regular,
             height: 40,
             paddingHorizontal: 18,
             paddingVertical: 6,
         },
         sm: {
-            ...theme.typography.body3Strong,
+            ...theme.typography.body3Regular,
             height: 36,
             paddingHorizontal: 16,
             paddingVertical: 8,
@@ -29,15 +29,15 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
         variant: {
             primary: {
                 backgroundColor: theme.palette.primary,
-                color: "#FFFFFF",
+                color: theme.palette.gray[900],
             },
             secondary: {
-                backgroundColor: "#FFFFFF",
-                color: "#000000",
+                backgroundColor: theme.palette.gray[900],
+                color: theme.palette.black,
             },
             tertiary: {
-                backgroundColor: theme.palette.overlay[100]["12%"],
-                color: "#ffffff",
+                backgroundColor: theme.palette.overlay[900]["12%"],
+                color: theme.palette.gray[900],
             },
             outlined: {
                 borderColor: theme.palette.text,
@@ -54,7 +54,7 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
                     backgroundColor: emphasize(theme.palette.primary, 0.15),
                 },
                 secondary: {
-                    backgroundColor: emphasize("#FFFFFF", 0.02),
+                    backgroundColor: emphasize(theme.palette.black, 0.02),
                 },
                 tertiary: {
                     backgroundColor: theme.palette.overlay[100]["24%"],
