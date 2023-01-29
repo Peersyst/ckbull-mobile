@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { LayoutChangeEvent, ViewStyle } from "react-native";
-import { CardModalBodyWrapper, CardModalContent, CardModalWrapper } from "./CardNavigator.styles";
+import { CardModalBodyWrapper, CardModalContent, CardModalWrapper } from "./CardModal.styles";
 import { Backdrop, Divider, ExposedBackdropProps } from "@peersyst/react-native-components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDimensions } from "@react-native-community/hooks";

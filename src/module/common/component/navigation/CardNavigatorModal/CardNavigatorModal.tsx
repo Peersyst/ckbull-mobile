@@ -1,8 +1,9 @@
 import { ExposedBackdropProps } from "@peersyst/react-native-components";
-import CardModal from "module/common/component/navigation/CardNavigator/CardNavigator";
+
 import Navbar from "module/common/component/navigation/Navbar/Navbar";
 import { NavbarProps } from "module/common/component/navigation/Navbar/Navbar.types";
 import { ReactNode } from "react";
+import CardModal from "module/common/component/navigation/CardModal/CardModal";
 
 interface CardNavigatorModalProps extends ExposedBackdropProps {
     navbar?: NavbarProps;

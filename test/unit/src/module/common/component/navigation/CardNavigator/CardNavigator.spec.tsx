@@ -1,5 +1,5 @@
 import { render } from "test-utils";
-import CardNavigator from "module/common/component/navigation/CardNavigator/CardNavigator";
+import CardNavigator from "module/common/component/navigation/CardModal/CardModal.styles";
 import { Typography } from "@peersyst/react-native-components";
 
 describe("CardNavigator tests", () => {
