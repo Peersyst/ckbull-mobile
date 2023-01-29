@@ -2,7 +2,7 @@ import { Backdrop, ExposedBackdropProps } from "@peersyst/react-native-component
 import CardNavigator, { CardNavigatorProps } from "module/common/component/navigation/CardNavigator/CardNavigator";
 
 const CardNavigatorModal = ({
-    navbar: { back, onBack, ...restNavProps } = {},
+    navbar: { back, action, onBack, onAction, ...restNavProps } = {},
     children,
     style,
     closable = true,
@@ -13,8 +13,10 @@ const CardNavigatorModal = ({
             {(_open, setOpen) => (
                 <CardNavigator
                     navbar={{
-                        back: back && closable,
+                        back: back && !action && closable,
+                        action: !back && closable ? action : undefined,
                         onBack: onBack || (() => setOpen(false)),
+                        onAction: onAction || (() => setOpen(false)),
                         ...restNavProps,
                     }}
                     style={style}

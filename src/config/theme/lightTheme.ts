@@ -99,7 +99,7 @@ const lightTheme = createTheme({
         red,
         status,
         mode: "dark",
-        background: gray[700],
+        background: gray[100],
         text: gray[700],
         gray,
         overlay,

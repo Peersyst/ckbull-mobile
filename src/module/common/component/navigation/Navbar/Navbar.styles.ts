@@ -15,3 +15,9 @@ export const BackIconRoot = styled(IconButton)(({ theme }) => ({
     left: 20,
     color: theme.palette.gray[theme.palette.mode === "light" ? "600" : "900"],
 }));
+
+export const ActionIconButtonRoot = styled(IconButton)(({ theme }) => ({
+    position: "absolute",
+    right: 20,
+    color: theme.palette.gray[theme.palette.mode === "light" ? "600" : "900"],
+}));

@@ -7,9 +7,9 @@ export interface StepsProps {
 
 const Steps = ({ index, length }: StepsProps): JSX.Element => (
     <Row>
-        <Typography variant="body3Strong">{index + 1} </Typography>
-        <Typography variant="body3Regular">/</Typography>
-        <Typography variant="body3Regular" light>
+        <Typography variant="body3Light">{index + 1} </Typography>
+        <Typography variant="body3Light">/</Typography>
+        <Typography variant="body3Light" light>
             {` ${length}`}
         </Typography>
     </Row>
