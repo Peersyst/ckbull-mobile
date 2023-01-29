@@ -1,30 +1,49 @@
-import { Backdrop, ExposedBackdropProps } from "@peersyst/react-native-components";
-import CardNavigator, { CardNavigatorProps } from "module/common/component/navigation/CardNavigator/CardNavigator";
+import { ExposedBackdropProps } from "@peersyst/react-native-components";
+import CardModal from "module/common/component/navigation/CardNavigator/CardNavigator";
+import Navbar from "module/common/component/navigation/Navbar/Navbar";
+import { NavbarProps } from "module/common/component/navigation/Navbar/Navbar.types";
+import { ReactNode } from "react";
+
+interface CardNavigatorModalProps extends ExposedBackdropProps {
+    navbar?: NavbarProps;
+    children: ReactNode;
+}
 
 const CardNavigatorModal = ({
     navbar: { back, action, onBack, onAction, ...restNavProps } = {},
     children,
-    style,
+    open,
     closable = true,
+    onClose,
     ...backdropProps
-}: ExposedBackdropProps & CardNavigatorProps): JSX.Element => {
+}: CardNavigatorModalProps): JSX.Element => {
     return (
-        <Backdrop closable={closable} {...backdropProps}>
-            {(_open, setOpen) => (
-                <CardNavigator
-                    navbar={{
-                        back: back && !action && closable,
-                        action: !back && closable ? action : undefined,
-                        onBack: onBack || (() => setOpen(false)),
-                        onAction: onAction || (() => setOpen(false)),
-                        ...restNavProps,
-                    }}
-                    style={style}
-                >
-                    {children}
-                </CardNavigator>
-            )}
-        </Backdrop>
+        <CardModal closable={closable} {...backdropProps} open={open}>
+            {(open, setOpen) => ({
+                header: (
+                    <Navbar
+                        back={back && !action && closable}
+                        onBack={
+                            onBack ||
+                            (() => {
+                                setOpen(false);
+                                if (open !== undefined) onClose?.();
+                            })
+                        }
+                        action={!back && closable ? action : undefined}
+                        onAction={
+                            onAction ||
+                            (() => {
+                                setOpen(false);
+                                if (open !== undefined) onClose?.();
+                            })
+                        }
+                        {...restNavProps}
+                    />
+                ),
+                body: children,
+            })}
+        </CardModal>
     );
 };
 
