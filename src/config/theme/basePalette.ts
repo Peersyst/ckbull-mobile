@@ -21,7 +21,6 @@ export const green: Theme["palette"]["green"] = {
 export const gradient: Theme["palette"]["gradient"] = {
     greenDarkGreen: [green["200"], green["800"]],
     greenViolet: [green["200"], violet],
-    greenGreen: [green["200"], green["200"]],
 };
 
 //Base theme

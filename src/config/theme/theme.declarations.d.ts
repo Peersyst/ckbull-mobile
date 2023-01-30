@@ -60,7 +60,6 @@ declare module "@peersyst/react-native-components" {
     export interface ThemeGradients {
         greenDarkGreen: ThemeGradient;
         greenViolet: ThemeGradient;
-        greenGreen: ThemeGradient;
     }
 
     export interface ThemePalette {
