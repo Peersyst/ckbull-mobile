@@ -1,5 +1,5 @@
-import { MainTabItemType } from "module/main/component/navigation/MainTabs/MainTabs.types";
+import { BaseTabItemType } from "module/main/component/navigation/MainTabs/MainTabs.types";
 
 export interface FloatingTabsProps {
-    tabs: MainTabItemType[];
+    tabs: BaseTabItemType[];
 }

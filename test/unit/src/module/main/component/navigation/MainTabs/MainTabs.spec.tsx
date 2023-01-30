@@ -1,6 +1,6 @@
 import { render } from "test-utils";
 import MainTabs from "module/main/component/navigation/MainTabs/MainTabs";
-import { fireEvent } from "@testing-library/react-native";
+import { fireEvent, screen } from "@testing-library/react-native";
 import { MainTabItemType } from "module/main/component/navigation/MainTabs/MainTabs.types";
 import { Typography } from "@peersyst/react-native-components";
 
@@ -24,7 +24,7 @@ describe("MainTabs tests", () => {
                 item: <Typography variant="body1">Text4</Typography>,
             },
         ];
-        const screen = render(<MainTabs tabs={Tabs} />);
+        render(<MainTabs tabs={Tabs} />);
 
         expect(screen.getAllByText("Tab1")).toBeDefined();
         expect(screen.getAllByText("Text1")).toBeDefined();

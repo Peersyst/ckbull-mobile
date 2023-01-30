@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
 
-export type MainTabItemType = {
+export type BaseTabItemType = {
     title: string;
     item: ReactElement;
 };
 
 export interface MainTabsProps {
-    tabs: MainTabItemType[];
+    tabs: BaseTabItemType[];
 }
