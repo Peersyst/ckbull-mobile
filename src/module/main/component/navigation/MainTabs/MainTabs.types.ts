@@ -5,6 +5,6 @@ export type MainTabItemType = {
     item: ReactElement;
 };
 
-export interface MainTabsType {
+export interface MainTabsProps {
     tabs: MainTabItemType[];
 }

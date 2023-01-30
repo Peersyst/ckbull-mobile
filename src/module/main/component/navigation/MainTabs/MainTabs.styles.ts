@@ -11,4 +11,5 @@ export const TabGroup = styled(BaseTabGroup)(({ theme }) => ({
     borderBottomWidth: 1,
     borderColor: theme.palette.overlay[700]["8%"],
     justifyContent: "center",
+    paddingVertical: 5,
 }));
