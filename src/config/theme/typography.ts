@@ -3,7 +3,7 @@ import { TextStyle } from "react-native";
 
 export type FontWeight = "strong" | "regular" | "light";
 
-export type TypographyVariant = "h1" | "h2" | "title1" | "title2" | "body1" | "body2" | "body3" | "body4";
+export type TypographyVariant = "h1" | "h2" | "title1" | "title2" | "title3" | "title4" | "body1" | "body2" | "body3" | "body4";
 
 export const ACTIVE_GROTESK: Record<FontWeight, string> = {
     light: "AktivGrotesk_Regular",
@@ -20,8 +20,10 @@ export const DRUK_TEXT_WIDE: Record<FontWeight, string> = {
 export const FONT_STYLE: Record<TypographyVariant, TextStyle> = {
     h1: { fontSize: 28 },
     h2: { fontSize: 20 },
-    title1: { fontSize: 32 },
-    title2: { fontSize: 22 },
+    title1: { fontSize: 28 },
+    title2: { fontSize: 24 },
+    title3: { fontSize: 22 },
+    title4: { fontSize: 20 },
     body1: { fontSize: 18 },
     body2: { fontSize: 16 },
     body3: { fontSize: 14 },
@@ -76,6 +78,12 @@ const typography: CreateTheme["typography"] = {
     title2Strong: createTypographyVariant("title2", "strong"),
     title2Regular: createTypographyVariant("title2", "regular"),
     title2Light: createTypographyVariant("title2", "light"),
+    title3Strong: createTypographyVariant("title3", "strong"),
+    title3Regular: createTypographyVariant("title3", "regular"),
+    title3Light: createTypographyVariant("title3", "light"),
+    title4Strong: createTypographyVariant("title4", "strong"),
+    title4Regular: createTypographyVariant("title4", "regular"),
+    title4Light: createTypographyVariant("title4", "light"),
     body1Strong: createTypographyVariant("body1", "strong"),
     body1Regular: createTypographyVariant("body1", "regular"),
     body1Light: createTypographyVariant("body1", "light"),

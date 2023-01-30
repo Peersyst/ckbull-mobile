@@ -111,6 +111,12 @@ declare module "@peersyst/react-native-components" {
         title2Strong: true;
         title2Regular: true;
         title2Light: true;
+        title3Strong: true;
+        title3Regular: true;
+        title3Light: true;
+        title4Strong: true;
+        title4Regular: true;
+        title4Light: true;
         body1Strong: true;
         body1Regular: true;
         body1Light: true;
