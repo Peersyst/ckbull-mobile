@@ -10,7 +10,7 @@ interface CardNavigatorModalProps extends ExposedBackdropProps {
 }
 
 const CardNavigatorModal = ({
-    navbar: { back, action, onBack, onAction, ...restNavProps } = {},
+    navbar: { back, onBack, ...restNavProps } = {},
     children,
     open,
     closable = true,
@@ -22,17 +22,9 @@ const CardNavigatorModal = ({
             {(open, setOpen) => ({
                 header: (
                     <Navbar
-                        back={back && !action && closable}
+                        back={back && closable}
                         onBack={
                             onBack ||
-                            (() => {
-                                setOpen(false);
-                                if (open !== undefined) onClose?.();
-                            })
-                        }
-                        action={!back && closable ? action : undefined}
-                        onAction={
-                            onAction ||
                             (() => {
                                 setOpen(false);
                                 if (open !== undefined) onClose?.();

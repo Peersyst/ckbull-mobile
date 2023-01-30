@@ -5,17 +5,17 @@ import { Backdrop, Divider, ExposedBackdropProps } from "@peersyst/react-native-
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDimensions } from "@react-native-community/hooks";
 
-interface CardModalChildren {
+export interface CardModalChildren {
     header: ReactNode;
     body: ReactNode;
 }
 
-export interface CardNavigatorProps extends ExposedBackdropProps {
+export interface CardModalProps extends ExposedBackdropProps {
     children: ((open: boolean, setOpen: (value: boolean) => unknown) => CardModalChildren) | CardModalChildren;
     style?: ViewStyle;
 }
 
-const CardModal = ({ children, style, open, closable = true, onClose, ...backdropProps }: CardNavigatorProps): JSX.Element => {
+const CardModal = ({ children, style, open, closable = true, onClose, ...backdropProps }: CardModalProps): JSX.Element => {
     const [keyboardPaddingEnabled, setKeyboardPaddingEnabled] = useState(false);
     const {
         screen: { height },
