@@ -5,8 +5,8 @@ export const ImageBackgroundPageRoot = styled(View)(() => ({
     flex: 1,
 }));
 
-export const ImageBackgroundBase = styled(ImageBackground, { imageStyle: { minHeight: 220 } })(({ dimensions }) => ({
+export const ImageBackgroundBase = styled(ImageBackground, { imageStyle: { minHeight: 220 } })(() => ({
     overflow: "hidden",
-    height: dimensions.height,
+    height: "100%",
     minHeight: 220,
 }));

@@ -2,8 +2,11 @@ import { Button } from "@peersyst/react-native-components";
 import styled from "@peersyst/react-native-styled";
 import { ButtonProps } from "./Button.types";
 import { emphasize } from "@peersyst/react-utils";
+import { Animated, View } from "react-native";
+import { classify } from "@peersyst/react-utils";
+import { LinearGradient } from "expo-linear-gradient";
 
-export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
+export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
     return {
         borderRadius: rounded ? 10000 : undefined,
         //Size Styles
@@ -28,8 +31,8 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
         //Variant Styles
         variant: {
             primary: {
-                backgroundColor: theme.palette.primary,
-                color: theme.palette.gray[900],
+                backgroundColor: "transparent",
+                color: theme.palette.white,
             },
             secondary: {
                 backgroundColor: theme.palette.gray[900],
@@ -44,7 +47,7 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
                 color: theme.palette.text,
             },
             text: {
-                color: theme.palette.text,
+                color: theme.palette.white,
             },
         },
         //State Styles
@@ -65,7 +68,7 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
             },
         },
         disabled: {
-            backgroundColor: theme.palette.overlay[100]["24%"],
+            backgroundColor: theme.palette.overlay[100]["12%"],
             color: "white",
             variant: {
                 outlined: {
@@ -73,7 +76,23 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
                     color: theme.palette.overlay[100]["24%"],
                     borderColor: theme.palette.overlay[100]["24%"],
                 },
+                primary: {
+                    backgroundColor: theme.palette.overlay[900]["12%"],
+                    color: theme.palette.overlay[100]["48%"],
+                },
             },
         },
     };
 });
+
+export const ButtonRoot = styled(View)(() => ({}));
+
+export const ButtonGradient = styled(Animated.createAnimatedComponent(classify(LinearGradient)))(() => ({
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: -1,
+    elevation: -1,
+    width: "100%",
+    height: "100%",
+}));
