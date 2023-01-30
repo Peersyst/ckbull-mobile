@@ -8,7 +8,6 @@ export { default as euro_coin } from "./euro-coin.png";
 export { default as image_background } from "./image_background.png";
 export { default as key } from "./key.png";
 export { default as lock } from "./lock.png";
-export { default as logo } from "./logo.png";
 export { default as nervos_coin } from "./nervos-coin.png";
 export { default as notes } from "./notes.png";
 export { default as placeholder_image } from "./placeholder_image.jpg";

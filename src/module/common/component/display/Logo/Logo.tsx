@@ -1,8 +1,7 @@
-import { logo } from "images";
-import { Image } from "react-native";
+import { LogoIcon } from "icons";
 
 export const Logo = (): JSX.Element => {
-    return <Image source={logo} style={{ height: 60, width: 60, position: "absolute", zIndex: -1 }}></Image>;
+    return <LogoIcon style={{ fontSize: 72 }} />;
 };
 
 export default Logo;
