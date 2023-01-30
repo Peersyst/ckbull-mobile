@@ -1,6 +1,6 @@
 import CardModal, { CardModalProps } from "module/common/component/navigation/CardModal/CardModal";
 import { ReactElement } from "react";
-import { ChevronUpIcon } from "icons";
+import { ChevronDownIcon, CircleErrorIcon } from "icons";
 import { ActionIconRoot, CardSelectModalNavbar } from "module/common/component/feedback/CardSelectModal/CardSelectModal.styles";
 import { Typography } from "@peersyst/react-native-components";
 
@@ -10,7 +10,14 @@ export type CardSelectModalProps = Omit<CardModalProps, "children"> & {
     action: "hide" | "close";
 };
 
-const CardSelectModal = ({ children, title, onClose, ...rest }: CardSelectModalProps): JSX.Element => {
+const CardSelectModal = ({ children, title, action, onClose, ...rest }: CardSelectModalProps): JSX.Element => {
+    const actionIcons = {
+        hide: ChevronDownIcon,
+        close: CircleErrorIcon,
+    };
+
+    const ActionIcon = actionIcons[action];
+
     return (
         <CardModal {...rest} onClose={onClose}>
             {(open, setOpen) => ({
@@ -20,7 +27,7 @@ const CardSelectModal = ({ children, title, onClose, ...rest }: CardSelectModalP
                             {title}
                         </Typography>
                         <ActionIconRoot>
-                            <ChevronUpIcon
+                            <ActionIcon
                                 onPress={() => {
                                     setOpen(false);
                                     if (open !== undefined) onClose?.();
