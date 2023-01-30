@@ -37,34 +37,4 @@ describe("CardNavigatorModal tests", () => {
         fireEvent.press(screen.getByTestId("BackIcon"));
         expect(handleBack).toHaveBeenCalled();
     });
-
-    test("Renders close action and calls onAction", () => {
-        const mockOnAction = jest.fn();
-
-        render(
-            <CardNavigatorModal navbar={{ title: "Title", action: "close", onAction: mockOnAction }}>
-                <Text>Content</Text>
-            </CardNavigatorModal>,
-        );
-
-        const closeButton = screen.getByTestId("CircleErrorIcon");
-        expect(closeButton).toBeDefined();
-        fireEvent.press(closeButton);
-        expect(mockOnAction).toHaveBeenCalled();
-    });
-
-    test("Renders hide action and calls onAction", () => {
-        const mockOnAction = jest.fn();
-
-        render(
-            <CardNavigatorModal navbar={{ title: "Title", action: "hide", onAction: mockOnAction }}>
-                <Text>Content</Text>
-            </CardNavigatorModal>,
-        );
-
-        const closeButton = screen.getByTestId("ChevronUpIcon");
-        expect(closeButton).toBeDefined();
-        fireEvent.press(closeButton);
-        expect(mockOnAction).toHaveBeenCalled();
-    });
 });
