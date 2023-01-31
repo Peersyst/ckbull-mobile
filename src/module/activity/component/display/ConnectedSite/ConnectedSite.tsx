@@ -1,22 +1,22 @@
 import { SiteImage } from "module/activity/component/display/ConnectedSite/ConnectedSite.styles";
-import BaseActivity from "module/activity/core/BaseActivity/BaseActivity";
-import { View } from "react-native";
+import BaseActivity from "module/activity/component/display/ActivityCard/ActivityCard";
 import ConnectedSiteStatus, { ConnectedSiteStatusProps } from "module/activity/component/display/ConnectedSiteStatus/ConnectedSiteStatus";
+import { ActivityActionKind } from "module/activity/core/ActivityAction/ActivityAction.types";
+import { placeholder_image } from "images";
 
 interface ConnectedSiteProps extends ConnectedSiteStatusProps {
     title: string;
-    source: string;
-    action: "disconnect" | "open";
+    source?: string;
+    action: ActivityActionKind;
     onAction: () => void;
 }
 
-const ConnectedSite = ({ title, source, status }: ConnectedSiteProps): JSX.Element => {
+const ConnectedSite = ({ title, action, onAction, source, status }: ConnectedSiteProps): JSX.Element => {
     return (
-        <BaseActivity title={title}>
+        <BaseActivity title={title} action={action} onAction={onAction}>
             {{
-                header: <SiteImage source={{ uri: source }} />,
-                statusDetail: <ConnectedSiteStatus status={status} />,
-                actionable: <View></View>,
+                header: <SiteImage source={source ? { uri: source } : placeholder_image} />,
+                description: <ConnectedSiteStatus status={status} details={"this is a detail"} />,
             }}
         </BaseActivity>
     );
