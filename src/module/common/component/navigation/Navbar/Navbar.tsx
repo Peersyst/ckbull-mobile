@@ -23,7 +23,7 @@ const Navbar = ({ back, title, onBack, steps }: NavbarProps): JSX.Element => {
             )}
             <Col alignItems="center">
                 {title && (
-                    <Typography variant="body1Strong" textTransform="uppercase">
+                    <Typography variant="body1Regular" textTransform="uppercase">
                         {title}
                     </Typography>
                 )}

@@ -10,11 +10,11 @@ export interface AdviseProps {
 
 const Advise = ({ title, text, style }: AdviseProps): JSX.Element => (
     <Col alignItems="center" style={style} gap={24}>
-        <Typography variant="body3Strong" textAlign="center">
+        <Typography variant="body3Regular" textAlign="center" color={(palette) => palette.text}>
             {title}
         </Typography>
         {text && (
-            <Typography variant="body3Regular" textAlign="center" color={(palette) => palette.gray["450"]}>
+            <Typography variant="body3Regular" textAlign="center" color={(palette) => palette.gray["600"]}>
                 {text}
             </Typography>
         )}
