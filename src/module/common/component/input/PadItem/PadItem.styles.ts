@@ -21,6 +21,7 @@ export const Item = styled(Text)(({ theme, dimensions: { height } }) => {
     return {
         ...finalFont,
         color: theme.palette.text,
+        marginBottom: -3,
     };
 });
 
