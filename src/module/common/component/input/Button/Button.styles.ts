@@ -2,8 +2,7 @@ import { Button } from "@peersyst/react-native-components";
 import styled from "@peersyst/react-native-styled";
 import { ButtonProps } from "./Button.types";
 import { emphasize } from "@peersyst/react-utils";
-import { Animated, View } from "react-native";
-import { classify } from "@peersyst/react-utils";
+import { View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
@@ -43,21 +42,21 @@ export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }
                 color: theme.palette.gray[900],
             },
             outlined: {
-                borderColor: theme.palette.text,
+                borderColor: theme.palette.overlay[100]["12%"],
                 color: theme.palette.text,
             },
             text: {
-                color: theme.palette.white,
+                color: theme.palette.text,
             },
         },
         //State Styles
         pressed: {
             variant: {
                 primary: {
-                    backgroundColor: emphasize(theme.palette.primary, 0.15),
+                    backgroundColor: emphasize(theme.palette.overlay[100]["12%"], 0.15),
                 },
                 secondary: {
-                    backgroundColor: emphasize(theme.palette.black, 0.02),
+                    backgroundColor: emphasize(theme.palette.gray[900], 0.02),
                 },
                 tertiary: {
                     backgroundColor: theme.palette.overlay[100]["24%"],
@@ -68,7 +67,6 @@ export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }
             },
         },
         disabled: {
-            backgroundColor: theme.palette.overlay[100]["12%"],
             color: "white",
             variant: {
                 outlined: {
@@ -87,7 +85,7 @@ export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }
 
 export const ButtonRoot = styled(View)(() => ({}));
 
-export const ButtonGradient = styled(Animated.createAnimatedComponent(classify(LinearGradient)))(() => ({
+export const ButtonGradient = styled(LinearGradient)(() => ({
     position: "absolute",
     top: 0,
     left: 0,

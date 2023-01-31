@@ -1,23 +1,17 @@
 import { ButtonProps } from "./Button.types";
-import { ButtonBase, ButtonGradient, ButtonRoot } from "./Button.styles";
+import { ButtonBase, ButtonGradient } from "./Button.styles";
 import { useTheme } from "@peersyst/react-native-styled";
+import { View } from "react-native";
 
-const Button = ({
-    style: { backgroundColor: backgroundColorStyle, secondaryBackgroundColor: secondaryBackgroundColorStyle } = {},
-    ...rest
-}: ButtonProps): JSX.Element => {
-    const { variant, disabled } = rest;
+const Button = ({ variant, disabled, ...rest }: ButtonProps): JSX.Element => {
     const { palette } = useTheme();
-
-    const backgroundColor = backgroundColorStyle || palette.green[200];
-    const secondaryBackgroundColor = secondaryBackgroundColorStyle || palette.green[800];
-
+    const showGradient = variant === "primary" && !disabled;
     return (
-        <ButtonRoot {...rest}>
-            <ButtonBase {...rest} />
-            {variant === "primary" && !disabled && (
+        <View>
+            <ButtonBase {...rest} disabled={disabled} variant={variant} />
+            {showGradient && (
                 <ButtonGradient
-                    colors={[backgroundColor, secondaryBackgroundColor]}
+                    colors={[palette.green[200], palette.green[800]]}
                     start={{ x: 0, y: 1 }}
                     end={{ x: 1, y: 0 }}
                     style={{
@@ -25,7 +19,7 @@ const Button = ({
                     }}
                 />
             )}
-        </ButtonRoot>
+        </View>
     );
 };
 
