@@ -1,7 +1,7 @@
 import { Animated } from "@peersyst/react-native-components";
 import NumericPad from "module/common/component/input/NumericPad/NumericPad";
 import { WalletStorage } from "module/wallet/WalletStorage";
-import { useLogoPageFlex, useLogoPageGradient } from "module/common/component/layout/LogoPage/LogoPageContext";
+import { useLogoPageFlex } from "module/common/component/layout/LogoPage/LogoPageContext";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import walletState from "module/wallet/state/WalletState";
@@ -16,7 +16,6 @@ const SetWalletPinScreen = (): JSX.Element => {
     const [error, setError] = useState(false);
     const setWalletState = useSetRecoilState(walletState);
     useLogoPageFlex(0.4);
-    useLogoPageGradient(false);
     const handlePinSubmit = async (pin: string) => {
         const storedPin = await WalletStorage.getPin();
         if (storedPin === pin) {
