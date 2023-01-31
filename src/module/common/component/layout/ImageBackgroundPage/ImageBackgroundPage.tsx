@@ -1,13 +1,11 @@
 import { image_background } from "images";
-import { ImageBackgroundBase, ImageBackgroundPageRoot } from "./ImageBackgroundPage.styles";
-import { ImageBackgroundPageProps } from "./ImageBackgroundPage.types";
+import { ViewProps } from "react-native";
+import { ImageBackgroundPageRoot } from "./ImageBackgroundPage.styles";
 
-const ImageBackgroundPage = ({ children, ...rest }: ImageBackgroundPageProps): JSX.Element => {
+const ImageBackgroundPage = ({ children, ...rest }: ViewProps): JSX.Element => {
     return (
-        <ImageBackgroundPageRoot {...rest}>
-            <ImageBackgroundBase source={image_background} resizeMode="cover">
-                {children}
-            </ImageBackgroundBase>
+        <ImageBackgroundPageRoot source={image_background} resizeMode="cover" {...rest}>
+            {children}
         </ImageBackgroundPageRoot>
     );
 };
