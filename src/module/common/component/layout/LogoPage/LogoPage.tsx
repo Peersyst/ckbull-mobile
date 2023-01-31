@@ -32,7 +32,7 @@ const LogoPage = ({ children }: LogoPageProps): JSX.Element => {
     return (
         <ThemeProvider theme={darkTheme}>
             <ImageBackgroundPage>
-                <LogoPageIconRoot style={{ height: logoAnim.interpolate({ inputRange: [0, 1.3], outputRange: [0, height] }) }}>
+                <LogoPageIconRoot style={{ height: logoAnim.interpolate({ inputRange: [0, 1], outputRange: [0, height] }) }}>
                     <LogoIcon style={{ fontSize: 72 }} />
                 </LogoPageIconRoot>
                 <LogoPageProvider value={{ setLogoFlex }}>{children}</LogoPageProvider>
