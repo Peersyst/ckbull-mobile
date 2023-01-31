@@ -42,21 +42,21 @@ export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }
                 color: theme.palette.gray[900],
             },
             outlined: {
-                borderColor: theme.palette.text,
+                borderColor: theme.palette.overlay[100]["12%"],
                 color: theme.palette.text,
             },
             text: {
-                color: theme.palette.white,
+                color: theme.palette.text,
             },
         },
         //State Styles
         pressed: {
             variant: {
                 primary: {
-                    backgroundColor: emphasize(theme.palette.primary, 0.15),
+                    backgroundColor: emphasize(theme.palette.overlay[100]["12%"], 0.15),
                 },
                 secondary: {
-                    backgroundColor: emphasize(theme.palette.black, 0.02),
+                    backgroundColor: emphasize(theme.palette.gray[900], 0.02),
                 },
                 tertiary: {
                     backgroundColor: theme.palette.overlay[100]["24%"],
@@ -67,7 +67,6 @@ export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }
             },
         },
         disabled: {
-            backgroundColor: theme.palette.overlay[100]["12%"],
             color: "white",
             variant: {
                 outlined: {
