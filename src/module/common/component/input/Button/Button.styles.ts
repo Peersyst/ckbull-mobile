@@ -3,9 +3,10 @@ import styled from "@peersyst/react-native-styled";
 import { ButtonProps } from "./Button.types";
 import { emphasize } from "@peersyst/react-utils";
 
-export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
+export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true, circular }) => {
     return {
-        borderRadius: rounded ? 10000 : undefined,
+        aspectRatio: circular ? 1 : undefined,
+        borderRadius: rounded || circular ? 10000 : undefined,
         //Size Styles
         lg: {
             ...theme.typography.body2Strong,
@@ -15,7 +16,7 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
         },
         md: {
             ...theme.typography.body2Strong,
-            height: 40,
+            height: 44,
             paddingHorizontal: 18,
             paddingVertical: 6,
         },

@@ -5,4 +5,8 @@ export interface ButtonProps extends BaseButtonProps {
      * Button is rounded
      */
     rounded?: boolean | undefined;
+    /**
+     * Button is circular
+     */
+    circular?: boolean | undefined;
 }

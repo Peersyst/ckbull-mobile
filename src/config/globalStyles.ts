@@ -1,6 +1,6 @@
 import { CreateGlobalStyles } from "@peersyst/react-native-components";
 
-const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) => ({
+const globalStyles: CreateGlobalStyles = ({ theme: { palette } }) => ({
     Divider: {
         backgroundColor: palette.component.borderColor,
     },
@@ -25,7 +25,6 @@ const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) =>
     Label: {
         label: {
             color: palette.component.label,
-            ...typography.body2Strong,
         },
     },
     Paper: {

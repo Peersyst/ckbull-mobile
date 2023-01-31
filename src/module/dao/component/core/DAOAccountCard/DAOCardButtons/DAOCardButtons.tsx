@@ -1,26 +1,29 @@
-import { DAOWithdrawIcon, DAODepositIcon } from "icons";
-import { useModal } from "@peersyst/react-native-components";
-import CardButtons from "module/common/component/input/CardButtons/CardButtons";
+import { DepositIcon, WithdrawalIcon } from "icons";
+import { Row, Skeleton, useModal } from "@peersyst/react-native-components";
 import DepositModal from "../../DepositModal/DepositModal";
 import WithdrawModal from "../../WithdrawModal/WithdrawModal";
-import { useTranslate } from "module/common/hook/useTranslate";
+import Button from "module/common/component/input/Button/Button";
 
-const CARD_BUTTON_ICON_SIZE = 24;
+export interface DAOCardButtonsProps {
+    loading?: boolean;
+}
 
-const DAOCardButtons = (): JSX.Element => {
+const DAOCardButtons = ({ loading = false }: DAOCardButtonsProps): JSX.Element => {
     const { showModal } = useModal();
-    const translate = useTranslate();
+
     return (
-        <CardButtons
-            //Left props
-            leftLabel={translate("deposit")}
-            leftIcon={<DAODepositIcon style={{ fontSize: CARD_BUTTON_ICON_SIZE }} />}
-            leftButtonOnPress={() => showModal(DepositModal)}
-            //Right props
-            rightLabel={translate("withdraw")}
-            rightIcon={<DAOWithdrawIcon style={{ fontSize: CARD_BUTTON_ICON_SIZE }} />}
-            rightButtonOnPress={() => showModal(WithdrawModal)}
-        />
+        <Row justifyContent="flex-end" gap={12}>
+            <Skeleton loading={loading} shape="circular">
+                <Button size="md" variant="outlined" onPress={() => showModal(WithdrawModal)} circular>
+                    <WithdrawalIcon style={{ fontSize: 24 }} />
+                </Button>
+            </Skeleton>
+            <Skeleton loading={loading} shape="circular">
+                <Button size="md" variant="secondary" onPress={() => showModal(DepositModal)} circular>
+                    <DepositIcon style={{ fontSize: 24 }} />
+                </Button>
+            </Skeleton>
+        </Row>
     );
 };
 
