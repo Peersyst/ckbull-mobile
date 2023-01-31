@@ -15,7 +15,7 @@ const DAOCardBalance = ({ daoBalance, estimatedApc = "0", freeBalance = 0, loadi
     const translate = useTranslate();
 
     return (
-        <Col gap={12}>
+        <Col gap="3%">
             <DAOCardLabel loading={loading} label={translate("available")} Component={Balance} balance={freeBalance} units="token" />
             <DAOCardLabel
                 loading={loading}
