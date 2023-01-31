@@ -1,12 +1,6 @@
 import styled from "@peersyst/react-native-styled";
-import { ImageBackground, View } from "react-native";
+import { ImageBackground } from "react-native";
 
-export const ImageBackgroundPageRoot = styled(View)(() => ({
+export const ImageBackgroundPageRoot = styled(ImageBackground, { imageStyle: { minHeight: 220 } })(() => ({
     flex: 1,
-}));
-
-export const ImageBackgroundBase = styled(ImageBackground, { imageStyle: { minHeight: 220 } })(() => ({
-    overflow: "hidden",
-    height: "100%",
-    minHeight: 220,
 }));
