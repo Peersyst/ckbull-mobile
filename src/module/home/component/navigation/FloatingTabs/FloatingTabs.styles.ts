@@ -10,6 +10,6 @@ export const FloatingTabsNavigatorRoot = styled(Col)(({ theme }) => ({
     alignSelf: "center",
     marginVertical: 20,
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: theme.borderRadiusSm,
     borderColor: theme.palette.overlay[100]["12%"],
 }));

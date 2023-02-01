@@ -13,7 +13,7 @@ const BaseTab = ({ children, index, style }: BaseTabProps): JSX.Element => {
     const active = activeIndex === index;
 
     return (
-        <Tab index={index} style={style}>
+        <Tab index={index} style={{ marginVertical: 20, marginHorizontal: 10, ...style }}>
             <Typography variant="body3Regular" textAlign="center" light={!active}>
                 {children}
             </Typography>

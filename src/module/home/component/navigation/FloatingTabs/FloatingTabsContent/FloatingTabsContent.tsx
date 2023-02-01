@@ -1,8 +1,8 @@
 import { TabPanel } from "@peersyst/react-native-components";
-import { TabComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
+import { TabsComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 import { BaseTabsRoot } from "module/common/component/navigation/BaseTabs/BaseTabGroup/BaseTabGroup.styles";
 
-const FloatingTabsContent = ({ tabs }: TabComponentProps): JSX.Element => {
+const FloatingTabsContent = ({ tabs }: TabsComponentProps): JSX.Element => {
     return (
         <BaseTabsRoot>
             {tabs.map(({ item }, index) => {

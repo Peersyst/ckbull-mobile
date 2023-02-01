@@ -1,13 +1,13 @@
 import { MainTabsGroup } from "module/main/component/navigation/MainTabs/MainTabs.styles";
 import BaseTab from "module/common/component/navigation/BaseTabs/BaseTab/BaseTab";
-import { TabComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
+import { TabsComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 
-const MainTabsNavigator = ({ tabs, style }: TabComponentProps): JSX.Element => {
+const MainTabsNavigator = ({ tabs }: TabsComponentProps): JSX.Element => {
     return (
         <MainTabsGroup>
             {tabs.map(({ title }, index) => {
                 return (
-                    <BaseTab key={index} index={index} style={style}>
+                    <BaseTab key={index} index={index} style={{ marginTop: 24 }}>
                         {title}
                     </BaseTab>
                 );

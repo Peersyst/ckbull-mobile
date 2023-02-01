@@ -16,7 +16,7 @@ const DAOTabs = (): JSX.Element => {
             item: <DAOCompletedWithdrawalsList />,
         },
     ];
-    return <MainTabs tabs={DAOTabs} style={{ paddingTop: 24, paddingBottom: 20, marginHorizontal: 10 }} />;
+    return <MainTabs tabs={DAOTabs} />;
 };
 
 export default DAOTabs;

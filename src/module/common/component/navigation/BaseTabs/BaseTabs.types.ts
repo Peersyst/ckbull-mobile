@@ -1,12 +1,10 @@
 import { ReactElement } from "react";
-import { ViewStyle } from "react-native";
 
 export type TabItem = {
     title: string;
     item: ReactElement;
 };
 
-export interface TabComponentProps {
+export interface TabsComponentProps {
     tabs: TabItem[];
-    style?: ViewStyle;
 }

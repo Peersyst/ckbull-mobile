@@ -1,23 +1,23 @@
 import { FloatingTabsGroup, FloatingTabsNavigatorRoot } from "module/home/component/navigation/FloatingTabs/FloatingTabs.styles";
 import BaseTab from "module/common/component/navigation/BaseTabs/BaseTab/BaseTab";
-import { TabComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
+import { TabsComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 import DarkThemeProvider from "module/common/component/util/ThemeProvider/DarkThemeProvider";
 
-const FloatingTabsNavigator = ({ tabs }: TabComponentProps): JSX.Element => {
+const FloatingTabsNavigator = ({ tabs }: TabsComponentProps): JSX.Element => {
     return (
-        <FloatingTabsNavigatorRoot>
-            <DarkThemeProvider>
+        <DarkThemeProvider>
+            <FloatingTabsNavigatorRoot>
                 <FloatingTabsGroup>
                     {tabs.map(({ title }, index) => {
                         return (
-                            <BaseTab key={index} index={index} style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+                            <BaseTab key={index} index={index}>
                                 {title}
                             </BaseTab>
                         );
                     })}
                 </FloatingTabsGroup>
-            </DarkThemeProvider>
-        </FloatingTabsNavigatorRoot>
+            </FloatingTabsNavigatorRoot>
+        </DarkThemeProvider>
     );
 };
 
