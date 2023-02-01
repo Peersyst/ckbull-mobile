@@ -28,7 +28,7 @@ export function useLoad(): boolean {
                 }));
 
                 //Get the settings from storage and set it to the state
-                const settings = (await SettingsStorage.getAllSettings()) || defaultSettingsState;
+                const settings = { ...defaultSettingsState, ...((await SettingsStorage.getAllSettings()) || {}) };
                 setSettingsState(settings);
 
                 for (let i = 0; i < wallets.length; i += 1) {
