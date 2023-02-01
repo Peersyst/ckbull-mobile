@@ -1,12 +1,12 @@
-import { BaseTabItemType } from "module/main/component/navigation/MainTabs/MainTabs.types";
 import MainTabs from "../../../main/component/navigation/MainTabs/MainTabs";
 import DAOCompletedWithdrawalsList from "module/dao/component/core/DAOCompletedWithdrawalsList/DAOCompletedWithdrawalsList";
 import DAODepositsList from "module/dao/component/core/DAODepositsList/DAODepositsList";
 import { useTranslate } from "module/common/hook/useTranslate";
+import { TabItem } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 
 const DAOTabs = (): JSX.Element => {
     const translate = useTranslate();
-    const DAOTabs: BaseTabItemType[] = [
+    const DAOTabs: TabItem[] = [
         {
             title: translate("deposits"),
             item: <DAODepositsList />,
@@ -16,7 +16,7 @@ const DAOTabs = (): JSX.Element => {
             item: <DAOCompletedWithdrawalsList />,
         },
     ];
-    return <MainTabs tabs={DAOTabs} />;
+    return <MainTabs tabs={DAOTabs} style={{ paddingTop: 24, paddingBottom: 20, marginHorizontal: 10 }} />;
 };
 
 export default DAOTabs;

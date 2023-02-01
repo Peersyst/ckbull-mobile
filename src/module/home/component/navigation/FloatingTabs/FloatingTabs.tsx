@@ -1,13 +1,13 @@
 import FloatingTabsNavigator from "module/home/component/navigation/FloatingTabs/FloatingTabsNavigator/FloatingTabsNavigator";
 import BaseTabs from "module/common/component/navigation/BaseTabs/BaseTabs";
 import FloatingTabsContent from "module/home/component/navigation/FloatingTabs/FloatingTabsContent/FloatingTabsContent";
-import { FloatingTabsProps } from "module/home/component/navigation/FloatingTabs/FloatingTabs.types";
+import { TabComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 
-const FloatingTabs = ({ tabs }: FloatingTabsProps): JSX.Element => {
+const FloatingTabs = ({ tabs, style }: TabComponentProps): JSX.Element => {
     return (
         <BaseTabs>
             {{
-                navbar: <FloatingTabsNavigator tabs={tabs} />,
+                navbar: <FloatingTabsNavigator tabs={tabs} style={style} />,
                 content: <FloatingTabsContent tabs={tabs} />,
             }}
         </BaseTabs>

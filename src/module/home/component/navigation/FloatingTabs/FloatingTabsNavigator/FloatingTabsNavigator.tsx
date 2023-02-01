@@ -1,23 +1,22 @@
 import { FloatingTabsGroup, FloatingTabsNavigatorRoot } from "module/home/component/navigation/FloatingTabs/FloatingTabs.styles";
-import { useTheme } from "@peersyst/react-native-components";
 import BaseTab from "module/common/component/navigation/BaseTabs/BaseTab/BaseTab";
-import { FloatingTabsProps } from "module/home/component/navigation/FloatingTabs/FloatingTabs.types";
-import { View } from "react-native";
+import { TabComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
+import DarkThemeProvider from "module/common/component/util/ThemeProvider/DarkThemeProvider";
 
-const FloatingTabsNavigator = ({ tabs }: FloatingTabsProps): JSX.Element => {
-    const { palette } = useTheme();
-
+const FloatingTabsNavigator = ({ tabs }: TabComponentProps): JSX.Element => {
     return (
         <FloatingTabsNavigatorRoot>
-            <FloatingTabsGroup renderIndicator indicator={<View style={{ backgroundColor: palette.green[200] }} />}>
-                {tabs.map(({ title }, index) => {
-                    return (
-                        <BaseTab key={index} index={index} alternative>
-                            {title}
-                        </BaseTab>
-                    );
-                })}
-            </FloatingTabsGroup>
+            <DarkThemeProvider>
+                <FloatingTabsGroup>
+                    {tabs.map(({ title }, index) => {
+                        return (
+                            <BaseTab key={index} index={index} style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+                                {title}
+                            </BaseTab>
+                        );
+                    })}
+                </FloatingTabsGroup>
+            </DarkThemeProvider>
         </FloatingTabsNavigatorRoot>
     );
 };

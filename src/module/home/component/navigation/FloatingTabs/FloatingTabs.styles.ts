@@ -1,8 +1,8 @@
 import styled from "@peersyst/react-native-styled";
-import { Col, TabGroup as BaseTabGroup } from "@peersyst/react-native-components";
+import { Col } from "@peersyst/react-native-components";
+import BaseTabGroup from "module/common/component/navigation/BaseTabs/BaseTabGroup/BaseTabGroup";
 
 export const FloatingTabsGroup = styled(BaseTabGroup)(() => ({
-    gap: 16,
     paddingHorizontal: 10,
 }));
 

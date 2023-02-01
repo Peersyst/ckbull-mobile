@@ -1,7 +1,7 @@
 import { Col, TabPanel } from "@peersyst/react-native-components";
-import { MainTabsProps } from "module/main/component/navigation/MainTabs/MainTabs.types";
+import { TabComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 
-const MainTabsContent = ({ tabs }: MainTabsProps): JSX.Element => {
+const MainTabsContent = ({ tabs }: TabComponentProps): JSX.Element => {
     return (
         <Col flex={1}>
             {tabs.map(({ item }, index) => {

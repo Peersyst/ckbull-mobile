@@ -1,19 +1,19 @@
-import { MainTabsRoot } from "./MainTabs.styles";
 import BaseTabs from "module/common/component/navigation/BaseTabs/BaseTabs";
 import MainTabsNavigator from "module/main/component/navigation/MainTabs/MainTabsNavigator/MainTabsNavigator";
 import MainTabsContent from "module/main/component/navigation/MainTabs/MainTabsContent/MainTabsContent";
-import { MainTabsProps } from "module/main/component/navigation/MainTabs/MainTabs.types";
+import { TabComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
+import { BaseTabsRoot } from "module/common/component/navigation/BaseTabs/BaseTabGroup/BaseTabGroup.styles";
 
-const MainTabs = ({ tabs }: MainTabsProps): JSX.Element => {
+const MainTabs = ({ tabs, style }: TabComponentProps): JSX.Element => {
     return (
-        <MainTabsRoot>
+        <BaseTabsRoot>
             <BaseTabs>
                 {{
-                    navbar: <MainTabsNavigator tabs={tabs} />,
+                    navbar: <MainTabsNavigator tabs={tabs} style={style} />,
                     content: <MainTabsContent tabs={tabs} />,
                 }}
             </BaseTabs>
-        </MainTabsRoot>
+        </BaseTabsRoot>
     );
 };
 

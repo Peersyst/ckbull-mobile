@@ -1,22 +1,18 @@
-import { TabGroup } from "module/main/component/navigation/MainTabs/MainTabs.styles";
-import { MainTabsProps } from "module/main/component/navigation/MainTabs/MainTabs.types";
-import { useTheme } from "@peersyst/react-native-components";
+import { MainTabsGroup } from "module/main/component/navigation/MainTabs/MainTabs.styles";
 import BaseTab from "module/common/component/navigation/BaseTabs/BaseTab/BaseTab";
-import { View } from "react-native";
+import { TabComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 
-const MainTabsNavigator = ({ tabs }: MainTabsProps): JSX.Element => {
-    const { palette } = useTheme();
-
+const MainTabsNavigator = ({ tabs, style }: TabComponentProps): JSX.Element => {
     return (
-        <TabGroup renderIndicator={true} indicator={<View style={{ backgroundColor: palette.green[200] }} />}>
+        <MainTabsGroup>
             {tabs.map(({ title }, index) => {
                 return (
-                    <BaseTab key={index} index={index}>
+                    <BaseTab key={index} index={index} style={style}>
                         {title}
                     </BaseTab>
                 );
             })}
-        </TabGroup>
+        </MainTabsGroup>
     );
 };
 

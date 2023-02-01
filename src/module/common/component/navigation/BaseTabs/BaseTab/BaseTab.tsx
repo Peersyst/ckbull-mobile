@@ -1,30 +1,23 @@
 import Typography from "module/common/component/display/Typography/Typography";
-import { useTab } from "@peersyst/react-native-components";
-import { useTheme } from "@peersyst/react-native-styled";
-import { BaseTabRoot } from "module/common/component/navigation/BaseTabs/BaseTab/BaseTab.styles";
+import { Tab, useTab } from "@peersyst/react-native-components";
+import { ViewStyle } from "react-native";
 
 export interface BaseTabProps {
     index: number;
     children: string;
-    alternative?: boolean;
+    style?: ViewStyle;
 }
 
-const BaseTab = ({ children, index, alternative = false }: BaseTabProps): JSX.Element => {
+const BaseTab = ({ children, index, style }: BaseTabProps): JSX.Element => {
     const activeIndex = useTab();
     const active = activeIndex === index;
 
-    const theme = useTheme();
     return (
-        <BaseTabRoot index={index}>
-            <Typography
-                variant="body3Regular"
-                textAlign="center"
-                light={!active}
-                style={active && alternative ? { color: theme.palette.white } : {}}
-            >
+        <Tab index={index} style={style}>
+            <Typography variant="body3Regular" textAlign="center" light={!active}>
                 {children}
             </Typography>
-        </BaseTabRoot>
+        </Tab>
     );
 };
 
