@@ -29,7 +29,7 @@ const CreateWalletNavigatorGroup = () => {
     const translate = useTranslate();
     const [activeTab, setActiveTab] = useState(0);
     const setTab = useTabs()[1];
-    const [showGlass, setShowGlass] = useState(true);
+    const [showModal, setShowModal] = useState(true);
     const [showPin, setShowPin] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     useLogoPageFlex(showSuccess ? 1 : 0.4);
@@ -41,21 +41,21 @@ const CreateWalletNavigatorGroup = () => {
 
     const handleBack = () => {
         if (activeTab === CreateWalletScreens.SET_WALLET_NAME) {
-            setShowGlass(false);
+            setShowModal(false);
         } else if (activeTab >= 0) setActiveTab((t) => t - 1);
     };
 
     const handleTabChange = (t: number) => {
         if (t === CreateWalletScreens.SET_WALLET_PIN) {
             setShowPin(true);
-            setShowGlass(false);
+            setShowModal(false);
         } else if (t === CreateWalletScreens.WALLET_ADVISES || t === CreateWalletScreens.PICK_WALLET_MNEMONIC) {
             setShowPin(false);
-            setShowGlass(true);
+            setShowModal(true);
             setActiveTab(t);
         } else if (t === CreateWalletScreens.CREATE_WALLET_SUCCESS) {
             setShowPin(false);
-            setShowGlass(false);
+            setShowModal(false);
             setShowSuccess(true);
             setActiveTab(t);
         } else setActiveTab(t);
@@ -74,8 +74,8 @@ const CreateWalletNavigatorGroup = () => {
         <Tabs index={activeTab} onIndexChange={handleTabChange}>
             <LightThemeProvider>
                 <CardNavigatorModal
-                    onClose={() => setShowGlass(false)}
-                    open={showGlass}
+                    onClose={() => setShowModal(false)}
+                    open={showModal}
                     onExited={handleGlassExit}
                     navbar={{ back: true, title: translate("create_wallet"), onBack: handleBack, steps: { index: activeTab, length: 4 } }}
                     renderBackdrop={false}
@@ -96,14 +96,14 @@ const CreateWalletNavigatorGroup = () => {
                         <WalletMnemonicScreen onNextScreen={() => handleTabChange(CreateWalletScreens.PICK_WALLET_MNEMONIC)} />
                     </TabPanel>
                     <TabPanel index={CreateWalletScreens.PICK_WALLET_MNEMONIC}>
-                        <PickWalletMnemonicScreen onSubmit={() => handleTabChange(CreateWalletScreens.SET_WALLET_PIN)} />
+                        <PickWalletMnemonicScreen onSubmit={() => handleTabChange(CreateWalletScreens.CREATE_WALLET_SUCCESS)} />
                     </TabPanel>
                 </CardNavigatorModal>
             </LightThemeProvider>
             <DarkThemeProvider>
                 <TabPanel index={CreateWalletScreens.SET_WALLET_PIN}>
                     <SetWalletPinScreen
-                        onSuccess={() => handleTabChange(CreateWalletScreens.CREATE_WALLET_SUCCESS)}
+                        onSuccess={() => handleTabChange(CreateWalletScreens.WALLET_ADVISES)}
                         onCancel={() => handleTabChange(CreateWalletScreens.PICK_WALLET_MNEMONIC)}
                     />
                 </TabPanel>
