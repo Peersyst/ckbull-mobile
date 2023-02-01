@@ -2,10 +2,8 @@ import { Button } from "@peersyst/react-native-components";
 import styled from "@peersyst/react-native-styled";
 import { ButtonProps } from "./Button.types";
 import { emphasize } from "@peersyst/react-utils";
-import { View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
-export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
+export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
     return {
         borderRadius: rounded ? 10000 : undefined,
         //Size Styles
@@ -30,12 +28,16 @@ export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }
         //Variant Styles
         variant: {
             primary: {
-                backgroundColor: "transparent",
+                gradient: {
+                    colors: [theme.palette.green[200], theme.palette.green[800]],
+                    start: { x: 0, y: 1 },
+                    end: { x: 1, y: 0 },
+                },
                 color: theme.palette.white,
             },
             secondary: {
                 backgroundColor: theme.palette.gray[900],
-                color: theme.palette.black,
+                color: theme.palette.gray[0],
             },
             tertiary: {
                 backgroundColor: theme.palette.overlay[900]["12%"],
@@ -82,15 +84,3 @@ export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }
         },
     };
 });
-
-export const ButtonRoot = styled(View)(() => ({}));
-
-export const ButtonGradient = styled(LinearGradient)(() => ({
-    position: "absolute",
-    top: 0,
-    left: 0,
-    zIndex: -1,
-    elevation: -1,
-    width: "100%",
-    height: "100%",
-}));
