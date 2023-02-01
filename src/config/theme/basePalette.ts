@@ -24,7 +24,7 @@ export const gradient: Theme["palette"]["gradient"] = {
 };
 
 //Base theme
-export const baseTheme: Partial<Theme["palette"]> = {
+export const basePalette: Partial<Theme["palette"]> = {
     primary: green["200"],
     secondary: violet,
     white,
@@ -40,4 +40,4 @@ export const baseTheme: Partial<Theme["palette"]> = {
     wallet: [violet, green["200"], red, gold, purple, blue, orange],
 };
 
-export const WALLET_GRADIENT_LENGTH = baseTheme?.wallet?.length || 0;
+export const WALLET_GRADIENT_LENGTH = basePalette?.wallet?.length || 0;

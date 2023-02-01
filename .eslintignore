@@ -7,7 +7,7 @@ package-lock.json
 openapi-spec.json
 /.git
 /.yarn
-/test/unit/**mocks**/file.mock.js
+/test/unit/__mocks__/file.mock.js
 /test/cypress/support/commands/utils.ts
 /.nyc_output/
 /src/module/api
