@@ -1,7 +1,7 @@
 import { Col, Row } from "@peersyst/react-native-components";
 import { ReactElement } from "react";
 import ActivityAction, { ActivityActionProps } from "module/activity/core/ActivityAction/ActivityAction";
-import { ActivityCardRoot } from "module/activity/component/display/ActivityCard/ActivityCard.styles";
+import { ActivityCardRoot } from "module/activity/core/ActivityCard/ActivityCard.styles";
 import { ActivityTypography } from "module/activity/component/display/ActivityStatus/ActivityStatus.styles";
 
 interface ActivityCardProps extends ActivityActionProps {

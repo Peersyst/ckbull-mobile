@@ -1,5 +1,5 @@
 import { SiteImage } from "module/activity/component/display/ConnectedSite/ConnectedSite.styles";
-import BaseActivity from "module/activity/component/display/ActivityCard/ActivityCard";
+import BaseActivity from "module/activity/core/ActivityCard/ActivityCard";
 import ConnectedSiteStatus, { ConnectedSiteStatusProps } from "module/activity/component/display/ConnectedSiteStatus/ConnectedSiteStatus";
 import { ActivityActionKind } from "module/activity/core/ActivityAction/ActivityAction.types";
 import { placeholder_image } from "images";
