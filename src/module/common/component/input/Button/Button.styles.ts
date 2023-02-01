@@ -1,7 +1,7 @@
 import { Button } from "@peersyst/react-native-components";
 import styled from "@peersyst/react-native-styled";
 import { ButtonProps } from "./Button.types";
-import { emphasize } from "@peersyst/react-utils";
+import { darken, emphasize } from "@peersyst/react-utils";
 
 export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
     return {
@@ -55,7 +55,9 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
         pressed: {
             variant: {
                 primary: {
-                    backgroundColor: emphasize(theme.palette.overlay[100]["12%"], 0.15),
+                    gradient: {
+                        colors: [darken(theme.palette.green[200], 0.15), darken(theme.palette.green[800], 0.15)],
+                    },
                 },
                 secondary: {
                     backgroundColor: emphasize(theme.palette.gray[900], 0.02),
@@ -77,7 +79,7 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
                     borderColor: theme.palette.overlay[100]["24%"],
                 },
                 primary: {
-                    backgroundColor: theme.palette.overlay[900]["12%"],
+                    gradient: { colors: [theme.palette.overlay[900]["12%"], theme.palette.overlay[900]["12%"]] },
                     color: theme.palette.overlay[100]["48%"],
                 },
             },
