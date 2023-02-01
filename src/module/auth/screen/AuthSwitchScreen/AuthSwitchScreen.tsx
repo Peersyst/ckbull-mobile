@@ -13,7 +13,7 @@ const AuthSwitchScreen = (): JSX.Element => {
     return (
         <DarkThemeProvider>
             <AnimatedAuthSwitchScreenRoot in={true} appear>
-                <Button variant="secondary" size="lg" fullWidth onPress={() => setTab(AuthScreens.CREATE_WALLET)}>
+                <Button variant="primary" size="lg" fullWidth onPress={() => setTab(AuthScreens.CREATE_WALLET)}>
                     {translate("create_wallet")}
                 </Button>
                 <Button variant="tertiary" size="lg" fullWidth onPress={() => setTab(AuthScreens.IMPORT_WALLET)}>

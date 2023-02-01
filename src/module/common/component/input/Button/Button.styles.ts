@@ -1,47 +1,56 @@
-import { Button } from "@peersyst/react-native-components";
+import { Button, ButtonSize } from "@peersyst/react-native-components";
 import styled from "@peersyst/react-native-styled";
 import { ButtonProps } from "./Button.types";
-import { emphasize } from "@peersyst/react-utils";
+import { darken, emphasize } from "@peersyst/react-utils";
 
-export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true, circular }) => {
+export const BUTTON_SIZES: Record<ButtonSize, number> = {
+    lg: 52,
+    md: 44,
+    sm: 36,
+};
+
+export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
     return {
-        aspectRatio: circular ? 1 : undefined,
-        borderRadius: rounded || circular ? 10000 : undefined,
+        borderRadius: rounded ? 10000 : undefined,
         //Size Styles
         lg: {
-            ...theme.typography.body2Strong,
-            height: 52,
+            ...theme.typography.body2Regular,
+            height: BUTTON_SIZES.lg,
             paddingHorizontal: 18,
             paddingVertical: 12,
         },
         md: {
-            ...theme.typography.body2Strong,
-            height: 44,
+            ...theme.typography.body2Regular,
+            height: BUTTON_SIZES.md,
             paddingHorizontal: 18,
             paddingVertical: 6,
         },
         sm: {
-            ...theme.typography.body3Strong,
-            height: 36,
+            ...theme.typography.body3Regular,
+            height: BUTTON_SIZES.sm,
             paddingHorizontal: 16,
             paddingVertical: 8,
         },
         //Variant Styles
         variant: {
             primary: {
-                backgroundColor: theme.palette.primary,
-                color: "#FFFFFF",
+                gradient: {
+                    colors: [theme.palette.green[200], theme.palette.green[800]],
+                    start: { x: 0, y: 1 },
+                    end: { x: 1, y: 0 },
+                },
+                color: theme.palette.white,
             },
             secondary: {
-                backgroundColor: "#FFFFFF",
-                color: "#000000",
+                backgroundColor: theme.palette.gray[900],
+                color: theme.palette.gray[0],
             },
             tertiary: {
-                backgroundColor: theme.palette.overlay[100]["12%"],
-                color: "#ffffff",
+                backgroundColor: theme.palette.overlay[900]["12%"],
+                color: theme.palette.gray[900],
             },
             outlined: {
-                borderColor: theme.palette.text,
+                borderColor: theme.palette.overlay[100]["12%"],
                 color: theme.palette.text,
             },
             text: {
@@ -52,10 +61,12 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true, 
         pressed: {
             variant: {
                 primary: {
-                    backgroundColor: emphasize(theme.palette.primary, 0.15),
+                    gradient: {
+                        colors: [darken(theme.palette.green[200], 0.15), darken(theme.palette.green[800], 0.15)],
+                    },
                 },
                 secondary: {
-                    backgroundColor: emphasize("#FFFFFF", 0.02),
+                    backgroundColor: emphasize(theme.palette.gray[900], 0.02),
                 },
                 tertiary: {
                     backgroundColor: theme.palette.overlay[100]["24%"],
@@ -66,13 +77,16 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true, 
             },
         },
         disabled: {
-            backgroundColor: theme.palette.overlay[100]["24%"],
             color: "white",
             variant: {
                 outlined: {
                     backgroundColor: "transparent",
                     color: theme.palette.overlay[100]["24%"],
                     borderColor: theme.palette.overlay[100]["24%"],
+                },
+                primary: {
+                    gradient: { colors: [theme.palette.overlay[900]["12%"], theme.palette.overlay[900]["12%"]] },
+                    color: theme.palette.overlay[100]["48%"],
                 },
             },
         },
