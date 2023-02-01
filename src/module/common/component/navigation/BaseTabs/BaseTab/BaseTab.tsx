@@ -1,5 +1,4 @@
-import Typography from "module/common/component/display/Typography/Typography";
-import { Tab, useTab } from "@peersyst/react-native-components";
+import { Tab, Typography, useTab } from "@peersyst/react-native-components";
 import { ViewStyle } from "react-native";
 
 export interface BaseTabProps {
