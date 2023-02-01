@@ -1,6 +1,5 @@
 import { BalanceProps } from "./Balance.types";
-import Typography from "module/common/component/display/Typography/Typography";
-import { Spinner, Suspense } from "@peersyst/react-native-components";
+import { Spinner, Suspense, Typography } from "@peersyst/react-native-components";
 import { useFormatBalance } from "./hook/useFormatBalance";
 
 const Balance = ({

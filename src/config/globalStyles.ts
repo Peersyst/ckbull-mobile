@@ -1,6 +1,6 @@
 import { CreateGlobalStyles } from "@peersyst/react-native-components";
 
-const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) => ({
+const globalStyles: CreateGlobalStyles = ({ theme: { palette } }) => ({
     Dialog: {
         title: {
             textAlign: "center",
@@ -35,7 +35,6 @@ const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) =>
     Label: {
         label: {
             color: palette.component.label,
-            ...typography.body2Strong,
         },
     },
     Paper: {

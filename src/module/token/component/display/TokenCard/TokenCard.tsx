@@ -1,10 +1,9 @@
-import { Col, Row } from "@peersyst/react-native-components";
+import { Col, Row, Typography } from "@peersyst/react-native-components";
 import { TokenIcon } from "./TokenCard.styles";
 import Balance from "module/wallet/component/display/Balance/Balance";
 import settingsState from "module/settings/state/SettingsState";
 import { useGetTokenPrice } from "module/token/query/useGetTokenPrice";
 import { useRecoilValue } from "recoil";
-import Typography from "module/common/component/display/Typography/Typography";
 import MainListCard from "module/main/component/display/MainListCard/MainListCard";
 import { placeholder_image } from "images";
 import { TokenAmount } from "module/token/types";
