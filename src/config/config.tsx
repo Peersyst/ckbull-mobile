@@ -8,6 +8,7 @@ import { CkbAddressValidator } from "config/validators/CkbAddressValidator";
 import globalStyles from "config/globalStyles";
 import { ChevronDownIcon } from "icons";
 import darkTheme from "config/theme/darkTheme";
+import Button from "module/common/component/input/Button/Button";
 
 const envConfigs: Record<string, CreateConfig> = {
     test: { ...baseConfig, ...devConfig },
@@ -38,6 +39,21 @@ const config = createConfig({
             defaultProps: {
                 variant: "primary",
                 size: "lg",
+            },
+        },
+        Dialog: {
+            defaultProps: {
+                buttonsLayout: {
+                    direction: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 0,
+                },
+            },
+            actions: {
+                variant: "text",
+                component: Button,
+                fullWidth: true,
             },
         },
         Label: {
