@@ -1,5 +1,4 @@
-import { Row } from "@peersyst/react-native-components";
-import Typography from "../Typography/Typography";
+import { Row, Typography } from "@peersyst/react-native-components";
 
 export interface StepsProps {
     index: number;
