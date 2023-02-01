@@ -15,9 +15,16 @@ export interface SettingsState {
     network: NetworkType;
     fee: FeeType;
     loading?: boolean;
+    biometrics: boolean;
 }
 
-export const defaultSettingsState: SettingsState = { locale: getDefaultLocale(), fiat: "usd", network: "testnet", fee: FeeRate.NORMAL };
+export const defaultSettingsState: SettingsState = {
+    locale: getDefaultLocale(),
+    fiat: "usd",
+    network: "testnet",
+    fee: FeeRate.NORMAL,
+    biometrics: true,
+};
 
 const settingsState = atom<SettingsState>({
     key: "settings",
