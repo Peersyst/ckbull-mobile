@@ -47,7 +47,7 @@ const config = createConfig({
                     direction: "column",
                     justifyContent: "center",
                     alignItems: "center",
-                    gap: 0,
+                    gap: 20,
                 },
             },
             actions: {

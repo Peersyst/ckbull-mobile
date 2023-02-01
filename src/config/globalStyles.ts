@@ -7,6 +7,8 @@ const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) =>
         },
         content: {
             textAlign: "center",
+            paddingBottom: 24,
+            color: palette.gray[700],
         },
     },
     Divider: {
