@@ -1,5 +1,4 @@
-import { Row } from "@peersyst/react-native-components";
-import Typography from "module/common/component/display/Typography/Typography";
+import { Row, Typography } from "@peersyst/react-native-components";
 import SettingsTouchableCard from "../../input/SettingsTouchableCard/SettingsTouchableCard";
 
 export interface SettingsMenuItemProps {
@@ -11,7 +10,7 @@ export interface SettingsMenuItemProps {
 const SettingsMenuItem = ({ text, onPress, destructive = false }: SettingsMenuItemProps): JSX.Element => (
     <SettingsTouchableCard onPress={onPress}>
         <Row flex={1} alignItems="center">
-            <Typography variant="body3Strong" color={(p) => (destructive ? p.status.error : p.text)}>
+            <Typography variant="body3Strong" color={destructive ? "status.error" : "text"}>
                 {text}
             </Typography>
         </Row>
