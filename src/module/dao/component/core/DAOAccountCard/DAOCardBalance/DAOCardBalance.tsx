@@ -16,11 +16,19 @@ const DAOCardBalance = ({ daoBalance, estimatedApc = "0", freeBalance = 0, loadi
 
     return (
         <Col gap="3%">
-            <DAOCardLabel loading={loading} label={translate("available")} Component={Balance} balance={freeBalance} units="token" />
+            <DAOCardLabel
+                loading={loading}
+                label={translate("available")}
+                Component={Balance}
+                textAlign="right"
+                balance={freeBalance}
+                units="token"
+            />
             <DAOCardLabel
                 loading={loading}
                 label={translate("locked")}
                 Component={Balance}
+                textAlign="right"
                 balance={daoBalance?.daoDeposit || 0}
                 units="token"
             />

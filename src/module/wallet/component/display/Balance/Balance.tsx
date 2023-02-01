@@ -20,7 +20,7 @@ const Balance = ({
 
     return (
         <Skeleton loading={loading}>
-            <Typography numberOfLines={1} {...typographyProps}>
+            <Typography numberOfLines={1} adjustsFontSizeToFit {...typographyProps}>
                 {formattedBalance}
             </Typography>
         </Skeleton>

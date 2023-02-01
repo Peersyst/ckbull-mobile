@@ -7,7 +7,7 @@ import WalletCard, { WalletComponentCardProps } from "module/wallet/component/su
 
 const DAOCard = ({ wallet, style }: WalletComponentCardProps) => {
     const { data: daoBalance, isLoading: daoBalanceLoading } = useGetDAOBalance();
-    const { data: { estimated_apc = "0" } = {}, isLoading: loadingDao } = useGetDaoInfo();
+    const { data: { estimated_apc = "0.0000" } = {}, isLoading: loadingDao } = useGetDaoInfo();
     const { data: { freeBalance = 0 } = {}, isLoading: balanceLoading } = useGetBalance();
 
     const loading = daoBalanceLoading || loadingDao || balanceLoading;
