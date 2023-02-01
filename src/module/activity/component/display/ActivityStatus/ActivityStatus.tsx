@@ -1,8 +1,7 @@
 import { ReactElement } from "react";
 import { ActivityStatusLabel, ActivityTypography } from "module/activity/component/display/ActivityStatus/ActivityStatus.styles";
 import { useTranslate } from "module/common/hook/useTranslate";
-
-export type StatusState = "connected" | "disconnected" | "pending" | "failed";
+import { StatusState } from "module/activity/component/display/ConnectedSiteStatus/ConnectedSiteStatus";
 
 export interface ActivityStatusProps {
     message: StatusState;
