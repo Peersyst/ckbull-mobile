@@ -1,7 +1,13 @@
-import { Button } from "@peersyst/react-native-components";
+import { Button, ButtonSize } from "@peersyst/react-native-components";
 import styled from "@peersyst/react-native-styled";
 import { ButtonProps } from "./Button.types";
 import { darken, emphasize } from "@peersyst/react-utils";
+
+export const BUTTON_SIZES: Record<ButtonSize, number> = {
+    lg: 52,
+    md: 44,
+    sm: 36,
+};
 
 export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
     return {
@@ -9,19 +15,19 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
         //Size Styles
         lg: {
             ...theme.typography.body2Regular,
-            height: 52,
+            height: BUTTON_SIZES.lg,
             paddingHorizontal: 18,
             paddingVertical: 12,
         },
         md: {
             ...theme.typography.body2Regular,
-            height: 44,
+            height: BUTTON_SIZES.md,
             paddingHorizontal: 18,
             paddingVertical: 6,
         },
         sm: {
             ...theme.typography.body3Regular,
-            height: 36,
+            height: BUTTON_SIZES.sm,
             paddingHorizontal: 16,
             paddingVertical: 8,
         },

@@ -2038,14 +2038,6 @@
     "@peersyst/react-utils" "^2.1.0"
     validator "^13.7.0"
 
-"@peersyst/react-hooks@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@peersyst/react-hooks/-/react-hooks-2.0.0.tgz#30849bd7ddf1cad51cc5fd749afe9baa9a79218a"
-  integrity sha512-CXPXpPRwN/zCmbACVYsBioE6RR4jziX+LoEhd//hAIqNPzoCeb8mWKYKDJggxZBVFgM1TtQNyigMOfx/UfI9nA==
-  dependencies:
-    "@babel/runtime" "^7.16.7"
-    "@peersyst/react-utils" "^2.0.0"
-
 "@peersyst/react-hooks@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@peersyst/react-hooks/-/react-hooks-2.2.0.tgz#4cc58494690dbe96d682a67307eb832bef44bb06"

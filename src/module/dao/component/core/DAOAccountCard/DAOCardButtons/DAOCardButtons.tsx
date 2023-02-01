@@ -2,7 +2,7 @@ import { DepositIcon, WithdrawalIcon } from "icons";
 import { Row, Skeleton, useModal } from "@peersyst/react-native-components";
 import DepositModal from "../../DepositModal/DepositModal";
 import WithdrawModal from "../../WithdrawModal/WithdrawModal";
-import Button from "module/common/component/input/Button/Button";
+import IconButton from "module/common/component/input/IconButton/IconButton";
 
 export interface DAOCardButtonsProps {
     loading?: boolean;
@@ -14,14 +14,20 @@ const DAOCardButtons = ({ loading = false }: DAOCardButtonsProps): JSX.Element =
     return (
         <Row justifyContent="flex-end" gap={12}>
             <Skeleton loading={loading} shape="circular">
-                <Button size="md" variant="outlined" onPress={() => showModal(WithdrawModal)} circular>
-                    <WithdrawalIcon style={{ fontSize: 24 }} />
-                </Button>
+                <IconButton
+                    icon={<WithdrawalIcon style={{ fontSize: 24 }} />}
+                    size="md"
+                    variant="outlined"
+                    onPress={() => showModal(WithdrawModal)}
+                />
             </Skeleton>
             <Skeleton loading={loading} shape="circular">
-                <Button size="md" variant="secondary" onPress={() => showModal(DepositModal)} circular>
-                    <DepositIcon style={{ fontSize: 24 }} />
-                </Button>
+                <IconButton
+                    icon={<DepositIcon style={{ fontSize: 24 }} />}
+                    size="md"
+                    variant="secondary"
+                    onPress={() => showModal(DepositModal)}
+                />
             </Skeleton>
         </Row>
     );
