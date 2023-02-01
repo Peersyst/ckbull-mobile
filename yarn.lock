@@ -2027,24 +2027,16 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@peersyst/react-components-core@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@peersyst/react-components-core/-/react-components-core-1.2.1.tgz#d1d4d4b45d2370dc8915b5588e0c929971ea76b7"
-  integrity sha512-1Rhow3NUIXmPTwZyglrR6pdWC2QBQ+/4fzAABtvljYdVQnRhcYcHtaJx7AtQ02g03LQztxmraGdyEBtuU2YSdw==
+"@peersyst/react-components-core@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@peersyst/react-components-core/-/react-components-core-1.2.4.tgz#fcff056ad4cf165362e14052b90bcf9e72deec04"
+  integrity sha512-ERauFZJtx1xGHIxFjO7l4kJxg3pgUYQwsdHobA84Dp/0SFtg+zufpQEs8JGIBI0eYgNDqpeUXfmJG3C7qFujTQ==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@peersyst/react-hooks" "^2.2.0"
     "@peersyst/react-types" "^1.5.0"
     "@peersyst/react-utils" "^2.1.0"
     validator "^13.7.0"
-
-"@peersyst/react-hooks@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@peersyst/react-hooks/-/react-hooks-2.0.0.tgz#30849bd7ddf1cad51cc5fd749afe9baa9a79218a"
-  integrity sha512-CXPXpPRwN/zCmbACVYsBioE6RR4jziX+LoEhd//hAIqNPzoCeb8mWKYKDJggxZBVFgM1TtQNyigMOfx/UfI9nA==
-  dependencies:
-    "@babel/runtime" "^7.16.7"
-    "@peersyst/react-utils" "^2.0.0"
 
 "@peersyst/react-hooks@^2.2.0":
   version "2.2.0"
@@ -2054,13 +2046,13 @@
     "@babel/runtime" "^7.16.7"
     "@peersyst/react-utils" "^2.1.0"
 
-"@peersyst/react-native-components@^2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@peersyst/react-native-components/-/react-native-components-2.1.2.tgz#84d441f0f36f9189442804b601671b73659593a8"
-  integrity sha512-pcCINRV5N2cM9dGj+wM9w8H8hvMz0JQ1ocn/bW1rvAUAgB/ToV4677iSDuRLHQf5Ko2aaUyL0H6npJpI/xEczw==
+"@peersyst/react-native-components@^2.1.8":
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/@peersyst/react-native-components/-/react-native-components-2.1.8.tgz#b1816d83d858579fa5f13a9559ff240ca3f5ce09"
+  integrity sha512-GeP83HSRTzUCGLJxY6MOQpRRvWWuFg/ihdB5u3w3G6MSiG/tUTv4gbGYuQWsdmYlvD9X4ToS7cUU4ab+MB7GPg==
   dependencies:
     "@babel/runtime" "^7.16.7"
-    "@peersyst/react-components-core" "^1.2.1"
+    "@peersyst/react-components-core" "^1.2.4"
     "@peersyst/react-hooks" "^2.2.0"
     "@peersyst/react-native-styled" "^2.0.0"
     "@peersyst/react-native-utils" "^1.0.1"
@@ -2072,6 +2064,7 @@
     expo-camera "~12.1.2"
     expo-clipboard "~4.0.1"
     expo-constants "~13.0.2"
+    expo-linear-gradient "^12.0.1"
     expo-localization "~12.0.0"
     expo-status-bar "^1.2.0"
     react-native-gesture-handler "~2.1.0"
@@ -5044,7 +5037,7 @@ expo-keep-awake@~11.0.1:
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-11.0.1.tgz#ee354465892a94040ffe09901b85b469e7d54fb3"
   integrity sha512-44ZjgLE4lnce2d40Pv8xsjMVc6R5GvgHOwZfkLYtGmgYG9TYrEJeEj5UfSeweXPL3pBFhXKfFU8xpGYMaHdP0A==
 
-expo-linear-gradient@~12.0.1:
+expo-linear-gradient@^12.0.1, expo-linear-gradient@~12.0.1:
   version "12.0.1"
   resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-12.0.1.tgz#452f793b0463ddf313aad431552f23acc85f5d64"
   integrity sha512-TMl/wBTVQOliL4S3DS5Aa3UFfVySr0mdJEHLG6kfBdMCLkr+tfLI2rGyJ+scS7xgMsvhTIaurhf1+Z0sL3aLCg==

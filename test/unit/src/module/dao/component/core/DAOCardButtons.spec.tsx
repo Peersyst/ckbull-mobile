@@ -1,5 +1,5 @@
 import DAOCardButtons from "module/dao/component/core/DAOAccountCard/DAOCardButtons/DAOCardButtons";
-import { fireEvent, render, translate } from "test-utils";
+import { fireEvent, render } from "test-utils";
 import * as Genesys from "@peersyst/react-native-components";
 import DepositModal from "module/dao/component/core/DepositModal/DepositModal";
 import WithdrawModal from "module/dao/component/core/WithdrawModal/WithdrawModal";
@@ -7,16 +7,14 @@ import WithdrawModal from "module/dao/component/core/WithdrawModal/WithdrawModal
 describe("Test for the DoaCardBalance", () => {
     test("Returns correctly", () => {
         const screen = render(<DAOCardButtons />);
-        expect(screen.getByText(translate("deposit"))).toBeDefined();
-        expect(screen.getByTestId("DAODepositIcon")).toBeDefined();
-        expect(screen.getByTestId("DAOWithdrawIcon")).toBeDefined();
-        expect(screen.getByText(translate("withdraw"))).toBeDefined();
+        expect(screen.getByTestId("DepositIcon")).toBeDefined();
+        expect(screen.getByTestId("WithdrawalIcon")).toBeDefined();
     });
     test("Triggers deposit function correctly", () => {
         const showModal = jest.fn();
         jest.spyOn(Genesys, "useModal").mockReturnValue({ showModal } as any);
         const screen = render(<DAOCardButtons />);
-        const button = screen.getByText(translate("deposit"));
+        const button = screen.getByTestId("DepositIcon");
         fireEvent.press(button);
         expect(showModal).toHaveBeenCalledWith(DepositModal);
     });
@@ -24,7 +22,7 @@ describe("Test for the DoaCardBalance", () => {
         const showModal = jest.fn();
         jest.spyOn(Genesys, "useModal").mockReturnValue({ showModal } as any);
         const screen = render(<DAOCardButtons />);
-        const button = screen.getByText(translate("withdraw"));
+        const button = screen.getByTestId("WithdrawalIcon");
         fireEvent.press(button);
         expect(showModal).toHaveBeenCalledWith(WithdrawModal);
     });
