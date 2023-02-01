@@ -11,7 +11,7 @@ export default function (): UseCancelableDialogReturn {
 
     const showCancelableDialog = ({ buttons, ...rest }: DialogProps) => {
         const cancelableButtons = buttons;
-        cancelableButtons?.push({ type: "destructive", text: translate("cancel"), variant: "text" });
+        cancelableButtons?.push({ type: "positive", text: translate("cancel"), variant: "text" });
 
         showDialog({
             ...rest,

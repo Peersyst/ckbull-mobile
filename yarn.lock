@@ -2054,10 +2054,10 @@
     "@babel/runtime" "^7.16.7"
     "@peersyst/react-utils" "^2.1.0"
 
-"@peersyst/react-native-components@^2.1.11":
-  version "2.1.11"
-  resolved "https://registry.yarnpkg.com/@peersyst/react-native-components/-/react-native-components-2.1.11.tgz#94bb9d6d5b806627c997156f103359a4a82c1f43"
-  integrity sha512-kWbyH4GPiUmDaLcJWVNP/LGT71NgCvp70482EJuKvcI08hVow6+3mB7vdpfdJK7rueZpHS/zx7RXnoo+YuyiAg==
+"@peersyst/react-native-components@^2.1.12":
+  version "2.1.12"
+  resolved "https://registry.yarnpkg.com/@peersyst/react-native-components/-/react-native-components-2.1.12.tgz#b3ab511ea8fcf2c3859351df74f074910ced928e"
+  integrity sha512-k9cOs9o0L/nKvUMulPr64FbO6oxq2TmvxppRyF9Q5lGRwU6uNJPZS/EOxO0a0zK0f2swbbvt/2LDCtbMAvkoAQ==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@peersyst/react-components-core" "^1.2.6"
