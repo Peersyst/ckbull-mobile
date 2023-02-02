@@ -1,5 +1,5 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { DaoIcon, PinIcon, ScanIcon, WalletIcon } from "icons";
+import { AccountIcon, DaoIcon, PinIcon, QrIcon } from "icons";
 import { MainBottomScreens } from "module/main/component/navigation/MainBottomNavigatorGroup/MainBottomNavigatorGroup";
 import { MainStackParamsList } from "stack-navigator";
 import { BottomBarRoot } from "./BottomBar.styles";
@@ -29,18 +29,13 @@ const BottomBar = ({ state, navigation }: BottomBarProps): JSX.Element => {
             />
             <BottomBarItem
                 onPress={() => handleNavigation(MainBottomScreens.HOME)}
-                isActive={activeTab === MainBottomScreens.ACCOUNT}
+                isActive={activeTab === MainBottomScreens.HOME}
                 label={translate("account")}
-                Icon={<WalletIcon />}
+                Icon={<AccountIcon />}
             />
-            <MainButton
-                onPress={() => handleNavigation(MainBottomScreens.HOME)}
-                label={translate("scan")}
-                icon={<ScanIcon style={{ color: "white" }} />}
-                style={{ marginTop: -15 }}
-            ></MainButton>
+            <MainButton label={translate("scan")} icon={<QrIcon />} style={{ marginTop: -15 }} />
             <BottomBarItem
-                onPress={() => handleNavigation(MainBottomScreens.HOME)}
+                onPress={() => handleNavigation(MainBottomScreens.ACTIVITY)}
                 isActive={activeTab === MainBottomScreens.ACTIVITY}
                 label={translate("activity")}
                 Icon={<ActivityIcon />}
