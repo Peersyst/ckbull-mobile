@@ -156,5 +156,7 @@
     "boughtFor": "Comprado por",
     "selectAToken": "Select una moneda",
     "continue": "Continuar",
-    "biometricAuthentication": "Autenticación Biométrica"
+    "biometricAuthentication": "Autenticación Biométrica",
+    "account": "Cuenta",
+    "activity": "Actividad"
 }
