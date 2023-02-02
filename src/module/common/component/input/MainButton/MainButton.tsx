@@ -14,8 +14,10 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
         <MainButtonRoot variant="primary" size="lg" {...buttonProps}>
             {
                 <Col gap={4} alignItems={"center"} justifyContent="center">
-                    <ElementStyler style={{ fontSize: 24 }}>{icon}</ElementStyler>
-                    <Typography variant="body4Light">{label}</Typography>
+                    <ElementStyler style={{ flex: 1 }}>{icon}</ElementStyler>
+                    <Typography variant="body4Light" numberOfLines={1} adjustsFontSizeToFit>
+                        {label}
+                    </Typography>
                 </Col>
             }
         </MainButtonRoot>
