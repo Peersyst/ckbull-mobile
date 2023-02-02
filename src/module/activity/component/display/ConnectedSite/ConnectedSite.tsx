@@ -1,24 +1,41 @@
+import { ConnectedSiteStatusType, ConnectedSiteType } from "module/activity/component/display/ConnectedSite/ConnectedSite.types";
+import ActivityCard from "module/activity/core/ActivityCard/ActivityCard";
+import { useTheme } from "@peersyst/react-native-styled";
+import { useTranslate } from "module/common/hook/useTranslate";
 import { SiteImage } from "module/activity/component/display/ConnectedSite/ConnectedSite.styles";
-import BaseActivity from "module/activity/core/ActivityCard/ActivityCard";
-import ConnectedSiteStatus from "module/activity/component/display/ConnectedSiteStatus/ConnectedSiteStatus";
 import { placeholder_image } from "images";
-import { ConnectedSiteType } from "module/activity/component/display/ConnectedSite/ConnectedSite.types";
-import { ActivityActionKind } from "module/activity/core/ActivityAction/ActivityAction.types";
+import useGetConnectedSiteAction from "module/activity/hook/useGetConnectedSiteAction";
 
 interface ConnectedSiteProps {
     site: ConnectedSiteType;
 }
 
-const ConnectedSite = ({ site }: ConnectedSiteProps): JSX.Element => {
-    const { title, source = "", status, action = ActivityActionKind.DISCONNECT } = site;
+const ConnectedSite = ({ site: { title, source = "", status } }: ConnectedSiteProps) => {
+    const theme = useTheme();
+    const translate = useTranslate();
+
+    const { handleActionElement, handleOnAction } = useGetConnectedSiteAction();
+
+    const handleStatusColor = (status: ConnectedSiteStatusType): string => {
+        switch (status) {
+            case "connected":
+                return theme.palette.green[200];
+            case "failed":
+                return theme.palette.red;
+            default:
+                return theme.palette.text;
+        }
+    };
 
     return (
-        <BaseActivity title={title} action={action} onAction={() => undefined}>
-            {{
-                header: <SiteImage source={{ uri: source }} fallback={placeholder_image} />,
-                description: <ConnectedSiteStatus status={status} />,
-            }}
-        </BaseActivity>
+        <ActivityCard
+            display={<SiteImage source={source ? { uri: source } : placeholder_image} />}
+            title={title}
+            description={translate(status)}
+            actionElement={handleActionElement(status)}
+            onAction={handleOnAction(status)}
+            style={{ description: { color: handleStatusColor(status) } }}
+        />
     );
 };
 

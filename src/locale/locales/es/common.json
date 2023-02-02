@@ -130,7 +130,6 @@
     "status": "Estado",
     "pending": "Pendiente",
     "connected": "Conectado",
-    "disconnected": "Desconectado",
     "failed": "Fallado",
     "proposed": "Propuesta",
     "committed": "Cometida",

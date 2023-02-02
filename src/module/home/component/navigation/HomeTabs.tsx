@@ -5,7 +5,6 @@ import { MainTabItemType } from "module/main/component/navigation/MainTabs/MainT
 import MainTabs from "../../../main/component/navigation/MainTabs/MainTabs";
 import { useTranslate } from "module/common/hook/useTranslate";
 import ConnectedSite from "module/activity/component/display/ConnectedSite/ConnectedSite";
-import { ActivityActionKind } from "module/activity/core/ActivityAction/ActivityAction.types";
 
 const HomeTabs = (): JSX.Element => {
     const translate = useTranslate();
@@ -24,7 +23,7 @@ const HomeTabs = (): JSX.Element => {
         },
         {
             title: "Connected Sites",
-            item: <ConnectedSite site={{ title: "Figma", status: "connected", action: ActivityActionKind.DISCONNECT }} />,
+            item: <ConnectedSite site={{ title: "Figma", status: "connected" }} />,
         },
     ];
     return <MainTabs tabs={HomeTabs} />;
