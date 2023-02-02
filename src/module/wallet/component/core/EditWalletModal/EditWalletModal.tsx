@@ -8,7 +8,6 @@ import {
     Typography,
     useToast,
 } from "@peersyst/react-native-components";
-import useWallet from "module/wallet/hook/useWallet";
 import useEditWallet from "module/wallet/hook/useEditWallet";
 import { EditWalletModalRoot } from "module/wallet/component/core/EditWalletModal/EditWalletModal.styles";
 import TextField from "module/common/component/input/TextField/TextField";
@@ -17,15 +16,12 @@ import { useTheme } from "@peersyst/react-native-styled";
 import { useState } from "react";
 import { WalletStorage } from "module/wallet/WalletStorage";
 import { useTranslate } from "module/common/hook/useTranslate";
+import useSelectedWallet from "module/wallet/hook/useSelectedWallet";
 
-export interface EditWalletModalProps extends ExposedBackdropProps {
-    index: number;
-}
-
-const EditWalletModal = createModal(({ index, closable = true, onClose, ...backdropProps }: EditWalletModalProps): JSX.Element => {
+const EditWalletModal = createModal<ExposedBackdropProps>(({ closable = true, onClose, ...backdropProps }): JSX.Element => {
     const [open, setOpen] = useState(true);
     const translate = useTranslate();
-    const { name, colorIndex } = useWallet(index);
+    const { name, colorIndex, index } = useSelectedWallet();
     const {
         setName,
         setColorIndex,

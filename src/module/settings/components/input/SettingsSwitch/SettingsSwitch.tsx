@@ -8,7 +8,7 @@ export interface SettingsSwitchProps extends SwitchProps {
 const SettingsSwitch = (props: SettingsSwitchProps) => {
     return (
         <SettingsCard>
-            <Switch {...props} />
+            <Switch LabelProps={{ variant: "body2Light", alignment: "space-between" }} {...props} />
         </SettingsCard>
     );
 };
