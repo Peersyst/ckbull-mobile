@@ -1,9 +1,8 @@
 import styled from "@peersyst/react-native-styled";
-import { Col } from "@peersyst/react-native-components";
+import { Col, Typography } from "@peersyst/react-native-components";
 import GradientPage from "module/common/component/layout/GradientPage/GradientPage";
 import { View } from "react-native";
 import { CircleCheckIcon } from "icons";
-import Typography from "module/common/component/display/Typography/Typography";
 
 export const DarkLoadingModalOverlay = styled(View)(({ theme }) => ({
     position: "absolute",

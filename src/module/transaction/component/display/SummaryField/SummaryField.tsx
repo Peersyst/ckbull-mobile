@@ -1,6 +1,6 @@
+import { Typography } from "@peersyst/react-native-components";
 import { ReactNode } from "react";
 import { SummaryFieldRoot } from "./SummaryField.styles";
-import Typography from "module/common/component/display/Typography/Typography";
 
 export interface SummaryFieldProps {
     label: string;

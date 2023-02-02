@@ -5,6 +5,7 @@ export { default as colored_background } from "./coloredBackground.png";
 export { default as deposit } from "./deposit.png";
 export { default as dollar_coin } from "./dollar-coin.png";
 export { default as euro_coin } from "./euro-coin.png";
+export { default as image_background } from "./image_background.png";
 export { default as key } from "./key.png";
 export { default as lock } from "./lock.png";
 export { default as nervos_coin } from "./nervos-coin.png";

@@ -29,6 +29,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         icon: "./assets/images/adaptive-icon.png",
         infoPlist: {
             NSCameraUsageDescription: "This app uses camera for QR code scanning.",
+            NSFaceIDUsageDescription: "This app uses biometrics to provide a higher level of security",
         },
         splash: { image: "./assets/images/splash.png", resizeMode: "cover", backgroundColor: "#141414" },
     },
