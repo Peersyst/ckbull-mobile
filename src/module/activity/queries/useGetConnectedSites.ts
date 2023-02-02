@@ -5,7 +5,7 @@ import { ActivityActionKind } from "module/activity/core/ActivityAction/Activity
  *  MOCKED CALL PENDING TO BACKEND
  * */
 export default function () {
-    const mockSite: ConnectedSiteType = { title: "Figma", status: "pending", action: ActivityActionKind.SIGN };
+    const mockSite: ConnectedSiteType = { title: "Figma", status: "connected", action: ActivityActionKind.DISCONNECT };
     const mockData: readonly any[] | null | undefined = [mockSite, mockSite, mockSite];
 
     return mockData;
