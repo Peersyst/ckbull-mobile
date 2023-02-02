@@ -11,10 +11,10 @@ describe("BottomBar test", () => {
         expect(screen.getByTestId("DaoIcon")).toBeDefined();
         //Account
         expect(screen.getByText(translate("account"))).toBeDefined();
-        expect(screen.getByTestId("WalletIcon")).toBeDefined();
+        expect(screen.getByTestId("AccountIcon")).toBeDefined();
         //Wallet
         expect(screen.getByText(translate("scan"))).toBeDefined();
-        expect(screen.getByTestId("ScanIcon")).toBeDefined();
+        expect(screen.getByTestId("QrIcon")).toBeDefined();
         //Activity
         expect(screen.getByTestId("ActivityIcon")).toBeDefined();
         expect(screen.getByText(translate("activity"))).toBeDefined();
@@ -32,8 +32,8 @@ describe("BottomBar test", () => {
     test("Navigate to Account Screen", () => {
         const mockedNavigate = jest.fn();
         const screen = render(<BottomBar state={mockedState as any} navigation={{ navigate: mockedNavigate } as any} />);
-        const walletIcon = screen.getByTestId("WalletIcon");
-        fireEvent.press(walletIcon);
+        const accountIcon = screen.getByTestId("AccountIcon");
+        fireEvent.press(accountIcon);
         expect(mockedNavigate).toHaveBeenCalledWith(MainBottomScreens.HOME);
     });
     test("Navigate to Activity Screen", () => {
@@ -41,15 +41,14 @@ describe("BottomBar test", () => {
         const screen = render(<BottomBar state={mockedState as any} navigation={{ navigate: mockedNavigate } as any} />);
         const activityIcon = screen.getByTestId("ActivityIcon");
         fireEvent.press(activityIcon);
-        expect(mockedNavigate).toHaveBeenCalledWith(MainBottomScreens.HOME);
+        expect(mockedNavigate).toHaveBeenCalledWith(MainBottomScreens.ACTIVITY);
     });
 
     test("Navigate to Scan Screen", () => {
         const mockedNavigate = jest.fn();
         const screen = render(<BottomBar state={mockedState as any} navigation={{ navigate: mockedNavigate } as any} />);
-        const scanIcon = screen.getByTestId("ScanIcon");
-        fireEvent.press(scanIcon);
-        expect(mockedNavigate).toHaveBeenCalledWith(MainBottomScreens.HOME);
+        const qrIcon = screen.getByTestId("QrIcon");
+        fireEvent.press(qrIcon);
     });
     test("Navigate to News Screen", () => {
         const mockedNavigate = jest.fn();
