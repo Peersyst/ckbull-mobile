@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
 import { ActivityStatusLabel, ActivityTypography } from "module/activity/component/display/ActivityStatus/ActivityStatus.styles";
 import { useTranslate } from "module/common/hook/useTranslate";
-import { StatusState } from "module/activity/component/display/ConnectedSiteStatus/ConnectedSiteStatus";
+import { ConnectedSiteStatusType } from "module/activity/component/display/ConnectedSiteStatus/ConnectedSiteStatus";
 
 export interface ActivityStatusProps {
-    message: StatusState;
+    message: ConnectedSiteStatusType;
     statusColor: string;
     light: boolean;
     children?: ReactElement;
