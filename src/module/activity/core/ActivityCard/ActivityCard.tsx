@@ -23,20 +23,20 @@ const ActivityCard = ({
     amount,
     actionElement,
     onAction,
-    style = { title: {}, details: {}, description: {} },
+    style: { title: titleStyle = {}, details: detailsStyle = {}, description: descriptionStyle = {}, ...rotStyle } = {},
 }: ActivityCardProps): JSX.Element => {
     return (
-        <ActivityCardRoot>
+        <ActivityCardRoot style={rotStyle}>
             <Row gap={16}>
                 {display}
                 <Col gap={4} justifyContent="center">
-                    <Typography variant="body3Regular" style={style?.title}>
+                    <Typography variant="body3Regular" style={titleStyle}>
                         {title}
                     </Typography>
-                    <Typography variant="body4Light" style={style?.description} light={!style}>
+                    <Typography variant="body4Light" style={descriptionStyle} light={!descriptionStyle.color}>
                         {description}
                     </Typography>
-                    <Typography variant="body4Strong" light style={style?.details}>
+                    <Typography variant="body4Strong" light style={detailsStyle}>
                         {details}
                     </Typography>
                 </Col>

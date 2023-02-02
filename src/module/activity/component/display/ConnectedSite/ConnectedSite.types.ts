@@ -5,3 +5,7 @@ export type ConnectedSiteType = {
     source?: string;
     status: ConnectedSiteStatusType;
 };
+
+export interface ConnectedSiteRootProps {
+    status: ConnectedSiteStatusType;
+}

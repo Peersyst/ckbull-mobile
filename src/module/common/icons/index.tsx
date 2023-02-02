@@ -43,4 +43,3 @@ export * from "./TransactionReceivedIcon";
 export * from "./TransactionSentIcon";
 export * from "./UnlockDAOIcon";
 export * from "./WalletIcon";
-export * from "./ScanIcon";

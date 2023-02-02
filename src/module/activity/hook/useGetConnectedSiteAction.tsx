@@ -1,23 +1,21 @@
 import { ConnectedSiteStatusType } from "module/activity/component/display/ConnectedSite/ConnectedSite.types";
 import { ReactElement } from "react";
 import { useTranslate } from "module/common/hook/useTranslate";
-import { useTheme } from "@peersyst/react-native-styled";
 import { Typography } from "@peersyst/react-native-components";
 
 interface UseGetConnectedSiteAction {
-    handleActionElement: (status: ConnectedSiteStatusType) => ReactElement | undefined;
-    handleOnAction: (status: ConnectedSiteStatusType) => (() => unknown) | undefined;
+    actionElement: ReactElement | undefined;
+    handleAction: (() => unknown) | undefined;
 }
 
-export default function (): UseGetConnectedSiteAction {
+export default function (status: ConnectedSiteStatusType): UseGetConnectedSiteAction {
     const translate = useTranslate();
-    const theme = useTheme();
 
-    const handleActionElement = (status: ConnectedSiteStatusType): ReactElement | undefined => {
+    const getActionElement = (): ReactElement | undefined => {
         switch (status) {
             case "connected":
                 return (
-                    <Typography variant="body2Light" style={{ color: theme.palette.red }}>
+                    <Typography variant="body2Light" color="red">
                         {translate("disconnect")}
                     </Typography>
                 );
@@ -26,7 +24,7 @@ export default function (): UseGetConnectedSiteAction {
         }
     };
 
-    const handleOnAction = (status: ConnectedSiteStatusType): (() => unknown) | undefined => {
+    const getHandleAction = (): (() => unknown) | undefined => {
         switch (status) {
             case "connected":
                 // Temporal until doing sign/review_connection modal
@@ -37,7 +35,7 @@ export default function (): UseGetConnectedSiteAction {
     };
 
     return {
-        handleActionElement,
-        handleOnAction,
+        actionElement: getActionElement(),
+        handleAction: getHandleAction(),
     };
 }
