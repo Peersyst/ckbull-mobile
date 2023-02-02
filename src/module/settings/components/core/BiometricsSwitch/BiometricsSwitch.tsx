@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import settingsState from "module/settings/state/SettingsState";
 import { SettingsStorage } from "module/settings/SettingsStorage";
-import SettingsSwitch from "module/settings/components/input/SetttingsSwitch/SettingsSwitch";
+import SettingsSwitch from "module/settings/components/input/SettingsSwitch/SettingsSwitch";
 import { useTranslate } from "module/common/hook/useTranslate";
 
 const BiometricsSwitch = (): JSX.Element => {
