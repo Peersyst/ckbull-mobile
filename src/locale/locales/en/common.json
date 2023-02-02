@@ -156,5 +156,8 @@
     "boughtFor": "Bought for",
     "selectAToken": "Select a token",
     "continue": "Continue",
-    "biometricAuthentication": "Biometric authentication"
+    "biometricAuthentication": "Biometric authentication",
+    "account": "Account",
+    "activity": "Activity",
+    "scan": "Scan"
 }
