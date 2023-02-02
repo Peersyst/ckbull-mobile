@@ -1,8 +1,8 @@
 import { ConnectedSiteStatusType } from "module/activity/component/display/ConnectedSite/ConnectedSite.types";
 import { ReactElement } from "react";
-import Typography from "module/common/component/display/Typography/Typography";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { useTheme } from "@peersyst/react-native-styled";
+import { Typography } from "@peersyst/react-native-components";
 
 interface UseGetConnectedSiteAction {
     handleActionElement: (status: ConnectedSiteStatusType) => ReactElement | undefined;
