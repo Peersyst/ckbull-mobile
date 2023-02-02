@@ -24,12 +24,7 @@ const WalletCard = ({
     const walletColor = palette.wallet[colorIndex];
 
     return (
-        <ThemeOverrideProvider
-            overrides={(theme) => ({
-                ...theme,
-                palette: { ...theme.palette, text: getLuminance(walletColor) > 0.5 ? theme.palette.black : theme.palette.white },
-            })}
-        >
+        <ThemeOverrideProvider theme={getLuminance(walletColor) > 0.5 ? "light" : "dark"}>
             <WalletCardRoot color={walletColor} justifyContent="space-between" style={style}>
                 <Col style={{ width: "100%" }} gap={"2.5%"} justifyContent="center">
                     <Typography variant={nameVariant}>{name}</Typography>
