@@ -1,6 +1,5 @@
-import { Col } from "@peersyst/react-native-components";
+import { Col, Typography } from "@peersyst/react-native-components";
 import { ViewStyle } from "react-native";
-import Typography from "../Typography/Typography";
 
 export interface AdviseProps {
     title: string;
@@ -14,7 +13,7 @@ const Advise = ({ title, text, style }: AdviseProps): JSX.Element => (
             {title}
         </Typography>
         {text && (
-            <Typography variant="body3Regular" textAlign="center" color={(palette) => palette.gray["450"]}>
+            <Typography variant="body3Regular" textAlign="center" color="gray.450">
                 {text}
             </Typography>
         )}

@@ -42,7 +42,7 @@ const config = createConfig({
         },
         Label: {
             defaultProps: {
-                variant: "body1",
+                variant: "body2Strong",
             },
         },
         Modal: {
@@ -53,6 +53,13 @@ const config = createConfig({
         Select: {
             defaultProps: {
                 icon: <ChevronDownIcon />,
+            },
+        },
+        Switch: {
+            defaultProps: {
+                LabelProps: {
+                    alignment: "space-between",
+                },
             },
         },
         TextInput: {
