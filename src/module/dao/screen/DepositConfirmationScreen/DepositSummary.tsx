@@ -1,10 +1,9 @@
 import { formatHash } from "@peersyst/react-utils";
-import { Col } from "@peersyst/react-native-components";
+import { Col, Typography } from "@peersyst/react-native-components";
 import BaseSendSummary, { BaseSendSummaryProps } from "../../../transaction/component/display/BaseSendSummary/BaseSendSummary";
 import SummaryField from "../../../transaction/component/display/SummaryField/SummaryField";
 import useGetDaoInfo from "module/dao/query/useGetDaoInfo";
 import { useTranslate } from "module/common/hook/useTranslate";
-import Typography from "module/common/component/display/Typography/Typography";
 
 export interface DepositSummaryProps extends Omit<BaseSendSummaryProps, "token"> {
     senderName: string;

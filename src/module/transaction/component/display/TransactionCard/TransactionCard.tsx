@@ -1,4 +1,4 @@
-import { Col, Row, useModal } from "@peersyst/react-native-components";
+import { Col, Row, Typography, useModal } from "@peersyst/react-native-components";
 import TransactionAmount from "module/transaction/component/display/TransactionAmount/TransactionAmount";
 import TransactionLabel from "module/transaction/component/display/TransactionLabel/TransactionLabel";
 import TransactionDetailsModal from "../../core/TransactionDetailsModal/TransactionDetailsModal";
@@ -11,7 +11,6 @@ import { useGetTokenPrice } from "module/token/query/useGetTokenPrice";
 import { TransactionCardProps } from "./TransactionCard.types";
 import { TouchableWithoutFeedback } from "react-native";
 import TransactionIcon from "../TransactionIcon/TransactionIcon";
-import Typography from "module/common/component/display/Typography/Typography";
 import Balance from "module/wallet/component/display/Balance/Balance";
 import MainListCard from "module/main/component/display/MainListCard/MainListCard";
 import useFormatDate from "module/common/hook/useFormatDate";
@@ -43,7 +42,7 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
                     </Row>
                     <Row justifyContent="space-between" alignItems="center">
                         {timestamp ? (
-                            <Typography variant="body4Strong" color={(p) => p.gray[300]}>
+                            <Typography variant="body4Strong" color="gray.300">
                                 {formattedDate}
                             </Typography>
                         ) : (
@@ -57,7 +56,7 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
                                 <Balance
                                     options={{ maximumFractionDigits: 2, minimumFractionDigits: 2 }}
                                     action="round"
-                                    color={(p) => p.gray[300]}
+                                    color="gray.300"
                                     balance={tokenValue * amount}
                                     units={fiat}
                                     variant="body4Strong"

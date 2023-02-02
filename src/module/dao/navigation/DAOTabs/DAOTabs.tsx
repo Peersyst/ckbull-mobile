@@ -1,12 +1,13 @@
-import { MainTabItemType } from "module/main/component/navigation/MainTabs/MainTabs.types";
 import MainTabs from "../../../main/component/navigation/MainTabs/MainTabs";
 import DAOCompletedWithdrawalsList from "module/dao/component/core/DAOCompletedWithdrawalsList/DAOCompletedWithdrawalsList";
 import DAODepositsList from "module/dao/component/core/DAODepositsList/DAODepositsList";
 import { useTranslate } from "module/common/hook/useTranslate";
+import { TabItem } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
+import ConnectedSite from "module/activity/component/display/ConnectedSite/ConnectedSite";
 
 const DAOTabs = (): JSX.Element => {
     const translate = useTranslate();
-    const DAOTabs: MainTabItemType[] = [
+    const DAOTabs: TabItem[] = [
         {
             title: translate("deposits"),
             item: <DAODepositsList />,
@@ -14,6 +15,10 @@ const DAOTabs = (): JSX.Element => {
         {
             title: translate("withdrawals"),
             item: <DAOCompletedWithdrawalsList />,
+        },
+        {
+            title: "Connected Sites",
+            item: <ConnectedSite site={{ title: "Figma", status: "connected" }} />,
         },
     ];
     return <MainTabs tabs={DAOTabs} />;

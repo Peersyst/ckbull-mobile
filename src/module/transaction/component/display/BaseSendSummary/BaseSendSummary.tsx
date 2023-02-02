@@ -2,9 +2,8 @@ import { SendState } from "module/transaction/state/SendState";
 import Balance from "module/wallet/component/display/Balance/Balance";
 import { BalanceProps } from "module/wallet/component/display/Balance/Balance.types";
 import { ReactElement } from "react";
-import { Col, Row } from "@peersyst/react-native-components";
+import { Col, Row, Typography } from "@peersyst/react-native-components";
 import { useTranslate } from "module/common/hook/useTranslate";
-import Typography from "module/common/component/display/Typography/Typography";
 import Container from "module/common/component/display/Container/Container";
 import { config } from "config";
 
@@ -40,14 +39,14 @@ const BaseSendSummary = ({ amount, fee, token, children }: BaseSendSummaryFullPr
                         />
                     </Row>
                     <Row>
-                        <Typography variant="body2Regular" color={(palette) => palette.primary}>
+                        <Typography variant="body2Regular" color="primary">
                             {translate("total")}:{" "}
                         </Typography>
                         <Balance
                             balance={Number(amount) + Number(fee)}
                             variant="body2Strong"
                             units={token}
-                            color={(palette) => palette.primary}
+                            color="primary"
                             options={{ maximumFractionDigits: config.maxNumberOfDecimals }}
                         />
                     </Row>

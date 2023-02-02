@@ -1,26 +1,17 @@
-import { DAOWithdrawIcon, DAODepositIcon } from "icons";
-import { useModal } from "@peersyst/react-native-components";
-import CardButtons from "module/common/component/input/CardButtons/CardButtons";
+import { ReceiveIcon, SendIcon } from "icons";
+import { Row, useModal } from "@peersyst/react-native-components";
 import DepositModal from "../../DepositModal/DepositModal";
 import WithdrawModal from "../../WithdrawModal/WithdrawModal";
-import { useTranslate } from "module/common/hook/useTranslate";
-
-const CARD_BUTTON_ICON_SIZE = 24;
+import IconButton from "module/common/component/input/IconButton/IconButton";
 
 const DAOCardButtons = (): JSX.Element => {
     const { showModal } = useModal();
-    const translate = useTranslate();
+
     return (
-        <CardButtons
-            //Left props
-            leftLabel={translate("deposit")}
-            leftIcon={<DAODepositIcon style={{ fontSize: CARD_BUTTON_ICON_SIZE }} />}
-            leftButtonOnPress={() => showModal(DepositModal)}
-            //Right props
-            rightLabel={translate("withdraw")}
-            rightIcon={<DAOWithdrawIcon style={{ fontSize: CARD_BUTTON_ICON_SIZE }} />}
-            rightButtonOnPress={() => showModal(WithdrawModal)}
-        />
+        <Row justifyContent="flex-end" gap={12}>
+            <IconButton icon={<SendIcon />} size="md" variant="outlined" onPress={() => showModal(WithdrawModal)} />
+            <IconButton icon={<ReceiveIcon />} size="md" variant="secondary" onPress={() => showModal(DepositModal)} />
+        </Row>
     );
 };
 

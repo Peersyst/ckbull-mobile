@@ -2,7 +2,7 @@ import { LocaleType } from "locale";
 import { BaseStorageService } from "module/common/service/BaseStorageService";
 import { defaultSettingsState, FeeType, FiatCurrencyType, NetworkType, SettingsState } from "./state/SettingsState";
 
-export const SettingsStorage = new (class extends BaseStorageService<SettingsState> {
+export const SettingsStorage = new (class extends BaseStorageService<undefined, SettingsState> {
     constructor() {
         super("settings");
     }
@@ -20,6 +20,11 @@ export const SettingsStorage = new (class extends BaseStorageService<SettingsSta
     async getNetwork(): Promise<NetworkType | undefined> {
         const settings = await this.get();
         return settings?.network;
+    }
+
+    async getBiometrics(): Promise<boolean | undefined> {
+        const settings = await this.get();
+        return settings?.biometrics;
     }
 
     async getFee(): Promise<FeeType | undefined> {
