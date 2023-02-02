@@ -1,21 +1,20 @@
 import { SiteImage } from "module/activity/component/display/ConnectedSite/ConnectedSite.styles";
 import BaseActivity from "module/activity/core/ActivityCard/ActivityCard";
-import ConnectedSiteStatus, { ConnectedSiteStatusProps } from "module/activity/component/display/ConnectedSiteStatus/ConnectedSiteStatus";
-import { ActivityActionKind } from "module/activity/core/ActivityAction/ActivityAction.types";
+import ConnectedSiteStatus from "module/activity/component/display/ConnectedSiteStatus/ConnectedSiteStatus";
 import { placeholder_image } from "images";
+import { ConnectedSiteType } from "module/activity/component/display/ConnectedSite/ConnectedSite.types";
 
-interface ConnectedSiteProps extends ConnectedSiteStatusProps {
-    title: string;
-    source?: string;
-    action: ActivityActionKind;
-    onAction: () => void;
+interface ConnectedSiteProps {
+    site: ConnectedSiteType;
 }
 
-const ConnectedSite = ({ title, action, onAction, source, status }: ConnectedSiteProps): JSX.Element => {
+const ConnectedSite = ({ site }: ConnectedSiteProps): JSX.Element => {
+    const { title, source = "", status, action } = site;
+
     return (
-        <BaseActivity title={title} action={action} onAction={onAction}>
+        <BaseActivity title={title} action={action} onAction={() => undefined}>
             {{
-                header: <SiteImage source={source ? { uri: source } : placeholder_image} />,
+                header: <SiteImage source={{ uri: source }} fallback={placeholder_image} />,
                 description: <ConnectedSiteStatus status={status} details={"this is a detail"} />,
             }}
         </BaseActivity>

@@ -24,7 +24,7 @@ const HomeTabs = (): JSX.Element => {
         },
         {
             title: "Connected Sites",
-            item: <ConnectedSite title="Figma" action={ActivityActionKind.SIGN} onAction={() => undefined} status="failed" />,
+            item: <ConnectedSite site={{ title: "Figma", status: "connected", action: ActivityActionKind.DISCONNECT }} />,
         },
     ];
     return <MainTabs tabs={HomeTabs} />;
