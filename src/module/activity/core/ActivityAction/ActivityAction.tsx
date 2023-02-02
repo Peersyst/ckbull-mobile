@@ -4,7 +4,6 @@ import { ActivityActionList } from "module/activity/core/ActivityAction/Activity
 import Typography from "module/common/component/display/Typography/Typography";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { useTheme } from "@peersyst/react-native-styled";
-import { capitalize } from "@peersyst/react-utils";
 import { ActivityActionIcon } from "module/activity/core/ActivityAction/ActivityAction.styles";
 
 export interface ActivityActionProps {
@@ -25,7 +24,7 @@ const ActivityAction = ({ action, onAction }: ActivityActionProps): JSX.Element 
     ) : label ? (
         <Pressable accessibilityRole="button" onPress={onAction}>
             <Typography variant="body2Light" style={{ color: theme.palette.red }}>
-                {capitalize(translate(label))}
+                {translate(label)}
             </Typography>
         </Pressable>
     ) : (
