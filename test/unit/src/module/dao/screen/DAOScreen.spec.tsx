@@ -12,6 +12,6 @@ describe("Test for the DAOScreen", () => {
         const screen = render(<DAOScreen />);
         //DAO Card
         //Balance
-        expect(screen.getByText(translate("available"))).toBeDefined();
+        expect(screen.getAllByText(translate("available"))).toHaveLength(2);
     });
 });

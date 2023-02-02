@@ -7,14 +7,14 @@ import WithdrawModal from "module/dao/component/core/WithdrawModal/WithdrawModal
 describe("Test for the DoaCardBalance", () => {
     test("Returns correctly", () => {
         const screen = render(<DAOCardButtons />);
-        expect(screen.getByTestId("DepositIcon")).toBeDefined();
-        expect(screen.getByTestId("WithdrawalIcon")).toBeDefined();
+        expect(screen.getByTestId("ReceiveIcon")).toBeDefined();
+        expect(screen.getByTestId("SendIcon")).toBeDefined();
     });
     test("Triggers deposit function correctly", () => {
         const showModal = jest.fn();
         jest.spyOn(Genesys, "useModal").mockReturnValue({ showModal } as any);
         const screen = render(<DAOCardButtons />);
-        const button = screen.getByTestId("DepositIcon");
+        const button = screen.getByTestId("ReceiveIcon");
         fireEvent.press(button);
         expect(showModal).toHaveBeenCalledWith(DepositModal);
     });
@@ -22,7 +22,7 @@ describe("Test for the DoaCardBalance", () => {
         const showModal = jest.fn();
         jest.spyOn(Genesys, "useModal").mockReturnValue({ showModal } as any);
         const screen = render(<DAOCardButtons />);
-        const button = screen.getByTestId("WithdrawalIcon");
+        const button = screen.getByTestId("SendIcon");
         fireEvent.press(button);
         expect(showModal).toHaveBeenCalledWith(WithdrawModal);
     });
