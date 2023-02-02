@@ -4,8 +4,7 @@ import NftsList from "module/nft/component/core/NftsList/NftsList";
 import { MainTabItemType } from "module/main/component/navigation/MainTabs/MainTabs.types";
 import MainTabs from "../../../main/component/navigation/MainTabs/MainTabs";
 import { useTranslate } from "module/common/hook/useTranslate";
-import ConnectedSite from "module/activity/component/display/ConnectedSite/ConnectedSite";
-import { ActivityActionKind } from "module/activity/core/ActivityAction/ActivityAction.types";
+import ConnectedSitesList from "module/activity/component/display/ConnectedSitesList/ConnectedSitesList";
 
 const HomeTabs = (): JSX.Element => {
     const translate = useTranslate();
@@ -24,7 +23,7 @@ const HomeTabs = (): JSX.Element => {
         },
         {
             title: "Connected Sites",
-            item: <ConnectedSite site={{ title: "Figma", status: "connected", action: ActivityActionKind.DISCONNECT }} />,
+            item: <ConnectedSitesList />,
         },
     ];
     return <MainTabs tabs={HomeTabs} />;
