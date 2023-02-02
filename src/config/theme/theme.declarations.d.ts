@@ -12,6 +12,7 @@ export interface ThemeOverlay {
     "16%": string;
     "12%": string;
     "8%": string;
+    "6%": string;
 }
 
 export interface ThemeOverlays {
