@@ -1,9 +1,9 @@
 import { render, translate } from "test-utils";
 import ActivityCard from "module/activity/core/ActivityCard/ActivityCard";
 import { ActivityActionKind } from "module/activity/core/ActivityAction/ActivityAction.types";
-import Typography from "module/common/component/display/Typography/Typography";
 import { screen } from "@testing-library/react-native";
 import { capitalize } from "@peersyst/react-utils";
+import { Typography } from "@peersyst/react-native-components";
 
 describe("Tests for ActivityCard", () => {
     const mockTitle = "title";
