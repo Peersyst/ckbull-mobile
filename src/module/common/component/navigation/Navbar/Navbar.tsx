@@ -21,9 +21,9 @@ const Navbar = ({ back, title, onBack, steps }: NavbarProps): JSX.Element => {
                     <BackIcon size={20} />
                 </BackIconRoot>
             )}
-            <Col alignItems="center">
+            <Col gap={8} alignItems="center">
                 {title && (
-                    <Typography style={{ lineHeight: 30 }} variant="body1Light" textTransform="uppercase">
+                    <Typography variant="body1Light" textTransform="uppercase">
                         {title}
                     </Typography>
                 )}

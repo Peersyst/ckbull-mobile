@@ -1,8 +1,8 @@
 import CardModal, { CardModalProps } from "module/common/component/navigation/CardModal/CardModal";
 import { ReactElement } from "react";
-import { ChevronDownIcon, CircleErrorIcon } from "icons";
 import { ActionIconRoot, CardSelectModalNavbar } from "module/common/component/feedback/CardSelectModal/CardSelectModal.styles";
 import { Typography } from "@peersyst/react-native-components";
+import { ACTION_ICONS } from "module/common/component/feedback/CardSelectModal/ActionIcons";
 
 export type CardSelectModalProps = Omit<CardModalProps, "children"> & {
     children: ReactElement;
@@ -11,12 +11,7 @@ export type CardSelectModalProps = Omit<CardModalProps, "children"> & {
 };
 
 const CardSelectModal = ({ children, title, action, onClose, ...rest }: CardSelectModalProps): JSX.Element => {
-    const actionIcons = {
-        hide: ChevronDownIcon,
-        close: CircleErrorIcon,
-    };
-
-    const ActionIcon = actionIcons[action];
+    const ActionIcon = ACTION_ICONS[action];
 
     return (
         <CardModal {...rest} onClose={onClose}>
