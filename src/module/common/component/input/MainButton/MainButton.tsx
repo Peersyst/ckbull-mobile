@@ -11,7 +11,7 @@ export interface MainButtonProps extends Omit<ButtonProps, "children" | "rounded
 const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Element => (
     <MainButtonRoot variant="primary" size="lg" {...buttonProps}>
         {
-            <Col gap={6} alignItems={"center"} style={{ marginTop: 5 }}>
+            <Col gap={6} alignItems={"center"} justifyContent="center">
                 <ElementStyler style={{ fontSize: 24 }}>{icon}</ElementStyler>
                 <Typography variant="body4Light" color="white">
                     {label}

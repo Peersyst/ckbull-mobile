@@ -8,12 +8,12 @@ describe("BottomBar test", () => {
         const screen = render(<BottomBar state={{ ...mockedState, index: 0 } as any} navigation={{ navigate: jest.fn() } as any} />);
         //DAO
         expect(screen.getByText(translate("DAO"))).toBeDefined();
-        expect(screen.getByTestId("DaoBottomIcon")).toBeDefined();
+        expect(screen.getByTestId("DaoIcon")).toBeDefined();
         //Account
         expect(screen.getByText(translate("account"))).toBeDefined();
         expect(screen.getByTestId("WalletIcon")).toBeDefined();
         //Wallet
-        expect(screen.getByText(translate("wallet"))).toBeDefined();
+        expect(screen.getByText(translate("scan"))).toBeDefined();
         expect(screen.getByTestId("ScanIcon")).toBeDefined();
         //Activity
         expect(screen.getByTestId("ActivityIcon")).toBeDefined();
@@ -25,7 +25,7 @@ describe("BottomBar test", () => {
     test("Navigate to DAO Screen", () => {
         const mockedNavigate = jest.fn();
         const screen = render(<BottomBar state={mockedState as any} navigation={{ navigate: mockedNavigate } as any} />);
-        const daoButton = screen.getByTestId("DaoBottomIcon");
+        const daoButton = screen.getByTestId("DaoIcon");
         fireEvent.press(daoButton);
         expect(mockedNavigate).toHaveBeenCalledWith(MainBottomScreens.DAO);
     });
@@ -44,12 +44,11 @@ describe("BottomBar test", () => {
         expect(mockedNavigate).toHaveBeenCalledWith(MainBottomScreens.HOME);
     });
 
-    test("Navigate to Wallet Screen", () => {
+    test("Navigate to Scan Screen", () => {
         const mockedNavigate = jest.fn();
         const screen = render(<BottomBar state={mockedState as any} navigation={{ navigate: mockedNavigate } as any} />);
-        const walletIcon = screen.getByTestId("ScanIcon");
-
-        fireEvent.press(walletIcon);
+        const scanIcon = screen.getByTestId("ScanIcon");
+        fireEvent.press(scanIcon);
         expect(mockedNavigate).toHaveBeenCalledWith(MainBottomScreens.HOME);
     });
     test("Navigate to News Screen", () => {

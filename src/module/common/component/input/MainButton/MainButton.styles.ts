@@ -3,8 +3,8 @@ import Button from "module/common/component/input/Button/Button";
 
 export const MainButtonRoot = styled(Button)(({ theme }) => ({
     lg: {
-        width: 70,
-        height: 70,
+        width: 64,
+        height: 64,
     },
     variant: {
         primary: {

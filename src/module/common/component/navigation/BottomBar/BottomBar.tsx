@@ -1,11 +1,11 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { PinIcon, ScanIcon, WalletIcon } from "icons";
+import { DaoIcon, PinIcon, ScanIcon, WalletIcon } from "icons";
 import { MainBottomScreens } from "module/main/component/navigation/MainBottomNavigatorGroup/MainBottomNavigatorGroup";
 import { MainStackParamsList } from "stack-navigator";
 import { BottomBarRoot } from "./BottomBar.styles";
 import BottomBarItem from "./BottomBarItem/BottomBarItem";
 import { useTranslate } from "module/common/hook/useTranslate";
-import { DaoBottomIcon } from "module/common/icons/DaoBottomIcon";
+
 import { ActivityIcon } from "module/common/icons/ActivityIcon";
 import MainButton from "../../input/MainButton/MainButton";
 
@@ -25,7 +25,7 @@ const BottomBar = ({ state, navigation }: BottomBarProps): JSX.Element => {
                 onPress={() => handleNavigation(MainBottomScreens.DAO)}
                 isActive={activeTab === MainBottomScreens.DAO}
                 label={translate("DAO")}
-                Icon={<DaoBottomIcon />}
+                Icon={<DaoIcon />}
             />
             <BottomBarItem
                 onPress={() => handleNavigation(MainBottomScreens.HOME)}
@@ -35,7 +35,7 @@ const BottomBar = ({ state, navigation }: BottomBarProps): JSX.Element => {
             />
             <MainButton
                 onPress={() => handleNavigation(MainBottomScreens.HOME)}
-                label={translate("wallet")}
+                label={translate("scan")}
                 icon={<ScanIcon style={{ color: "white" }} />}
                 style={{ marginTop: -15 }}
             ></MainButton>
