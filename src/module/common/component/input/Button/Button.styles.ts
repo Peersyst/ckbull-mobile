@@ -1,41 +1,49 @@
-import { Button } from "@peersyst/react-native-components";
+import { Button, ButtonSize } from "@peersyst/react-native-components";
 import styled from "@peersyst/react-native-styled";
 import { ButtonProps } from "./Button.types";
-import { emphasize } from "@peersyst/react-utils";
-import { View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { darken, emphasize } from "@peersyst/react-utils";
 
-export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
+export const BUTTON_SIZES: Record<ButtonSize, number> = {
+    lg: 52,
+    md: 44,
+    sm: 36,
+};
+
+export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
     return {
         borderRadius: rounded ? 10000 : undefined,
         //Size Styles
         lg: {
             ...theme.typography.body2Regular,
-            height: 52,
+            height: BUTTON_SIZES.lg,
             paddingHorizontal: 18,
             paddingVertical: 12,
         },
         md: {
             ...theme.typography.body2Regular,
-            height: 40,
+            height: BUTTON_SIZES.md,
             paddingHorizontal: 18,
             paddingVertical: 6,
         },
         sm: {
             ...theme.typography.body3Regular,
-            height: 36,
+            height: BUTTON_SIZES.sm,
             paddingHorizontal: 16,
             paddingVertical: 8,
         },
         //Variant Styles
         variant: {
             primary: {
-                backgroundColor: "transparent",
+                gradient: {
+                    colors: [theme.palette.green[200], theme.palette.green[800]],
+                    start: { x: 0, y: 1 },
+                    end: { x: 1, y: 0 },
+                },
                 color: theme.palette.white,
             },
             secondary: {
-                backgroundColor: theme.palette.gray[900],
-                color: theme.palette.black,
+                color: theme.palette.gray[900],
+                backgroundColor: theme.palette.gray[0],
             },
             tertiary: {
                 backgroundColor: theme.palette.overlay[900]["12%"],
@@ -53,10 +61,12 @@ export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }
         pressed: {
             variant: {
                 primary: {
-                    backgroundColor: emphasize(theme.palette.overlay[100]["12%"], 0.15),
+                    gradient: {
+                        colors: [darken(theme.palette.green[200], 0.15), darken(theme.palette.green[800], 0.15)],
+                    },
                 },
                 secondary: {
-                    backgroundColor: emphasize(theme.palette.gray[900], 0.02),
+                    backgroundColor: emphasize(theme.palette.gray[0], 0.1),
                 },
                 tertiary: {
                     backgroundColor: theme.palette.overlay[100]["24%"],
@@ -75,22 +85,10 @@ export const ButtonBase = styled(Button)<ButtonProps>(({ theme, rounded = true }
                     borderColor: theme.palette.overlay[100]["24%"],
                 },
                 primary: {
-                    backgroundColor: theme.palette.overlay[900]["12%"],
+                    gradient: { colors: [theme.palette.overlay[900]["12%"], theme.palette.overlay[900]["12%"]] },
                     color: theme.palette.overlay[100]["48%"],
                 },
             },
         },
     };
 });
-
-export const ButtonRoot = styled(View)(() => ({}));
-
-export const ButtonGradient = styled(LinearGradient)(() => ({
-    position: "absolute",
-    top: 0,
-    left: 0,
-    zIndex: -1,
-    elevation: -1,
-    width: "100%",
-    height: "100%",
-}));

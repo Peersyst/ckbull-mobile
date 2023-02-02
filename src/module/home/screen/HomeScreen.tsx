@@ -12,7 +12,7 @@ const HomeScreen = (): JSX.Element => {
 
     return (
         <BaseMainGradientScreen style={{ backgroundColor: "#5F8AFA", secondaryBackgroundColor: "#4FD1D9" }}>
-            <Col flex={1}>
+            <Col flex={1} gap="5%">
                 <HomeSlider />
                 {selectedWallet < wallets.length ? <HomeTabs /> : <AddWallet />}
             </Col>

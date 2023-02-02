@@ -4,6 +4,7 @@ import { Theme as RNCTheme } from "@peersyst/react-native-components";
 
 export interface ThemeOverlay {
     "80%": string;
+    "72%": string;
     "60%": string;
     "48%": string;
     "32%": string;

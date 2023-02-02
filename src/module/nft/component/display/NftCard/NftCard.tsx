@@ -1,5 +1,4 @@
-import { Col } from "@peersyst/react-native-components";
-import Typography from "module/common/component/display/Typography/Typography";
+import { Col, Typography } from "@peersyst/react-native-components";
 import { useTranslate } from "module/common/hook/useTranslate";
 import MainListCard from "module/main/component/display/MainListCard/MainListCard";
 import Balance from "module/wallet/component/display/Balance/Balance";
@@ -17,7 +16,7 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
         events,
     } = nft;
     const lastTransfer = useMemo(() => {
-        return events.find((e) => e.type === "nft_transfer");
+        return events.find((e: { type: string }) => e.type === "nft_transfer");
     }, [events]);
 
     return (
@@ -32,7 +31,7 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
                             </Typography>
                         )}
                         {contract_id && (
-                            <Typography variant="body3Strong" numberOfLines={1} color={(p) => p.primary}>
+                            <Typography variant="body3Strong" numberOfLines={1} color="primary">
                                 {contract_id}
                             </Typography>
                         )}
