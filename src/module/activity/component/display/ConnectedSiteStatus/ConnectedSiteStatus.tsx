@@ -2,7 +2,7 @@ import { useTheme } from "@peersyst/react-native-styled";
 import ActivityStatus from "module/activity/component/display/ActivityStatus/ActivityStatus";
 import { ActivityTypography } from "module/activity/component/display/ActivityStatus/ActivityStatus.styles";
 
-export type ConnectedSiteStatusType = "connected" | "disconnected" | "pending" | "failed";
+export type ConnectedSiteStatusType = "connected" | "failed";
 
 export interface ConnectedSiteStatusProps {
     status: ConnectedSiteStatusType;
@@ -16,8 +16,6 @@ const ConnectedSiteStatus = ({ status, details }: ConnectedSiteStatusProps): JSX
         switch (status) {
             case "connected":
                 return theme.palette.green[200];
-            case "disconnected":
-                return theme.palette.red;
             case "failed":
                 return theme.palette.red;
             default:
@@ -26,7 +24,7 @@ const ConnectedSiteStatus = ({ status, details }: ConnectedSiteStatusProps): JSX
     };
 
     return (
-        <ActivityStatus message={status} statusColor={handleStatusColor(status)} light={status === "pending"}>
+        <ActivityStatus message={status} statusColor={handleStatusColor(status)}>
             {details ? (
                 <ActivityTypography variant="body4Strong" light>
                     {details}

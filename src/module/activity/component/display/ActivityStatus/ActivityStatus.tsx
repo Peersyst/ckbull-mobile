@@ -6,11 +6,11 @@ import { ConnectedSiteStatusType } from "module/activity/component/display/Conne
 export interface ActivityStatusProps {
     message: ConnectedSiteStatusType;
     statusColor: string;
-    light: boolean;
+    light?: boolean;
     children?: ReactElement;
 }
 
-const ActivityStatus = ({ message, light, children, statusColor }: ActivityStatusProps): JSX.Element => {
+const ActivityStatus = ({ message, light = false, children, statusColor }: ActivityStatusProps): JSX.Element => {
     const translate = useTranslate();
 
     return (
