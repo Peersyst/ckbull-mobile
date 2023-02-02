@@ -158,5 +158,6 @@
     "sentTo": "Enviado a",
     "boughtFor": "Comprado por",
     "selectAToken": "Select una moneda",
-    "continue": "Continuar"
+    "continue": "Continuar",
+    "disconnect": "Desconectar"
 }
