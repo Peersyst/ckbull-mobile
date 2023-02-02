@@ -4,7 +4,7 @@ import NftsList from "module/nft/component/core/NftsList/NftsList";
 import { MainTabItemType } from "module/main/component/navigation/MainTabs/MainTabs.types";
 import MainTabs from "../../../main/component/navigation/MainTabs/MainTabs";
 import { useTranslate } from "module/common/hook/useTranslate";
-import ConnectedSitesList from "module/activity/component/display/ConnectedSitesList/ConnectedSitesList";
+import ConnectedSiteList from "module/activity/component/display/ConnectedSiteList/ConnectedSiteList";
 
 const HomeTabs = (): JSX.Element => {
     const translate = useTranslate();
@@ -23,7 +23,7 @@ const HomeTabs = (): JSX.Element => {
         },
         {
             title: "Connected Sites",
-            item: <ConnectedSitesList />,
+            item: <ConnectedSiteList />,
         },
     ];
     return <MainTabs tabs={HomeTabs} />;
