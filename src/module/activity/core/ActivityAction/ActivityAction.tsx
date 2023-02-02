@@ -1,10 +1,10 @@
 import { ActivityActionKind } from "module/activity/core/ActivityAction/ActivityAction.types";
 import { Pressable } from "react-native";
 import { ActivityActionList } from "module/activity/core/ActivityAction/ActivityActionList";
-import Typography from "module/common/component/display/Typography/Typography";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { useTheme } from "@peersyst/react-native-styled";
 import { ActivityActionIcon } from "module/activity/core/ActivityAction/ActivityAction.styles";
+import { Typography } from "@peersyst/react-native-components";
 
 export interface ActivityActionProps {
     action: ActivityActionKind;
