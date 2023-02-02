@@ -130,7 +130,6 @@
     "status": "Status",
     "pending": "Pending",
     "connected": "Connected",
-    "disconnected": "Disconnected",
     "failed": "Failed",
     "proposed": "Proposed",
     "committed": "Committed",
@@ -160,5 +159,8 @@
     "selectAToken": "Select a token",
     "continue": "Continue",
     "biometricAuthentication": "Biometric authentication",
-    "disconnect": "Disconnect"
+    "disconnect": "Disconnect",
+    "account": "Account",
+    "activity": "Activity",
+    "scan": "Scan"
 }

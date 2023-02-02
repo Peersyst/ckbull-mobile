@@ -130,7 +130,6 @@
     "status": "Estado",
     "pending": "Pendiente",
     "connected": "Conectado",
-    "disconnected": "Desconectado",
     "failed": "Fallado",
     "proposed": "Propuesta",
     "committed": "Cometida",
@@ -160,5 +159,8 @@
     "selectAToken": "Select una moneda",
     "continue": "Continuar",
     "biometricAuthentication": "Autenticación Biométrica",
-    "disconnect": "Desconectar"
+    "disconnect": "Desconectar",
+    "account": "Cuenta",
+    "activity": "Actividad",
+    "scan": "Escanear"
 }

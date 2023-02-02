@@ -1,7 +1,7 @@
 import styled from "@peersyst/react-native-styled";
 import { PlusIcon } from "icons";
 import { Row, Typography } from "@peersyst/react-native-components";
-import { BaseWalletCardRoot } from "module/common/component/surface/BaseWalletCard/BaseWalletCard.styles";
+import { View } from "react-native";
 
 export const AddIcon = styled(PlusIcon)(({ theme }) => ({
     color: theme.palette.white,
@@ -13,8 +13,11 @@ export const AddText = styled(Typography, { textTransform: "uppercase" })(({ the
     fontWeight: "bold",
 }));
 
-export const AddWalletCardRoot = styled(BaseWalletCardRoot)(({ theme }) => ({
-    backgroundColor: theme.palette.darkLightGray,
+export const AddWalletCardRoot = styled(View)(({ theme }) => ({
+    flex: 1,
+    height: "100%",
+    width: "100%",
+    backgroundColor: theme.palette.gray[500],
 }));
 
 export const ContentRoot = styled(Row, { justifyContent: "center", alignItems: "center", gap: 20 })(() => ({

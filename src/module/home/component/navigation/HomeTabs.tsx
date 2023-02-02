@@ -5,6 +5,7 @@ import { useTranslate } from "module/common/hook/useTranslate";
 import FloatingTabs from "module/home/component/navigation/FloatingTabs/FloatingTabs";
 import { TabItem } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 
+
 const HomeTabs = (): JSX.Element => {
     const translate = useTranslate();
     const HomeTabs: TabItem[] = [

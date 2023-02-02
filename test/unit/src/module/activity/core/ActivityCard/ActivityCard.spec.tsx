@@ -1,58 +1,55 @@
-import { render, translate } from "test-utils";
+import { render } from "test-utils";
 import ActivityCard from "module/activity/core/ActivityCard/ActivityCard";
-import { ActivityActionKind } from "module/activity/core/ActivityAction/ActivityAction.types";
 import { screen } from "@testing-library/react-native";
-import { capitalize } from "@peersyst/react-utils";
 import { Typography } from "@peersyst/react-native-components";
 
 describe("Tests for ActivityCard", () => {
     const mockTitle = "title";
+    const mockDescription = "description";
+    const mockDetails = "details";
+    const mockAmount = "amount";
     const mockOnAction = jest.fn();
 
-    test("Renders correctly ActivityCard children", () => {
+    test("Renders correctly with onAction", () => {
         render(
-            <ActivityCard title={mockTitle} action={ActivityActionKind.DISCONNECT} onAction={mockOnAction}>
-                {{
-                    header: <Typography variant="body1Strong">header</Typography>,
-                    description: <Typography variant="body1Strong">description</Typography>,
-                    content: <Typography variant="body1Strong">content</Typography>,
-                }}
-            </ActivityCard>,
+            <ActivityCard
+                display={<Typography variant="body1Light">display</Typography>}
+                title={mockTitle}
+                description={mockDescription}
+                details={"details"}
+                amount={mockAmount}
+                actionElement={<Typography variant="body1Light">action</Typography>}
+                onAction={mockOnAction}
+            />,
         );
 
         expect(screen.getByText(mockTitle)).toBeDefined();
-        expect(screen.getByText("header")).toBeDefined();
-        expect(screen.getByText("description")).toBeDefined();
-        expect(screen.getByText("content")).toBeDefined();
+        expect(screen.getByText(mockDescription)).toBeDefined();
+        expect(screen.getByText("display")).toBeDefined();
+        expect(screen.getByText(mockDetails)).toBeDefined();
+        expect(screen.getByText(mockAmount)).toBeDefined();
+
+        expect(screen.getByText("action")).toBeDefined();
     });
 
     test("Renders correctly with action disconnect", () => {
         render(
-            <ActivityCard title={mockTitle} action={ActivityActionKind.DISCONNECT} onAction={mockOnAction}>
-                {{
-                    header: <Typography variant="body1Strong">header</Typography>,
-                    description: <Typography variant="body1Strong">description</Typography>,
-                    content: <Typography variant="body1Strong">content</Typography>,
-                }}
-            </ActivityCard>,
+            <ActivityCard
+                display={<Typography variant="body1Light">display</Typography>}
+                title={mockTitle}
+                description={mockDescription}
+                details={"details"}
+                amount={mockAmount}
+                actionElement={<Typography variant="body1Light">action</Typography>}
+            />,
         );
 
-        expect(screen.getByText(capitalize(translate("disconnect")))).toBeDefined();
-        expect(screen.queryByTestId("ChevronRightIcon")).toBeNull();
-    });
+        expect(screen.getByText(mockTitle)).toBeDefined();
+        expect(screen.getByText(mockDescription)).toBeDefined();
+        expect(screen.getByText("display")).toBeDefined();
+        expect(screen.getByText(mockDetails)).toBeDefined();
+        expect(screen.getByText(mockAmount)).toBeDefined();
 
-    test("Renders correctly with action sign", () => {
-        render(
-            <ActivityCard title={mockTitle} action={ActivityActionKind.SIGN} onAction={mockOnAction}>
-                {{
-                    header: <Typography variant="body1Strong">header</Typography>,
-                    description: <Typography variant="body1Strong">description</Typography>,
-                    content: <Typography variant="body1Strong">content</Typography>,
-                }}
-            </ActivityCard>,
-        );
-
-        expect(screen.queryByText(capitalize(translate("disconnect")))).toBeNull();
-        expect(screen.queryByTestId("ChevronRightIcon")).toBeDefined();
+        expect(screen.queryByText("action")).toBeNull();
     });
 });

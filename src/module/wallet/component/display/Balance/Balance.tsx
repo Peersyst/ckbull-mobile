@@ -1,5 +1,5 @@
 import { BalanceProps } from "./Balance.types";
-import { Spinner, Suspense, Typography } from "@peersyst/react-native-components";
+import { Skeleton, Typography } from "@peersyst/react-native-components";
 import { useFormatBalance } from "./hook/useFormatBalance";
 
 const Balance = ({
@@ -8,8 +8,7 @@ const Balance = ({
     units,
     unitsPosition = "right",
     action = "display",
-    isLoading = false,
-    spinnerProps,
+    loading = false,
     ...typographyProps
 }: BalanceProps): JSX.Element => {
     const formattedBalance = useFormatBalance(balance, {
@@ -20,11 +19,11 @@ const Balance = ({
     });
 
     return (
-        <Suspense isLoading={isLoading} fallback={<Spinner {...spinnerProps} />}>
-            <Typography numberOfLines={1} {...typographyProps}>
+        <Skeleton loading={loading}>
+            <Typography numberOfLines={1} adjustsFontSizeToFit {...typographyProps}>
                 {formattedBalance}
             </Typography>
-        </Suspense>
+        </Skeleton>
     );
 };
 
