@@ -51,7 +51,7 @@ const config = createConfig({
                 },
             },
             actions: {
-                variant: "text",
+                variant: "filled",
                 component: Button,
                 fullWidth: true,
             },

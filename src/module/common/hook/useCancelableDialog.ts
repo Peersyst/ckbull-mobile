@@ -6,17 +6,17 @@ interface UseCancelableDialogReturn {
 }
 
 export default function (): UseCancelableDialogReturn {
-    const { showDialog } = useDialog();
+    const { showDialog, ...restDialog } = useDialog();
     const translate = useTranslate();
 
     const showCancelableDialog = ({ buttons, ...rest }: DialogProps) => {
         const cancelableButtons = buttons;
-        cancelableButtons?.push({ type: "positive", text: translate("cancel"), variant: "text" });
+        cancelableButtons?.push({ type: "default", text: translate("cancel"), variant: "text" });
 
         showDialog({
             ...rest,
             buttons: cancelableButtons,
         });
     };
-    return { showCancelableDialog };
+    return { showCancelableDialog, ...restDialog };
 }
