@@ -1,10 +1,10 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { useTranslate } from "module/common/hook/useTranslate";
 import { DAOIcon, PinIcon, WalletIcon } from "icons";
 import { MainBottomScreens } from "module/main/component/navigation/MainBottomNavigatorGroup/MainBottomNavigatorGroup";
 import { MainStackParamsList } from "stack-navigator";
 import { BottomBarRoot } from "./BottomBar.styles";
 import BottomBarItem from "./BottomBarItem/BottomBarItem";
-import { useTranslate } from "module/common/hook/useTranslate";
 
 type BottomBarProps = Pick<BottomTabBarProps, "state" | "navigation">;
 
