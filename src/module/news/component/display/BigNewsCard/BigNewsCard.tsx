@@ -7,7 +7,8 @@ import useFormatDate from "module/common/hook/useFormatDate";
 
 const BigNewsCard = (news: any): JSX.Element => {
     const { uri, title, imageUri, date } = formatNews(news);
-    const formattedDate = useFormatDate(date);
+    const formatDate = useFormatDate();
+    const formattedDate = formatDate(date);
     return (
         <TouchableWithoutFeedback onPress={() => Linking.openURL(uri)}>
             <SimpleNewsCardRoot>

@@ -32,6 +32,7 @@ const gray: Theme["palette"]["gray"] = {
 //Overlays
 //Overlay100 - #000000
 export const overlay100: ThemeOverlay = {
+    "6%": "#0000000F",
     "8%": "#00000014",
     "12%": "#0000001F",
     "16%": "#00000029",
@@ -44,6 +45,7 @@ export const overlay100: ThemeOverlay = {
 };
 //Overlay300 - #262626
 export const overlay300: ThemeOverlay = {
+    "6%": "#2626260F",
     "8%": "#26262614",
     "12%": "#2626261F",
     "16%": "#26262629",
@@ -56,6 +58,7 @@ export const overlay300: ThemeOverlay = {
 };
 //Overlay500 - #292929
 export const overlay500: ThemeOverlay = {
+    "6%": "#2929290F",
     "8%": "#29292914",
     "12%": "#2929291F",
     "16%": "#29292929",
@@ -68,6 +71,7 @@ export const overlay500: ThemeOverlay = {
 };
 //Overlay700 - #a7a7a7
 export const overlay700: ThemeOverlay = {
+    "6%": "#A7A7A70F",
     "8%": "#A7A7A714",
     "12%": "#A7A7A71F",
     "16%": "#A7A7A729",
@@ -80,6 +84,7 @@ export const overlay700: ThemeOverlay = {
 };
 //Overlay900 - #FFFFFF
 export const overlay900: ThemeOverlay = {
+    "6%": "#FFFFFF0F",
     "8%": "#FFFFFF14",
     "12%": "#FFFFFF1F",
     "16%": "#FFFFFF29",

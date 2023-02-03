@@ -21,18 +21,19 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
     const { data: tokenValue } = useGetTokenPrice(fiat, "nervos-network");
     const { timestamp, amount, type, token = "token", status } = transaction;
     const showAmount = type !== TransactionType.SEND_NFT && type !== TransactionType.RECEIVE_NFT;
-    const formattedDate = useFormatDate(timestamp);
+    const formatDate = useFormatDate();
+    const formattedDate = formatDate(timestamp);
 
     return (
         <TouchableWithoutFeedback onPress={() => showModal(TransactionDetailsModal, { transaction })}>
             <MainListCard gap="4%" alignItems="center">
                 <TransactionIcon type={type} />
-                <Col gap={2} flex={1}>
+                <Col gap={4} flex={1}>
                     <Row justifyContent="space-between">
-                        <TransactionLabel variant="body3Strong" type={type} numberOfLines={1} style={{ maxWidth: "45%" }} />
+                        <TransactionLabel variant="body3Regular" type={type} numberOfLines={1} style={{ maxWidth: "45%" }} />
                         {showAmount && (
                             <TransactionAmount
-                                variant="body3Strong"
+                                variant="body3Regular"
                                 type={type}
                                 amount={amount}
                                 units={token}
@@ -42,11 +43,11 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
                     </Row>
                     <Row justifyContent="space-between" alignItems="center">
                         {timestamp ? (
-                            <Typography variant="body4Strong" color="gray.300">
+                            <Typography variant="body3Light" color="gray.200">
                                 {formattedDate}
                             </Typography>
                         ) : (
-                            <TransactionStatus variant="body2" status={status} />
+                            <TransactionStatus variant="body3Light" status={status} />
                         )}
                         {status !== TransactionStatusEnum.COMMITTED ? (
                             <TransactionStatusIndicator status={status} />
@@ -56,10 +57,10 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
                                 <Balance
                                     options={{ maximumFractionDigits: 2, minimumFractionDigits: 2 }}
                                     action="round"
-                                    color="gray.300"
+                                    color="gray.200"
                                     balance={tokenValue * amount}
                                     units={fiat}
-                                    variant="body4Strong"
+                                    variant="body3Light"
                                 />
                             )
                         )}
