@@ -3,7 +3,7 @@ import { TextStyle } from "react-native";
 
 export type FontWeight = "strong" | "regular" | "light";
 
-export type TypographyVariant = "h1" | "h2" | "title1" | "title2" | "title3" | "title4" | "body1" | "body2" | "body3" | "body4";
+export type TypographyVariant = "h1" | "h2" | "title1" | "title2" | "title3" | "title4" | "title5" | "body1" | "body2" | "body3" | "body4";
 
 export const ACTIVE_GROTESK: Record<FontWeight, string> = {
     light: "AktivGrotesk_Regular",
@@ -18,16 +18,17 @@ export const DRUK_TEXT_WIDE: Record<FontWeight, string> = {
 };
 
 export const FONT_STYLE: Record<TypographyVariant, TextStyle> = {
-    h1: { fontSize: 28 },
-    h2: { fontSize: 20 },
-    title1: { fontSize: 28 },
-    title2: { fontSize: 24 },
-    title3: { fontSize: 22 },
-    title4: { fontSize: 20 },
-    body1: { fontSize: 18 },
-    body2: { fontSize: 16 },
-    body3: { fontSize: 14 },
-    body4: { fontSize: 12 },
+    h1: { fontSize: 28, lineHeight: 36 },
+    h2: { fontSize: 20, lineHeight: 24 },
+    title1: { fontSize: 32, lineHeight: 40 },
+    title2: { fontSize: 28, lineHeight: 28 },
+    title3: { fontSize: 24, lineHeight: 24 },
+    title4: { fontSize: 22, lineHeight: 28 },
+    title5: { fontSize: 20, lineHeight: 28 },
+    body1: { fontSize: 18, lineHeight: 20 },
+    body2: { fontSize: 16, lineHeight: 28 },
+    body3: { fontSize: 14, lineHeight: 20 },
+    body4: { fontSize: 12, lineHeight: 18 },
 };
 
 export function isHeading(variant: TypographyVariant): boolean {
@@ -84,6 +85,9 @@ const typography: CreateTheme["typography"] = {
     title4Strong: createTypographyVariant("title4", "strong"),
     title4Regular: createTypographyVariant("title4", "regular"),
     title4Light: createTypographyVariant("title4", "light"),
+    title5Strong: createTypographyVariant("title5", "strong"),
+    title5Regular: createTypographyVariant("title5", "regular"),
+    title5Light: createTypographyVariant("title5", "light"),
     body1Strong: createTypographyVariant("body1", "strong"),
     body1Regular: createTypographyVariant("body1", "regular"),
     body1Light: createTypographyVariant("body1", "light"),

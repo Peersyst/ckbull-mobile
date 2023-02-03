@@ -13,7 +13,7 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
     <DarkThemeProvider>
         <MainButtonRoot variant="primary" size="lg" {...buttonProps}>
             {
-                <Col gap={4} alignItems={"center"} justifyContent="center">
+                <Col alignItems={"center"} justifyContent="center">
                     <ElementStyler style={{ flex: 1 }}>{icon}</ElementStyler>
                     <Typography variant="body4Light" numberOfLines={1} adjustsFontSizeToFit>
                         {label}

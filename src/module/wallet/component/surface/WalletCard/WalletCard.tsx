@@ -16,7 +16,7 @@ export type WalletComponentCardProps = Pick<WalletCardProps, "wallet" | "style">
 
 const WalletCard = ({
     wallet: { colorIndex, name },
-    nameVariant = "title4Light",
+    nameVariant = "title5Light",
     children: { content, footer },
     style,
 }: WalletCardProps): JSX.Element => {
