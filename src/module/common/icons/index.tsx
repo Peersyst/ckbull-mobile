@@ -17,7 +17,6 @@ export * from "./EditIcon";
 export * from "./FaceIdIcon";
 export * from "./FaucetIcon";
 export * from "./FilledCircleIcon";
-export * from "./FilledCopyIcon";
 export * from "./FilledDAOIcon";
 export * from "./FilledNewsIcon";
 export * from "./FilledWalletIcon";
