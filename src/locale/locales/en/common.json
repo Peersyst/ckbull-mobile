@@ -129,6 +129,8 @@
     "mnemonic_for": "Mnemonic for {{name}}",
     "status": "Status",
     "pending": "Pending",
+    "connected": "Connected",
+    "failed": "Failed",
     "proposed": "Proposed",
     "committed": "Committed",
     "rejected": "Rejected",
@@ -156,5 +158,9 @@
     "boughtFor": "Bought for",
     "selectAToken": "Select a token",
     "continue": "Continue",
-    "biometricAuthentication": "Biometric authentication"
+    "biometricAuthentication": "Biometric authentication",
+    "disconnect": "Disconnect",
+    "account": "Account",
+    "activity": "Activity",
+    "scan": "Scan"
 }
