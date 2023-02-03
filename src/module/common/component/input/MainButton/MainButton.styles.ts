@@ -6,6 +6,8 @@ export const MainButtonRoot = styled(Button)(({ theme }) => ({
     lg: {
         width: 64,
         height: 64,
+        paddingHorizontal: 12,
+        paddingVertical: 0,
     },
     variant: {
         primary: {
