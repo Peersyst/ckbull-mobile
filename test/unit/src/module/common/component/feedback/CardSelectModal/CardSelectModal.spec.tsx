@@ -1,7 +1,7 @@
 import { render } from "test-utils";
 import CardSelectModal from "module/common/component/feedback/CardSelectModal/CardSelectModal";
-import Typography from "module/common/component/display/Typography/Typography";
 import { fireEvent, screen } from "@testing-library/react-native";
+import { Typography } from "@peersyst/react-native-components";
 
 describe("CardSelectModal tests", () => {
     const mockTitle = "mockTitle";
