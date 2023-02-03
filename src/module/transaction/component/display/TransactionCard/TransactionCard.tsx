@@ -21,7 +21,8 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
     const { data: tokenValue } = useGetTokenPrice(fiat, "nervos-network");
     const { timestamp, amount, type, token = "token", status } = transaction;
     const showAmount = type !== TransactionType.SEND_NFT && type !== TransactionType.RECEIVE_NFT;
-    const formattedDate = useFormatDate(timestamp);
+    const formatDate = useFormatDate();
+    const formattedDate = formatDate(timestamp);
 
     return (
         <TouchableWithoutFeedback onPress={() => showModal(TransactionDetailsModal, { transaction })}>

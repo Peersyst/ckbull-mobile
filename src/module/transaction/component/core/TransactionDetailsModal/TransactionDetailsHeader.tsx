@@ -12,7 +12,8 @@ export interface TransactionDetailsHeaderProps {
 
 const TransactionDetailsHeader = ({ transaction: { type, amount, token, timestamp } }: TransactionDetailsHeaderProps): JSX.Element => {
     const showAmount = type !== TransactionType.SEND_NFT && type !== TransactionType.RECEIVE_NFT;
-    const formattedDate = useFormatDate(timestamp);
+    const formatDate = useFormatDate();
+    const formattedDate = formatDate(timestamp);
 
     return (
         <Col alignItems="center" gap={10}>
