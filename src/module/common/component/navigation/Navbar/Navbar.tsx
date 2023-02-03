@@ -18,7 +18,7 @@ const Navbar = ({ back, title, onBack, steps }: NavbarProps): JSX.Element => {
         <NavbarRoot>
             {back && (
                 <BackIconRoot onPress={onBack || goBack}>
-                    <BackIcon size={20} />
+                    <BackIcon />
                 </BackIconRoot>
             )}
             <Col gap={8} alignItems="center">

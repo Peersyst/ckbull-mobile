@@ -1,5 +1,5 @@
 import { Row, Typography } from "@peersyst/react-native-components";
-import { useTheme } from "@peersyst/react-native-styled";
+import { LightStep } from "./Steps.styles";
 
 export interface StepsProps {
     index: number;
@@ -7,16 +7,11 @@ export interface StepsProps {
 }
 
 const Steps = ({ index, length }: StepsProps): JSX.Element => {
-    const theme = useTheme();
-    const light = theme.palette.mode === "light";
-
     return (
         <Row>
             <Typography variant="body3Light">{index + 1} </Typography>
             <Typography variant="body3Light">/</Typography>
-            <Typography variant="body3Light" style={{ color: theme.palette.gray[light ? 200 : 700] }}>
-                {` ${length}`}
-            </Typography>
+            <LightStep variant="body3Light">{` ${length}`}</LightStep>
         </Row>
     );
 };
