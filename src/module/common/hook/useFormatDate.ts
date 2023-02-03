@@ -8,10 +8,11 @@ const parseDate = (date: string) => {
 
 export const formatDate = (
     locale: LocaleType,
-    date?: Date | string | number,
+    date?: Date | string | number | undefined,
     options: Intl.DateTimeFormatOptions = { weekday: "short", day: "2-digit", month: "short", year: "numeric" },
 ) => {
     try {
+        if (date === undefined) return "";
         const finalDate = new Date(date || Date.now());
         const weekday = parseDate(new Intl.DateTimeFormat(locale, { weekday: options.weekday }).format(finalDate));
         const day = new Intl.DateTimeFormat(locale, { day: options.day }).format(finalDate);
@@ -34,7 +35,6 @@ export default function (): (
         options: Intl.DateTimeFormatOptions = { weekday: "short", day: "2-digit", month: "short", year: "numeric" },
         locale?: LocaleType,
     ) => {
-        if (date === undefined) return "";
         return formatDate(locale ?? defaultLocale, date, options);
     };
     return finalFormatDate;
