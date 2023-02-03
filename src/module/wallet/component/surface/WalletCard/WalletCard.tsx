@@ -24,7 +24,7 @@ const WalletCard = ({
 }: WalletCardProps): JSX.Element => {
     const { palette } = useTheme();
     const walletColor = palette.wallet[colorIndex];
-
+    const displayName = showName && name && name !== "";
     return (
         <ThemeOverrideProvider
             overrides={(theme) => ({
@@ -34,7 +34,7 @@ const WalletCard = ({
         >
             <WalletCardRoot color={walletColor} gap={"2.5%"} justifyContent="space-between" style={style}>
                 <Col style={{ width: "100%" }} justifyContent="center">
-                    {showName && name && <Typography variant={nameVariant}>{name}</Typography>}
+                    {displayName && <Typography variant={nameVariant}>{name}</Typography>}
                     {content}
                 </Col>
                 {footer}
