@@ -163,7 +163,7 @@
     "account": "Account",
     "activity": "Activity",
     "scan": "Scan",
-    "create":"Create",
-    "import":"Import",
-    "add_a_new_account" : "Add a new account"
+    "create": "Create",
+    "import": "Import",
+    "add_a_new_account": "Add a new account"
 }

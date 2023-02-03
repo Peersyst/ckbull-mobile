@@ -23,7 +23,7 @@ const WalletCard = ({
     showName,
 }: WalletCardProps): JSX.Element => {
     const { palette } = useTheme();
-    const walletColor = palette.wallet[colorIndex];
+    const walletColor = palette.wallet[colorIndex ? colorIndex : 0];
     const displayName = showName && name && name !== "";
     return (
         <ThemeOverrideProvider
