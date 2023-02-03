@@ -29,7 +29,7 @@ const ActivityCard = ({
         <ActivityCardRoot style={rotStyle}>
             <Row gap={16}>
                 {display}
-                <Col gap={4} justifyContent="center">
+                <Col justifyContent="center">
                     <Typography variant="body3Regular" style={titleStyle}>
                         {title}
                     </Typography>

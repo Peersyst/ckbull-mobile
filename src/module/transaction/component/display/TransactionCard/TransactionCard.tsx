@@ -28,7 +28,7 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
         <TouchableWithoutFeedback onPress={() => showModal(TransactionDetailsModal, { transaction })}>
             <MainListCard gap="4%" alignItems="center">
                 <TransactionIcon type={type} />
-                <Col gap={4} flex={1}>
+                <Col flex={1}>
                     <Row justifyContent="space-between">
                         <TransactionLabel variant="body3Regular" type={type} numberOfLines={1} style={{ maxWidth: "45%" }} />
                         {showAmount && (
@@ -43,7 +43,7 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
                     </Row>
                     <Row justifyContent="space-between" alignItems="center">
                         {timestamp ? (
-                            <Typography variant="body3Light" color="gray.200">
+                            <Typography variant="body3Light" light>
                                 {formattedDate}
                             </Typography>
                         ) : (
@@ -57,7 +57,7 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
                                 <Balance
                                     options={{ maximumFractionDigits: 2, minimumFractionDigits: 2 }}
                                     action="round"
-                                    color="gray.200"
+                                    light
                                     balance={tokenValue * amount}
                                     units={fiat}
                                     variant="body3Light"
