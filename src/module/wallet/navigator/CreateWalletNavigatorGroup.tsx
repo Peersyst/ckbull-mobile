@@ -14,8 +14,10 @@ import createWalletState from "module/wallet/state/CreateWalletState";
 import { useTranslate } from "module/common/hook/useTranslate";
 import LightThemeProvider from "module/common/component/util/ThemeProvider/LightThemeProvider";
 import DarkThemeProvider from "module/common/component/util/ThemeProvider/DarkThemeProvider";
+import SetWalletNameScreen from "../screen/SetWalletNameScreen";
 
 export enum CreateWalletScreens {
+    SET_WALLET_NAME,
     WALLET_ADVISES,
     WALLET_MNEMONIC,
     PICK_WALLET_MNEMONIC,
@@ -38,7 +40,7 @@ const CreateWalletNavigatorGroup = () => {
     const resetCreateWalletState = useResetRecoilState(createWalletState);
 
     const handleBack = () => {
-        if (activeTab === CreateWalletScreens.WALLET_ADVISES) {
+        if (activeTab === CreateWalletScreens.SET_WALLET_NAME) {
             setShowGlass(false);
         } else if (activeTab >= 0) setActiveTab((t) => t - 1);
     };
@@ -75,9 +77,15 @@ const CreateWalletNavigatorGroup = () => {
                     onClose={() => setShowGlass(false)}
                     open={showGlass}
                     onExited={handleGlassExit}
-                    navbar={{ back: true, title: translate("create_wallet"), onBack: handleBack, steps: { index: activeTab, length: 3 } }}
+                    navbar={{ back: true, title: translate("create_wallet"), onBack: handleBack, steps: { index: activeTab, length: 4 } }}
                     renderBackdrop={false}
                 >
+                    <TabPanel index={CreateWalletScreens.SET_WALLET_NAME}>
+                        <SetWalletNameScreen
+                            onSubmit={() => handleTabChange(CreateWalletScreens.SET_WALLET_PIN)}
+                            submitText={translate("set_pin")}
+                        />
+                    </TabPanel>
                     <TabPanel index={CreateWalletScreens.WALLET_ADVISES}>
                         <WalletAdvisesScreen
                             onNextScreen={() => handleTabChange(CreateWalletScreens.WALLET_MNEMONIC)}
