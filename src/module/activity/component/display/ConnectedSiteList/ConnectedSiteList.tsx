@@ -4,13 +4,14 @@ import EmptyListComponent from "module/common/component/display/EmptyListCompone
 import useGetConnectedSites from "module/activity/queries/useGetConnectedSites";
 
 const ConnectedSiteList = (): JSX.Element => {
-    const connectedSites = useGetConnectedSites();
+    const { data: connectedSites, isLoading, refetch } = useGetConnectedSites();
 
     return (
         <MainList
             data={connectedSites}
+            onRefresh={refetch}
             renderItem={({ item: connectedSite }) => <ConnectedSite site={connectedSite} />}
-            ListEmptyComponent={<EmptyListComponent />}
+            ListEmptyComponent={isLoading ? undefined : <EmptyListComponent />}
             contentContainerStyle={{ paddingHorizontal: 20 }}
         />
     );
