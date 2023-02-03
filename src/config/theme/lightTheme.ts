@@ -103,7 +103,7 @@ const lightTheme = createTheme({
         ...basePalette,
         red,
         status,
-        mode: "dark",
+        mode: "light",
         background: gray[700],
         text: gray[700],
         gray,

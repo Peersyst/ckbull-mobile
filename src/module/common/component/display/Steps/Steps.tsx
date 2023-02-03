@@ -8,8 +8,7 @@ export interface StepsProps {
 
 const Steps = ({ index, length }: StepsProps): JSX.Element => {
     const theme = useTheme();
-    const light = theme.palette.mode;
-    console.log(light);
+    const light = theme.palette.mode === "light";
 
     return (
         <Row>
