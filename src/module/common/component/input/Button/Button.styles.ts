@@ -42,8 +42,8 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
                 color: theme.palette.white,
             },
             secondary: {
-                color: theme.palette.gray[900],
-                backgroundColor: theme.palette.gray[0],
+                color: theme.palette.gray[0],
+                backgroundColor: theme.palette.gray[900],
             },
             tertiary: {
                 backgroundColor: theme.palette.overlay[900]["12%"],
@@ -66,7 +66,7 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
                     },
                 },
                 secondary: {
-                    backgroundColor: emphasize(theme.palette.gray[0], 0.1),
+                    backgroundColor: emphasize(theme.palette.gray[900], 0.1),
                 },
                 tertiary: {
                     backgroundColor: theme.palette.overlay[100]["24%"],
