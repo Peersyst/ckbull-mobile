@@ -1,4 +1,4 @@
-import { SpinnerProps, TypographyProps } from "@peersyst/react-native-components";
+import { TypographyProps } from "@peersyst/react-native-components";
 import { FiatCurrencyType } from "module/settings/state/SettingsState";
 
 export type AppCurrency = FiatCurrencyType | "token";
@@ -11,6 +11,5 @@ export interface BalanceProps extends Omit<TypographyProps, "children" | "number
     unitsPosition?: "left" | "right";
     action?: BalanceAction;
     options?: Intl.NumberFormatOptions;
-    isLoading?: boolean;
-    spinnerProps?: SpinnerProps;
+    loading?: boolean;
 }

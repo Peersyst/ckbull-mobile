@@ -21,7 +21,7 @@ const HomeTabs = (): JSX.Element => {
             item: <NftsList />,
         },
     ];
-    return <FloatingTabs tabs={HomeTabs} style={{ paddingVertical: 20, marginHorizontal: 10 }} />;
+    return <FloatingTabs tabs={HomeTabs} />;
 };
 
 export default HomeTabs;

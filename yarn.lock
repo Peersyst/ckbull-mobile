@@ -2027,10 +2027,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@peersyst/react-components-core@^1.2.4":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@peersyst/react-components-core/-/react-components-core-1.2.4.tgz#fcff056ad4cf165362e14052b90bcf9e72deec04"
-  integrity sha512-ERauFZJtx1xGHIxFjO7l4kJxg3pgUYQwsdHobA84Dp/0SFtg+zufpQEs8JGIBI0eYgNDqpeUXfmJG3C7qFujTQ==
+"@peersyst/react-components-core@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@peersyst/react-components-core/-/react-components-core-1.2.6.tgz#c1ab1e49062674fa34b252100e81a3df9a81b8d7"
+  integrity sha512-bY6G9eCln+4EWO3ytw15VY0GrUHB+O96rB+Di7iRV9DpMx3ZADLEphebjwpZeBIRyqNdCYrzi4HLRYT62M8gZQ==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@peersyst/react-hooks" "^2.2.0"
@@ -2046,13 +2046,13 @@
     "@babel/runtime" "^7.16.7"
     "@peersyst/react-utils" "^2.1.0"
 
-"@peersyst/react-native-components@^2.1.8":
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/@peersyst/react-native-components/-/react-native-components-2.1.8.tgz#b1816d83d858579fa5f13a9559ff240ca3f5ce09"
-  integrity sha512-GeP83HSRTzUCGLJxY6MOQpRRvWWuFg/ihdB5u3w3G6MSiG/tUTv4gbGYuQWsdmYlvD9X4ToS7cUU4ab+MB7GPg==
+"@peersyst/react-native-components@^2.1.12":
+  version "2.1.12"
+  resolved "https://registry.yarnpkg.com/@peersyst/react-native-components/-/react-native-components-2.1.12.tgz#b3ab511ea8fcf2c3859351df74f074910ced928e"
+  integrity sha512-k9cOs9o0L/nKvUMulPr64FbO6oxq2TmvxppRyF9Q5lGRwU6uNJPZS/EOxO0a0zK0f2swbbvt/2LDCtbMAvkoAQ==
   dependencies:
     "@babel/runtime" "^7.16.7"
-    "@peersyst/react-components-core" "^1.2.4"
+    "@peersyst/react-components-core" "^1.2.6"
     "@peersyst/react-hooks" "^2.2.0"
     "@peersyst/react-native-styled" "^2.0.0"
     "@peersyst/react-native-utils" "^1.0.1"
@@ -5052,6 +5052,13 @@ expo-linking@~3.2.3:
     invariant "^2.2.4"
     qs "^6.9.1"
     url-parse "^1.5.9"
+
+expo-local-authentication@~13.0.2:
+  version "13.0.2"
+  resolved "https://registry.yarnpkg.com/expo-local-authentication/-/expo-local-authentication-13.0.2.tgz#a785e589119538e0c328b65c0f63e162a423ad5f"
+  integrity sha512-YqyIix9+oyBbJ8Wgp/ZBQBbWbo4FMVWWibyOhrUfyx9wwRiElAlJZ52ne6XzcJEjLOSqCy4/xkhhC5LJtbnGTw==
+  dependencies:
+    invariant "^2.2.4"
 
 expo-localization@~12.0.0:
   version "12.0.1"

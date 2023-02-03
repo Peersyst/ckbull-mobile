@@ -1,7 +1,7 @@
 import { render } from "test-utils";
 import BaseTabs from "module/common/component/navigation/BaseTabs/BaseTabs";
-import { screen } from "@testing-library/react-native";
 import { Typography } from "@peersyst/react-native-components";
+import { screen } from "@testing-library/react-native";
 
 describe("BaseTabs tests", () => {
     test("Renders correctly navbar and content", () => {
