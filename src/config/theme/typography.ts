@@ -1,5 +1,5 @@
 import { CreateTheme } from "@peersyst/react-native-components";
-import { TextStyle } from "react-native";
+import { Platform, TextStyle } from "react-native";
 
 export type FontWeight = "strong" | "regular" | "light";
 
@@ -20,13 +20,13 @@ export const DRUK_TEXT_WIDE: Record<FontWeight, string> = {
 export const FONT_STYLE: Record<TypographyVariant, TextStyle> = {
     h1: { fontSize: 28, lineHeight: 36 },
     h2: { fontSize: 20, lineHeight: 24 },
-    title1: { fontSize: 32, lineHeight: 40 },
-    title2: { fontSize: 28, lineHeight: 28 },
-    title3: { fontSize: 24, lineHeight: 24 },
+    title1: { fontSize: 32, lineHeight: 34 },
+    title2: { fontSize: 28, lineHeight: 32 },
+    title3: { fontSize: 24, lineHeight: 30 },
     title4: { fontSize: 22, lineHeight: 28 },
-    title5: { fontSize: 20, lineHeight: 28 },
-    body1: { fontSize: 18, lineHeight: 20 },
-    body2: { fontSize: 16, lineHeight: 28 },
+    title5: { fontSize: 20, lineHeight: 26 },
+    body1: { fontSize: 18, lineHeight: 24 },
+    body2: { fontSize: 16, lineHeight: 22 },
     body3: { fontSize: 14, lineHeight: 20 },
     body4: { fontSize: 12, lineHeight: 18 },
 };
@@ -37,11 +37,15 @@ export function isHeading(variant: TypographyVariant): boolean {
 export function getFontFamily(variant: TypographyVariant, fontWeight: FontWeight): string {
     return isHeading(variant) ? DRUK_TEXT_WIDE[fontWeight] : ACTIVE_GROTESK[fontWeight];
 }
+export function getMarginBottom(variant: TypographyVariant): number {
+    return !isHeading(variant) && Platform.OS === "ios" ? -3 : 0;
+}
 
 export function createTypographyVariant(typographyVariant: TypographyVariant, fontWeight: FontWeight, style: TextStyle = {}): TextStyle {
     return {
         ...FONT_STYLE[typographyVariant],
         fontFamily: getFontFamily(typographyVariant, fontWeight),
+        marginBottom: getMarginBottom(typographyVariant),
         ...style,
     };
 }

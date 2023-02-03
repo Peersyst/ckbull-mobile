@@ -5,10 +5,10 @@ export interface WalletCardRootProps {
     color: string;
 }
 
-export const WalletCardRoot = styled(Col)<WalletCardRootProps>(({ color }) => ({
+export const WalletCardRoot = styled(Col)<WalletCardRootProps>(({ color, dimensions }) => ({
     width: "100%",
     height: "100%",
-    padding: 24,
+    padding: Math.min(dimensions.height * 0.025, 24),
     overflow: "hidden",
     backgroundColor: color,
     borderRadius: 20,
