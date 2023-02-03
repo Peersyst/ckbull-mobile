@@ -51,7 +51,7 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
             },
             outlined: {
                 borderColor: theme.palette.overlay[100]["12%"],
-                color: theme.palette.text,
+                color: theme.palette.gray[0],
             },
             text: {
                 color: theme.palette.text,

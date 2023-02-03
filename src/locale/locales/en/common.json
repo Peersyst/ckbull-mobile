@@ -164,5 +164,6 @@
     "activity": "Activity",
     "scan": "Scan",
     "create":"Create",
-    "import":"Import"
+    "import":"Import",
+    "add_a_new_account" : "Add a new account"
 }
