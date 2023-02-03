@@ -3,7 +3,7 @@ import DAOCompletedWithdrawalsList from "module/dao/component/core/DAOCompletedW
 import DAODepositsList from "module/dao/component/core/DAODepositsList/DAODepositsList";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TabItem } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
-import ConnectedSite from "module/activity/component/display/ConnectedSite/ConnectedSite";
+import ConnectedSiteList from "module/activity/component/display/ConnectedSiteList/ConnectedSiteList";
 
 const DAOTabs = (): JSX.Element => {
     const translate = useTranslate();
@@ -18,7 +18,7 @@ const DAOTabs = (): JSX.Element => {
         },
         {
             title: "Connected Sites",
-            item: <ConnectedSite site={{ title: "Figma", status: "connected" }} />,
+            item: <ConnectedSiteList />,
         },
     ];
     return <MainTabs tabs={DAOTabs} />;
