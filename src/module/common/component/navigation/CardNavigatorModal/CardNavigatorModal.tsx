@@ -1,28 +1,41 @@
-import { Backdrop, ExposedBackdropProps } from "@peersyst/react-native-components";
-import CardNavigator, { CardNavigatorProps } from "module/common/component/navigation/CardNavigator/CardNavigator";
+import { ExposedBackdropProps } from "@peersyst/react-native-components";
+import Navbar from "module/common/component/navigation/Navbar/Navbar";
+import { NavbarProps } from "module/common/component/navigation/Navbar/Navbar.types";
+import { ReactNode } from "react";
+import CardModal from "module/common/component/navigation/CardModal/CardModal";
+
+interface CardNavigatorModalProps extends ExposedBackdropProps {
+    navbar?: NavbarProps;
+    children: ReactNode;
+}
 
 const CardNavigatorModal = ({
     navbar: { back, onBack, ...restNavProps } = {},
     children,
-    style,
+    open,
     closable = true,
+    onClose,
     ...backdropProps
-}: ExposedBackdropProps & CardNavigatorProps): JSX.Element => {
+}: CardNavigatorModalProps): JSX.Element => {
     return (
-        <Backdrop closable={closable} {...backdropProps}>
-            {(_open, setOpen) => (
-                <CardNavigator
-                    navbar={{
-                        back: back && closable,
-                        onBack: onBack || (() => setOpen(false)),
-                        ...restNavProps,
-                    }}
-                    style={style}
-                >
-                    {children}
-                </CardNavigator>
-            )}
-        </Backdrop>
+        <CardModal closable={closable} {...backdropProps} open={open}>
+            {(open, setOpen) => ({
+                header: (
+                    <Navbar
+                        back={back && closable}
+                        onBack={
+                            onBack ||
+                            (() => {
+                                setOpen(false);
+                                if (open !== undefined) onClose?.();
+                            })
+                        }
+                        {...restNavProps}
+                    />
+                ),
+                body: children,
+            })}
+        </CardModal>
     );
 };
 
