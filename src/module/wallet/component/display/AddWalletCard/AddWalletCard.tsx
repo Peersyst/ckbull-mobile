@@ -1,27 +1,19 @@
-import { AddWalletCardRoot, ContentRoot } from "./AddWalletCard.style";
-import useCreateWallet from "module/wallet/hook/useCreateWallet";
-import { useTheme } from "@peersyst/react-native-styled";
+import { AddWalletCardRoot } from "./AddWalletCard.style";
 import { useTranslate } from "module/common/hook/useTranslate";
 import Button from "module/common/component/input/Button/Button";
+import { Row } from "@peersyst/react-native-components";
 
 const AddWalletCard = (): JSX.Element => {
     const translate = useTranslate();
 
-    const {
-        state: { colorIndex },
-    } = useCreateWallet();
-    const {
-        palette: { wallet: walletColors },
-    } = useTheme();
-
     return (
-        <AddWalletCardRoot style={colorIndex !== undefined ? { backgroundColor: walletColors[colorIndex] } : undefined}>
-            <ContentRoot style={{ alignContent: "center" }}>
+        <AddWalletCardRoot justifyContent="center" gap="5%">
+            <Row justifyContent="center" gap={"5%"} style={{ width: "100%" }}>
                 <Button variant="outlined">{translate("create")}</Button>
                 <Button variant="secondary" size="lg">
                     {translate("import")}
                 </Button>
-            </ContentRoot>
+            </Row>
         </AddWalletCardRoot>
     );
 };
