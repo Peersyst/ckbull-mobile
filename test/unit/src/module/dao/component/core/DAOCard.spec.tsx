@@ -3,7 +3,7 @@ import { render, SuccessApiCall, translate } from "test-utils";
 import { MockedDAOBalance } from "mocks/DAO";
 import * as UseGetDaoInfo from "module/dao/query/useGetDaoInfo";
 import daoInfo from "mocks/daoInfo";
-import { UseServiceInstanceMock, UseWalletStateMock } from "test-mocks";
+import { UseServiceInstanceMock, UseWalletStateMock, WalletMock } from "test-mocks";
 
 describe("Test for the DAO Card", () => {
     const { serviceInstance } = new UseServiceInstanceMock();
@@ -21,7 +21,7 @@ describe("Test for the DAO Card", () => {
         jest.spyOn(serviceInstance, "getDAOBalance").mockReturnValue(SuccessApiCall(MockedDAOBalance));
         jest.spyOn(UseGetDaoInfo, "default").mockReturnValue({ data: daoInfo, isLoading: false } as any);
 
-        const screen = render(<DAOCard />);
+        const screen = render(<DAOCard wallet={new WalletMock()} />);
         //Balance
         expect(screen.getByText(translate("available"))).toBeDefined();
         /**Account Balance */
@@ -32,7 +32,7 @@ describe("Test for the DAO Card", () => {
         expect(screen.getByText(`${daoInfo.estimated_apc}%`)).toBeDefined();
 
         //Buttons
-        expect(screen.getByTestId("DepositIcon")).toBeDefined();
-        expect(screen.getByTestId("WithdrawalIcon")).toBeDefined();
+        expect(screen.getByTestId("SendIcon")).toBeDefined();
+        expect(screen.getByTestId("ReceiveIcon")).toBeDefined();
     });
 });

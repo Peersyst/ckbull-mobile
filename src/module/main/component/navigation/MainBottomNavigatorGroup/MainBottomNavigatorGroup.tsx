@@ -7,8 +7,10 @@ import BasePage from "module/common/component/layout/BasePage/BasePage";
 
 export enum MainBottomScreens {
     HOME = "Home",
+    ACCOUNT = "Account",
     DAO = "DAO",
     NEWS = "News",
+    ACTIVITY = "Activity",
 }
 
 const MainBottomNavigatorGroup = () => (

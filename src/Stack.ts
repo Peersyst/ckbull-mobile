@@ -8,6 +8,8 @@ export type MainStackParamsList = {
     Home: undefined;
     DAO: undefined;
     News: undefined;
+    Account: undefined;
+    Activity: undefined;
 };
 export type SettingsStackParamsList = {
     //Settings

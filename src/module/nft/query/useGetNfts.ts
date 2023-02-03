@@ -1,7 +1,9 @@
 import { useQuery, UseQueryResult } from "react-query";
 import useSelectedWalletIndex from "module/wallet/hook/useSelectedWalletIndex";
 import useSelectedNetwork from "module/settings/hook/useSelectedNetwork";
-import { Nft } from "module/sdk/mock.types";
+
+// TODO: Fix sdk type generating errors
+type Nft = any;
 
 export default function (index?: number): UseQueryResult<Nft[]> {
     const network = useSelectedNetwork();

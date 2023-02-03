@@ -71,6 +71,13 @@ const config = createConfig({
                 icon: <ChevronDownIcon />,
             },
         },
+        Switch: {
+            defaultProps: {
+                LabelProps: {
+                    alignment: "space-between",
+                },
+            },
+        },
         TextInput: {
             defaultProps: {
                 errorElement: false,
