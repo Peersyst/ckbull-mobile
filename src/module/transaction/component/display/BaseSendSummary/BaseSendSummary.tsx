@@ -22,7 +22,7 @@ const BaseSendSummary = ({ amount, fee, token, children }: BaseSendSummaryFullPr
                 <Col gap={2} alignItems="center">
                     <Balance
                         balance={amount}
-                        variant="title2Strong"
+                        variant="title3Strong"
                         units={token}
                         options={{ maximumFractionDigits: config.maxNumberOfDecimals }}
                     />

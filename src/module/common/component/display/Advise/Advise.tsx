@@ -9,11 +9,11 @@ export interface AdviseProps {
 
 const Advise = ({ title, text, style }: AdviseProps): JSX.Element => (
     <Col alignItems="center" style={style} gap={24}>
-        <Typography variant="body3Regular" textAlign="center" color="text">
+        <Typography variant="body3Regular" textAlign="center">
             {title}
         </Typography>
         {text && (
-            <Typography variant="body3Regular" textAlign="center" color="gray.450">
+            <Typography variant="body3Light" textAlign="center" color="gray.450">
                 {text}
             </Typography>
         )}
