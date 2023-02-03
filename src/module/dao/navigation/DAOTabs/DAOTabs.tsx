@@ -3,7 +3,8 @@ import DAOCompletedWithdrawalsList from "module/dao/component/core/DAOCompletedW
 import DAODepositsList from "module/dao/component/core/DAODepositsList/DAODepositsList";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TabItem } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
-import ConnectedSiteList from "module/activity/component/display/ConnectedSiteList/ConnectedSiteList";
+import TransactionRequest from "module/activity/component/display/TransactionRequest/TransactionRequest";
+import { TransactionType } from "module/sdk";
 
 const DAOTabs = (): JSX.Element => {
     const translate = useTranslate();
@@ -18,7 +19,17 @@ const DAOTabs = (): JSX.Element => {
         },
         {
             title: "Connected Sites",
-            item: <ConnectedSiteList />,
+            item: (
+                <TransactionRequest
+                    transaction={{
+                        transactionToken: "0",
+                        status: "pending",
+                        transaction: { amount: 234234, type: TransactionType.RECEIVE_TOKEN },
+                        expiresAt: 234234,
+                        app: { title: "Figma" },
+                    }}
+                />
+            ),
         },
     ];
     return <MainTabs tabs={DAOTabs} />;

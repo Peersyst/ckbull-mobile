@@ -1,3 +1,4 @@
-export interface ActivityTypographyProps {
-    statusColor?: string;
-}
+export type App = {
+    title: string;
+    source?: string;
+};

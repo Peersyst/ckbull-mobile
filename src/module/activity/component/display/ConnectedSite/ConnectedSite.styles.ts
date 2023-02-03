@@ -1,5 +1,4 @@
 import styled from "@peersyst/react-native-styled";
-import { Image } from "@peersyst/react-native-components";
 import ActivityCard from "module/activity/core/ActivityCard/ActivityCard";
 import { ConnectedSiteRootProps, ConnectedSiteStatusType } from "module/activity/component/display/ConnectedSite/ConnectedSite.types";
 
@@ -21,9 +20,3 @@ export const ConnectedSiteRoot = styled(ActivityCard)<ConnectedSiteRootProps>(({
         },
     };
 });
-
-export const SiteImage = styled(Image)(({ theme }) => ({
-    width: 56,
-    height: 56,
-    borderRadius: theme.borderRadiusSm,
-}));

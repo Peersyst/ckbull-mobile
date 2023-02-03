@@ -3,12 +3,13 @@ import { ReactElement } from "react";
 import { ActivityCardRoot } from "module/activity/core/ActivityCard/ActivityCard.styles";
 import { Pressable, TextStyle, ViewStyle } from "react-native";
 import { ChevronRightIcon } from "icons";
+import Balance from "module/wallet/component/display/Balance/Balance";
 
 interface ActivityCardProps {
     display: ReactElement;
     title: string;
     description: string;
-    amount?: string;
+    amount?: string | number;
     details?: string;
     actionElement?: ReactElement;
     onAction?: () => void;
@@ -41,7 +42,7 @@ const ActivityCard = ({
                     </Typography>
                 </Col>
             </Row>
-            {amount && <Typography variant="body4Strong">{amount}</Typography>}
+            {amount && <Balance balance={amount} variant="body3Strong" units="token" />}
             {onAction && (
                 <Col justifyContent="center" alignItems="center">
                     <Pressable accessibilityRole="button" onPress={onAction}>
