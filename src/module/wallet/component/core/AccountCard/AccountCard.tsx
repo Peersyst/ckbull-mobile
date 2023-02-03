@@ -20,7 +20,7 @@ const AccountCard = ({ wallet, style }: WalletComponentCardProps): JSX.Element =
     };
 
     return (
-        <WalletCard wallet={wallet} style={style}>
+        <WalletCard showName wallet={wallet} style={style}>
             {{
                 content: (
                     <Balance

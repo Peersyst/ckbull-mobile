@@ -10,6 +10,7 @@ export interface WalletCardProps {
     nameVariant?: TypographyProps["variant"];
     children: { content: ReactElement; footer?: ReactElement };
     style?: ViewStyle;
+    showName?: boolean;
 }
 
 export type WalletComponentCardProps = Pick<WalletCardProps, "wallet" | "style">;
@@ -19,6 +20,7 @@ const WalletCard = ({
     nameVariant = "title4Light",
     children: { content, footer },
     style,
+    showName,
 }: WalletCardProps): JSX.Element => {
     const { palette } = useTheme();
     const walletColor = palette.wallet[colorIndex];
@@ -30,9 +32,9 @@ const WalletCard = ({
                 palette: { ...theme.palette, text: getLuminance(walletColor) > 0.5 ? theme.palette.black : theme.palette.white },
             })}
         >
-            <WalletCardRoot color={walletColor} justifyContent="space-between" style={style}>
-                <Col style={{ width: "100%" }} gap={"2.5%"} justifyContent="center">
-                    <Typography variant={nameVariant}>{name}</Typography>
+            <WalletCardRoot color={walletColor} gap={"2.5%"} justifyContent="space-between" style={style}>
+                <Col style={{ width: "100%" }} justifyContent="center">
+                    {showName && name && <Typography variant={nameVariant}>{name}</Typography>}
                     {content}
                 </Col>
                 {footer}
