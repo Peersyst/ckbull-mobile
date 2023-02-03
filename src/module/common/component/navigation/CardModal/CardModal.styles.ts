@@ -9,7 +9,7 @@ export const CardModalContent = styled(KeyboardAvoidingView)(({ theme, dimension
     maxHeight: dimensions.height * 0.9,
     borderTopStartRadius: theme.borderRadius,
     borderTopEndRadius: theme.borderRadius,
-    backgroundColor: theme.palette.background,
+    backgroundColor: theme.palette.component.modal,
 }));
 
 export const CardModalWrapper = styled(Col)(({ safeAreaInsets }) => ({

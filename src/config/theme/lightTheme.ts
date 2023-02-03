@@ -1,5 +1,5 @@
 import { createTheme, Theme } from "@peersyst/react-native-components";
-import { basePalette, blue, green, orange, overlay } from "./basePalette";
+import { basePalette, blue, green, orange, overlay, white } from "./basePalette";
 import { theme } from "./theme";
 
 //Custom light theme colors
@@ -33,7 +33,7 @@ const lightTheme = createTheme({
         red,
         status,
         mode: "dark",
-        background: gray[100],
+        background: gray[700],
         text: gray[700],
         gray,
         backdrop: overlay["500"]["48%"],
@@ -49,6 +49,7 @@ const lightTheme = createTheme({
                 borderColor: overlay[300]["24%"],
                 displayColor: gray[600],
             },
+            modal: white,
         },
     },
 });

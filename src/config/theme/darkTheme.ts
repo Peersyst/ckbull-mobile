@@ -52,6 +52,7 @@ const darkTheme = createTheme({
                 borderColor: overlay[700]["24%"],
                 displayColor: gray[600],
             },
+            modal: black,
         },
     },
 });
