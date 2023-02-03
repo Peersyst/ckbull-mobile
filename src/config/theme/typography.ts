@@ -1,5 +1,5 @@
 import { CreateTheme } from "@peersyst/react-native-components";
-import { TextStyle } from "react-native";
+import { Platform, TextStyle } from "react-native";
 
 export type FontWeight = "strong" | "regular" | "light";
 
@@ -37,11 +37,15 @@ export function isHeading(variant: TypographyVariant): boolean {
 export function getFontFamily(variant: TypographyVariant, fontWeight: FontWeight): string {
     return isHeading(variant) ? DRUK_TEXT_WIDE[fontWeight] : ACTIVE_GROTESK[fontWeight];
 }
+export function getMarginBottom(variant: TypographyVariant): number {
+    return !isHeading(variant) && Platform.OS === "ios" ? -3 : 0;
+}
 
 export function createTypographyVariant(typographyVariant: TypographyVariant, fontWeight: FontWeight, style: TextStyle = {}): TextStyle {
     return {
         ...FONT_STYLE[typographyVariant],
         fontFamily: getFontFamily(typographyVariant, fontWeight),
+        marginBottom: getMarginBottom(typographyVariant),
         ...style,
     };
 }
