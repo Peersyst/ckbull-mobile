@@ -1,6 +1,6 @@
 import styled from "@peersyst/react-native-styled";
 import { PlusIcon } from "icons";
-import { Row, Typography } from "@peersyst/react-native-components";
+import { Col, Typography } from "@peersyst/react-native-components";
 import { View } from "react-native";
 
 export const AddIcon = styled(PlusIcon)(({ theme }) => ({
@@ -20,6 +20,7 @@ export const AddWalletCardRoot = styled(View)(({ theme }) => ({
     backgroundColor: theme.palette.gray[500],
 }));
 
-export const ContentRoot = styled(Row, { justifyContent: "center", alignItems: "center", gap: 20 })(() => ({
+export const ContentRoot = styled(Col, { justifyContent: "center", gap: 20 })(() => ({
     height: "100%",
+    backgroundColor: "red",
 }));
