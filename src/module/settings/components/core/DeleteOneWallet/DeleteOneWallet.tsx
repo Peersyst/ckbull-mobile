@@ -1,5 +1,5 @@
 import SettingsMenuItem from "module/settings/components/navigation/SettingsMenuItem/SettingsMenuItem";
-import { useDialog, useModal } from "@peersyst/react-native-components";
+import { useModal } from "@peersyst/react-native-components";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
 import { serviceInstancesMap } from "module/wallet/state/WalletState";
 import { WalletStorage } from "module/wallet/WalletStorage";
@@ -10,10 +10,11 @@ import useWalletQueriesInvalidation from "module/wallet/hook/useWalletQueriesInv
 import useWalletQueriesRemoval from "module/wallet/hook/useWalletQueriesRemoval";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useWalletState from "module/wallet/hook/useWalletState";
+import useCancelableDialog from "module/common/hook/useCancelableDialog";
 
 const DeleteOneWallet = () => {
     const translate = useTranslate();
-    const { showDialog } = useDialog();
+    const { showCancelableDialog } = useCancelableDialog();
     const { showModal } = useModal();
     const {
         reset,
@@ -74,17 +75,17 @@ const DeleteOneWallet = () => {
         const walletToDelete = wallets.find((w) => w.index === index);
         if (walletToDelete) {
             setTimeout(() => {
-                showDialog({
+                showCancelableDialog({
                     title: translate("delete_wallet", { walletName: walletToDelete.name }),
                     content: translate(wallets.length === 1 ? "delete_only_wallet_text" : "delete_wallet_text", {
                         walletName: walletToDelete.name,
                     }),
                     buttons: [
-                        { text: translate("cancel") },
                         {
                             text: translate("delete_wallet", { walletName: walletToDelete.name }),
                             type: "destructive",
                             action: () => handleDelete(index),
+                            variant: "filled",
                         },
                     ],
                 });

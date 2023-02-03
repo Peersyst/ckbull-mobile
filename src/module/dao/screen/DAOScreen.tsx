@@ -1,15 +1,15 @@
 import BaseMainGradientScreen from "module/main/component/layout/BaseMainGradientScreen/BaseMainGradientScreen";
 import { Col } from "@peersyst/react-native-components";
-import DAOCard from "../component/core/DAOAccountCard/DAOCard";
 import DAOTabs from "../navigation/DAOTabs/DAOTabs";
+import DAOSlider from "module/dao/component/core/DAOSlider/DAOSlider";
 
 const DAOScreen = (): JSX.Element => {
     return (
         <BaseMainGradientScreen>
-            <Col style={{ padding: 20, paddingBottom: 40 }}>
-                <DAOCard />
+            <Col flex={1} gap="5%">
+                <DAOSlider />
+                <DAOTabs />
             </Col>
-            <DAOTabs />
         </BaseMainGradientScreen>
     );
 };
