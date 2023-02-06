@@ -1,17 +1,5 @@
-import { Transaction } from "module/sdk";
-import { App } from "module/activity/core/ActivityCard/ActivityCard.types";
-
-export type TransactionRequestStatusType = "pending" | "signed" | "expired";
-
-export type TransactionRequestType = {
-    transactionToken: string;
-    status: TransactionRequestStatusType;
-    transaction: Pick<Transaction, "type" | "amount">; //Add inputs & outputs
-    expiresAt?: number;
-    app?: App;
-    token?: string;
-};
+import { TransactionRequestDto } from "module/activity/dto/dtos";
 
 export interface TransactionRequestRootProps {
-    status: TransactionRequestStatusType;
+    status: TransactionRequestDto["status"];
 }

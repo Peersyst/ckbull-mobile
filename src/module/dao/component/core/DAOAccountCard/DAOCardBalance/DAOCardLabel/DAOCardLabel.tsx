@@ -22,7 +22,7 @@ function DAOCardLabel<P extends { variant: TypographyProps["variant"] } = Typogr
             label={label}
             style={{ label: { marginRight: 12 }, alignContent: "stretch" }}
             variant="body3Light"
-            color="overlay.100.72%"
+            color="overlay.900.72%"
             placement="left"
             alignment="space-between"
         >

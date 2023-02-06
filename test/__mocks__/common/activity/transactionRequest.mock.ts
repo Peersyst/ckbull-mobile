@@ -1,23 +1,22 @@
 import BaseMock from "mocks/common/base.mock";
-import {
-    TransactionRequestStatusType,
-    TransactionRequestType,
-} from "module/activity/component/display/TransactionRequest/TransactionRequest.types";
-import { Transaction, TransactionType } from "module/sdk";
-import { App } from "module/activity/core/ActivityCard/ActivityCard.types";
+import { AppDto, TransactionRequestDto } from "module/activity/dto/dtos";
+import { TransactionType } from "module/sdk";
+import { AppMock } from "mocks/common";
 
-export class TransactionRequestMock extends BaseMock implements TransactionRequestType {
-    transaction: Pick<Transaction, "type" | "amount">;
+export class TransactionRequestMock extends BaseMock implements TransactionRequestDto {
+    transaction: TransactionRequestDto["transaction"];
     transactionToken: string;
-    status: TransactionRequestStatusType;
-    expiresAt?: number;
-    app?: App;
-    constructor({ transaction, transactionToken, status, expiresAt, app }: Partial<TransactionRequestType>) {
+    status: TransactionRequestDto["status"];
+    expiresAt: number;
+    createdAt: number;
+    app?: AppDto;
+    constructor({ transaction, transactionToken, status, createdAt, expiresAt, app }: Partial<TransactionRequestDto>) {
         super();
         this.transaction = transaction || { type: TransactionType.RECEIVE_TOKEN, amount: 1000 };
         this.transactionToken = transactionToken || "0";
         this.status = status || "signed";
         this.expiresAt = expiresAt || 1000;
-        this.app = app || { title: "App" };
+        this.createdAt = createdAt || 0;
+        this.app = app || new AppMock();
     }
 }

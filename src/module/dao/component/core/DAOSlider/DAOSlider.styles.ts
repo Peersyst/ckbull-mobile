@@ -3,6 +3,6 @@ import WalletSlider from "module/wallet/component/core/WalletSlider/WalletSlider
 
 export const DAOSliderRoot = styled(WalletSlider)(({ dimensions: { height } }) => {
     return {
-        minHeight: Math.max(height * 0.35, 265),
+        minHeight: Math.min(Math.max(height * 0.35, 255), 270),
     };
 });

@@ -1,11 +1,5 @@
-export type ConnectedSiteStatusType = "connected" | "failed";
-
-export type ConnectedSiteType = {
-    title: string;
-    source?: string;
-    status: ConnectedSiteStatusType;
-};
+import { ConnectedSiteDto } from "module/activity/dto/dtos";
 
 export interface ConnectedSiteRootProps {
-    status: ConnectedSiteStatusType;
+    status: ConnectedSiteDto["status"];
 }
