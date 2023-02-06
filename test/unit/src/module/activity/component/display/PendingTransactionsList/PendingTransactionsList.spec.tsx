@@ -13,6 +13,6 @@ describe("PendingTransactionsList tests", () => {
         await waitFor(() => expect(getPendingTransactionsRequestMock).toHaveBeenCalled());
         expect(screen.getByText(translate("today"))).toBeDefined();
         expect(screen.getAllByText("Figma")).toHaveLength(5);
-        expect(screen.getByText("6/11/2019")).toBeDefined();
+        expect(screen.getByText("7/11/2019")).toBeDefined();
     });
 });
