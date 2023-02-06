@@ -165,5 +165,6 @@
     "disconnect": "Desconectar",
     "account": "Cuenta",
     "activity": "Actividad",
-    "scan": "Escanear"
+    "scan": "Escanear",
+    "connected_sites": "Sitios conectados"
 }

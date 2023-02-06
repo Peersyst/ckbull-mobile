@@ -1,5 +1,7 @@
 enum Queries {
     GET_CONNECTED_SITES,
+    GET_PENDING_TRANSACTION_REQUEST,
+    GET_SIGNED_TRANSACTIONS,
 }
 
 export default Queries;
