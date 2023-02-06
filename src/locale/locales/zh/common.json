@@ -161,5 +161,6 @@
     "selectAToken": "选择一个硬币",
     "continue": "继续",
     "disconnect": "斷開",
-    "connected_sites": "連接的站點"
+    "connected_sites": "連接的站點",
+    "today": "今天"
 }

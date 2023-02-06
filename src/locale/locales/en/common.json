@@ -166,5 +166,6 @@
     "account": "Account",
     "activity": "Activity",
     "scan": "Scan",
-    "connected_sites": "Connected sites"
+    "connected_sites": "Connected sites",
+    "today": "Today"
 }

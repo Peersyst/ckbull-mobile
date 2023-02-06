@@ -166,5 +166,6 @@
     "account": "Cuenta",
     "activity": "Actividad",
     "scan": "Escanear",
-    "connected_sites": "Sitios conectados"
+    "connected_sites": "Sitios conectados",
+    "today": "Hoy"
 }
