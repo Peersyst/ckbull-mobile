@@ -28,6 +28,6 @@ export const ChipText = styled(Text)<ChipTextProps>(({ theme, variant }) => ({
         color: theme.palette.mode === "dark" ? theme.palette.gray[900] : theme.palette.overlay[900]["60%"],
     }),
     ...(variant === "primary" && {
-        color: theme.palette.mode === "dark" ? theme.palette.gray[0] : theme.palette.gray[0],
+        color: theme.palette.gray[0],
     }),
 }));
