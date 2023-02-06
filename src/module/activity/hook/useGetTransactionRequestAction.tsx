@@ -1,14 +1,18 @@
-import { TransactionRequestStatusType } from "module/activity/component/display/TransactionRequest/TransactionRequest.types";
 import { ReactElement } from "react";
+import { TransactionRequestDto } from "module/activity/dto/dtos";
 
 interface UseGetTransactionRequestAction {
     actionElement: ReactElement | undefined;
     handleAction: (() => unknown) | undefined;
 }
 
-export default function (status: TransactionRequestStatusType): UseGetTransactionRequestAction {
+export default function (status: TransactionRequestDto["status"]): UseGetTransactionRequestAction {
     const getActionElement = (): ReactElement | undefined => {
         switch (status) {
+            case "pending":
+            case "signed":
+            case "expired":
+                return undefined;
             default:
                 return undefined;
         }
@@ -17,7 +21,8 @@ export default function (status: TransactionRequestStatusType): UseGetTransactio
     const getHandleAction = (): (() => unknown) | undefined => {
         switch (status) {
             case "pending":
-                // Temporal until doing sign/review_connection modal
+            case "signed":
+            case "expired":
                 return () => undefined;
             default:
                 return undefined;

@@ -1,19 +1,17 @@
-import { TransactionRequestType } from "module/activity/component/display/TransactionRequest/TransactionRequest.types";
-import { ActivityDisplay } from "module/activity/core/ActivityCard/ActivityCard.styles";
-import { placeholder_image } from "images";
 import useGetTransactionRequestAction from "module/activity/hook/useGetTransactionRequestAction";
 import { getTimeFromSeconds } from "module/activity/utils/time";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TransactionRequestRoot } from "module/activity/component/display/TransactionRequest/TransactionRequest.styles";
 import TransactionAmount from "module/transaction/component/display/TransactionAmount/TransactionAmount";
+import { TransactionRequestDto } from "module/activity/dto/dtos";
 
 interface TransactionRequestProps {
-    transaction: TransactionRequestType;
+    transaction: TransactionRequestDto;
 }
 
 const TransactionRequest = ({
     transaction: {
-        app: { title, source = "" } = { title: "" },
+        app: { title, imageUrl = "" } = { title: "" },
         transaction: { type, amount },
         status,
         expiresAt,
@@ -26,7 +24,7 @@ const TransactionRequest = ({
     return (
         <TransactionRequestRoot
             status={status}
-            display={<ActivityDisplay source={source ? { uri: source } : placeholder_image} />}
+            imageUrl={imageUrl}
             title={title}
             description={translate(status)}
             details={expiresAt ? translate("expireDate", getTimeFromSeconds(expiresAt)) : undefined}

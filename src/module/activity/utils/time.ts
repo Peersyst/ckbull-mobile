@@ -4,15 +4,15 @@ interface GetTimeReturn {
     seconds: number;
 }
 
-export const getTimeFromSeconds = (seconds: number): GetTimeReturn => {
-    const formattedSeconds = seconds % 60;
-    const totalMinutes = Math.floor(seconds / 60);
-    const formattedHours = Math.floor(totalMinutes / 60);
-    const formattedMinutes = totalMinutes % 60;
+export const getTimeFromSeconds = (totalSeconds: number): GetTimeReturn => {
+    const seconds = totalSeconds % 60;
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
 
     return {
-        hours: formattedHours,
-        minutes: formattedMinutes,
-        seconds: formattedSeconds,
+        hours,
+        minutes,
+        seconds,
     };
 };

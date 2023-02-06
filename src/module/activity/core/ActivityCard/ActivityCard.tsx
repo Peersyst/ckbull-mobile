@@ -1,13 +1,14 @@
 import { Col, Row, Typography } from "@peersyst/react-native-components";
 import { ReactElement } from "react";
-import { ActivityCardRoot, DefaultActivityAction, Details } from "module/activity/core/ActivityCard/ActivityCard.styles";
+import { ActivityCardRoot, ActivityDisplay, DefaultActivityAction, Details } from "module/activity/core/ActivityCard/ActivityCard.styles";
 import { Pressable, TextStyle, ViewStyle } from "react-native";
+import { placeholder_image } from "images";
 
 interface ActivityCardProps {
-    display: ReactElement;
+    imageUrl: string;
     title: string;
     description: string;
-    amount?: string | number | ReactElement;
+    amount?: number | ReactElement;
     details?: string;
     actionElement?: ReactElement;
     onAction?: () => void;
@@ -15,7 +16,7 @@ interface ActivityCardProps {
 }
 
 const ActivityCard = ({
-    display,
+    imageUrl,
     title,
     description,
     details,
@@ -27,7 +28,7 @@ const ActivityCard = ({
     return (
         <ActivityCardRoot style={rotStyle}>
             <Row gap={16}>
-                {display}
+                <ActivityDisplay source={imageUrl ? { uri: imageUrl } : placeholder_image} />
                 <Col gap={4} justifyContent="center">
                     <Typography variant="body3Regular" style={titleStyle}>
                         {title}
