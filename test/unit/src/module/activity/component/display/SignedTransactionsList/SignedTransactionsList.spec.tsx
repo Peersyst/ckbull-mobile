@@ -5,8 +5,17 @@ import * as useGetSignedTransactionRequest from "module/activity/queries/useGetS
 import { screen, waitFor } from "@testing-library/react-native";
 
 describe("SignedTransactionsList tests", () => {
+    let serviceInstance: UseServiceInstanceMock;
+
+    beforeEach(() => {
+        serviceInstance = new UseServiceInstanceMock();
+    });
+
+    afterEach(() => {
+        serviceInstance.restore();
+    });
+
     test("Renders correctly with signedTransactions", async () => {
-        new UseServiceInstanceMock();
         const getSignedTransactionsRequestMock = jest.spyOn(useGetSignedTransactionRequest, "default");
 
         render(<SignedTransactionsList />);

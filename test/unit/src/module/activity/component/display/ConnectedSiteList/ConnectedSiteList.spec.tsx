@@ -5,8 +5,17 @@ import * as useGetConnectedSites from "module/activity/queries/useGetConnectedSi
 import { UseServiceInstanceMock } from "mocks/common";
 
 describe("ConnectedSiteList tests", () => {
+    let serviceInstance: UseServiceInstanceMock;
+
+    beforeEach(() => {
+        serviceInstance = new UseServiceInstanceMock();
+    });
+
+    afterEach(() => {
+        serviceInstance.restore();
+    });
+
     test("Renders correctly with connectedSites", async () => {
-        new UseServiceInstanceMock();
         const getConnectedSitesMock = jest.spyOn(useGetConnectedSites, "default");
 
         render(<ConnectedSiteList />);

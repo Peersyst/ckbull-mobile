@@ -5,8 +5,17 @@ import { render, translate } from "test-utils";
 import { screen, waitFor } from "@testing-library/react-native";
 
 describe("PendingTransactionsList tests", () => {
+    let serviceInstance: UseServiceInstanceMock;
+
+    beforeEach(() => {
+        serviceInstance = new UseServiceInstanceMock();
+    });
+
+    afterEach(() => {
+        serviceInstance.restore();
+    });
+
     test("Renders correctly with pendingTransactions", async () => {
-        new UseServiceInstanceMock();
         const getPendingTransactionsRequestMock = jest.spyOn(useGetPendingTransactionRequest, "default");
 
         render(<PendingTransactionsList />);
