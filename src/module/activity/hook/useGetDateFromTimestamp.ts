@@ -16,7 +16,7 @@ export default function (): UseGetDateFromTimestamp {
             currentDate.getDay() === now.getDay()
         )
             return translate("today");
-        else return currentDate.getDay() + "/" + currentDate.getMonth() + "/" + currentDate.getFullYear();
+        else return `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`;
     };
 
     return { formatDate };
