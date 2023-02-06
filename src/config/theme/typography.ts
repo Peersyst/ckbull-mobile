@@ -20,7 +20,7 @@ export const DRUK_TEXT_WIDE: Record<FontWeight, string> = {
 export const FONT_STYLE: Record<TypographyVariant, TextStyle> = {
     h1: { fontSize: 28, lineHeight: 36 },
     h2: { fontSize: 20, lineHeight: 24 },
-    title1: { fontSize: 32, lineHeight: 34 },
+    title1: { fontSize: 32, lineHeight: 36 },
     title2: { fontSize: 28, lineHeight: 32 },
     title3: { fontSize: 24, lineHeight: 30 },
     title4: { fontSize: 22, lineHeight: 28 },

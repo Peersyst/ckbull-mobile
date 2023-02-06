@@ -162,5 +162,7 @@
     "disconnect": "Desconectar",
     "account": "Cuenta",
     "activity": "Actividad",
-    "scan": "Escanear"
+    "scan": "Escanear",
+    "ckbullMobileWallet": "CKBull Mobile Wallet",
+    "nervosDAO": "Nervos DAO"
 }

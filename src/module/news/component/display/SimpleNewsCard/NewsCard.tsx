@@ -19,11 +19,11 @@ const NewsCard = ({ news, style }: SimpleNewsCardProps): JSX.Element => {
             <NewsCardRoot elevation={0} style={style}>
                 <Row gap={12} alignItems="center">
                     <NewsImage source={{ uri: imageUri }} />
-                    <Col flex={1} style={{ paddingRight: 16 }}>
+                    <Col gap={4} flex={1} style={{ paddingRight: 16 }}>
                         <Typography variant="body3Light" light>
                             {formattedDate(date)}
                         </Typography>
-                        <Typography variant="body2Regular" numberOfLines={2} adjustsFontSizeToFit minimumFontScale={1}>
+                        <Typography variant="body3Regular" numberOfLines={2} adjustsFontSizeToFit minimumFontScale={1}>
                             {title}
                         </Typography>
                     </Col>
