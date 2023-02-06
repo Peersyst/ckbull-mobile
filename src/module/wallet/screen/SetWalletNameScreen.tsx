@@ -30,7 +30,7 @@ const SetWalletNameScreen = ({ onSubmit, submitText }: SetWalletNameScreenProps)
             <Form onSubmit={handleSubmit}>
                 <Col gap={30}>
                     <TextField name="walletName" defaultValue={name} placeholder={translate("wallet_name")} required />
-                    <Button fullWidth type="submit">
+                    <Button fullWidth variant="primary" type="submit">
                         {submitText}
                     </Button>
                 </Col>

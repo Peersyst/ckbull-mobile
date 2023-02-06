@@ -14,7 +14,7 @@ describe("Test for the DoaCardBalance", () => {
         const showModal = jest.fn();
         jest.spyOn(Genesys, "useModal").mockReturnValue({ showModal } as any);
         const screen = render(<DAOCardButtons />);
-        const button = screen.getByTestId("ReceiveIcon");
+        const button = screen.getByTestId("SendIcon");
         fireEvent.press(button);
         expect(showModal).toHaveBeenCalledWith(DepositModal);
     });
@@ -22,7 +22,7 @@ describe("Test for the DoaCardBalance", () => {
         const showModal = jest.fn();
         jest.spyOn(Genesys, "useModal").mockReturnValue({ showModal } as any);
         const screen = render(<DAOCardButtons />);
-        const button = screen.getByTestId("SendIcon");
+        const button = screen.getByTestId("ReceiveIcon");
         fireEvent.press(button);
         expect(showModal).toHaveBeenCalledWith(WithdrawModal);
     });

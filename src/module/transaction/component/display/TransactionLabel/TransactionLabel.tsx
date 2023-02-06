@@ -9,10 +9,11 @@ export interface TransactionLabelProps extends Omit<TypographyProps, "children">
 }
 
 const TransactionLabel = ({ type, accountId, ...typographyProps }: TransactionLabelProps): JSX.Element => {
-    const t = useTranslate();
+    const translate = useTranslate();
+
     return (
-        <Typography {...typographyProps} color="gray.600">
-            {t(TX_LABEL[type])}
+        <Typography {...typographyProps}>
+            {translate(TX_LABEL[type])}
             {accountId && ` (${accountId})`}
         </Typography>
     );

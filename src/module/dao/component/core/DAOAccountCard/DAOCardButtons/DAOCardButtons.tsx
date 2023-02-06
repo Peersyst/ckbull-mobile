@@ -9,8 +9,8 @@ const DAOCardButtons = (): JSX.Element => {
 
     return (
         <Row justifyContent="flex-end" gap={12}>
-            <IconButton icon={<SendIcon />} size="md" variant="outlined" onPress={() => showModal(WithdrawModal)} />
-            <IconButton icon={<ReceiveIcon />} size="md" variant="secondary" onPress={() => showModal(DepositModal)} />
+            <IconButton icon={<SendIcon />} size="md" variant="outlined" onPress={() => showModal(DepositModal)} />
+            <IconButton icon={<ReceiveIcon />} size="md" variant="secondary" onPress={() => showModal(WithdrawModal)} />
         </Row>
     );
 };

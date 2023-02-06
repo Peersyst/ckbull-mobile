@@ -12,7 +12,7 @@ describe("TransactionDetailsModal test", () => {
         const action = transactionTypeToBalanceAction(sentTransaction.type) || "display";
         const screen = render(<TransactionDetailsModal transaction={sentTransaction} />);
         //Header
-        expect(screen.getByTestId("ArrowUpCircleIcon")).toBeDefined();
+        expect(screen.getByTestId("SendIcon")).toBeDefined();
         expect(screen.getByText(translate(TX_LABEL[sentTransaction.type]))).toBeDefined();
 
         expect(screen.getByText(ACTION_LABEL[action!] + sentTransaction.amount + " " + config.tokenName)).toBeDefined();
@@ -27,7 +27,7 @@ describe("TransactionDetailsModal test", () => {
         const action = transactionTypeToBalanceAction(receivedTransaction.type);
         const screen = render(<TransactionDetailsModal transaction={receivedTransaction} />);
         //HEADER
-        expect(screen.getByTestId("ArrowDownCircleIcon")).toBeDefined();
+        expect(screen.getByTestId("ReceiveIcon")).toBeDefined();
         expect(screen.getByText(translate(TX_LABEL[receivedTransaction.type]))).toBeDefined();
         expect(screen.getByText(ACTION_LABEL[action!] + receivedTransaction.amount + " " + config.tokenName)).toBeDefined();
         //BODY
