@@ -10,7 +10,9 @@ export default function (status: TransactionRequestDto["status"]): UseGetTransac
     const getActionElement = (): ReactElement | undefined => {
         switch (status) {
             case "pending":
+                return undefined;
             case "signed":
+                return undefined;
             case "expired":
                 return undefined;
             default:
@@ -21,7 +23,9 @@ export default function (status: TransactionRequestDto["status"]): UseGetTransac
     const getHandleAction = (): (() => unknown) | undefined => {
         switch (status) {
             case "pending":
+                return () => undefined;
             case "signed":
+                return () => undefined;
             case "expired":
                 return () => undefined;
             default:
