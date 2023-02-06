@@ -6,9 +6,10 @@ export type TransactionRequestStatusType = "pending" | "signed" | "expired";
 export type TransactionRequestType = {
     transactionToken: string;
     status: TransactionRequestStatusType;
-    transaction: Pick<Transaction, "type" | "amount">;
+    transaction: Pick<Transaction, "type" | "amount">; //Add inputs & outputs
     expiresAt?: number;
     app?: App;
+    token?: string;
 };
 
 export interface TransactionRequestRootProps {

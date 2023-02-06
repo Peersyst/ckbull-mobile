@@ -1,15 +1,13 @@
 import { Col, Row, Typography } from "@peersyst/react-native-components";
 import { ReactElement } from "react";
-import { ActivityCardRoot } from "module/activity/core/ActivityCard/ActivityCard.styles";
+import { ActivityCardRoot, DefaultActivityAction, Details } from "module/activity/core/ActivityCard/ActivityCard.styles";
 import { Pressable, TextStyle, ViewStyle } from "react-native";
-import { ChevronRightIcon } from "icons";
-import Balance from "module/wallet/component/display/Balance/Balance";
 
 interface ActivityCardProps {
     display: ReactElement;
     title: string;
     description: string;
-    amount?: string | number;
+    amount?: string | number | ReactElement;
     details?: string;
     actionElement?: ReactElement;
     onAction?: () => void;
@@ -37,16 +35,16 @@ const ActivityCard = ({
                     <Typography variant="body4Light" style={descriptionStyle} light={!descriptionStyle.color}>
                         {description}
                     </Typography>
-                    <Typography variant="body4Strong" light style={detailsStyle}>
+                    <Details variant="body4Strong" style={detailsStyle}>
                         {details}
-                    </Typography>
+                    </Details>
                 </Col>
             </Row>
-            {amount && <Balance balance={amount} variant="body3Strong" units="token" />}
+            {amount}
             {onAction && (
                 <Col justifyContent="center" alignItems="center">
                     <Pressable accessibilityRole="button" onPress={onAction}>
-                        {actionElement || <ChevronRightIcon />}
+                        {actionElement || <DefaultActivityAction />}
                     </Pressable>
                 </Col>
             )}

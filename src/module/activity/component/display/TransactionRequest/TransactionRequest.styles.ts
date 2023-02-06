@@ -7,7 +7,6 @@ import {
 
 export const TransactionRequestRoot = styled(ActivityCard)<TransactionRequestRootProps>(({ theme, status }) => {
     const canHandle = status === "signed" || status === "expired";
-
     const handleStatusColor = (status: TransactionRequestStatusType): string | undefined => {
         switch (status) {
             case "signed":

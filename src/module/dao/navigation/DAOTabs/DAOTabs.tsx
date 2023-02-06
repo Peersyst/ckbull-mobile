@@ -24,9 +24,10 @@ const DAOTabs = (): JSX.Element => {
                     transaction={{
                         transactionToken: "0",
                         status: "pending",
-                        transaction: { amount: 234234, type: TransactionType.RECEIVE_TOKEN },
+                        transaction: { amount: 4234, type: TransactionType.RECEIVE_TOKEN },
                         expiresAt: 234234,
                         app: { title: "Figma" },
+                        token: "token",
                     }}
                 />
             ),
