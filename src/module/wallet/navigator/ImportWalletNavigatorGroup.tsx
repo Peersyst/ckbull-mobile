@@ -13,8 +13,10 @@ import createWalletState from "../state/CreateWalletState";
 import { useTranslate } from "module/common/hook/useTranslate";
 import LightThemeProvider from "module/common/component/util/ThemeProvider/LightThemeProvider";
 import DarkThemeProvider from "module/common/component/util/ThemeProvider/DarkThemeProvider";
+import SetWalletNameScreen from "../screen/SetWalletNameScreen";
 
 export enum ImportWalletScreens {
+    SET_WALLET_NAME,
     WALLET_ADVISES,
     ENTER_WALLET_MNEMONIC,
     SET_WALLET_PIN,
@@ -36,7 +38,7 @@ const ImportWalletNavigatorGroup = () => {
     });
 
     const handleBack = () => {
-        if (activeTab === ImportWalletScreens.WALLET_ADVISES) {
+        if (activeTab === ImportWalletScreens.SET_WALLET_NAME) {
             setShowGlass(false);
         } else if (activeTab === ImportWalletScreens.SET_WALLET_PIN) {
             setShowPin(false);
@@ -73,8 +75,14 @@ const ImportWalletNavigatorGroup = () => {
                     onClose={() => setShowGlass(false)}
                     open={showGlass}
                     onExited={handleGlassExit}
-                    navbar={{ back: true, title: translate("import_wallet"), onBack: handleBack, steps: { index: activeTab, length: 2 } }}
+                    navbar={{ back: true, title: translate("import_wallet"), onBack: handleBack, steps: { index: activeTab, length: 3 } }}
                 >
+                    <TabPanel index={ImportWalletScreens.SET_WALLET_NAME}>
+                        <SetWalletNameScreen
+                            onSubmit={() => handleTabChange(ImportWalletScreens.WALLET_ADVISES)}
+                            submitText={translate("enter_mnemonic")}
+                        />
+                    </TabPanel>
                     <TabPanel index={ImportWalletScreens.WALLET_ADVISES}>
                         <WalletAdvisesScreen
                             onNextScreen={() => handleTabChange(ImportWalletScreens.ENTER_WALLET_MNEMONIC)}
