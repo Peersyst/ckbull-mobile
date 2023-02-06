@@ -2,7 +2,7 @@ import { Theme } from "@peersyst/react-native-components";
 
 //Base colors
 export const white = "#FFFFFF";
-export const black = "#000000";
+export const black = "#1A1A1A";
 export const gold = "#FFC860";
 export const red = "#F54565";
 export const orange = "#E3935B";
