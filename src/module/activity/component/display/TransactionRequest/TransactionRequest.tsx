@@ -2,8 +2,8 @@ import useGetTransactionRequestAction from "module/activity/hook/useGetTransacti
 import { getTimeFromSeconds } from "module/activity/utils/time";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TransactionRequestRoot } from "module/activity/component/display/TransactionRequest/TransactionRequest.styles";
-import TransactionAmount from "module/transaction/component/display/TransactionAmount/TransactionAmount";
 import { TransactionRequestDto } from "module/activity/dto/dtos";
+import transactionTypeToBalanceAction from "module/transaction/component/display/TransactionAmount/utils/transactionTypeToBalanceAction";
 
 interface TransactionRequestProps {
     transaction: TransactionRequestDto;
@@ -15,7 +15,6 @@ const TransactionRequest = ({
         transaction: { type, amount },
         status,
         expiresAt,
-        token,
     },
 }: TransactionRequestProps): JSX.Element => {
     const translate = useTranslate();
@@ -23,12 +22,14 @@ const TransactionRequest = ({
 
     return (
         <TransactionRequestRoot
+            type={type}
             status={status}
             imageUrl={imageUrl}
             title={title}
             description={translate(status)}
             details={expiresAt ? translate("expireDate", getTimeFromSeconds(expiresAt)) : undefined}
-            amount={<TransactionAmount variant="body3Strong" type={type} amount={amount} units={token} />}
+            amount={amount}
+            amountAction={transactionTypeToBalanceAction(type)}
             actionElement={actionElement}
             onAction={handleAction}
         />

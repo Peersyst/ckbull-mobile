@@ -2,7 +2,6 @@ import { render } from "test-utils";
 import ActivityCard from "module/activity/core/ActivityCard/ActivityCard";
 import { screen } from "@testing-library/react-native";
 import { Typography } from "@peersyst/react-native-components";
-import Balance from "module/wallet/component/display/Balance/Balance";
 
 describe("Tests for ActivityCard", () => {
     const mockTitle = "title";
@@ -18,7 +17,8 @@ describe("Tests for ActivityCard", () => {
                 title={mockTitle}
                 description={mockDescription}
                 details={"details"}
-                amount={<Balance balance={100} variant={"body3Strong"} units="token" />}
+                amount={100}
+                amountAction={"add"}
                 actionElement={<Typography variant="body1Light">action</Typography>}
                 onAction={mockOnAction}
             />,
@@ -27,7 +27,7 @@ describe("Tests for ActivityCard", () => {
         expect(screen.getByText(mockTitle)).toBeDefined();
         expect(screen.getByText(mockDescription)).toBeDefined();
         expect(screen.getByText(mockDetails)).toBeDefined();
-        expect(screen.getByText("100 CKB")).toBeDefined();
+        expect(screen.getByText("+100 CKB")).toBeDefined();
         expect(screen.getByText("action")).toBeDefined();
     });
 
@@ -38,7 +38,8 @@ describe("Tests for ActivityCard", () => {
                 title={mockTitle}
                 description={mockDescription}
                 details={"details"}
-                amount={<Balance balance={100} variant={"body3Strong"} units="token" />}
+                amount={100}
+                amountAction={"add"}
                 actionElement={<Typography variant="body1Light">action</Typography>}
             />,
         );
@@ -46,7 +47,7 @@ describe("Tests for ActivityCard", () => {
         expect(screen.getByText(mockTitle)).toBeDefined();
         expect(screen.getByText(mockDescription)).toBeDefined();
         expect(screen.getByText(mockDetails)).toBeDefined();
-        expect(screen.getByText("100 CKB")).toBeDefined();
+        expect(screen.getByText("+100 CKB")).toBeDefined();
 
         expect(screen.queryByText("action")).toBeNull();
     });
