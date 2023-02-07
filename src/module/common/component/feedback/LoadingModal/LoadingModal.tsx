@@ -3,17 +3,13 @@ import { DarkLoadingModalOverlay, LoadingModalRoot, SuccessIcon, LoadingModalCon
 import { useEffect, useState } from "react";
 import { notificationAsync, NotificationFeedbackType } from "expo-haptics";
 import { useTranslate } from "module/common/hook/useTranslate";
-import LinearLogo from "module/common/component/display/LinearBgLogo/LinearBgLogo";
-import { Backdrop, Col, useTheme } from "@peersyst/react-native-components";
+import { Backdrop, Col } from "@peersyst/react-native-components";
 import Button from "module/common/component/input/Button/Button";
+import { Isotip } from "../../display/Logos/Isotip/Isotip.styles";
 
 const LoadingModal = ({ loading, successMessage, error, success, ...backdropProps }: LoadingModalProps): JSX.Element => {
     const [open, setOpen] = useState(false);
     const translate = useTranslate();
-
-    const { palette } = useTheme();
-    const white = palette.white;
-    const logoGradient = palette.mode === "dark" ? palette.gradient.greenViolet : [white, white];
 
     useEffect(() => {
         if (!open) setOpen(loading || success || error);
@@ -58,7 +54,7 @@ const LoadingModal = ({ loading, successMessage, error, success, ...backdropProp
                         </>
                     ) : (
                         <Col alignItems="center" gap={14}>
-                            <LinearLogo startColor={logoGradient[0]} endColor={logoGradient[1]} size="md" />
+                            <Isotip size="lg" />
                             <LoadingModalMessage textAlign="center" variant="body2Strong">
                                 {translate("processing")}
                             </LoadingModalMessage>

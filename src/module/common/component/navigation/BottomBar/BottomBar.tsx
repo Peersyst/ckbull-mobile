@@ -2,11 +2,11 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { AccountIcon, DaoIcon, PinIcon, QrIcon } from "icons";
 import { MainBottomScreens } from "module/main/component/navigation/MainBottomNavigatorGroup/MainBottomNavigatorGroup";
-import { MainStackParamsList } from "stack-navigator";
 import { BottomBarRoot } from "./BottomBar.styles";
 import BottomBarItem from "./BottomBarItem/BottomBarItem";
 import { ActivityIcon } from "module/common/icons/ActivityIcon";
 import MainButton from "../../input/MainButton/MainButton";
+import { MainStackParamsList } from "stack-navigator";
 
 type BottomBarProps = Pick<BottomTabBarProps, "state" | "navigation">;
 

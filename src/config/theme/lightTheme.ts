@@ -109,16 +109,19 @@ const lightTheme = createTheme({
         red,
         status,
         mode: "light",
-        background: gray[700],
+        background: gray[900],
         text: gray[700],
         gray,
         overlay,
         backdrop: overlay["500"]["48%"],
         glass: overlay[900]["32%"],
         component: {
-            appbar: white,
+            appbar: { backgroundColor: gray[900], borderColor: overlay[100]["8%"] },
             paper: white,
-            bottomBar: white,
+            bottomBar: {
+                backgroundColor: white,
+                borderColor: overlay[700]["8%"],
+            },
             borderColor: overlay["300"]["24%"],
             label: gray[700],
             input: {

@@ -1,8 +1,7 @@
 import styled from "@peersyst/react-native-styled";
 import { LogoIcon } from "icons";
 import { getTextColor } from "utils/getTextColor";
-import { IsotipAnimationContainerProps, IsotipRootProps, SizeIsotipRelationType } from "./Isotip.types";
-import AnimationContainer from "module/common/component/display/AnimationContainer/AnimationContainer";
+import { IsotipRootProps, SizeIsotipRelationType } from "./Isotip.types";
 
 export const Isotip = styled(LogoIcon)<IsotipRootProps>(({ theme, size }) => {
     const color = getTextColor(theme);
@@ -30,11 +29,3 @@ export const sizeRelations: SizeIsotipRelationType = {
         fontSize: 165.43,
     },
 };
-
-export const IsotipAnimatedContainer = styled(AnimationContainer)<IsotipAnimationContainerProps>(({ size }) => {
-    const { fontSize } = sizeRelations[size];
-    return {
-        height: fontSize + 20,
-        width: fontSize + 20,
-    };
-});

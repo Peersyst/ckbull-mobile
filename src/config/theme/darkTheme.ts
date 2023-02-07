@@ -120,9 +120,12 @@ const darkTheme = createTheme({
         glass: overlay[100]["32%"],
         component: {
             label: gray[900],
-            appbar: black,
-            paper: black,
-            bottomBar: black,
+            appbar: { backgroundColor: black, borderColor: overlay[900]["16%"] },
+            paper: gray[0],
+            bottomBar: {
+                backgroundColor: gray[0],
+                borderColor: overlay[900]["12%"],
+            },
             borderColor: overlay["900"]["8%"],
             input: {
                 placeholderColor: gray[500],
