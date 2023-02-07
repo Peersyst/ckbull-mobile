@@ -1,7 +1,7 @@
-import { SectionList, SectionListProps } from "react-native";
 import useCkbSync from "module/wallet/hook/useCkbSync";
 import { ListSection } from "module/main/component/display/MainSectionList/MainSectionList.styles";
 import { Typography } from "@peersyst/react-native-components";
+import { SectionList, SectionListProps } from "react-native";
 
 export type MainSectionListProps = Omit<
     SectionListProps<any, any>,
