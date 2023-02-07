@@ -4,32 +4,36 @@ import { useQuery } from "react-query";
 import Queries from "../../../query/queries";
 import { TransactionType } from "module/sdk";
 import { TransactionRequestDto } from "module/activity/dto/dtos";
-import { SectionListData } from "react-native";
 
-export interface PendingTransactionRequests {
-    title: number;
-}
-
-export default function (): QueryResult<readonly SectionListData<TransactionRequestDto, PendingTransactionRequests>[]> {
+export default function (): QueryResult<TransactionRequestDto[]> {
     const mockRequest: TransactionRequestDto = {
         transactionToken: "0",
         status: "pending",
         transaction: { amount: 4234, type: TransactionType.RECEIVE_TOKEN },
-        expiresAt: 234234,
-        createdAt: 23423,
+        expiresAt: 1675759479000,
+        createdAt: 1675759478000,
         app: { title: "Figma" },
         token: "token",
     };
 
-    const mockData: readonly SectionListData<TransactionRequestDto, PendingTransactionRequests>[] = [
-        {
-            title: 1675694773000,
-            data: [mockRequest, mockRequest],
-        },
-        {
-            title: 1575694773000,
-            data: [mockRequest, mockRequest, mockRequest],
-        },
+    const mockRequest2: TransactionRequestDto = {
+        transactionToken: "0",
+        status: "pending",
+        transaction: { amount: 4234, type: TransactionType.RECEIVE_TOKEN },
+        expiresAt: 1175759479000,
+        createdAt: 1175759478000,
+        app: { title: "Figma" },
+        token: "token",
+    };
+
+    const mockData: TransactionRequestDto[] = [
+        mockRequest,
+        mockRequest2,
+        mockRequest2,
+        mockRequest,
+        mockRequest,
+        mockRequest2,
+        mockRequest2,
     ];
 
     const { index: usedIndex, network, queryEnabled } = useServiceInstance();
@@ -37,7 +41,7 @@ export default function (): QueryResult<readonly SectionListData<TransactionRequ
         return mockData;
     };
 
-    return useQuery([Queries.GET_PENDING_TRANSACTION_REQUEST, usedIndex, network], getMockTransactionRequest, {
+    return useQuery([Queries.SIGNER_APP_GET_PENDING_TRANSACTIONS, usedIndex, network], getMockTransactionRequest, {
         enabled: queryEnabled,
     });
 }

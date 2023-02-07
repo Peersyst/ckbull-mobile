@@ -1,6 +1,6 @@
 import EmptyListComponent from "module/common/component/display/EmptyListComponent/EmptyListComponent";
 import MainList from "module/main/component/display/MainList/MainList";
-import useGetSignedTransactionRequest from "module/activity/queries/useGetSignedTransactionRequest";
+import useGetSignedTransactionRequest from "module/activity/queries/useGetSignedTransactions";
 import TransactionCard from "module/transaction/component/display/TransactionCard/TransactionCard";
 
 const SignedTransactionsList = (): JSX.Element => {

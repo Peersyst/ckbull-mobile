@@ -20,7 +20,7 @@ export default function (): QueryResult<FullTransaction[]> {
         return mockData;
     };
 
-    return useQuery([Queries.GET_SIGNED_TRANSACTIONS, usedIndex, network], getMockSignedTransactions, {
+    return useQuery([Queries.SIGNER_APP_GET_SIGNED_TRANSACTIONS, usedIndex, network], getMockSignedTransactions, {
         enabled: queryEnabled,
     });
 }

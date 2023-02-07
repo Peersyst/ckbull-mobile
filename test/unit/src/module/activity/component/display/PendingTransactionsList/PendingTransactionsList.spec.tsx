@@ -1,5 +1,5 @@
 import { UseServiceInstanceMock } from "mocks/common";
-import * as useGetPendingTransactionRequest from "module/activity/queries/useGetPendingTransactionRequest";
+import * as useGetPendingTransactionRequest from "module/activity/queries/useGetPendingTransactions";
 import PendingTransactionsList from "module/activity/component/display/PendingTransactionsList/PendingTransactionsList";
 import { render, translate } from "test-utils";
 import { screen, waitFor } from "@testing-library/react-native";

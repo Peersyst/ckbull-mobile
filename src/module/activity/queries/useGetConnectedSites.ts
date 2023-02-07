@@ -14,7 +14,7 @@ export default function (index?: number): UseQueryResult<ConnectedSiteDto[]> {
         return mockData;
     };
 
-    return useQuery([Queries.GET_CONNECTED_SITES, usedIndex, network], getMockConnectedSites, {
+    return useQuery([Queries.SIGNER_APP_GET_CONNECTED_SITES, usedIndex, network], getMockConnectedSites, {
         enabled: queryEnabled,
     });
 }
