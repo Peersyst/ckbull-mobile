@@ -18,7 +18,7 @@ const TokenCard = ({ token: { type, amount } }: TokenCardProps): JSX.Element => 
     const { data: tokenValue } = useGetTokenPrice(fiat, type);
 
     return (
-        <MainListCard alignItems="center" justifyContent="space-between" style={{ height: 78 }}>
+        <MainListCard alignItems="center" justifyContent="space-between">
             <Row alignItems="center" gap={16}>
                 <TokenIcon source={imageUri ? { uri: imageUri } : placeholder_image} />
                 <Typography variant="body2Regular" numberOfLines={1} style={{ maxWidth: "70%" }}>
