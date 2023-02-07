@@ -1,14 +1,13 @@
 import useCkbSync from "module/wallet/hook/useCkbSync";
 import { ListSection } from "module/main/component/display/MainSectionList/MainSectionList.styles";
-import { Typography } from "@peersyst/react-native-components";
-import { SectionList, SectionListProps } from "react-native";
+import { SectionList, SectionListProps, Typography } from "@peersyst/react-native-components";
 
 export type MainSectionListProps = Omit<
-    SectionListProps<any, any>,
+    SectionListProps,
     "stickySectionHeadersEnabled" | "contentContainerStyle" | "style" | "ItemSeparatorComponent"
 >;
 
-const MainSectionList = ({ refreshing, onRefresh, ...rest }: MainSectionListProps): JSX.Element => {
+const MainSectionList = ({ loading, onRefresh, ...rest }: MainSectionListProps): JSX.Element => {
     const { synchronizing, synchronize } = useCkbSync();
     const handleRefresh = async () => {
         await synchronize();
@@ -28,7 +27,7 @@ const MainSectionList = ({ refreshing, onRefresh, ...rest }: MainSectionListProp
             renderSectionHeader={renderSectionHeader}
             stickySectionHeadersEnabled={false}
             contentContainerStyle={{ paddingHorizontal: 20, paddingVertical: 12 }}
-            refreshing={synchronizing || refreshing}
+            loading={synchronizing || loading}
             onRefresh={handleRefresh}
             {...rest}
         />
