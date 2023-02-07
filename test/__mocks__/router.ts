@@ -1,5 +1,5 @@
 import { RouteProp } from "@react-navigation/native";
-import { RootStackParamsList, MainStackParamsList } from "stack-navigator";
+import { MainStackParamsList, RootStackParamsList } from "stack-navigator";
 
 type RouteNameType = "Login" | "AuthSwitch" | "CreateWallet" | "ImportWallet" | keyof MainStackParamsList;
 type MockedRouterType = RouteProp<RootStackParamsList, RouteNameType>;

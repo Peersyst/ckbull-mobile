@@ -165,5 +165,7 @@
     "disconnect": "Disconnect",
     "account": "Account",
     "activity": "Activity",
-    "scan": "Scan"
+    "scan": "Scan",
+    "ckbullMobileWallet": "CKBull Mobile Wallet",
+    "nervosDAO": "Nervos DAO"
 }

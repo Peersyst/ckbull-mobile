@@ -6,7 +6,7 @@ export const NewsCardRoot = styled(Paper)(({ theme }) => ({
 }));
 
 export const NewsImage = styled(Image)(({ theme, dimensions }) => {
-    const size = Math.min(dimensions.width * 0.25, 120);
+    const size = Math.min(dimensions.width * 0.3, 120);
 
     return {
         width: size,
