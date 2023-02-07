@@ -12,12 +12,7 @@ const MainList = ({ loading, onRefresh, ...rest }: MainListProps): JSX.Element =
     };
 
     return (
-        <List
-            contentContainerStyle={{ paddingHorizontal: "6%", paddingVertical: 12 }}
-            loading={synchronizing || loading}
-            onRefresh={handleRefresh}
-            {...rest}
-        />
+        <List contentContainerStyle={{ paddingHorizontal: "6%" }} loading={synchronizing || loading} onRefresh={handleRefresh} {...rest} />
     );
 };
 

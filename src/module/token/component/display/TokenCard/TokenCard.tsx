@@ -21,7 +21,7 @@ const TokenCard = ({ token: { type, amount } }: TokenCardProps): JSX.Element => 
         <MainListCard alignItems="center" justifyContent="space-between">
             <Row alignItems="center" gap={16}>
                 <TokenIcon source={imageUri ? { uri: imageUri } : placeholder_image} />
-                <Typography variant="body3Strong" numberOfLines={1} style={{ maxWidth: "50%" }}>
+                <Typography variant="body2Regular" numberOfLines={1} style={{ maxWidth: "70%" }}>
                     {name}
                 </Typography>
             </Row>
@@ -30,9 +30,9 @@ const TokenCard = ({ token: { type, amount } }: TokenCardProps): JSX.Element => 
                     options={{ maximumFractionDigits: 4 }}
                     balance={amount / 10 ** type.decimals}
                     units={tokenName ? (tokenName === "Unknown Token" ? "?" : tokenName) : ""}
-                    variant="body2"
+                    variant="body3Regular"
                 />
-                {tokenValue && <Balance action="round" light balance={tokenValue} units={fiat} variant="body4Strong" />}
+                {tokenValue && <Balance action="round" light balance={tokenValue} units={fiat} variant="body3Light" />}
             </Col>
         </MainListCard>
     );
