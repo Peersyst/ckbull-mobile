@@ -16,7 +16,7 @@ export const TextFieldRoot = styled(TextField)<TextFieldRootProps>(({ theme, siz
         },
         lg: {
             height: 60,
-            ...theme.typography.body2Strong,
+            ...theme.typography.body3Strong,
         },
     };
 

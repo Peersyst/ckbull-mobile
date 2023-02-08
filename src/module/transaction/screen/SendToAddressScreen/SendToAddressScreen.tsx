@@ -56,6 +56,7 @@ const SendToAddressScreen = () => {
                         required
                         name="sender"
                         defaultValue={sendState.senderWalletIndex}
+                        style={{ component: { display: { backgroundColor: "transparent", borderColor: palette.overlay[300]["24%"] } } }}
                     />
                     <TextField
                         label={translate("send_to")}
@@ -71,9 +72,16 @@ const SendToAddressScreen = () => {
                         onChange={setReceiverAddress}
                         autoCapitalize="none"
                         autoCorrect={false}
+                        style={{ component: { backgroundColor: "transparent" } }}
                     />
                     <Col gap={8}>
-                        <Button type="submit" fullWidth disabled={uncommittedTransaction} loading={uncommittedTransaction}>
+                        <Button
+                            type="submit"
+                            variant="primary"
+                            fullWidth
+                            disabled={uncommittedTransaction}
+                            loading={uncommittedTransaction}
+                        >
                             {translate("next")}
                         </Button>
                         {uncommittedTransaction && (

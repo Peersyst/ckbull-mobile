@@ -9,6 +9,7 @@ import { TokenAmountInputRoot } from "module/transaction/component/input/TokenAm
 import TokenSelector from "module/token/component/input/TokenSelector/TokenSelector";
 import { TokenSelectorProps } from "module/token/component/input/TokenSelector/TokenSelector.types";
 import { useControlled } from "@peersyst/react-hooks";
+import { useTheme } from "@peersyst/react-native-styled";
 
 interface AmountInputProps extends Partial<Pick<TokenSelectorProps, "defaultToken" | "token" | "tokens" | "onTokenChange">> {
     amount: string;
@@ -39,7 +40,7 @@ const TokenAmountInput = ({
 
     const formattedFee = useFormatNumber(fee);
     const formattedMinTx = useFormatNumber((isDAO ? config.minimumDaoDeposit : config.minimumTransactionAmount).toString());
-
+    const { palette } = useTheme();
     return (
         <TokenAmountInputRoot
             hint={translate("transaction_fee", { fee: formattedFee, token: token })}
@@ -60,6 +61,7 @@ const TokenAmountInput = ({
             suffix={<TokenSelector token={token} tokens={tokens} onTokenChange={setToken} />}
             input={NumericInput}
             placeholder={translate("enter_amount")}
+            style={{ component: { backgroundColor: "transparent", borderColor: palette.overlay[300]["24%"] } }}
         />
     );
 };

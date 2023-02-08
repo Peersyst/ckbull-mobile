@@ -13,6 +13,7 @@ export const TokenSelectorRoot = styled(HOStringSelect)<TokenSelectorRootProps>(
             width: "auto",
             borderWidth: 0,
             ...theme.typography[variant],
+            backgroundColor: "transparent",
         },
     },
 }));

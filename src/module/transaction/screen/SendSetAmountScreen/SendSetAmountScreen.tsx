@@ -1,68 +1,72 @@
-import { Col, Form, Typography, useSetTab, Suspense } from "@peersyst/react-native-components";
-import TextArea from "module/common/component/input/TextArea/TextArea";
+import { Col, Form, useSetTab, Suspense } from "@peersyst/react-native-components";
 import Button from "module/common/component/input/Button/Button";
-import { useRecoilState, useRecoilValue } from "recoil";
-import sendRecoilState from "module/transaction/state/SendState";
-import { useState } from "react";
+import { useRecoilState } from "recoil";
+import sendRecoilState, { SendState } from "module/transaction/state/SendState";
 import useGetBalance from "module/wallet/query/useGetBalance";
-import settingsState from "module/settings/state/SettingsState";
 import { SendScreens } from "module/transaction/component/core/SendModal/SendModal";
-import TokenAmountInput from "../../component/input/TokenAmountInput/TokenAmountInput";
-import { DepositScreens } from "module/dao/component/core/DepositModal/DepositModal";
 import CenteredLoader from "module/common/component/feedback/CenteredLoader/CenteredLoader";
-import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
-import { config } from "config";
 import { useTranslate } from "module/common/hook/useTranslate";
+import WalletAssetSelect from "module/wallet/component/input/WalletAssetSelect/WalletAssetSelect";
+import AssetAmountTextField from "module/transaction/component/input/AssetAmountTextField/AssetAmountTextField";
+import { useState } from "react";
+import { Asset } from "module/wallet/wallet.types";
+import { AssetType } from "module/wallet/wallet.types";
 
-export interface SendAmountAndMessageResult {
-    amount: string;
-    message: string;
-    token: string;
-}
+export type SendAmountAndMessageResult = Pick<SendState, "amount" | "asset">;
 
-export interface SendSetAmountScreenProps {
-    type?: "dao" | "send";
-}
+export const SEND_SET_AMOUNT_FORM_KEYS: Partial<Record<keyof SendState, keyof SendState>> = {
+    asset: "asset",
+    amount: "amount",
+};
 
-const SendSetAmountScreen = ({ type = "send" }: SendSetAmountScreenProps): JSX.Element => {
+const SendSetAmountScreen = (): JSX.Element => {
     const [sendState, setSendState] = useRecoilState(sendRecoilState);
+    /**
+     * asset will never be undefined because by default sendRoilState has it defined
+     * (check the recoil defaultState of sendState)
+     */
+    const [asset, setAsset] = useState<Asset | undefined>(sendState.asset);
+    const [amount, setAmount] = useState<string | undefined>(sendState.amount?.toString() ?? undefined);
     const translate = useTranslate();
-    const [amount, setAmount] = useState(sendState.amount || "");
-    const { fee: feeInDecimals } = useRecoilValue(settingsState);
-    const fee = convertShannonsToCKB(feeInDecimals);
-    const { data: balance, isLoading: balanceIsLoading } = useGetBalance(sendState.senderWalletIndex || 0);
+
+    const senderWalletIndex = sendState.senderWalletIndex!;
+    const { isLoading: balanceIsLoading } = useGetBalance(senderWalletIndex);
     const setTab = useSetTab();
 
-    const isDao = type === "dao";
+    const handleSubmit = (res: SendAmountAndMessageResult): void => {
+        setSendState((oldState) => ({
+            ...oldState,
+            ...res,
+        }));
+        setTab(SendScreens.CONFIRMATION);
+    };
 
-    const handleSubmit = ({ amount, message, token }: SendAmountAndMessageResult): void => {
-        setSendState((oldState) => ({ ...oldState, amount, message, fee: fee.toString(), token }));
-        setTab(type === "send" ? SendScreens.CONFIRMATION : DepositScreens.CONFIRMATION);
+    const handleAssetChange = (asset: Asset): void => {
+        setAsset(asset);
+        setAmount("");
     };
 
     return (
         <Suspense isLoading={balanceIsLoading} fallback={<CenteredLoader color="black" />}>
             <Form onSubmit={handleSubmit}>
                 <Col gap={24}>
-                    <TokenAmountInput
-                        type={type}
-                        fee={fee}
-                        amount={amount}
-                        setAmount={setAmount}
-                        freeBalance={balance?.freeBalance ?? 0}
-                        defaultToken={sendState.token}
-                        tokens={isDao ? undefined : ["BTC"]}
+                    <WalletAssetSelect
+                        label={translate("choose_what_to_send")}
+                        onChange={handleAssetChange}
+                        value={asset}
+                        index={senderWalletIndex}
+                        name={SEND_SET_AMOUNT_FORM_KEYS.asset}
                     />
-                    {isDao ? (
-                        <Typography variant="body1" textAlign="center">
-                            {translate("deposit_warning", {
-                                dao_min_deposit: config.minimumDaoDeposit.toString(),
-                                token: config.tokenName,
-                            })}
-                        </Typography>
-                    ) : (
-                        <TextArea name="message" placeholder={translate("write_a_message")} numberOfLines={7} />
-                    )}
+                    <AssetAmountTextField
+                        hideError={amount === ""}
+                        value={amount}
+                        onChange={(amount) => setAmount(amount)}
+                        label={translate("select_the_amount_to_send")}
+                        asset={asset ?? { type: AssetType.TOKEN }}
+                        placeholder={translate("enter_amount")}
+                        name={SEND_SET_AMOUNT_FORM_KEYS.amount}
+                        index={sendState.senderWalletIndex}
+                    />
                     <Button type="submit" fullWidth>
                         {translate("next")}
                     </Button>
