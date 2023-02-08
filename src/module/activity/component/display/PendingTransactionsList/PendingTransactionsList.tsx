@@ -10,7 +10,7 @@ const PendingTransactionRequestList = (): JSX.Element => {
         <MainSectionList
             sections={parsedPendingTransactions || []}
             onRefresh={refetch}
-            refreshing={isRefetching}
+            loading={isRefetching}
             renderItem={({ item: transactionRequest }) => <TransactionRequest transaction={transactionRequest} />}
             ListEmptyComponent={isLoading ? undefined : <EmptyListComponent />}
             keyExtractor={(_, index) => index.toString()}
