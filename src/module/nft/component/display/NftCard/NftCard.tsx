@@ -1,30 +1,27 @@
 import { Col, Typography } from "@peersyst/react-native-components";
-import { useTranslate } from "module/common/hook/useTranslate";
 import MainListCard from "module/main/component/display/MainListCard/MainListCard";
 import { TouchableWithoutFeedback } from "react-native";
 import { NftCardImage } from "./NftCard.styles";
 import { NftCardProps } from "./NftCard.types";
-import { placeholder_image } from "images";
 
 const NftCard = ({ nft }: NftCardProps): JSX.Element => {
-    const t = useTranslate();
     const {
         nftName,
         tokenUri,
         tokenId,
         total,
-        data: { description, title },
+        data: { description },
     } = nft;
 
     return (
         <TouchableWithoutFeedback>
             <MainListCard gap="6.5%">
-                <NftCardImage source={tokenUri ? { uri: tokenUri } : placeholder_image} />
+                <NftCardImage source={{ uri: tokenUri }} />
                 <Col flex={1} gap={12} justifyContent="center">
                     <Col gap={2} flex={1}>
-                        {title && (
+                        {nftName && (
                             <Typography variant="body1Strong" numberOfLines={1}>
-                                {title}
+                                {nftName}
                             </Typography>
                         )}
                         {description && (
@@ -32,9 +29,9 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
                                 {description}
                             </Typography>
                         )}
-                        {tokenId && (
+                        {tokenId && total && (
                             <Typography variant="body3Strong" numberOfLines={1} color="primary">
-                                {tokenId}
+                                {`${tokenId}/${total}`}
                             </Typography>
                         )}
                     </Col>

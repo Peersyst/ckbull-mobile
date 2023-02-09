@@ -1,9 +1,7 @@
 import { useQuery, UseQueryResult } from "react-query";
 import useSelectedWalletIndex from "module/wallet/hook/useSelectedWalletIndex";
 import useSelectedNetwork from "module/settings/hook/useSelectedNetwork";
-
-// TODO: Fix sdk type generating errors
-type Nft = any;
+import { Nft } from "ckb-peersyst-sdk";
 
 export default function (index?: number): UseQueryResult<Nft[]> {
     const network = useSelectedNetwork();
@@ -12,18 +10,10 @@ export default function (index?: number): UseQueryResult<Nft[]> {
     return useQuery(["nfts", usedIndex, network], (): Nft[] => {
         return [
             {
-                token_id: "0",
-                owner_id: "doctorparra.near",
-                contract_id: "nuer.near",
-                events: [
-                    {
-                        type: "nft_transfer",
-                        price: 200000.23423,
-                        receiver_id: "doctorparra.near",
-                        sender_id: "nuer.near",
-                    },
-                ],
-                metadata: {
+                tokenId: "0",
+                tokenUri: "https://ipfs.fleek.co/ipfs/bafybeiffkdczuvd6neggcggg63xd2ptdartq2rkzufob55qfkrrrby3kky",
+                nftName: "CBK CAMEL 21 #19",
+                data: {
                     title: "NEAR CAMEL 21 #19",
                     description: "INDIAN CAMEL",
                     media: "https://ipfs.fleek.co/ipfs/bafybeiffkdczuvd6neggcggg63xd2ptdartq2rkzufob55qfkrrrby3kky",
@@ -37,7 +27,6 @@ export default function (index?: number): UseQueryResult<Nft[]> {
                     reference: null,
                     reference_hash: null,
                 },
-                approved_account_ids: [],
             },
         ];
     });
