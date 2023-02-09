@@ -29,7 +29,13 @@ const SetWalletNameScreen = ({ onSubmit, submitText }: SetWalletNameScreenProps)
             <Advise title={translate("security_first")} text={translate("set_wallet_name_text")} />
             <Form onSubmit={handleSubmit}>
                 <Col gap={30}>
-                    <TextField name="walletName" defaultValue={name} placeholder={translate("wallet_name")} required />
+                    <TextField
+                        name="walletName"
+                        defaultValue={name}
+                        placeholder={translate("wallet_name")}
+                        required
+                        style={{ component: { backgroundColor: "transparent" } }}
+                    />
                     <Button fullWidth variant="primary" type="submit">
                         {submitText}
                     </Button>

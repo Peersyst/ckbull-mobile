@@ -9,15 +9,15 @@ const AddWalletCard = (): JSX.Element => {
     const translate = useTranslate();
     const { showModal } = useModal();
     return (
-        <AddWalletCardRoot justifyContent="center" gap="5%" alignItems="center">
-            <Typography variant="body3Regular" color="gray.0">
+        <AddWalletCardRoot justifyContent="center" gap={24} alignItems="center">
+            <Typography variant="body1Light" color="white">
                 {translate("add_a_new_account")}
             </Typography>
-            <Row justifyContent="center" gap={"5%"} style={{ width: "100%" }}>
+            <Row justifyContent="center" gap={10}>
                 <Button variant="outlined" color="gray.0" onPress={() => showModal(CreateWalletModal)}>
                     {translate("create")}
                 </Button>
-                <Button variant="secondary" size="lg" onPress={() => showModal(ImportWalletModal)}>
+                <Button variant="secondary" onPress={() => showModal(ImportWalletModal)}>
                     {translate("import")}
                 </Button>
             </Row>
