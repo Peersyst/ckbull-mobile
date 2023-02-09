@@ -32,8 +32,8 @@ describe("BottomBar test", () => {
     test("Navigate to Account Screen", () => {
         const mockedNavigate = jest.fn();
         const screen = render(<BottomBar state={mockedState as any} navigation={{ navigate: mockedNavigate } as any} />);
-        const walletIcon = screen.getByTestId("AccountIcon");
-        fireEvent.press(walletIcon);
+        const accountIcon = screen.getByTestId("AccountIcon");
+        fireEvent.press(accountIcon);
         expect(mockedNavigate).toHaveBeenCalledWith(MainBottomScreens.HOME);
     });
     test("Navigate to Activity Screen", () => {
@@ -44,6 +44,12 @@ describe("BottomBar test", () => {
         expect(mockedNavigate).toHaveBeenCalledWith(MainBottomScreens.ACTIVITY);
     });
 
+    test("Navigate to Scan Screen", () => {
+        const mockedNavigate = jest.fn();
+        const screen = render(<BottomBar state={mockedState as any} navigation={{ navigate: mockedNavigate } as any} />);
+        const qrIcon = screen.getByTestId("QrIcon");
+        fireEvent.press(qrIcon);
+    });
     test("Navigate to News Screen", () => {
         const mockedNavigate = jest.fn();
         const screen = render(<BottomBar state={{ ...mockedState, index: 0 } as any} navigation={{ navigate: mockedNavigate } as any} />);

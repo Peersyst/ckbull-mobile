@@ -129,6 +129,9 @@
     "mnemonic_for": "%name%的助记词",
     "status": "当前状况",
     "pending": "等待中",
+    "signed": "簽",
+    "expired": "已到期",
+    "expireDate": "%hours%小時%minutes%分%seconds%秒後到期",
     "connected": "连接的",
     "failed": "失败的",
     "proposed": "已提交",
@@ -157,5 +160,7 @@
     "boughtFor": "购买者",
     "selectAToken": "选择一个硬币",
     "continue": "继续",
-    "disconnect": "斷開"
+    "disconnect": "斷開",
+    "connected_sites": "連接的站點",
+    "today": "今天"
 }

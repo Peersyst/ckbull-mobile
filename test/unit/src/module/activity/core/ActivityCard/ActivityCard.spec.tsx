@@ -7,17 +7,18 @@ describe("Tests for ActivityCard", () => {
     const mockTitle = "title";
     const mockDescription = "description";
     const mockDetails = "details";
-    const mockAmount = "amount";
+
     const mockOnAction = jest.fn();
 
     test("Renders correctly with onAction", () => {
         render(
             <ActivityCard
-                display={<Typography variant="body1Light">display</Typography>}
+                imageUrl={""}
                 title={mockTitle}
                 description={mockDescription}
                 details={"details"}
-                amount={mockAmount}
+                amount={100}
+                amountAction={"add"}
                 actionElement={<Typography variant="body1Light">action</Typography>}
                 onAction={mockOnAction}
             />,
@@ -25,30 +26,28 @@ describe("Tests for ActivityCard", () => {
 
         expect(screen.getByText(mockTitle)).toBeDefined();
         expect(screen.getByText(mockDescription)).toBeDefined();
-        expect(screen.getByText("display")).toBeDefined();
         expect(screen.getByText(mockDetails)).toBeDefined();
-        expect(screen.getByText(mockAmount)).toBeDefined();
-
+        expect(screen.getByText("+100 CKB")).toBeDefined();
         expect(screen.getByText("action")).toBeDefined();
     });
 
     test("Renders correctly with action disconnect", () => {
         render(
             <ActivityCard
-                display={<Typography variant="body1Light">display</Typography>}
+                imageUrl={""}
                 title={mockTitle}
                 description={mockDescription}
                 details={"details"}
-                amount={mockAmount}
+                amount={100}
+                amountAction={"add"}
                 actionElement={<Typography variant="body1Light">action</Typography>}
             />,
         );
 
         expect(screen.getByText(mockTitle)).toBeDefined();
         expect(screen.getByText(mockDescription)).toBeDefined();
-        expect(screen.getByText("display")).toBeDefined();
         expect(screen.getByText(mockDetails)).toBeDefined();
-        expect(screen.getByText(mockAmount)).toBeDefined();
+        expect(screen.getByText("+100 CKB")).toBeDefined();
 
         expect(screen.queryByText("action")).toBeNull();
     });

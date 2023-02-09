@@ -7,5 +7,5 @@ export const WalletSliderRoot = styled(PagerView)(({ theme: { palette }, dimensi
     margin: 0,
     marginBottom: 0,
     minHeight: Math.max(height * 0.25, WALLET_SLIDER_MIN_HEIGHT),
-    pagination: { dot: { backgroundColor: palette.overlay[100]["12%"], active: { backgroundColor: palette.white } } },
+    pagination: { dot: { backgroundColor: palette.overlay[900]["16%"], active: { backgroundColor: palette.white } } },
 }));

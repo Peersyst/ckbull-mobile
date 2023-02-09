@@ -15,7 +15,8 @@ module.exports = function (api) {
                         "ckb-peersyst-sdk": "./src/module/sdk",
                         module: "./src/module",
                         utils: "./src/utils",
-                        "stack-navigator": "./src/Stack.ts",
+                        navigator: "./src/navigator",
+                        "stack-navigator": "./src/navigator/Stack.ts",
                         "query-utils": "./src/query/react-query-overrides.ts",
                         "test-mocks": "./test/__mocks__"
                     },

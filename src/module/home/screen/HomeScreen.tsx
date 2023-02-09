@@ -1,16 +1,16 @@
 import { Col } from "@peersyst/react-native-components";
 import HomeSlider from "module/home/component/core/HomeSlider";
-import BaseMainGradientScreen from "module/main/component/layout/BaseMainGradientScreen/BaseMainGradientScreen";
 import HomeTabs from "../component/navigation/HomeTabs";
+import BaseMainScreen from "module/main/component/layout/BaseMainScreen/BaseMainScreen";
 
 const HomeScreen = (): JSX.Element => {
     return (
-        <BaseMainGradientScreen style={{ backgroundColor: "#5F8AFA", secondaryBackgroundColor: "#4FD1D9" }}>
+        <BaseMainScreen>
             <Col flex={1}>
                 <HomeSlider />
                 <HomeTabs />
             </Col>
-        </BaseMainGradientScreen>
+        </BaseMainScreen>
     );
 };
 
