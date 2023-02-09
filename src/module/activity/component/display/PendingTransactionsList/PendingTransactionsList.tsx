@@ -1,14 +1,14 @@
 import TransactionRequest from "module/activity/component/display/TransactionRequest/TransactionRequest";
 import EmptyListComponent from "module/common/component/display/EmptyListComponent/EmptyListComponent";
 import MainSectionList from "module/main/component/display/MainSectionList/MainSectionList";
-import useGetParsedPendingTransactions from "module/activity/hook/useGetParsedPendingTransactions";
+import useGetPendingTransactions from "module/activity/queries/useGetPendingTransactions";
 
 const PendingTransactionRequestList = (): JSX.Element => {
-    const { parsedPendingTransactions, isLoading, refetch, isRefetching } = useGetParsedPendingTransactions();
+    const { data: pendingTransactions, isLoading, refetch, isRefetching } = useGetPendingTransactions();
 
     return (
         <MainSectionList
-            sections={parsedPendingTransactions || []}
+            sections={pendingTransactions || []}
             onRefresh={refetch}
             loading={isRefetching}
             renderItem={({ item: transactionRequest }) => <TransactionRequest transaction={transactionRequest} />}
