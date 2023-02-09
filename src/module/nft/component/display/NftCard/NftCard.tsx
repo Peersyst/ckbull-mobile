@@ -1,8 +1,6 @@
 import { Col, Typography } from "@peersyst/react-native-components";
 import { useTranslate } from "module/common/hook/useTranslate";
 import MainListCard from "module/main/component/display/MainListCard/MainListCard";
-import Balance from "module/wallet/component/display/Balance/Balance";
-import { useMemo } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import { NftCardImage } from "./NftCard.styles";
 import { NftCardProps } from "./NftCard.types";
@@ -11,18 +9,17 @@ import { placeholder_image } from "images";
 const NftCard = ({ nft }: NftCardProps): JSX.Element => {
     const t = useTranslate();
     const {
-        contract_id,
-        metadata: { title, media },
-        events,
+        nftName,
+        tokenUri,
+        tokenId,
+        total,
+        data: { description, title },
     } = nft;
-    const lastTransfer = useMemo(() => {
-        return events.find((e: { type: string }) => e.type === "nft_transfer");
-    }, [events]);
 
     return (
         <TouchableWithoutFeedback>
             <MainListCard gap="6.5%">
-                <NftCardImage source={media ? { uri: media } : placeholder_image} />
+                <NftCardImage source={tokenUri ? { uri: tokenUri } : placeholder_image} />
                 <Col flex={1} gap={12} justifyContent="center">
                     <Col gap={2} flex={1}>
                         {title && (
@@ -30,20 +27,15 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
                                 {title}
                             </Typography>
                         )}
-                        {contract_id && (
-                            <Typography variant="body3Strong" numberOfLines={1} color="primary">
-                                {contract_id}
+                        {description && (
+                            <Typography variant="body1Strong" numberOfLines={1}>
+                                {description}
                             </Typography>
                         )}
-                    </Col>
-                    <Col flex={1}>
-                        {lastTransfer && (
-                            <Col gap={2}>
-                                <Typography variant="body4Strong" light numberOfLines={1}>
-                                    {t("boughtFor")}
-                                </Typography>
-                                <Balance variant="body3Strong" balance={lastTransfer.price} units="token" />
-                            </Col>
+                        {tokenId && (
+                            <Typography variant="body3Strong" numberOfLines={1} color="primary">
+                                {tokenId}
+                            </Typography>
                         )}
                     </Col>
                 </Col>

@@ -1,16 +1,17 @@
 import { NetworkType } from "module/settings/state/SettingsState";
-//import { NftToken, Token } from "near-peersyst-sdk";
+import { Nft } from "ckb-peersyst-sdk";
+import { TokenAmount } from "module/token/types";
 
 export enum AssetType {
-    TOKEN = "token",
-    FT = "ft",
+    NATIVE_TOKEN = "native_token",
+    FT = "token",
     NFT = "nft",
 } //token refers as near token
 
 export interface Asset {
     type: AssetType;
-    nft?: NftToken;
-    ft?: Token;
+    nft?: Nft;
+    ft?: TokenAmount;
 }
 
 export interface BaseWallet {

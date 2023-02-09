@@ -14,5 +14,6 @@
     "maxNumberOfDecimals": 6,
     "enableMainnet": true,
     "tokenName": "CKB",
-    "newsRSSUrl": "https://fetchrss.com/rss/6239aa2ceb62c371b8448ee26239aa120841546894777912.xml"
+    "newsRSSUrl": "https://fetchrss.com/rss/6239aa2ceb62c371b8448ee26239aa120841546894777912.xml",
+    "estimatedFee": "0.005"
 }

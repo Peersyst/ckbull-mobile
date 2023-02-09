@@ -18,6 +18,7 @@ const sendState = atom<SendState>({
     default: {
         token: config.tokenName,
         asset: { type: AssetType.TOKEN },
+        amount: "",
     },
 });
 

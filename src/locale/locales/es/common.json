@@ -167,5 +167,8 @@
     "activity": "Actividad",
     "scan": "Escanear",
     "ckbullMobileWallet": "CKBull Mobile Wallet",
-    "nervosDAO": "Nervos DAO"
+    "nervosDAO": "Nervos DAO",
+    "choose_what_to_send": "Elige que quieres enviar",
+    "select_the_amount_to_send": "Selecciona la cantidad a enviar",
+    "select_asset": "Elige entre tus activos"
 }

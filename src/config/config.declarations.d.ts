@@ -24,6 +24,7 @@ declare module "@peersyst/react-native-components" {
         enableMainnet: boolean;
         tokenName: string;
         newsRSSUrl: string;
+        estimatedFee: string;
     }
 
     export interface CreateConfig {

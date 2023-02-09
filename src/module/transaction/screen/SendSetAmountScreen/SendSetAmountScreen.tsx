@@ -21,10 +21,7 @@ export const SEND_SET_AMOUNT_FORM_KEYS: Partial<Record<keyof SendState, keyof Se
 
 const SendSetAmountScreen = (): JSX.Element => {
     const [sendState, setSendState] = useRecoilState(sendRecoilState);
-    /**
-     * asset will never be undefined because by default sendRoilState has it defined
-     * (check the recoil defaultState of sendState)
-     */
+
     const [asset, setAsset] = useState<Asset | undefined>(sendState.asset);
     const [amount, setAmount] = useState<string | undefined>(sendState.amount?.toString() ?? undefined);
     const translate = useTranslate();
@@ -41,7 +38,7 @@ const SendSetAmountScreen = (): JSX.Element => {
         setTab(SendScreens.CONFIRMATION);
     };
 
-    const handleAssetChange = (asset: Asset): void => {
+    const handleAssetChange = (asset: Asset | undefined): void => {
         setAsset(asset);
         setAmount("");
     };
@@ -57,17 +54,17 @@ const SendSetAmountScreen = (): JSX.Element => {
                         index={senderWalletIndex}
                         name={SEND_SET_AMOUNT_FORM_KEYS.asset}
                     />
-                    <AssetAmountTextField
+                    {/*<AssetAmountTextField
                         hideError={amount === ""}
                         value={amount}
-                        onChange={(amount) => setAmount(amount)}
+                        onChange={(amount: string) => setAmount(amount)}
                         label={translate("select_the_amount_to_send")}
                         asset={asset ?? { type: AssetType.TOKEN }}
                         placeholder={translate("enter_amount")}
                         name={SEND_SET_AMOUNT_FORM_KEYS.amount}
                         index={sendState.senderWalletIndex}
-                    />
-                    <Button type="submit" fullWidth>
+                    />*/}
+                    <Button variant="primary" type="submit" fullWidth>
                         {translate("next")}
                     </Button>
                 </Col>
