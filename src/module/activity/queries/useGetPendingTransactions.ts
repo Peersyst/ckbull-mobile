@@ -4,14 +4,10 @@ import { useQuery } from "react-query";
 import Queries from "../../../query/queries";
 import { TransactionType } from "module/sdk";
 import { TransactionRequestDto } from "module/activity/dto/dtos";
-import useFormatDate from "module/common/hook/useFormatDate";
+import useParsePendingTransactions from "../hook/useParsePendingTransactions";
+import { ParsedPendingTransactions } from "../types";
 
-export interface ParsedPendingTransaction {
-    title: string;
-    data: TransactionRequestDto[];
-}
-
-export default function (): QueryResult<ParsedPendingTransaction[]> {
+export default function (): QueryResult<ParsedPendingTransactions[]> {
     const mockRequest: TransactionRequestDto = {
         transactionToken: "0",
         status: "pending",
@@ -42,24 +38,7 @@ export default function (): QueryResult<ParsedPendingTransaction[]> {
         mockRequest2,
     ];
 
-    const formatDate = useFormatDate();
-
-    const parsedPendingTransactions = (data: TransactionRequestDto[]): ParsedPendingTransaction[] => {
-        const timestampsMap: Record<string, TransactionRequestDto[]> = {};
-        data.map((transaction) => {
-            const { createdAt } = transaction;
-            const formattedDate = formatDate(createdAt);
-            if (!timestampsMap[formattedDate]) {
-                timestampsMap[formattedDate] = [transaction];
-            } else {
-                timestampsMap[formattedDate].push(transaction);
-            }
-        });
-        const timestamps = Object.keys(timestampsMap);
-        return timestamps.map((timestamp) => {
-            return { title: timestamp, data: timestampsMap[timestamp] };
-        });
-    };
+    const parsePendingTransactions = useParsePendingTransactions();
 
     const { index: usedIndex, network, queryEnabled } = useServiceInstance();
     const getMockTransactionRequest = () => {
@@ -67,7 +46,7 @@ export default function (): QueryResult<ParsedPendingTransaction[]> {
     };
 
     return useQuery([Queries.SIGNER_APP_GET_PENDING_TRANSACTIONS, usedIndex, network], getMockTransactionRequest, {
-        select: (data) => parsedPendingTransactions(data),
+        select: (data) => parsePendingTransactions(data),
         enabled: queryEnabled,
     });
 }
