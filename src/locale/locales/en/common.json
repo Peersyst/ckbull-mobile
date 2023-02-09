@@ -167,5 +167,7 @@
     "activity": "Activity",
     "scan": "Scan",
     "ckbullMobileWallet": "CKBull Mobile Wallet",
-    "nervosDAO": "Nervos DAO"
+    "nervosDAO": "Nervos DAO",
+    "connected_sites": "Connected sites",
+    "today": "Today"
 }

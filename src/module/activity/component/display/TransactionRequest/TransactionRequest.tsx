@@ -15,6 +15,7 @@ const TransactionRequest = ({
         transaction: { type, amount },
         status,
         expiresAt,
+        createdAt,
     },
 }: TransactionRequestProps): JSX.Element => {
     const translate = useTranslate();
@@ -27,7 +28,7 @@ const TransactionRequest = ({
             imageUrl={imageUrl}
             title={title}
             description={translate(status)}
-            details={expiresAt ? translate("expireDate", getTimeFromSeconds(expiresAt)) : undefined}
+            details={expiresAt ? translate("expireDate", getTimeFromSeconds(expiresAt - createdAt)) : undefined}
             amount={amount}
             amountAction={transactionTypeToBalanceAction(type)}
             actionElement={actionElement}

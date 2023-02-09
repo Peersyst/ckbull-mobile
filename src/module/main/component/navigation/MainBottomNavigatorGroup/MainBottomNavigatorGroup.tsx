@@ -4,6 +4,7 @@ import DAOScreen from "module/dao/screen/DAOScreen";
 import NewsScreen from "module/news/screen/NewsScreen";
 import Header from "module/common/component/navigation/Header/Header";
 import { BottomTab } from "stack-navigator";
+import ActivityScreen from "module/activity/screen/ActivityScreen";
 
 export enum MainBottomScreens {
     HOME = "Home",
@@ -22,6 +23,7 @@ const MainBottomNavigatorGroup = () => (
     >
         <BottomTab.Screen name={MainBottomScreens.HOME} component={HomeScreen} />
         <BottomTab.Screen name={MainBottomScreens.DAO} component={DAOScreen} />
+        <BottomTab.Screen name={MainBottomScreens.ACTIVITY} component={ActivityScreen} />
         <BottomTab.Screen name={MainBottomScreens.NEWS} component={NewsScreen} />
     </BottomTab.Navigator>
 );
