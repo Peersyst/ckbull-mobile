@@ -12,11 +12,11 @@ export const TextFieldRoot = styled(TextField)<TextFieldRootProps>(({ theme, siz
     const inputSizeStyles: Record<TextFieldSize, InputStyle> = {
         md: {
             height: 45,
-            ...theme.typography.body3Strong,
+            ...theme.typography.body2Strong,
         },
         lg: {
             height: 60,
-            ...theme.typography.body3Strong,
+            ...theme.typography.body2Strong,
         },
     };
 

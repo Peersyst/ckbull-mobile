@@ -17,7 +17,7 @@ const sendState = atom<SendState>({
     key: "send",
     default: {
         token: config.tokenName,
-        asset: { type: AssetType.TOKEN },
+        asset: { type: AssetType.NATIVE_TOKEN },
         amount: "",
     },
 });

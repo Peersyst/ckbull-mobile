@@ -4,14 +4,13 @@ import BaseAssetAmountTextField from "../BaseAssetAmountTextField/BaseAssetAmoun
 import { NumericTextFieldProps } from "module/common/component/input/NumericTextField/NumericTextField";
 //import { useNEARAmountTextFieldValidator } from "./hook/useNEARAmountTextFieldValidator";
 import { useControlled } from "@peersyst/react-hooks";
-import { useTheme } from "@peersyst/react-native-styled";
 
 export interface NEARAmountTextFieldProps extends Omit<NumericTextFieldProps, "validators" | "maxDecimals"> {
     index?: number;
     maxAmount?: string; //in NEAR
 }
 
-const NEARAmountTextField = ({
+const CKBAmountTextField = ({
     index,
     defaultValue = "",
     value,
@@ -20,7 +19,6 @@ const NEARAmountTextField = ({
     maxAmount,
     ...rest
 }: NEARAmountTextFieldProps) => {
-    const { palette } = useTheme();
     const [amount, setAmount] = useControlled(defaultValue, value, onChange);
     //const { error } = useNEARAmountTextFieldValidator({ index, amount, maxAmount });
     const { isLoading } = useGetBalance(index);
@@ -33,10 +31,9 @@ const NEARAmountTextField = ({
             onChange={setAmount}
             loading={isLoading}
             units={config.tokenName}
-            style={{ component: { backgroundColor: "transparent", borderColor: palette.overlay[300]["24%"] } }}
             {...rest}
         />
     );
 };
 
-export default NEARAmountTextField;
+export default CKBAmountTextField;

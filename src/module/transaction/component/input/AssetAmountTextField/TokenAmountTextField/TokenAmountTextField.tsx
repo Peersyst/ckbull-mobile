@@ -1,28 +1,28 @@
 import BaseAssetAmountTextField from "../BaseAssetAmountTextField/BaseAssetAmountTextField";
-import { Token } from "near-peersyst-sdk";
+import { TokenAmount } from "module/token/types";
 import { NumericTextFieldProps } from "module/common/component/input/NumericTextField/NumericTextField";
-import { useFTAmountTextFieldValidator } from "./hook/useFTAmountTextFieldValidator";
+//import { useFTAmountTextFieldValidator } from "./hook/useFTAmountTextFieldValidator";
 import { useControlled } from "@peersyst/react-hooks";
 
 export interface TokenAmountTextFieldProps extends Omit<NumericTextFieldProps, "validators" | "suffix"> {
-    token: Token;
+    token: TokenAmount;
 }
 
 const TokenAmountTextField = ({ token, defaultValue = "", value, onChange, error: errorProp, ...rest }: TokenAmountTextFieldProps) => {
     const {
-        metadata: { symbol, decimals: decimalsMetadata },
+        type: { decimals, tokenName },
     } = token;
     const [amount, setAmount] = useControlled(defaultValue, value, onChange);
 
-    const { error } = useFTAmountTextFieldValidator({ amount, token });
+    //const { error } = useFTAmountTextFieldValidator({ amount, token });
 
     return (
         <BaseAssetAmountTextField
-            maxDecimals={parseInt(decimalsMetadata, 10)}
-            error={errorProp || error}
+            maxDecimals={parseInt(decimals.toString(), 10)}
+            error={errorProp}
             value={amount}
             onChange={setAmount}
-            units={symbol}
+            units={tokenName}
             {...rest}
         />
     );

@@ -1,5 +1,4 @@
 import { Spinner, Typography } from "@peersyst/react-native-components";
-
 import NumericTextField, { NumericTextFieldProps } from "module/common/component/input/NumericTextField/NumericTextField";
 
 export type BaseAssetAmountTextFieldProps = NumericTextFieldProps & {
