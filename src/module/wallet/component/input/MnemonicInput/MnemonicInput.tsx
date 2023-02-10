@@ -34,7 +34,7 @@ export const MnemonicInput = (): JSX.Element => {
         <Col gap={24}>
             <Col gap={24} style={{ minHeight: 290 }}>
                 <Advise title={translate("mnemonic")} text={translate("mnemonic_input_text")} />
-                <MnemonicList mnemonic={mnemonic} onPress={handleWordPress} />
+                <MnemonicList mnemonic={mnemonic} onPress={handleWordPress} variant={"primary"} />
             </Col>
             <TextField
                 autoCorrect={false}
@@ -45,6 +45,7 @@ export const MnemonicInput = (): JSX.Element => {
                 onSubmitEditing={handleSubmit}
                 placeholder={translate("add_a_word")}
                 disabled={mnemonic.length > 11}
+                style={{ component: { backgroundColor: "transparent" } }}
             />
         </Col>
     );

@@ -27,8 +27,8 @@ const WalletMnemonicScreen = ({ onNextScreen }: WalletMnemonicScreenProps): JSX.
     return (
         <Col flex={1} gap={24} justifyContent="flex-end">
             <Advise title={translate("keep_this_safe")} />
-            <MnemonicList mnemonic={mnemonic} />
-            <Button fullWidth onPress={handleNext}>
+            <MnemonicList mnemonic={mnemonic} variant="secondary" />
+            <Button fullWidth variant="primary" onPress={handleNext}>
                 {translate("next")}
             </Button>
         </Col>
