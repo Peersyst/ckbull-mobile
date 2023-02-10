@@ -1,8 +1,8 @@
 import useNavigation from "module/common/hook/useNavigation";
 import { Row, Typography } from "@peersyst/react-native-components";
-import { RootStackParamsList } from "stack-navigator";
 import { ChevronRightIcon } from "icons";
 import SettingsTouchableCard from "../SettingsTouchableCard/SettingsTouchableCard";
+import { RootStackParamsList } from "stack-navigator";
 
 interface SettingsMenuProps {
     label: string;

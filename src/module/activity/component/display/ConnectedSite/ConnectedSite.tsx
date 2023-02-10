@@ -1,14 +1,18 @@
-import { ConnectedSiteType } from "module/activity/component/display/ConnectedSite/ConnectedSite.types";
 import { useTranslate } from "module/common/hook/useTranslate";
-import { ConnectedSiteRoot, SiteImage } from "module/activity/component/display/ConnectedSite/ConnectedSite.styles";
-import { placeholder_image } from "images";
+import { ConnectedSiteRoot } from "module/activity/component/display/ConnectedSite/ConnectedSite.styles";
 import useGetConnectedSiteAction from "module/activity/hook/useGetConnectedSiteAction";
+import { ConnectedSiteDto } from "module/activity/dto/dtos";
 
 interface ConnectedSiteProps {
-    site: ConnectedSiteType;
+    site: ConnectedSiteDto;
 }
 
-const ConnectedSite = ({ site: { title, source = "", status } }: ConnectedSiteProps) => {
+const ConnectedSite = ({
+    site: {
+        app: { title, imageUrl = "" },
+        status,
+    },
+}: ConnectedSiteProps) => {
     const translate = useTranslate();
 
     const { actionElement, handleAction } = useGetConnectedSiteAction(status);
@@ -16,7 +20,7 @@ const ConnectedSite = ({ site: { title, source = "", status } }: ConnectedSitePr
     return (
         <ConnectedSiteRoot
             status={status}
-            display={<SiteImage source={source ? { uri: source } : placeholder_image} />}
+            imageUrl={imageUrl}
             title={title}
             description={translate(status)}
             actionElement={actionElement}

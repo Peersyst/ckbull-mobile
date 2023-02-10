@@ -1,10 +1,6 @@
-import { Isotip as IsotipRoot, IsotipAnimatedContainer } from "./Isotip.styles";
+import { Isotip as IsotipRoot } from "./Isotip.styles";
 import { IsotipProps } from "./Isotip.types";
 
-const Isotip = ({ animation, size, ...rest }: IsotipProps) => (
-    <IsotipAnimatedContainer animation={animation} size={size}>
-        <IsotipRoot size={size} {...rest} />
-    </IsotipAnimatedContainer>
-);
+const Isotip = (props: IsotipProps) => <IsotipRoot {...props} />;
 
 export default Isotip;

@@ -1,51 +1,61 @@
 import { Col, Row, Typography } from "@peersyst/react-native-components";
 import { ReactElement } from "react";
-import { ActivityCardRoot } from "module/activity/core/ActivityCard/ActivityCard.styles";
+import { ActivityCardRoot, ActivityDisplay, DefaultActivityAction, Details } from "module/activity/core/ActivityCard/ActivityCard.styles";
 import { Pressable, TextStyle, ViewStyle } from "react-native";
-import { ChevronRightIcon } from "icons";
+import { placeholder_image } from "images";
+import Balance from "module/wallet/component/display/Balance/Balance";
+import { BalanceAction } from "module/wallet/component/display/Balance/Balance.types";
 
 interface ActivityCardProps {
-    display: ReactElement;
+    imageUrl: string;
     title: string;
     description: string;
-    amount?: string;
+    amount?: number | string;
+    amountAction?: BalanceAction;
     details?: string;
     actionElement?: ReactElement;
     onAction?: () => void;
-    style?: ViewStyle & { title?: TextStyle; description?: TextStyle; details?: TextStyle };
+    style?: ViewStyle & { title?: TextStyle; description?: TextStyle; details?: TextStyle; amount?: TextStyle };
 }
 
 const ActivityCard = ({
-    display,
+    imageUrl,
     title,
     description,
     details,
     amount,
+    amountAction,
     actionElement,
     onAction,
-    style: { title: titleStyle = {}, details: detailsStyle = {}, description: descriptionStyle = {}, ...rotStyle } = {},
+    style: {
+        title: titleStyle = {},
+        details: detailsStyle = {},
+        description: descriptionStyle = {},
+        amount: amountStyle = {},
+        ...rotStyle
+    } = {},
 }: ActivityCardProps): JSX.Element => {
     return (
         <ActivityCardRoot style={rotStyle}>
             <Row gap={16}>
-                {display}
-                <Col justifyContent="center">
+                <ActivityDisplay source={imageUrl ? { uri: imageUrl } : placeholder_image} />
+                <Col gap={4} justifyContent="center">
                     <Typography variant="body3Regular" style={titleStyle}>
                         {title}
                     </Typography>
                     <Typography variant="body4Light" style={descriptionStyle} light={!descriptionStyle.color}>
                         {description}
                     </Typography>
-                    <Typography variant="body4Strong" light style={detailsStyle}>
+                    <Details variant="body4Strong" style={detailsStyle}>
                         {details}
-                    </Typography>
+                    </Details>
                 </Col>
             </Row>
-            {amount && <Typography variant="body4Strong">{amount}</Typography>}
+            {amount && <Balance balance={amount} action={amountAction} variant="body3Strong" units="token" style={amountStyle} />}
             {onAction && (
                 <Col justifyContent="center" alignItems="center">
                     <Pressable accessibilityRole="button" onPress={onAction}>
-                        {actionElement || <ChevronRightIcon />}
+                        {actionElement || <DefaultActivityAction />}
                     </Pressable>
                 </Col>
             )}

@@ -82,8 +82,14 @@ declare module "@peersyst/react-native-components" {
         //Utils
         wallet: string[];
         component: {
-            appbar: string;
-            bottomBar: string;
+            appbar: {
+                backgroundColor: string;
+                borderColor: string;
+            };
+            bottomBar: {
+                backgroundColor: string;
+                borderColor: string;
+            };
             paper: string;
             borderColor: string;
             label: string;

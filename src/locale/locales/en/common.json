@@ -130,6 +130,9 @@
     "mnemonic_for": "Mnemonic for {{name}}",
     "status": "Status",
     "pending": "Pending",
+    "signed": "Signed",
+    "expired": "Expired",
+    "expireDate": "Expires in {{hours}}h {{minutes}}min {{seconds}}s",
     "connected": "Connected",
     "failed": "Failed",
     "proposed": "Proposed",
@@ -163,5 +166,12 @@
     "disconnect": "Disconnect",
     "account": "Account",
     "activity": "Activity",
-    "scan": "Scan"
+    "scan": "Scan",
+    "create": "Create",
+    "import": "Import",
+    "add_a_new_account": "Add a new account",
+    "ckbullMobileWallet": "CKBull Mobile Wallet",
+    "nervosDAO": "Nervos DAO",
+    "connected_sites": "Connected sites",
+    "today": "Today"
 }
