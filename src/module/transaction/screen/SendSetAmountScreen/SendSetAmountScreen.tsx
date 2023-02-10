@@ -54,16 +54,16 @@ const SendSetAmountScreen = (): JSX.Element => {
                         index={senderWalletIndex}
                         name={SEND_SET_AMOUNT_FORM_KEYS.asset}
                     />
-                    {/*<AssetAmountTextField
+                    <AssetAmountTextField
                         hideError={amount === ""}
                         value={amount}
                         onChange={(amount: string) => setAmount(amount)}
                         label={translate("select_the_amount_to_send")}
-                        asset={asset ?? { type: AssetType.TOKEN }}
+                        asset={asset ?? { type: AssetType.NATIVE_TOKEN }}
                         placeholder={translate("enter_amount")}
                         name={SEND_SET_AMOUNT_FORM_KEYS.amount}
                         index={sendState.senderWalletIndex}
-                    />*/}
+                    />
                     <Button variant="primary" type="submit" fullWidth>
                         {translate("next")}
                     </Button>

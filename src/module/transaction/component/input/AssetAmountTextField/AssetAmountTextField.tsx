@@ -3,7 +3,7 @@ import { Asset } from "module/wallet/wallet.types";
 import { AssetType } from "module/wallet/wallet.types";
 import NEARAmountTextField from "./NEARAmountTextField/NEARAmountTextField";
 import NftAmountTextField from "./NftAmountTextField/NftAmountTextField";
-import TokenAmountTextField from "./TokenAmountTextField/TokenAmountTextField";
+//import TokenAmountTextField from "./TokenAmountTextField/TokenAmountTextField";
 
 export interface AssetAmountTextFieldProps extends Omit<TextFieldProps, "keyboardType" | "validators"> {
     asset: Asset;
