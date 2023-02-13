@@ -1,11 +1,14 @@
 import { LoadingModalProps } from "./LoadingModal.types";
-import { DarkLoadingModalOverlay, LoadingModalRoot, SuccessIcon, LoadingModalContent, LoadingModalMessage } from "./LoadingModal.styles";
+import { LoadingModalRoot, SuccessIcon, LoadingModalMessage } from "./LoadingModal.styles";
 import { useEffect, useState } from "react";
 import { notificationAsync, NotificationFeedbackType } from "expo-haptics";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { Backdrop, Col } from "@peersyst/react-native-components";
 import Button from "module/common/component/input/Button/Button";
-import { Isotip } from "../../display/Logos/Isotip/Isotip.styles";
+import ImageBackgroundPage from "../../layout/ImageBackgroundPage/ImageBackgroundPage";
+import darkTheme from "config/theme/darkTheme";
+import { ThemeProvider } from "@peersyst/react-native-styled";
+import { LoadingIcon } from "icons";
 
 const LoadingModal = ({ loading, successMessage, error, success, ...backdropProps }: LoadingModalProps): JSX.Element => {
     const [open, setOpen] = useState(false);
@@ -38,29 +41,30 @@ const LoadingModal = ({ loading, successMessage, error, success, ...backdropProp
             {...backdropProps}
         >
             <LoadingModalRoot>
-                <DarkLoadingModalOverlay />
-                <LoadingModalContent>
-                    {success ? (
-                        <>
-                            <Col alignItems="center" gap={14}>
-                                <SuccessIcon />
+                <ThemeProvider theme={darkTheme}>
+                    <ImageBackgroundPage>
+                        {success ? (
+                            <>
+                                <Col alignItems="center" gap={14}>
+                                    <SuccessIcon />
+                                    <LoadingModalMessage textAlign="center" variant="body2Strong">
+                                        {successMessage}
+                                    </LoadingModalMessage>
+                                </Col>
+                                <Button fullWidth variant="secondary" onPress={handleClose}>
+                                    {translate("continue")}
+                                </Button>
+                            </>
+                        ) : (
+                            <Col alignItems="center" justifyContent="center" gap={20} flex={1}>
+                                <LoadingIcon style={{ fontSize: 80 }} />
                                 <LoadingModalMessage textAlign="center" variant="body2Strong">
-                                    {successMessage}
+                                    {translate("processing")}
                                 </LoadingModalMessage>
                             </Col>
-                            <Button fullWidth variant="secondary" onPress={handleClose}>
-                                {translate("continue")}
-                            </Button>
-                        </>
-                    ) : (
-                        <Col alignItems="center" gap={14}>
-                            <Isotip size="lg" />
-                            <LoadingModalMessage textAlign="center" variant="body2Strong">
-                                {translate("processing")}
-                            </LoadingModalMessage>
-                        </Col>
-                    )}
-                </LoadingModalContent>
+                        )}
+                    </ImageBackgroundPage>
+                </ThemeProvider>
             </LoadingModalRoot>
         </Backdrop>
     );
