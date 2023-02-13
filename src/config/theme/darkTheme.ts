@@ -131,6 +131,7 @@ const darkTheme = createTheme({
                 placeholderColor: gray[500],
                 borderColor: overlay[700]["24%"],
                 displayColor: gray[600],
+                backgroundColor: gray[0],
             },
         },
     },

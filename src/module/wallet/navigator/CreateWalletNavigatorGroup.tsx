@@ -46,7 +46,11 @@ const CreateWalletNavigatorGroup = () => {
     };
 
     const handleTabChange = (t: number) => {
-        if (t === CreateWalletScreens.SET_WALLET_PIN) {
+        if (t === CreateWalletScreens.SET_WALLET_NAME) {
+            setShowPin(false);
+            setShowModal(true);
+            setActiveTab(t);
+        } else if (t === CreateWalletScreens.SET_WALLET_PIN) {
             setShowPin(true);
             setShowModal(false);
         } else if (t === CreateWalletScreens.WALLET_ADVISES || t === CreateWalletScreens.PICK_WALLET_MNEMONIC) {
@@ -104,7 +108,7 @@ const CreateWalletNavigatorGroup = () => {
                 <TabPanel index={CreateWalletScreens.SET_WALLET_PIN}>
                     <SetWalletPinScreen
                         onSuccess={() => handleTabChange(CreateWalletScreens.WALLET_ADVISES)}
-                        onCancel={() => handleTabChange(CreateWalletScreens.PICK_WALLET_MNEMONIC)}
+                        onCancel={() => handleTabChange(CreateWalletScreens.SET_WALLET_NAME)}
                     />
                 </TabPanel>
                 <TabPanel index={CreateWalletScreens.CREATE_WALLET_SUCCESS}>

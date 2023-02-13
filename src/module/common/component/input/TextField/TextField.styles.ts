@@ -12,11 +12,11 @@ export const TextFieldRoot = styled(TextField)<TextFieldRootProps>(({ theme, siz
     const inputSizeStyles: Record<TextFieldSize, InputStyle> = {
         md: {
             height: 45,
-            ...theme.typography.body3Strong,
+            ...theme.typography.body3Light,
         },
         lg: {
             height: 60,
-            ...theme.typography.body2Strong,
+            ...theme.typography.body2Light,
         },
     };
 
@@ -28,7 +28,7 @@ export const TextFieldRoot = styled(TextField)<TextFieldRootProps>(({ theme, siz
                 highlightColor: theme.palette.primary,
             },
             borderRadius: theme.borderRadiusSm,
-            backgroundColor: theme.palette.background,
+            backgroundColor: theme.palette.component.input.backgroundColor,
             color: theme.palette.component.input.displayColor,
             borderWidth: theme.borderWidth,
             borderStyle: "solid",
