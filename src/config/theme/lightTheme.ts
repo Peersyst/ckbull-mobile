@@ -128,6 +128,7 @@ const lightTheme = createTheme({
                 placeholderColor: gray[200],
                 borderColor: overlay[300]["24%"],
                 displayColor: gray[600],
+                backgroundColor: gray[0],
             },
         },
     },

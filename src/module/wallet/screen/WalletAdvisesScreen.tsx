@@ -29,7 +29,7 @@ const WalletAdvisesScreen = ({ onNextScreen, ensureReading = true, nextScreenTex
     return (
         <Col flex={1} gap={24}>
             <AdviseGroup index={index} onIndexChange={setIndex} advises={advises} />
-            <Button disabled={ensureReading && !hasVisitedLastAdvise} fullWidth onPress={onNextScreen}>
+            <Button disabled={ensureReading && !hasVisitedLastAdvise} variant={"primary"} fullWidth onPress={onNextScreen}>
                 {nextScreenText}
             </Button>
         </Col>
