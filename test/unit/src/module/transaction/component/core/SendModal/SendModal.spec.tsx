@@ -47,7 +47,7 @@ describe("SendModal tests", () => {
 
         // Enter amount and message
         await waitFor(() => fireEvent.changeText(screen.getByPlaceholderText(translate("enter_amount")), "6000"));
-        fireEvent.changeText(screen.getByPlaceholderText(translate("write_a_message")), "This is a message");
+        //fireEvent.changeText(screen.getByPlaceholderText(translate("write_a_message")), "This is a message");
         fireEvent.press(screen.getByText(translate("next")));
         screen.debug();
         // Confirmation

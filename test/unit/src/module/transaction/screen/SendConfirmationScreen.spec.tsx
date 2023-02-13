@@ -25,14 +25,15 @@ describe("SendConfirmationScreen tests", () => {
         const screen = render(<SendConfirmationScreen />);
         expect(screen.getByText(`1,000 ${config.tokenName}`)).toBeDefined();
         expect(screen.getByText(translate("transaction_fee_label") + ":")).toBeDefined();
-        expect(screen.getByText(`10 ${config.tokenName}`)).toBeDefined();
+        expect(screen.getByText(`61 ${config.tokenName}`)).toBeDefined();
         expect(screen.getByText(translate("total") + ":")).toBeDefined();
-        expect(screen.getByText(`1,010 ${config.tokenName}`)).toBeDefined();
+        expect(screen.getByText(`1,061 ${config.tokenName}`)).toBeDefined();
 
         expect(screen.getByText(translate("from"))).toBeDefined();
-        expect(screen.getByText(state.wallets[0].name + " - " + formatHash(MOCKED_ADDRESS, "middle", 3))).toBeDefined();
+
+        expect(screen.getByText(formatHash(MOCKED_ADDRESS, "middle", 15))).toBeDefined();
         expect(screen.getByText(translate("to"))).toBeDefined();
-        expect(screen.getByText("recei...ess")).toBeDefined();
+        expect(screen.getByText(formatHash("receiver_address", "middle", 15))).toBeDefined();
         expect(screen.getByText(translate("message"))).toBeDefined();
         expect(screen.getByText("Send message")).toBeDefined();
     });

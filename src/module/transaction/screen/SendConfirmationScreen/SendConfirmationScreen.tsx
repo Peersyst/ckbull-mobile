@@ -13,13 +13,13 @@ import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/Con
 import { useState } from "react";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
-
+import { config } from "config";
 const SendConfirmationScreen = (): JSX.Element => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const translate = useTranslate();
     const [loading, setLoading] = useState(false);
 
-    const { amount, fee: fee, senderWalletIndex, receiverAddress, message, token } = useRecoilValue(sendState);
+    const { amount, senderWalletIndex, receiverAddress, message, token } = useRecoilValue(sendState);
     const { fee: feeInDecimals } = useRecoilValue(settingsState);
     const {
         state: { wallets },
@@ -50,7 +50,7 @@ const SendConfirmationScreen = (): JSX.Element => {
                 <SendSummary
                     amount={amount!}
                     receiverAddress={receiverAddress!}
-                    fee={fee!}
+                    fee={config.minimumTransactionAmount.toString()}
                     token={token}
                     message={message!}
                     senderName={senderName}

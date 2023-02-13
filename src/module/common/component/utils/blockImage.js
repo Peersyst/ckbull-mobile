@@ -1,8 +1,10 @@
 (function (global, factory) {
     exports && typeof exports === "object" && typeof module !== "undefined"
         ? factory(exports)
-        : typeof define === "function" && define.amd
-        ? define(["exports"], factory)
+        : // eslint-disable-next-line no-undef
+        typeof define === "function" && define.amd
+        ? // eslint-disable-next-line no-undef
+          define(["exports"], factory)
         : factory((global.blockies = {}));
 })(this, (exports) => {
     "use strict";
@@ -88,21 +90,21 @@
         write(this.buffer, this.idat_offs + 8, byte2(header));
 
         // initialize deflate block headers
-        for (var i = 0; (i << 16) - 1 < this.pix_size; i++) {
+        for (var ii = 0; (ii << 16) - 1 < this.pix_size; ii++) {
             var size, bits;
-            if (i + 0xffff < this.pix_size) {
+            if (ii + 0xffff < this.pix_size) {
                 size = 0xffff;
                 bits = "\x00";
             } else {
-                size = this.pix_size - (i << 16) - i;
+                size = this.pix_size - (ii << 16) - ii;
                 bits = "\x01";
             }
             write(this.buffer, this.idat_offs + 8 + 2 + (i << 16) + (i << 2), bits, byte2lsb(size), byte2lsb(~size));
         }
 
         /* Create crc32 lookup table */
-        for (var i = 0; i < 256; i++) {
-            let c = i;
+        for (var iii = 0; iii < 256; iii++) {
+            let c = iii;
             for (let j = 0; j < 8; j++) {
                 if (c & 1) {
                     c = -306674912 ^ ((c >> 1) & 0x7fffffff);
@@ -110,7 +112,7 @@
                     c = (c >> 1) & 0x7fffffff;
                 }
             }
-            _crc32[i] = c;
+            _crc32[iii] = c;
         }
 
         // compute the index into a png for a given pixel
@@ -268,8 +270,8 @@
         for (var i = 0; i < randseed.length; i++) {
             randseed[i] = 0;
         }
-        for (var i = 0; i < seed.length; i++) {
-            randseed[i % 4] = (randseed[i % 4] << 5) - randseed[i % 4] + seed.charCodeAt(i);
+        for (var ii = 0; ii < seed.length; ii++) {
+            randseed[ii % 4] = (randseed[ii % 4] << 5) - randseed[ii % 4] + seed.charCodeAt(ii);
         }
     }
 
@@ -354,7 +356,6 @@
         const width = Math.sqrt(imageData.length);
 
         const p = new PNG(opts.size * opts.scale, opts.size * opts.scale, 3);
-        const bgcolor = p.color(...hsl2rgb(...opts.bgcolor));
         const color = p.color(...hsl2rgb(...opts.color));
         const spotcolor = p.color(...hsl2rgb(...opts.spotcolor));
 
