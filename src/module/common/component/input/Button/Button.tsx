@@ -1,12 +1,8 @@
 import { ButtonRoot } from "./Button.styles";
 import { ButtonProps } from "./Button.types";
 
-const Button = ({ variant, disabled, children, ...rest }: ButtonProps): JSX.Element => {
-    return (
-        <ButtonRoot {...rest} disabled={disabled} variant={variant}>
-            {children}
-        </ButtonRoot>
-    );
+const Button = (props: ButtonProps): JSX.Element => {
+    return <ButtonRoot {...props} />;
 };
 
 export default Button;
