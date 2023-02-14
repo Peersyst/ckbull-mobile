@@ -56,7 +56,7 @@ const LoadingModal = ({ loading, successMessage, error, success, ...backdropProp
                                     {successMessage}
                                 </Typography>
                             </Col>
-                            <Button fullWidth variant="secondary" onPress={handleClose}>
+                            <Button fullWidth variant="secondary" colorBtn={palette.green[400]} onPress={handleClose}>
                                 {translate("continue")}
                             </Button>
                         </Col>
