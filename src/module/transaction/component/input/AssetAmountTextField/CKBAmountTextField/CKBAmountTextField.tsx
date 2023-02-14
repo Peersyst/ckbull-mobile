@@ -13,6 +13,7 @@ export interface NEARAmountTextFieldProps extends Omit<NumericTextFieldProps, "v
 const CKBAmountTextField = ({ index, defaultValue = "", value, onChange, error: errorProp, ...rest }: NEARAmountTextFieldProps) => {
     const [amount, setAmount] = useControlled(defaultValue, value, onChange);
     //const { error } = useNEARAmountTextFieldValidator({ index, amount, maxAmount });
+
     const { isLoading } = useGetBalance(index);
 
     return (
