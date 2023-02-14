@@ -1,5 +1,5 @@
-import { Cell } from "@ckb-lumos/lumos";
-import { TransactionSkeleton } from "@ckb-lumos/helpers";
+import { Cell, DepType } from "@ckb-lumos/lumos";
+import { TransactionSkeleton, TransactionSkeletonType } from "@ckb-lumos/helpers";
 import { common } from "@ckb-lumos/common-scripts";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -34,18 +34,54 @@ export interface MNft {
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+export enum NftTypes {
+    nrc721 = "nrc721",
+    mNft = "mNft",
+}
+
+export interface NftConfigType {
+    txHash: string;
+    index: string;
+    depType: DepType;
+    codeHash?: string;
+    classCodeHash?: string;
+}
+
+const nftConfig: { [key in Environments]: { [key in NftTypes]: NftConfigType } } = {
+    [Environments.Mainnet]: {
+        [NftTypes.nrc721]: {
+            txHash: "0xb85f64679b43e6742ff2b874621d1d75c9680961c94de8187364474d637eddab",
+            index: "0x0",
+            depType: "code",
+        },
+        [NftTypes.mNft]: {
+            txHash: "0x5dce8acab1750d4790059f22284870216db086cb32ba118ee5e08b97dc21d471",
+            index: "0x2",
+            depType: "code",
+            codeHash: "0x2b24f0d644ccbdd77bbf86b27c8cca02efa0ad051e447c212636d9ee7acaaec9",
+            classCodeHash: "0xd51e6eaf48124c601f41abe173f1da550b4cbca9c6a166781906a287abbb3d9a",
+        },
+    },
+    [Environments.Testnet]: {
+        [NftTypes.nrc721]: {
+            txHash: "0xb22f046e3bc62ca3741e732cff136f5bb34038eb0437f21dded1556a8cc87cec",
+            index: "0x0",
+            depType: "code",
+        },
+        [NftTypes.mNft]: {
+            txHash: "0xf11ccb6079c1a4b3d86abe2c574c5db8d2fd3505fdc1d5970b69b31864a4bd1c",
+            index: "0x2",
+            depType: "code",
+            codeHash: "0xb1837b5ad01a88558731953062d1f5cb547adf89ece01e8934a9f0aeed2d959f",
+            classCodeHash: "0x095b8c0b4e51a45f953acd1fcd1e39489f2675b4bc94e7af27bb38958790e3fc",
+        },
+    },
+};
+
 export class NftService {
     private readonly connection: ConnectionService;
     private transactionService?: TransactionService;
     private readonly logger = new Logger(NftService.name);
-    private readonly mNftCodeHash = "0x2b24f0d644ccbdd77bbf86b27c8cca02efa0ad051e447c212636d9ee7acaaec9";
-    private readonly mNftTxHash = "0x5dce8acab1750d4790059f22284870216db086cb32ba118ee5e08b97dc21d471";
-    private readonly mNftOutpointIndex = "0x2";
-    private readonly mNftDepType = "code";
-    private readonly mNftClassCodeHash = "0xd51e6eaf48124c601f41abe173f1da550b4cbca9c6a166781906a287abbb3d9a";
-    private readonly nrc721TxHash = "0xb85f64679b43e6742ff2b874621d1d75c9680961c94de8187364474d637eddab";
-    private readonly nrc721OutpointIndex = "0x0";
-    private readonly nrc721DepType = "code";
     private nftSdk: NftSdk = null!;
     private initializing = false;
     private readonly nftCellSize = BigInt(142 * 10 ** 8);
@@ -81,6 +117,26 @@ export class NftService {
             issued: issued,
             total: total,
         };
+    }
+
+    private getMNftConfig(): NftConfigType {
+        return nftConfig[this.connection.getEnvironment()].mNft;
+    }
+
+    private getNrc721Config(): NftConfigType {
+        return nftConfig[this.connection.getEnvironment()].nrc721;
+    }
+
+    private addCellDepFromNftConfig(txSkeleton: TransactionSkeletonType, nftCfg: NftConfigType): TransactionSkeletonType {
+        return txSkeleton.update("cellDeps", (cellDeps) => {
+            return cellDeps.push({
+                out_point: {
+                    tx_hash: nftCfg.txHash,
+                    index: nftCfg.index,
+                },
+                dep_type: nftCfg.depType,
+            });
+        });
     }
 
     setTransactionService(transactionService: TransactionService) {
@@ -154,10 +210,12 @@ export class NftService {
                 rawData: cell.data,
             };
         }
-        if (cellTypeScript.codeHash === this.mNftCodeHash && this.connection.getEnvironment() === Environments.Mainnet) {
+
+        const mNftCfg = this.getMNftConfig();
+        if (cellTypeScript.codeHash === mNftCfg.codeHash && this.connection.getEnvironment() === Environments.Mainnet) {
             const cellProvider = this.connection.getCellProvider({
                 type: {
-                    code_hash: this.mNftClassCodeHash,
+                    code_hash: mNftCfg.classCodeHash!,
                     args: cellTypeScript.args.slice(0, -8),
                     hash_type: "type",
                 },
@@ -231,28 +289,12 @@ export class NftService {
 
         // Inject token capacity
         txSkeleton = this.transactionService.addSecp256CellDep(txSkeleton);
-        if (nft.script.codeHash === this.mNftCodeHash) {
+        if (nft.script.codeHash === this.getMNftConfig().codeHash) {
             // Add mnft code deps
-            txSkeleton = txSkeleton.update("cellDeps", (cellDeps) => {
-                return cellDeps.push({
-                    out_point: {
-                        tx_hash: this.mNftTxHash,
-                        index: this.mNftOutpointIndex,
-                    },
-                    dep_type: this.mNftDepType,
-                });
-            });
+            txSkeleton = this.addCellDepFromNftConfig(txSkeleton, this.getMNftConfig());
         } else {
             // Add nrc-721 code deps
-            txSkeleton = txSkeleton.update("cellDeps", (cellDeps) => {
-                return cellDeps.push({
-                    out_point: {
-                        tx_hash: this.nrc721TxHash,
-                        index: this.nrc721OutpointIndex,
-                    },
-                    dep_type: this.nrc721DepType,
-                });
-            });
+            txSkeleton = this.addCellDepFromNftConfig(txSkeleton, this.getNrc721Config());
         }
         // txSkeleton = this.transactionService.addSudtCellDep(txSkeleton);
         txSkeleton = this.transactionService.injectNftCapacity(txSkeleton, nft, cells);
