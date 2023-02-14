@@ -23,6 +23,7 @@ export const tempNft: Nft = {
         extra: null,
         reference: null,
         reference_hash: null,
+        operator: "nuer.ckb",
     },
 };
 
