@@ -13,6 +13,7 @@ export const violet = "#6D45F5";
 //Base Green
 export const green: Theme["palette"]["green"] = {
     200: "#1ED882",
+    400: "#32B2AA",
     600: "#52BD8C",
     800: "#34AEAE",
 };

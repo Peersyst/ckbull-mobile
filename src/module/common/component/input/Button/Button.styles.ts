@@ -42,7 +42,7 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
                 color: theme.palette.white,
             },
             secondary: {
-                color: theme.palette.gray[0],
+                color: theme.palette.green[400],
                 backgroundColor: theme.palette.gray[900],
             },
             tertiary: {

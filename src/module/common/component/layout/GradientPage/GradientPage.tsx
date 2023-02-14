@@ -9,6 +9,8 @@ const GradientPage = ({
     gradient,
     style: { backgroundColor: backgroundColorStyle, secondaryBackgroundColor: secondaryBackgroundColorStyle, ...style } = {},
     children,
+    start,
+    end,
     ...rest
 }: GradientPageProps): JSX.Element => {
     const { palette } = useTheme();
@@ -35,8 +37,8 @@ const GradientPage = ({
             {children}
             <GradientPageGradient
                 colors={[backgroundColor, secondaryBackgroundColor]}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 1, y: 0.5 }}
+                start={start ? start : { x: 0, y: 0.5 }}
+                end={end ? end : { x: 1, y: 0.5 }}
                 style={{
                     transform: [{ translateX: gradientAnim }],
                 }}

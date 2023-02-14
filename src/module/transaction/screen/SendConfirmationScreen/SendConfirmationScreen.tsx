@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { config } from "config";
+
 const SendConfirmationScreen = (): JSX.Element => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const translate = useTranslate();
