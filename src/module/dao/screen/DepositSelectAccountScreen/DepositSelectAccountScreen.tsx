@@ -1,11 +1,9 @@
-import { Col, Form, Paper, Row, Typography, useSetTab } from "@peersyst/react-native-components";
+import { Col, Form, Paper, Typography, useSetTab } from "@peersyst/react-native-components";
 import Button from "module/common/component/input/Button/Button";
 import sendRecoilState from "module/transaction/state/SendState";
-import { deposit } from "../../../../asset/image";
 import { SendScreens } from "module/transaction/component/core/SendModal/SendModal";
 import { useRecoilState } from "recoil";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
-import { DepositImage } from "./DepositImage.styles";
 import useUncommittedTransaction from "module/transaction/hook/useUncommittedTransaction";
 import useWalletState from "module/wallet/hook/useWalletState";
 import { useTranslate } from "module/common/hook/useTranslate";
@@ -38,9 +36,6 @@ const DepositSelectAccountScreen = () => {
     return (
         <Form onSubmit={handleSubmit}>
             <Col>
-                <Row justifyContent="center">
-                    <DepositImage source={deposit} />
-                </Row>
                 <Col gap={40}>
                     <Paper style={{ padding: 20 }} elevation={8}>
                         <WalletSelector
