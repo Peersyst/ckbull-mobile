@@ -1,3 +1,5 @@
+/* eslint-disable no-redeclare */
+/* eslint-disable no-undef */
 (function (global, factory) {
     exports && typeof exports === "object" && typeof module !== "undefined"
         ? factory(exports)
@@ -354,7 +356,6 @@
         const width = Math.sqrt(imageData.length);
 
         const p = new PNG(opts.size * opts.scale, opts.size * opts.scale, 3);
-        const bgcolor = p.color(...hsl2rgb(...opts.bgcolor));
         const color = p.color(...hsl2rgb(...opts.color));
         const spotcolor = p.color(...hsl2rgb(...opts.spotcolor));
 
