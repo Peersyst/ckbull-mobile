@@ -43,6 +43,7 @@ export function useLoad(): boolean {
                     }
                 });
             }
+
             setLoading(false);
         };
         getStorage();

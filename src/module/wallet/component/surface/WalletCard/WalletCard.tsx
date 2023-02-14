@@ -21,7 +21,7 @@ const WalletCard = ({
     style,
 }: WalletCardProps): JSX.Element => {
     const { palette } = useTheme();
-    const walletColor = palette.wallet[colorIndex];
+    const walletColor = palette.wallet[colorIndex ? colorIndex : 0];
 
     return (
         <ThemeOverrideProvider theme={getLuminance(walletColor) > 0.5 ? "light" : "dark"}>

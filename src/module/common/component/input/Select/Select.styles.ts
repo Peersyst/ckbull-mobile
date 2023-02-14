@@ -6,7 +6,7 @@ export const SelectRoot = styled(Select)(({ theme }) => ({
         display: {
             borderRadius: theme.borderRadiusSm,
             height: 60,
-            backgroundColor: theme.palette.background,
+            backgroundColor: theme.palette.component.input.backgroundColor,
             borderWidth: theme.borderWidth,
             borderStyle: "solid",
             borderColor: theme.palette.component.input.borderColor,
