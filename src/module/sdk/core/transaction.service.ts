@@ -1,5 +1,5 @@
 import { ScriptConfig } from "@ckb-lumos/config-manager";
-import { Cell, commons, hd, helpers, Script, utils } from "@ckb-lumos/lumos";
+import { Cell, commons, hd, helpers, Script, utils, HashType } from "@ckb-lumos/lumos";
 import { sealTransaction, TransactionSkeletonType } from "@ckb-lumos/helpers";
 import { TransactionWithStatus, values, core, WitnessArgs } from "@ckb-lumos/base";
 import { TransactionCollector as TxCollector } from "@ckb-lumos/ckb-indexer";
@@ -7,14 +7,14 @@ import { Reader, normalizers } from "@ckb-lumos/toolkit";
 import { CKBIndexerQueryOptions } from "@ckb-lumos/ckb-indexer/src/type";
 import { ConnectionService } from "./connection.service";
 import { Logger } from "../utils/logger";
-import { NftService } from "./assets/nft.service";
+import { Nft, NftService } from "./assets/nft.service";
 
 const { ScriptValue } = values;
 
 export interface ScriptType {
     args: string;
     codeHash: string;
-    hashType: string;
+    hashType: HashType;
 }
 
 export interface DataRow {
@@ -94,6 +94,11 @@ export class TransactionService {
 
     static isScriptTypeScript(scriptType: ScriptType, scriptConfig: ScriptConfig): boolean {
         return scriptConfig.CODE_HASH === scriptType.codeHash && scriptConfig.HASH_TYPE === scriptType.hashType;
+    }
+
+    static cellIsScriptType(cell: Cell, scriptType: ScriptType): boolean {
+        const { type } = cell.cell_output;
+        return !!type && type.args === scriptType.args && type.code_hash === scriptType.codeHash && type.hash_type === scriptType.hashType;
     }
 
     private cellIsTokenType(cell: Cell, tokenHash: string): boolean {
@@ -432,6 +437,20 @@ export class TransactionService {
                 });
             }
         }
+
+        return txSkeleton;
+    }
+
+    injectNftCapacity(txSkeleton: TransactionSkeletonType, nft: Nft, cells: Cell[]): TransactionSkeletonType {
+        const nftCells = cells.filter((cell) => TransactionService.cellIsScriptType(cell, nft.script) && cell.data === nft.rawData);
+        if (nftCells.length === 0) {
+            throw new Error("Nft not found");
+        }
+        const [cell] = nftCells;
+
+        txSkeleton = txSkeleton.update("inputs", (inputs) => inputs.push(cell));
+        txSkeleton = txSkeleton.update("witnesses", (witnesses) => witnesses.push("0x"));
+        txSkeleton = this.addWitnesses(txSkeleton, cell.cell_output.lock);
 
         return txSkeleton;
     }

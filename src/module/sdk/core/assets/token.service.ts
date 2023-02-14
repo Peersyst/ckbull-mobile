@@ -1,4 +1,4 @@
-import { Cell, Script, utils } from "@ckb-lumos/lumos";
+import { Cell, Script, utils, HashType } from "@ckb-lumos/lumos";
 import { TransactionSkeleton } from "@ckb-lumos/helpers";
 import { sudt, common } from "@ckb-lumos/common-scripts";
 import { ConnectionService } from "../connection.service";
@@ -7,7 +7,7 @@ import { FeeRate, TransactionService } from "../transaction.service";
 export interface TokenType {
     args: string;
     codeHash: string;
-    hashType: string;
+    hashType: HashType;
 }
 export interface TokenAmount {
     type: TokenType;
@@ -73,7 +73,7 @@ export class TokenService {
         fromAddresses: string[],
         to: string,
         token: string,
-        amount: number,
+        amount: bigint,
         privateKeys: string[],
         feeRate: FeeRate = FeeRate.NORMAL,
     ): Promise<string> {
@@ -101,7 +101,7 @@ export class TokenService {
         // Inject token capacity
         txSkeleton = this.transactionService.addSudtCellDep(txSkeleton);
         txSkeleton = this.transactionService.addSecp256CellDep(txSkeleton);
-        txSkeleton = this.transactionService.injectTokenCapacity(txSkeleton, token, BigInt(amount), this.sudtCellSize, cells);
+        txSkeleton = this.transactionService.injectTokenCapacity(txSkeleton, token, amount, this.sudtCellSize, cells);
 
         // Pay fee
         txSkeleton = await common.payFeeByFeeRate(txSkeleton, fromAddresses, feeRate, undefined, this.connection.getConfigAsObject());

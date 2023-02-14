@@ -12,7 +12,15 @@ import {
     Transaction,
 } from "ckb-peersyst-sdk";
 import { tokenAmountZeroBalanceList, tokensList, UknownToken } from "module/token/mock/token";
-import { Chain, DepositInDAOParams, FullTransaction, SendTransactionParams, WithdrawOrUnlockParams } from "./CkbSdkService.types";
+import {
+    Chain,
+    DepositInDAOParams,
+    FullTransaction,
+    SendTransactionParams,
+    TransferNftParams,
+    TransferTokensParams,
+    WithdrawOrUnlockParams,
+} from "./CkbSdkService.types";
 import { TokenAmount, TokenType } from "module/token/types";
 import { config } from "config";
 
@@ -113,6 +121,14 @@ export class CKBSDKService {
 
     async sendTransaction(params: SendTransactionParams): Promise<string> {
         return this.wallet.sendTransaction(BigInt(params.amount), params.mnemonic.join(" "), params.to, params.feeRate);
+    }
+
+    async sendToken(params: TransferTokensParams): Promise<string> {
+        return this.wallet.transferTokens(BigInt(params.amount), params.mnemonic.join(" "), params.to, params.token, params.feeRate);
+    }
+
+    async sendNft(params: TransferNftParams): Promise<string> {
+        return this.wallet.transferNfts(params.mnemonic.join(" "), params.to, params.nft, params.feeRate);
     }
 
     async depositInDAO(params: DepositInDAOParams): Promise<string> {
