@@ -17,7 +17,7 @@ export interface TokenAmount {
 export class TokenService {
     private readonly connection: ConnectionService;
     private readonly transactionService: TransactionService;
-    // private readonly sudtCellSize = BI.from(142 * 10 ** 8);
+    private readonly sudtCellSize = BigInt(142 * 10 ** 8);
 
     constructor(connectionService: ConnectionService, transactionService: TransactionService) {
         this.connection = connectionService;
@@ -31,6 +31,16 @@ export class TokenService {
 
         const sudtScript = this.connection.getConfig().SCRIPTS.SUDT;
         return script.code_hash === sudtScript!.CODE_HASH && script.hash_type === sudtScript!.HASH_TYPE;
+    }
+
+    private getScriptTypeFromToken(hash: string): Script {
+        const sudtScript = this.connection.getConfig().SCRIPTS.SUDT;
+
+        return {
+            code_hash: sudtScript!.CODE_HASH,
+            hash_type: sudtScript!.HASH_TYPE,
+            args: hash,
+        };
     }
 
     async issue(address: string, amount: number, privateKey: string, feeRate: FeeRate = FeeRate.NORMAL): Promise<string> {
@@ -56,6 +66,50 @@ export class TokenService {
         txSkeleton = await common.payFeeByFeeRate(txSkeleton, [from], feeRate, undefined, this.connection.getConfigAsObject());
 
         return this.transactionService.signTransaction(txSkeleton, [privateKey]);
+    }
+
+    async transferFromCells(
+        cells: Cell[],
+        fromAddresses: string[],
+        to: string,
+        token: string,
+        amount: number,
+        privateKeys: string[],
+        feeRate: FeeRate = FeeRate.NORMAL,
+    ): Promise<string> {
+        let txSkeleton = TransactionSkeleton({ cellProvider: this.connection.getCellProvider() });
+
+        // Add output
+        const toScript = this.connection.getLockFromAddress(to);
+        txSkeleton = txSkeleton.update("outputs", (outputs) => {
+            return outputs.push({
+                cell_output: {
+                    capacity: "0x" + this.sudtCellSize.toString(16),
+                    lock: toScript,
+                    type: this.getScriptTypeFromToken(token),
+                },
+                data: utils.toBigUInt128LE(amount.toString()),
+            });
+        });
+        txSkeleton = txSkeleton.update("fixedEntries", (fixedEntries) => {
+            return fixedEntries.push({
+                field: "outputs",
+                index: txSkeleton.get("outputs").size - 1,
+            });
+        });
+
+        // Inject token capacity
+        txSkeleton = this.transactionService.addSudtCellDep(txSkeleton);
+        txSkeleton = this.transactionService.addSecp256CellDep(txSkeleton);
+        txSkeleton = this.transactionService.injectTokenCapacity(txSkeleton, token, BigInt(amount), this.sudtCellSize, cells);
+
+        // Pay fee
+        txSkeleton = await common.payFeeByFeeRate(txSkeleton, fromAddresses, feeRate, undefined, this.connection.getConfigAsObject());
+
+        // Get signing private keys
+        const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, fromAddresses, privateKeys);
+
+        return this.transactionService.signTransaction(txSkeleton, signingPrivKeys);
     }
 
     async getBalance(address: string): Promise<TokenAmount[]> {
