@@ -23,7 +23,6 @@ declare module "@peersyst/react-native-components" {
         faucetUrl: string;
         testnetExplorerApi: string;
         mainnetExplorerApi: string;
-        maxNumberOfDecimals: number;
         enableMainnet: boolean;
         tokenName: string;
         newsRSSUrl: string;
@@ -43,7 +42,6 @@ declare module "@peersyst/react-native-components" {
         faucetUrl: string;
         testnetExplorerApi: string;
         mainnetExplorerApi: string;
-        maxNumberOfDecimals: number;
         enableMainnet: boolean;
         tokenName: string;
         newsRSSUrl: string;

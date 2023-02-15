@@ -17,7 +17,7 @@ export class MinAmountFromDecimalsValidator extends BaseValidator {
         translate: TranslateFn,
         { decimals = config.defaultDecimals }: MinAmountFromDecimalsValidatorOptions = {},
     ) {
-        super(message || translate("invalid_min_amount_from_decimals", { minAmount: "1e-" + decimals }));
+        super(message || translate("invalid_number_gte", { n: "1e-" + decimals }));
         this.decimals = decimals.toString();
         this.minAmount = BNToNumber(1, this.decimals);
     }
