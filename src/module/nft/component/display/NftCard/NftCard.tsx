@@ -14,9 +14,9 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
     } = nft;
     return (
         <TouchableWithoutFeedback>
-            <MainListCard gap={24} style={{ marginTop: 24, height: 100 }}>
+            <MainListCard gap={24} style={{ height: 128, paddingVertical: 20 }}>
                 <NftCardImage source={{ uri: tokenUri }} />
-                <Col gap={10} flex={1}>
+                <Col gap={10} flex={1} justifyContent={"space-between"}>
                     <Col>
                         {nftName && (
                             <Typography variant="body2Strong" numberOfLines={1}>
