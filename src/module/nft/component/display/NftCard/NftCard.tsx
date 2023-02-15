@@ -29,7 +29,7 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
                                 {description}
                             </Typography>
                         )}
-                        {tokenId && total && (
+                        {tokenId && total !== undefined && (
                             <Typography variant="body3Strong" numberOfLines={1} color="primary">
                                 {`${tokenId}/${total}`}
                             </Typography>
