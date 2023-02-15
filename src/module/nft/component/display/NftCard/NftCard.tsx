@@ -1,5 +1,4 @@
 import { Col, Typography } from "@peersyst/react-native-components";
-import { useTranslate } from "module/common/hook/useTranslate";
 import MainListCard from "module/main/component/display/MainListCard/MainListCard";
 import { TouchableWithoutFeedback } from "react-native";
 import { NftCardImage } from "./NftCard.styles";
@@ -10,9 +9,9 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
         nftName,
         tokenUri,
         total,
-        data: { operator },
+        tokenId,
+        data: { description },
     } = nft;
-    const translate = useTranslate();
     return (
         <TouchableWithoutFeedback>
             <MainListCard gap={24} style={{ marginTop: 24, height: 100 }}>
@@ -24,19 +23,16 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
                                 {nftName}
                             </Typography>
                         )}
-                        {operator && (
+                        {description && (
                             <Typography variant="body3Strong" numberOfLines={1} color="green.200">
-                                {operator}
+                                {description}
                             </Typography>
                         )}
                     </Col>
-                    {total && (
+                    {tokenId && total && (
                         <Col>
-                            <Typography variant="body4Regular" numberOfLines={1} color="gray.200">
-                                {translate("bought_for")}
-                            </Typography>
                             <Typography variant="body3Strong" numberOfLines={1} color="gray.700">
-                                ${total}
+                                {`${tokenId}/${total}`}
                             </Typography>
                         </Col>
                     )}
