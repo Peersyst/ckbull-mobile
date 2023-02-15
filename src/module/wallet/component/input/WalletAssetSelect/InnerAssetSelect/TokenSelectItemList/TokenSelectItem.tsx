@@ -2,6 +2,7 @@ import { AssetType } from "module/wallet/wallet.types";
 import { useAssetSelect } from "../../hook/useAssetSelect";
 import BaseTokenSelectItem from "../BaseTokenSelectItem";
 import { TokenAmount } from "module/token/types";
+import { BNToNumber } from "module/common/utils/BalanceOperations/utils/BNtoNumber";
 
 export interface TokenSelectItemProps {
     token: TokenAmount;
@@ -18,5 +19,5 @@ export const TokenSelectItem = ({ token }: TokenSelectItemProps) => {
         });
     };
 
-    return <BaseTokenSelectItem onPress={handleOnPress} units={tokenName} balance={amount} token={token} />;
+    return <BaseTokenSelectItem onPress={handleOnPress} units={tokenName} balance={BNToNumber(amount, type.decimals)} token={token} />;
 };

@@ -35,11 +35,11 @@ const TokenAmountInput = ({
 }: AmountInputProps): JSX.Element => {
     const isDAO = type === "dao";
     const translate = useTranslate();
-
+    const formatNumber = useFormatNumber();
     const [token, setToken] = useControlled(defaultToken, tokenProp, onTokenChange);
 
-    const formattedFee = useFormatNumber(fee);
-    const formattedMinTx = useFormatNumber((isDAO ? config.minimumDaoDeposit : config.minimumTransactionAmount).toString());
+    const formattedFee = formatNumber(fee);
+    const formattedMinTx = formatNumber((isDAO ? config.minimumDaoDeposit : config.minimumTransactionAmount).toString());
     const { palette } = useTheme();
     return (
         <TokenAmountInputRoot

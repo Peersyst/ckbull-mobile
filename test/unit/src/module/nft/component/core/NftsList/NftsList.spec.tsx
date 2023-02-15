@@ -1,4 +1,4 @@
-import { render, translate, waitFor } from "test-utils";
+import { render, translate, wait, waitFor } from "test-utils";
 import NftsList from "module/nft/component/core/NftsList/NftsList";
 import { UseWalletStateMock } from "test-mocks";
 import { NftTokensMock } from "mocks/CKBSdk/nft.mock";
@@ -14,7 +14,8 @@ describe("NftsList tests", () => {
         const { nfts } = new NftTokensMock();
         new UseGetNftsMock({ nfts });
         const screen = render(<NftsList />);
-        await waitFor(() => expect(screen.getAllByText(translate("nothing_to_show", { ns: "error" }))));
+
+        await waitFor(() => expect(screen.getAllByText(nfts[0].nftName)));
     });
 
     // IGNORED WHILE MOCKED
