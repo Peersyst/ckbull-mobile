@@ -3,6 +3,7 @@ import { config } from "config";
 import { TypographyVariant } from "config/theme/typography";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { BNToNumber } from "module/common/utils/BalanceOperations/utils/BNtoNumber";
+import { getDecimals } from "module/common/utils/BalanceOperations/utils/getDecimals";
 import settingsState from "module/settings/state/SettingsState";
 import Balance from "module/wallet/component/display/Balance/Balance";
 import { useRecoilValue } from "recoil";
@@ -17,7 +18,7 @@ const Fee = ({ typographyVariant, fee: feeProp, ...rest }: FeeProps) => {
     const { fee } = useRecoilValue(settingsState);
 
     const finalFee = (feeProp ?? BNToNumber(fee.toString(), config.defaultDecimals)).toString();
-    const feeDecimals = finalFee.split(".")[1]?.length;
+    const feeDecimals = getDecimals(finalFee);
 
     return (
         <Typography variant={`${typographyVariant}Light`} light textAlign="center" {...rest}>
