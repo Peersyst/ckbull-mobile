@@ -1,5 +1,5 @@
-import { NetworkType } from "module/settings/state/SettingsState";
 import { Nft } from "ckb-peersyst-sdk";
+import { NetworkType } from "module/settings/state/SettingsState";
 import { TokenAmount } from "module/token/types";
 
 export enum AssetType {

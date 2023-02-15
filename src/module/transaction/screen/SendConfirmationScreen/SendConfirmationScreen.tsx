@@ -7,21 +7,20 @@ import SendModal from "module/transaction/component/core/SendModal/SendModal";
 import LoadingModal from "module/common/component/feedback/LoadingModal/LoadingModal";
 import useWalletState from "module/wallet/hook/useWalletState";
 import SendSummary from "./SendSummary";
-import settingsState from "module/settings/state/SettingsState";
 import { convertCKBToShannons } from "module/wallet/utils/convertCKBToShannons";
 import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/ConfirmPinModal";
 import { useState } from "react";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
-import { AssetType } from "module/wallet/wallet.types";
+import { useSettings } from "module/settings/hook/useSettings";
 
 const SendConfirmationScreen = (): JSX.Element => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const translate = useTranslate();
     const [loading, setLoading] = useState(false);
 
-    const { amount, senderWalletIndex, receiverAddress, message, token, asset } = useRecoilValue(sendState);
-    const { fee } = useRecoilValue(settingsState);
+    const { amount, senderWalletIndex, receiverAddress, message, asset } = useRecoilValue(sendState);
+    const { fee } = useSettings();
     const {
         state: { wallets },
     } = useWalletState();
@@ -49,10 +48,11 @@ const SendConfirmationScreen = (): JSX.Element => {
         <>
             <Col gap={24} onStartShouldSetResponder={() => true}>
                 <SendSummary
-                    showTotal={asset.type === AssetType.NATIVE_TOKEN}
+                    showTotal
                     amount={amount!}
                     receiverAddress={receiverAddress!}
-                    token={token}
+                    token={asset.ft}
+                    nft={asset.nft}
                     message={message!}
                     senderName={senderName}
                     senderAddress={serviceInstance?.getAddress() || ""}

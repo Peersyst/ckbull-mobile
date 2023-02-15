@@ -1,8 +1,6 @@
 import BaseAssetAmountTextField from "../BaseAssetAmountTextField/BaseAssetAmountTextField";
 import { TokenAmount } from "module/token/types";
 import { NumericTextFieldProps } from "module/common/component/input/NumericTextField/NumericTextField";
-//import { useFTAmountTextFieldValidator } from "./hook/useFTAmountTextFieldValidator";
-import { useControlled } from "@peersyst/react-hooks";
 import { useTokenAmountTextField } from "./hook/useTokenAmountTextField";
 
 export interface TokenAmountTextFieldProps extends Omit<NumericTextFieldProps, "suffix"> {

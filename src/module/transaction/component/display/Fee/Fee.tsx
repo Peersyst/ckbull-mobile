@@ -5,7 +5,7 @@ import { useTranslate } from "module/common/hook/useTranslate";
 import { BNToNumber } from "module/common/utils/BalanceOperations/utils/BNtoNumber";
 import settingsState from "module/settings/state/SettingsState";
 import Balance from "module/wallet/component/display/Balance/Balance";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 export interface FeeProps extends Omit<TypographyProps, "variant"> {
     typographyVariant: TypographyVariant;
