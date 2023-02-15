@@ -10,7 +10,7 @@ import { defaultSettingsState } from "module/settings/state/SettingsState";
 
 describe("SendConfirmationScreen tests", () => {
     new UseServiceInstanceMock();
-    new UseWalletStateMock();
+    const { state } = new UseWalletStateMock();
     afterEach(() => {
         jest.restoreAllMocks();
     });
@@ -29,7 +29,7 @@ describe("SendConfirmationScreen tests", () => {
 
         expect(screen.getByText(translate("from"))).toBeDefined();
 
-        expect(screen.getByText(formatHash(MOCKED_ADDRESS, "middle", 15))).toBeDefined();
+        expect(screen.getByText(state.wallets[0].name + " - " + formatHash(MOCKED_ADDRESS, "middle", 3))).toBeDefined();
         expect(screen.getByText(translate("to"))).toBeDefined();
         expect(screen.getByText(formatHash(MOCKED_ADDRESS, "middle", 3))).toBeDefined();
         expect(screen.getByText(translate("message"))).toBeDefined();
