@@ -28,7 +28,7 @@ const TokenCard = ({ token: { type, amount } }: TokenCardProps): JSX.Element => 
             </Row>
             <Col alignItems="flex-end" justifyContent="center" gap={2}>
                 <Balance
-                    options={{ maximumFractionDigits: type.decimals }}
+                    options={{ maximumFractionDigits: 4 }}
                     balance={BNToNumber(amount, type.decimals)}
                     units={tokenName ? (tokenName === "Unknown Token" ? "?" : tokenName) : ""}
                     variant="body3Regular"

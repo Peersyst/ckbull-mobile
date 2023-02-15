@@ -28,4 +28,9 @@ export class BalanceOperations {
         const { aBN, bBN } = BalanceOperations.numbersToBN(a, b, decimals);
         return BNToNumber(BigInteger.minus(aBN, bBN), decimals);
     }
+
+    static mul(a: string | number, b: string | number, decimals: string | number = config.defaultDecimals): string {
+        const { aBN, bBN } = BalanceOperations.numbersToBN(a, b, decimals);
+        return BNToNumber(BigInteger.mul(aBN, bBN), decimals);
+    }
 }

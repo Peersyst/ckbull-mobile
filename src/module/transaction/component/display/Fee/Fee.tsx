@@ -20,14 +20,14 @@ const Fee = ({ typographyVariant, fee: feeProp, ...rest }: FeeProps) => {
     const feeDecimals = finalFee.split(".")[1]?.length;
 
     return (
-        <Typography variant={`${typographyVariant}Regular`} light textAlign="center" {...rest}>
+        <Typography variant={`${typographyVariant}Light`} light textAlign="center" {...rest}>
             {translate("transaction_fee_label")}
             {" · "}
             <Balance
                 balance={finalFee}
-                variant={`${typographyVariant}Strong`}
+                variant={`${typographyVariant}Regular`}
                 units="token"
-                light
+                color="gray.700"
                 options={{
                     ...(feeDecimals !== undefined && {
                         maximumFractionDigits: feeDecimals,
