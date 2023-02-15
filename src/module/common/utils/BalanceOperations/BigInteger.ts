@@ -25,4 +25,8 @@ export class BigInteger {
     static minus(a: string, b: string): string {
         return BN(a).subtract(b).toString();
     }
+
+    static add(a: string, b: string): string {
+        return BN(a).add(b).toString();
+    }
 }

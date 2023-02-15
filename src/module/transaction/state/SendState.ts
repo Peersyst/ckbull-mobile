@@ -7,7 +7,6 @@ export interface SendState {
     senderWalletIndex?: number;
     receiverAddress?: string;
     amount?: string;
-    fee?: string;
     message?: string;
     token: AppCurrency | string;
     asset: Asset;

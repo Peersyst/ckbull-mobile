@@ -48,7 +48,7 @@ export function useCKBAmountTextField({
                 {
                     maxAmount,
                 },
-                translateError("invalid_number_lt", {
+                translateError("invalid_number_lte", {
                     n: formatBalance(maxAmount, {
                         units: config.tokenName,
                         numberFormatOptions: {

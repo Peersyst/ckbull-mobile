@@ -12,6 +12,7 @@ import useSelectedNetwork from "module/settings/hook/useSelectedNetwork";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { CameraIcon } from "icons";
 import QrScanner from "module/common/component/input/QrScanner/QrScanner";
+import { Keyboard } from "react-native";
 
 export interface SendForm {
     sender: number;
@@ -43,6 +44,7 @@ const SendToAddressScreen = () => {
     };
 
     const handleSubmit = ({ sender, receiver }: SendForm) => {
+        Keyboard.dismiss();
         setSendState((oldState) => ({ ...oldState, senderWalletIndex: sender, receiverAddress: receiver }));
         setTab(SendScreens.AMOUNT_AND_MESSAGE);
     };

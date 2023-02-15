@@ -2,54 +2,51 @@ import { SendState } from "module/transaction/state/SendState";
 import Balance from "module/wallet/component/display/Balance/Balance";
 import { BalanceProps } from "module/wallet/component/display/Balance/Balance.types";
 import { ReactElement } from "react";
-import { Col, Row, Typography } from "@peersyst/react-native-components";
+import { Col, Typography } from "@peersyst/react-native-components";
 import { useTranslate } from "module/common/hook/useTranslate";
 import Container from "module/common/component/display/Container/Container";
 import { config } from "config";
+import Fee from "../Fee/Fee";
+import settingsState from "module/settings/state/SettingsState";
+import { useRecoilValue } from "recoil";
+import { BalanceOperations } from "module/common/utils/BalanceOperations/BalanceOperations";
+import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
 
-export interface BaseSendSummaryFullProps extends Required<Pick<SendState, "fee" | "token">> {
+export interface BaseSendSummaryFullProps extends Required<Pick<SendState, "token">> {
     amount: BalanceProps["balance"];
     children: ReactElement;
+    showTotal?: boolean;
 }
 
 export type BaseSendSummaryProps = Omit<BaseSendSummaryFullProps, "children">;
 
-const BaseSendSummary = ({ amount, fee, token, children }: BaseSendSummaryFullProps): JSX.Element => {
+const BaseSendSummary = ({ amount, token, children, showTotal }: BaseSendSummaryFullProps): JSX.Element => {
     const translate = useTranslate();
+    const { fee } = useRecoilValue(settingsState);
+    const feeValue = convertShannonsToCKB(fee);
     return (
         <Container>
-            <Col gap={16} alignItems="center">
-                <Col gap={2} alignItems="center">
+            <Col gap="8%" alignItems="center">
+                <Col gap="2%" alignItems="center">
                     <Balance
                         balance={amount}
-                        variant="title3Strong"
+                        variant="title3Regular"
                         units={token}
                         options={{ maximumFractionDigits: config.maxNumberOfDecimals }}
                     />
-                    <Row>
-                        <Typography variant="body2Regular" light>
-                            {translate("transaction_fee_label")}:{" "}
-                        </Typography>
-                        <Balance
-                            balance={fee}
-                            variant="body2Strong"
-                            units={token}
-                            light
-                            options={{ maximumFractionDigits: config.maxNumberOfDecimals }}
-                        />
-                    </Row>
-                    <Row>
-                        <Typography variant="body2Regular" color="primary">
+                    <Fee fee={feeValue} typographyVariant="body2" />
+                    {showTotal && (
+                        <Typography variant="body2Light" color="primary">
                             {translate("total")}:{" "}
+                            <Balance
+                                balance={BalanceOperations.add(amount.toString(), feeValue)}
+                                variant="body2Regular"
+                                units={config.tokenName}
+                                color="primary"
+                                options={{ maximumFractionDigits: config.maxNumberOfDecimals }}
+                            />
                         </Typography>
-                        <Balance
-                            balance={Number(amount) + Number(fee)}
-                            variant="body2Strong"
-                            units={token}
-                            color="primary"
-                            options={{ maximumFractionDigits: config.maxNumberOfDecimals }}
-                        />
-                    </Row>
+                    )}
                 </Col>
                 {children}
             </Col>

@@ -13,14 +13,15 @@ import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/Con
 import { useState } from "react";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
+import { AssetType } from "module/wallet/wallet.types";
 
 const SendConfirmationScreen = (): JSX.Element => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const translate = useTranslate();
     const [loading, setLoading] = useState(false);
 
-    const { amount, fee: fee, senderWalletIndex, receiverAddress, message, token } = useRecoilValue(sendState);
-    const { fee: feeInDecimals } = useRecoilValue(settingsState);
+    const { amount, senderWalletIndex, receiverAddress, message, token, asset } = useRecoilValue(sendState);
+    const { fee } = useRecoilValue(settingsState);
     const {
         state: { wallets },
     } = useWalletState();
@@ -36,7 +37,7 @@ const SendConfirmationScreen = (): JSX.Element => {
                 amount: convertCKBToShannons(amount!),
                 message: message!,
                 to: receiverAddress!,
-                feeRate: feeInDecimals,
+                feeRate: fee,
             },
             {
                 onSettled: () => setLoading(false),
@@ -48,15 +49,15 @@ const SendConfirmationScreen = (): JSX.Element => {
         <>
             <Col gap={24} onStartShouldSetResponder={() => true}>
                 <SendSummary
+                    showTotal={asset.type === AssetType.NATIVE_TOKEN}
                     amount={amount!}
                     receiverAddress={receiverAddress!}
-                    fee={fee!}
                     token={token}
                     message={message!}
                     senderName={senderName}
                     senderAddress={serviceInstance?.getAddress() || ""}
                 />
-                <Typography variant="body3Regular" textAlign="center" light>
+                <Typography variant="body3Light" textAlign="center" light>
                     {translate("send_confirmation_text")}
                 </Typography>
                 <CountdownButton loading={loading} disabled={isSuccess} seconds={5} fullWidth onPress={() => setShowConfirmation(true)}>

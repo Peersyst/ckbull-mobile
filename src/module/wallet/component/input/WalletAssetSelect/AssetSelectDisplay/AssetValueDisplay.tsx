@@ -1,4 +1,5 @@
 import { Typography, TypographyProps } from "@peersyst/react-native-components";
+import { BNToNumber } from "module/common/utils/BalanceOperations/utils/BNtoNumber";
 import Balance from "module/wallet/component/display/Balance/Balance";
 import useGetBalance from "module/wallet/query/useGetBalance";
 import { AssetType } from "module/wallet/wallet.types";
@@ -21,7 +22,9 @@ export const AssetValueDisplay = ({ ...rest }: AssetValueDisplayProps): JSX.Elem
                     {nft?.nftName}
                 </Typography>
             )}
-            {type === AssetType.FT && <Balance units={ft?.type.tokenName} balance={ft?.amount ?? "0"} {...rest} />}
+            {type === AssetType.FT && (
+                <Balance units={ft?.type.tokenName} balance={BNToNumber(ft?.amount || "0", ft?.type.decimals)} {...rest} />
+            )}
             {type === AssetType.NATIVE_TOKEN && <Balance units="token" balance={freeBalance} {...rest} />}
         </>
     );
