@@ -8,7 +8,7 @@ export interface MnemonicListProps {
     onPress?: (item: string) => unknown;
 }
 
-const MnemonicList = ({ mnemonic, variant = "outlined", onPress }: MnemonicListProps): JSX.Element => {
+const MnemonicList = ({ mnemonic, variant = "secondary", onPress }: MnemonicListProps): JSX.Element => {
     return (
         <Col gap={10} alignItems="center" style={{ marginTop: -15 }}>
             <Row gap={4} wrap justifyContent="center">

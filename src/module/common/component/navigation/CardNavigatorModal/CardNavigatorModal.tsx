@@ -18,7 +18,7 @@ const CardNavigatorModal = ({
     ...backdropProps
 }: CardNavigatorModalProps): JSX.Element => {
     return (
-        <CardModal closable={closable} {...backdropProps} open={open}>
+        <CardModal closable={closable} onClose={onClose} {...backdropProps} open={open}>
             {(open, setOpen) => ({
                 header: (
                     <Navbar

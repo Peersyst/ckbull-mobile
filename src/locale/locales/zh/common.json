@@ -37,6 +37,7 @@
     "receive": "收款",
     "receive_info": "为保护隐私，CKBull会为每笔交易创建一个新的收款地址。当然，您之前使用过的收款地址依然可以正常使用。",
     "copy": "拷贝",
+    "import_wallet_text": "导入你的CKBULL钱包",
     "import_wallet": "导入钱包",
     "enter_mnemonic": "输入助记词",
     "mnemonic_input_text": "请依次输入助记词，点击Enter键进行确认，选中单词后可执行删除操作。",
@@ -160,5 +161,7 @@
     "boughtFor": "购买者",
     "selectAToken": "选择一个硬币",
     "continue": "继续",
-    "disconnect": "斷開"
+    "disconnect": "斷開",
+    "connected_sites": "連接的站點",
+    "today": "今天"
 }

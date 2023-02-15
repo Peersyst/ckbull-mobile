@@ -2,7 +2,7 @@ import { ViewStyle, TextStyle } from "react-native";
 
 export type ChipStyle = ViewStyle & TextStyle;
 
-export type ChipVariant = "filled" | "outlined";
+export type ChipVariant = "filled" | "secondary" | "primary";
 
 export interface ChipProps {
     onPress?: () => unknown;
