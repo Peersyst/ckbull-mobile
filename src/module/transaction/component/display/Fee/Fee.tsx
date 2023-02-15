@@ -2,25 +2,33 @@ import { Typography, TypographyProps } from "@peersyst/react-native-components";
 import { config } from "config";
 import { TypographyVariant } from "config/theme/typography";
 import { useTranslate } from "module/common/hook/useTranslate";
+import { BNToNumber } from "module/common/utils/BalanceOperations/utils/BNtoNumber";
+import { getDecimals } from "module/common/utils/BalanceOperations/utils/getDecimals";
+import settingsState from "module/settings/state/SettingsState";
 import Balance from "module/wallet/component/display/Balance/Balance";
+import { useRecoilValue } from "recoil";
 
 export interface FeeProps extends Omit<TypographyProps, "variant"> {
     typographyVariant: TypographyVariant;
     fee?: string;
 }
 
-const Fee = ({ typographyVariant, fee, ...rest }: FeeProps) => {
+const Fee = ({ typographyVariant, fee: feeProp, ...rest }: FeeProps) => {
     const translate = useTranslate();
-    const feeDecimals = fee?.split(".")[1]?.length;
+    const { fee } = useRecoilValue(settingsState);
+
+    const finalFee = (feeProp ?? BNToNumber(fee.toString(), config.defaultDecimals)).toString();
+    const feeDecimals = getDecimals(finalFee);
+
     return (
-        <Typography variant={`${typographyVariant}Regular`} light textAlign="center" {...rest}>
+        <Typography variant={`${typographyVariant}Light`} light textAlign="center" {...rest}>
             {translate("transaction_fee_label")}
             {" · "}
             <Balance
-                balance={fee ?? config.minimumTransactionAmount}
-                variant={`${typographyVariant}Strong`}
+                balance={finalFee}
+                variant={`${typographyVariant}Regular`}
                 units="token"
-                light
+                color="gray.700"
                 options={{
                     ...(feeDecimals !== undefined && {
                         maximumFractionDigits: feeDecimals,

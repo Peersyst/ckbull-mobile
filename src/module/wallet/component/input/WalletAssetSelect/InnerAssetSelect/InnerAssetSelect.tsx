@@ -5,7 +5,7 @@ import CKBSelectItem from "./CKBSelectItem";
 import NftSelectItemList from "./NftSelectItemList/NftSelectItemList";
 import TokenSelectItemlist from "./TokenSelectItemList/TokenSelectItemlist";
 
-export const ASSET_SELECT_NUM_OF_SKELETONS = 2;
+export const ASSET_SELECT_NUM_OF_SKELETONS = 3;
 
 export const InnerAssetSelectSkeletons = () => {
     return (

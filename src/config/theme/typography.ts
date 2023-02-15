@@ -42,8 +42,10 @@ export function getMarginBottom(variant: TypographyVariant): number {
 }
 
 export function createTypographyVariant(typographyVariant: TypographyVariant, fontWeight: FontWeight, style: TextStyle = {}): TextStyle {
+    const fontStyle = FONT_STYLE[typographyVariant] || {};
     return {
-        ...FONT_STYLE[typographyVariant],
+        lineHeight: fontStyle.fontSize! * 1.2,
+        ...fontStyle,
         fontFamily: getFontFamily(typographyVariant, fontWeight),
         marginBottom: getMarginBottom(typographyVariant),
         ...style,

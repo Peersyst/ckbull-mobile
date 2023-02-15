@@ -12,14 +12,14 @@ export interface SendSummaryProps extends BaseSendSummaryProps {
     message: SendState["message"];
 }
 
-const SendSummary = ({ amount, fee, token, receiverAddress, message, senderAddress }: SendSummaryProps): JSX.Element => {
+const SendSummary = ({ receiverAddress, message, senderName, senderAddress, ...rest }: SendSummaryProps): JSX.Element => {
     const translate = useTranslate();
     return (
-        <BaseSendSummary amount={amount} fee={fee} token={token}>
-            <Col gap={16} style={{ alignSelf: "flex-start" }} flex={1}>
-                <SummaryField label={translate("from")}>{formatHash(senderAddress, "middle", 15)}</SummaryField>
-                <SummaryField label={translate("to")}>{formatHash(receiverAddress!, "middle", 15)}</SummaryField>
-                <SummaryField label={translate("message")}>{message || "-"}</SummaryField>
+        <BaseSendSummary {...rest}>
+            <Col gap="7%" style={{ alignSelf: "flex-start" }}>
+                <SummaryField label={translate("from")}>{senderName + " - " + formatHash(senderAddress, "middle", 3)}</SummaryField>
+                <SummaryField label={translate("to")}>{formatHash(receiverAddress!, "middle", 3)}</SummaryField>
+                {message && <SummaryField label={translate("message")}>{message || "-"}</SummaryField>}
             </Col>
         </BaseSendSummary>
     );

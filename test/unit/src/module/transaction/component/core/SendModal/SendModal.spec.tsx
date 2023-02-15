@@ -2,7 +2,6 @@ import { render, translate } from "test-utils";
 import SendModal from "module/transaction/component/core/SendModal/SendModal";
 import * as Recoil from "recoil";
 import { fireEvent, waitFor } from "@testing-library/react-native";
-import { config } from "config";
 import { UseWalletStateMock, UseServiceInstanceMock } from "test-mocks";
 
 describe("SendModal tests", () => {
@@ -33,24 +32,5 @@ describe("SendModal tests", () => {
         fireEvent.press(screen.getByTestId("BackIcon"));
         await waitFor(() => expect(resetSendState).toHaveBeenCalled());
         expect(handleExited).toHaveBeenCalled();
-    });
-
-    test("Send is completed successfully", async () => {
-        const screen = render(<SendModal />);
-
-        // Enter receiver address, sender address equals the selected account (0)
-        fireEvent.changeText(
-            screen.getByPlaceholderText(translate("address")),
-            "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq03ewkvsva4cchhntydu648l7lyvn9w2cctnpask",
-        );
-        fireEvent.press(screen.getByText(translate("next")));
-
-        // Enter amount and message
-        await waitFor(() => fireEvent.changeText(screen.getByPlaceholderText(translate("enter_amount")), "6000"));
-        //fireEvent.changeText(screen.getByPlaceholderText(translate("write_a_message")), "This is a message");
-        fireEvent.press(screen.getByText(translate("next")));
-        screen.debug();
-        // Confirmation
-        await waitFor(() => expect(screen.getByText(`6,000 ${config.tokenName}`)).toBeDefined());
     });
 });

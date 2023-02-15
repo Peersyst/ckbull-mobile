@@ -12,9 +12,7 @@ const NftSelectItemList = (): JSX.Element => {
         <>
             {nfts.length > 0 && (
                 <Col gap={20}>
-                    <Typography variant="body2Strong" numberOfLines={1} color="overlay.500">
-                        {translate("nfts")}
-                    </Typography>
+                    <Typography variant="body2Strong">{translate("nfts")}</Typography>
                     {nfts.map((nft, index) => (
                         <NftSelectItem nft={nft} key={index} />
                     ))}

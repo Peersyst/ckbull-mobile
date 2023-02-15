@@ -9,7 +9,7 @@ export interface DepositInDAOParams {
 }
 
 export interface SendTransactionParams {
-    amount: bigint | number;
+    amount: bigint | number | string;
     mnemonic: string[];
     message: string;
     to: string;
