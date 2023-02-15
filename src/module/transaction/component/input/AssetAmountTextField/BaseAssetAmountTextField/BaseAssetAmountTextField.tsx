@@ -6,9 +6,9 @@ export type BaseAssetAmountTextFieldProps = NumericTextFieldProps & {
     units: string;
 };
 
-const BaseAssetAmountTextField = ({ loading = false, units, disabled, suffix, ...rest }: BaseAssetAmountTextFieldProps) => {
+const BaseAssetAmountTextField = ({ loading = false, units, disabled, hideError, suffix, ...rest }: BaseAssetAmountTextFieldProps) => {
     const finalSuffix = suffix || (loading ? <Spinner size="small" /> : <Typography variant="body4Strong">{units}</Typography>);
-    return <NumericTextField disabled={loading || disabled} suffix={finalSuffix} {...rest} />;
+    return <NumericTextField hideError={hideError || loading} disabled={loading || disabled} suffix={finalSuffix} {...rest} />;
 };
 
 export default BaseAssetAmountTextField;

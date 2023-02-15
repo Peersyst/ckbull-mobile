@@ -2,6 +2,9 @@ import "@peersyst/react-native-components";
 import { Validator } from "@peersyst/react-native-components";
 import { NetworkType } from "module/settings/state/SettingsState";
 import { TFunction } from "react-i18next";
+import { MaxAmountValidatorOptions } from "./validators/MaxAmountValidator";
+import { MinAmountFromDecimalsValidatorOptions } from "./validators/MinAmountFromDecimalsValidator";
+import { MinAmountValidatorOptions } from "./validators/MinAmountValidator";
 
 declare module "@peersyst/react-native-components" {
     export interface ConfigTypes {
@@ -24,7 +27,8 @@ declare module "@peersyst/react-native-components" {
         enableMainnet: boolean;
         tokenName: string;
         newsRSSUrl: string;
-        estimatedFee: string;
+        defaultDecimals: number;
+        miniUnits: string;
     }
 
     export interface CreateConfig {
@@ -43,10 +47,15 @@ declare module "@peersyst/react-native-components" {
         enableMainnet: boolean;
         tokenName: string;
         newsRSSUrl: string;
+        defaultDecimals: number;
+        miniUnits: string;
     }
 
     export interface ExtraValidators {
         address: Validator<NetworkType>;
+        minAmount: Validator<MinAmountValidatorOptions>;
+        maxAmount: Validator<MaxAmountValidatorOptions>;
+        minAmountFromDecimals: Validator<MinAmountFromDecimalsValidatorOptions>;
     }
 
     export interface BlockchainLinksTypesOverrides {

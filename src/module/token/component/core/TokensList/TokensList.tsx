@@ -12,12 +12,12 @@ import { useMemo } from "react";
 const TokensList = (): JSX.Element => {
     const { fiat } = useRecoilValue(settingsState);
     const { index } = useSelectedWallet();
-    const { isLoading, data: tokens = [] } = useGetTokens(index);
+    const { isLoading, data: tokens = [], refetch: refetchTokens } = useGetTokens(index);
     const tokenPriceUseQueries = useMemo(() => tokensList.map((token) => ["tokenPrice", fiat, token]), [fiat]);
     const refetch = useRefetchQueries();
 
     const handleRefetch = async () => {
-        await refetch(tokenPriceUseQueries);
+        await Promise.all([refetchTokens(), refetch(tokenPriceUseQueries)]);
     };
 
     return (

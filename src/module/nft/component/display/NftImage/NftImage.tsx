@@ -1,6 +1,6 @@
 import { ImageProps } from "@peersyst/react-native-components";
 import { placeholder_image } from "images";
-import { toDataUrl } from "module/common/component/utils/blockImage";
+import { toDataUrl } from "module/common/utils/blockImage";
 import { NftImageRoot } from "./NftImage.styles";
 
 export interface NftImageProps extends Omit<ImageProps, "source"> {

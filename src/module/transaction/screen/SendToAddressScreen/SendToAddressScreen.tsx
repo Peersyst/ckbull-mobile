@@ -56,7 +56,6 @@ const SendToAddressScreen = () => {
                         required
                         name="sender"
                         defaultValue={sendState.senderWalletIndex}
-                        style={{ component: { display: { backgroundColor: "transparent", borderColor: palette.overlay[300]["24%"] } } }}
                     />
                     <TextField
                         label={translate("send_to")}

@@ -9,9 +9,10 @@ import AssetValueDisplay from "./AssetValueDisplay";
 
 export interface AssetSelectDisplayProps {
     onPress: () => void;
+    fee?: string;
 }
 
-const AssetSelectDisplay = ({ onPress }: AssetSelectDisplayProps) => {
+const AssetSelectDisplay = ({ onPress, fee }: AssetSelectDisplayProps) => {
     const translate = useTranslate();
     const { asset } = useAssetSelect();
     return (
@@ -26,7 +27,7 @@ const AssetSelectDisplay = ({ onPress }: AssetSelectDisplayProps) => {
                         )}
                         <ChevronDownIcon />
                     </Row>
-                    <Fee typographyVariant="body2" color="gray.300" />
+                    <Fee typographyVariant="body2" color="gray.300" fee={fee} />
                 </Col>
             </Container>
         </TouchableWithoutFeedback>
