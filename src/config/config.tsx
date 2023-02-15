@@ -61,6 +61,11 @@ const config = createConfig({
                 variant: "body2Strong",
             },
         },
+        FormControlLabel: {
+            defaultProps: {
+                variant: "body3Regular",
+            },
+        },
         Modal: {
             defaultProps: {
                 showCloseButton: false,

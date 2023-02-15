@@ -8,7 +8,7 @@ describe("CardSelectModal tests", () => {
 
     test("Renders correctly with action close", () => {
         render(
-            <CardSelectModal title={mockTitle} action="close">
+            <CardSelectModal title={mockTitle} dismissal="close">
                 <Typography variant="body1Regular">content</Typography>
             </CardSelectModal>,
         );
@@ -21,7 +21,7 @@ describe("CardSelectModal tests", () => {
 
     test("Renders correctly with action hide", () => {
         render(
-            <CardSelectModal title={mockTitle} action="hide">
+            <CardSelectModal title={mockTitle} dismissal="hide">
                 <Typography variant="body1Regular">content</Typography>
             </CardSelectModal>,
         );
@@ -36,7 +36,7 @@ describe("CardSelectModal tests", () => {
         const mockOnClose = jest.fn();
 
         render(
-            <CardSelectModal title={mockTitle} action="close" onClose={mockOnClose}>
+            <CardSelectModal title={mockTitle} dismissal="close" onClose={mockOnClose}>
                 <Typography variant="body1Regular">content</Typography>
             </CardSelectModal>,
         );

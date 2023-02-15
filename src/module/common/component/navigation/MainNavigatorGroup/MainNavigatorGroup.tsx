@@ -7,7 +7,7 @@ const MainNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name={MainScreens.MAIN} component={MainBottomNavigatorGroup} />
-            <Stack.Screen name={MainScreens.SETTINGS} component={SettingsNavigatorGroup} options={{ presentation: "modal" }} />
+            <Stack.Screen name={MainScreens.SETTINGS} component={SettingsNavigatorGroup} options={{ animation: "slide_from_bottom" }} />
         </Stack.Navigator>
     );
 };

@@ -4,12 +4,10 @@ import SelectFee from "../components/core/SelectFee/SelectFee";
 import SelectFiat from "../components/core/SelectFiat/SelectFiat";
 import SelectLocale from "../components/core/SelectLocale/SelectLocale";
 import SelectNetwork from "../components/core/SelectNetwork/SelectNetwork";
-import { useTranslate } from "module/common/hook/useTranslate";
 
 const GeneralSettingsScreen = (): JSX.Element => {
-    const translate = useTranslate();
     return (
-        <BaseSecondaryScreen title={translate("general_settings")} back>
+        <BaseSecondaryScreen>
             <Col gap={10}>
                 <SelectNetwork />
                 <SelectFee />

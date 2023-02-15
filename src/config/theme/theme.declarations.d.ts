@@ -86,6 +86,9 @@ declare module "@peersyst/react-native-components" {
                 backgroundColor: string;
                 borderColor: string;
             };
+            navbar: {
+                borderColor: string;
+            };
             bottomBar: {
                 backgroundColor: string;
                 borderColor: string;

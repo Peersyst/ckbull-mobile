@@ -8,7 +8,7 @@ const SettingsScreen = (): JSX.Element => {
     const translate = useTranslate();
 
     return (
-        <BaseSecondaryScreen title={translate("settings")} back>
+        <BaseSecondaryScreen>
             <Col gap={10}>
                 <SettingsMenu label={translate("general_settings")} location={SettingsScreens.GENERAL_SETTINGS} />
                 <SettingsMenu label={translate("security_settings")} location={SettingsScreens.SECURITY_SETTINGS} />

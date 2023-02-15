@@ -1,35 +1,27 @@
 import CardModal, { CardModalProps } from "module/common/component/navigation/CardModal/CardModal";
 import { ReactElement } from "react";
-import { ActionIconRoot, CardSelectModalNavbar } from "module/common/component/feedback/CardSelectModal/CardSelectModal.styles";
-import { Typography } from "@peersyst/react-native-components";
-import { ACTION_ICONS } from "module/common/component/feedback/CardSelectModal/ActionIcons";
+import ModalHeader from "../../navigation/ModalHeader/ModalHeader";
+import { ModalHeaderDismissal } from "../../navigation/ModalHeader/ModalHeader.types";
 
 export type CardSelectModalProps = Omit<CardModalProps, "children"> & {
     children: ReactElement;
     title: string;
-    action: "hide" | "close";
+    dismissal: ModalHeaderDismissal;
 };
 
-const CardSelectModal = ({ children, title, action, onClose, ...rest }: CardSelectModalProps): JSX.Element => {
-    const ActionIcon = ACTION_ICONS[action];
-
+const CardSelectModal = ({ children, title, dismissal, onClose, ...rest }: CardSelectModalProps): JSX.Element => {
     return (
         <CardModal {...rest} onClose={onClose}>
             {(open, setOpen) => ({
                 header: (
-                    <CardSelectModalNavbar>
-                        <Typography style={{ lineHeight: 30 }} variant="body1Light" textTransform="uppercase">
-                            {title}
-                        </Typography>
-                        <ActionIconRoot>
-                            <ActionIcon
-                                onPress={() => {
-                                    setOpen(false);
-                                    if (open !== undefined) onClose?.();
-                                }}
-                            />
-                        </ActionIconRoot>
-                    </CardSelectModalNavbar>
+                    <ModalHeader
+                        title={title}
+                        dismissal={dismissal}
+                        onDismiss={() => {
+                            setOpen(false);
+                            if (open !== undefined) onClose?.();
+                        }}
+                    />
                 ),
                 body: children,
             })}
