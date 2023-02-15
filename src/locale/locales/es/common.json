@@ -172,10 +172,10 @@
     "add_a_new_account": "Agregar una nueva cuenta",
     "ckbullMobileWallet": "CKBull Mobile Wallet",
     "nervosDAO": "Nervos DAO",
-    "connected_sites": "Sitios conectados",
-    "today": "Hoy",
     "choose_what_to_send": "Elige que quieres enviar",
     "select_the_amount_to_send": "Selecciona la cantidad a enviar",
     "select_asset": "Elige entre tus activos",
-    "send_only_one_nft": "Solo puedes enviar 1 Nft"
+    "send_only_one_nft": "Solo puedes enviar 1 Nft",
+    "connected_sites": "Sitios conectados",
+    "today": "Hoy"
 }

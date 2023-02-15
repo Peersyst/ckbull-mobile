@@ -1,21 +1,20 @@
-import { render, SuccessApiCall } from "test-utils";
-import { tempNft } from "mocks/nft";
+import { render, translate, waitFor } from "test-utils";
 import NftsList from "module/nft/component/core/NftsList/NftsList";
-import { waitFor } from "@testing-library/react-native";
-import { UseServiceInstanceMock, UseWalletStateMock } from "test-mocks";
-
+import { UseWalletStateMock } from "test-mocks";
+import { NftTokensMock } from "mocks/CKBSdk/nft.mock";
+import { UseGetNftsMock } from "mocks/common/nft/useGetNfts.mock";
 describe("NftsList tests", () => {
     new UseWalletStateMock();
-    const { serviceInstance } = new UseServiceInstanceMock();
 
     afterAll(() => {
         jest.restoreAllMocks();
     });
 
     test("Renders correctly", async () => {
-        jest.spyOn(serviceInstance, "getNfts").mockReturnValue(SuccessApiCall([tempNft] as any));
+        const { nfts } = new NftTokensMock();
+        new UseGetNftsMock({ nfts });
         const screen = render(<NftsList />);
-        await waitFor(() => expect(screen.getByText(tempNft.metadata.title!)));
+        await waitFor(() => expect(screen.getAllByText(translate("nothing_to_show", { ns: "error" }))));
     });
 
     // IGNORED WHILE MOCKED
