@@ -1,4 +1,4 @@
-import { render, translate, wait, waitFor } from "test-utils";
+import { render, waitFor } from "test-utils";
 import NftsList from "module/nft/component/core/NftsList/NftsList";
 import { UseWalletStateMock } from "test-mocks";
 import { NftTokensMock } from "mocks/CKBSdk/nft.mock";

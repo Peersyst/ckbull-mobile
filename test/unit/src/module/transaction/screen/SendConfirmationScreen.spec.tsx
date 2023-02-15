@@ -10,7 +10,7 @@ import { defaultSettingsState } from "module/settings/state/SettingsState";
 
 describe("SendConfirmationScreen tests", () => {
     new UseServiceInstanceMock();
-    const { state } = new UseWalletStateMock();
+    new UseWalletStateMock();
     afterEach(() => {
         jest.restoreAllMocks();
     });
