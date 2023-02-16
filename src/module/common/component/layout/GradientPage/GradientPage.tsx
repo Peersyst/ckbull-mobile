@@ -37,8 +37,8 @@ const GradientPage = ({
             {children}
             <GradientPageGradient
                 colors={[backgroundColor, secondaryBackgroundColor]}
-                start={start ? start : { x: 0, y: 0.5 }}
-                end={end ? end : { x: 1, y: 0.5 }}
+                start={{ x: 0, y: 0.5, ...start }}
+                end={{ x: 1, y: 0.5, ...end }}
                 style={{
                     transform: [{ translateX: gradientAnim }],
                 }}
