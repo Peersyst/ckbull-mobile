@@ -1,6 +1,6 @@
 import { render } from "test-utils";
 import CardSelectModal from "module/common/component/feedback/CardSelectModal/CardSelectModal";
-import { fireEvent, screen } from "@testing-library/react-native";
+import { screen } from "@testing-library/react-native";
 import { Typography } from "@peersyst/react-native-components";
 
 describe("CardSelectModal tests", () => {
