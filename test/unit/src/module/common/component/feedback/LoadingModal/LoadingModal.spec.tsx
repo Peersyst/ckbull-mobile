@@ -37,7 +37,7 @@ describe("LoadingModal tests", () => {
 
         expect(screen.getByText(translate("processing"))).toBeDefined();
         act(() => jest.runAllTimers());
-        expect(screen.getByTestId("CircleCheckIcon")).toBeDefined();
+        expect(screen.getByTestId("SuccessIcon")).toBeDefined();
         act(() => jest.runAllTimers());
         jest.useRealTimers();
     });
@@ -47,7 +47,7 @@ describe("LoadingModal tests", () => {
         const screen = render(<ErrorLoadingModal />);
 
         act(() => jest.runAllTimers());
-        expect(screen.queryByTestId("CircleCheckIcon")).toBeNull();
+        expect(screen.queryByTestId("SuccessIcon")).toBeNull();
         act(() => jest.runAllTimers());
         jest.useRealTimers();
     });

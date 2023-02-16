@@ -1,8 +1,9 @@
 import styled from "@peersyst/react-native-styled";
-import { Col, Typography } from "@peersyst/react-native-components";
+import { Col } from "@peersyst/react-native-components";
 import GradientPage from "module/common/component/layout/GradientPage/GradientPage";
 import { View } from "react-native";
-import { CircleCheckIcon } from "icons";
+import { LinearGradient } from "expo-linear-gradient";
+import Button from "../../input/Button/Button";
 
 export const DarkLoadingModalOverlay = styled(View)(({ theme }) => ({
     position: "absolute",
@@ -11,23 +12,33 @@ export const DarkLoadingModalOverlay = styled(View)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? theme.palette.overlay[500]["80%"] : "transparent",
 }));
 
-export const LoadingModalRoot = styled(GradientPage, { gradient: true })(() => ({
+export const LoadingModalRoot = styled(GradientPage, { gradient: true })(({ theme: { palette } }) => ({
     width: "100%",
     height: "100%",
     justifyContent: "center",
     alignContent: "center",
+    backgroundColor: palette.gradient.greenDarkGreen[0],
+    secondaryBackgroundColor: palette.gradient.greenDarkGreen[1],
 }));
 
-export const LoadingModalContent = styled(Col, { flex: 1, justifyContent: "space-between" })(({ safeAreaInsets }) => ({
+export const LoadingModalContent = styled(Col, { flex: 1, justifyContent: "space-between" })(() => ({
     paddingHorizontal: 20,
-    paddingBottom: safeAreaInsets.bottom + 20,
 }));
 
-export const SuccessIcon = styled(CircleCheckIcon)(({ theme }) => ({
-    fontSize: 72,
-    color: theme.palette.mode === "dark" ? theme.palette.primary : theme.palette.white,
+export const Gradient = styled(LinearGradient)(() => ({
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: -1,
+    elevation: -1,
+    width: "100%",
+    height: "100%",
 }));
 
-export const LoadingModalMessage = styled(Typography)(({ theme }) => ({
+export const LoadingModalButton = styled(Button, { variant: "secondary" })(({ theme, safeAreaInsets, dimensions }) => ({
     color: theme.palette.white,
+    position: "absolute",
+    width: dimensions.width - 40,
+    marginLeft: 20,
+    bottom: safeAreaInsets.bottom + 40,
 }));

@@ -25,6 +25,7 @@ export interface ThemeOverlays {
 
 export interface ThemeGreen {
     200: string;
+    400: string;
     600: string;
     800: string;
 }
