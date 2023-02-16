@@ -1,5 +1,5 @@
 import { LoadingModalProps } from "./LoadingModal.types";
-import { LoadingModalRoot } from "./LoadingModal.styles";
+import { LoadingModalButton, LoadingModalRoot } from "./LoadingModal.styles";
 import { useEffect, useState } from "react";
 import { notificationAsync, NotificationFeedbackType } from "expo-haptics";
 import { useTranslate } from "module/common/hook/useTranslate";
@@ -42,11 +42,7 @@ const LoadingModal = ({ loading, successMessage, error, success, ...backdropProp
             closeOnBackdropTap={false}
             {...backdropProps}
         >
-            <LoadingModalRoot
-                style={{ backgroundColor: palette.green[200], secondaryBackgroundColor: palette.green[800] }}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 0.5, y: 1 }}
-            >
+            <LoadingModalRoot start={{ x: 0, y: 0.5 }} end={{ x: 0.5, y: 1 }}>
                 <ThemeProvider theme={darkTheme}>
                     {success ? (
                         <Col flex={1} style={{ paddingBottom: 30, paddingHorizontal: 20 }}>
@@ -56,9 +52,9 @@ const LoadingModal = ({ loading, successMessage, error, success, ...backdropProp
                                     {successMessage}
                                 </Typography>
                             </Col>
-                            <Button fullWidth variant="secondary" colorBtn={palette.green[400]} onPress={handleClose}>
+                            <LoadingModalButton fullWidth onPress={handleClose}>
                                 {translate("continue")}
-                            </Button>
+                            </LoadingModalButton>
                         </Col>
                     ) : (
                         <ImageBackgroundPage>

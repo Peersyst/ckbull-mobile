@@ -14,13 +14,13 @@ export const violet = "#6D45F5";
 export const green: Theme["palette"]["green"] = {
     200: "#1ED882",
     400: "#32B2AA",
-    600: "#52BD8C",
-    800: "#34AEAE",
+    600: "#34AEAE",
+    800: "#52BD8C",
 };
 
 //Base gradients
 export const gradient: Theme["palette"]["gradient"] = {
-    greenDarkGreen: [green["200"], green["800"]],
+    greenDarkGreen: [green["200"], green["600"]],
     greenViolet: [green["200"], violet],
 };
 
