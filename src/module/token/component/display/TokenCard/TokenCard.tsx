@@ -7,6 +7,7 @@ import { useRecoilValue } from "recoil";
 import MainListCard from "module/main/component/display/MainListCard/MainListCard";
 import { placeholder_image } from "images";
 import { TokenAmount } from "module/token/types";
+import { BNToNumber } from "module/common/utils/BalanceOperations/utils/BNtoNumber";
 
 export interface TokenCardProps {
     token: TokenAmount;
@@ -28,7 +29,7 @@ const TokenCard = ({ token: { type, amount } }: TokenCardProps): JSX.Element => 
             <Col alignItems="flex-end" justifyContent="center" gap={2}>
                 <Balance
                     options={{ maximumFractionDigits: 4 }}
-                    balance={amount / 10 ** type.decimals}
+                    balance={BNToNumber(amount, type.decimals)}
                     units={tokenName ? (tokenName === "Unknown Token" ? "?" : tokenName) : ""}
                     variant="body3Regular"
                 />

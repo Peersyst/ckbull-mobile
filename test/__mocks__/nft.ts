@@ -1,19 +1,11 @@
 import { Nft as OldNft } from "module/nft/types";
-import { Nft } from "module/sdk/mock.types";
+import { Nft } from "ckb-peersyst-sdk";
 
 export const tempNft: Nft = {
-    token_id: "0",
-    owner_id: "doctorparra.near",
-    contract_id: "nuer.near",
-    events: [
-        {
-            type: "nft_transfer",
-            price: 200000.23423,
-            receiver_id: "doctorparra.near",
-            sender_id: "nuer.near",
-        },
-    ],
-    metadata: {
+    tokenId: "0",
+    tokenUri: "https://ipfs.fleek.co/ipfs/bafybeiffkdczuvd6neggcggg63xd2ptdartq2rkzufob55qfkrrrby3kky",
+    nftName: "NEAR CAMEL 21 #19",
+    data: {
         title: "NEAR CAMEL 21 #19",
         description: "INDIAN CAMEL",
         media: "https://ipfs.fleek.co/ipfs/bafybeiffkdczuvd6neggcggg63xd2ptdartq2rkzufob55qfkrrrby3kky",
@@ -27,7 +19,6 @@ export const tempNft: Nft = {
         reference: null,
         reference_hash: null,
     },
-    approved_account_ids: [],
 };
 
 export const nft: OldNft = {

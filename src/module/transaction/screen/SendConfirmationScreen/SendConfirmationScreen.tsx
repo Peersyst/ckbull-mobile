@@ -7,20 +7,20 @@ import SendModal from "module/transaction/component/core/SendModal/SendModal";
 import LoadingModal from "module/common/component/feedback/LoadingModal/LoadingModal";
 import useWalletState from "module/wallet/hook/useWalletState";
 import SendSummary from "./SendSummary";
-import settingsState from "module/settings/state/SettingsState";
 import { convertCKBToShannons } from "module/wallet/utils/convertCKBToShannons";
 import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/ConfirmPinModal";
 import { useState } from "react";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
+import { useSettings } from "module/settings/hook/useSettings";
 
 const SendConfirmationScreen = (): JSX.Element => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const translate = useTranslate();
     const [loading, setLoading] = useState(false);
 
-    const { amount, fee: fee, senderWalletIndex, receiverAddress, message, token } = useRecoilValue(sendState);
-    const { fee: feeInDecimals } = useRecoilValue(settingsState);
+    const { amount, senderWalletIndex, receiverAddress, message, asset } = useRecoilValue(sendState);
+    const { fee } = useSettings();
     const {
         state: { wallets },
     } = useWalletState();
@@ -36,7 +36,7 @@ const SendConfirmationScreen = (): JSX.Element => {
                 amount: convertCKBToShannons(amount!),
                 message: message!,
                 to: receiverAddress!,
-                feeRate: feeInDecimals,
+                feeRate: fee,
             },
             {
                 onSettled: () => setLoading(false),
@@ -48,15 +48,16 @@ const SendConfirmationScreen = (): JSX.Element => {
         <>
             <Col gap={24} onStartShouldSetResponder={() => true}>
                 <SendSummary
+                    showTotal
                     amount={amount!}
                     receiverAddress={receiverAddress!}
-                    fee={fee!}
-                    token={token}
+                    token={asset.ft}
+                    nft={asset.nft}
                     message={message!}
                     senderName={senderName}
                     senderAddress={serviceInstance?.getAddress() || ""}
                 />
-                <Typography variant="body3Regular" textAlign="center" light>
+                <Typography variant="body3Light" textAlign="center" light>
                     {translate("send_confirmation_text")}
                 </Typography>
                 <CountdownButton loading={loading} disabled={isSuccess} seconds={5} fullWidth onPress={() => setShowConfirmation(true)}>

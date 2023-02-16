@@ -10,7 +10,7 @@ function Select<T = any>({ title, label, ...rest }: SelectProps<T>): JSX.Element
         // @ts-ignore
         <SelectRoot
             header={
-                <SelectHeader variant="body2Strong" textAlign="center">
+                <SelectHeader variant="body3Strong" textAlign="center">
                     {title ?? label}
                 </SelectHeader>
             }

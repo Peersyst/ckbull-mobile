@@ -9,6 +9,9 @@ import globalStyles from "config/globalStyles";
 import { ChevronDownIcon } from "icons";
 import darkTheme from "config/theme/darkTheme";
 import Button from "module/common/component/input/Button/Button";
+import { MinAmountValidator } from "./validators/MinAmountValidator";
+import { MinAmountFromDecimalsValidator } from "./validators/MinAmountFromDecimalsValidator";
+import { MaxAmountValidator } from "./validators/MaxAmountValidator";
 
 const envConfigs: Record<string, CreateConfig> = {
     test: { ...baseConfig, ...devConfig },
@@ -96,6 +99,9 @@ const config = createConfig({
     },
     validators: {
         address: CkbAddressValidator,
+        minAmount: MinAmountValidator,
+        minAmountFromDecimals: MinAmountFromDecimalsValidator,
+        maxAmount: MaxAmountValidator,
     },
     globalStyles,
 });

@@ -1,6 +1,6 @@
 import { CreateGlobalStyles } from "@peersyst/react-native-components";
 
-const globalStyles: CreateGlobalStyles = ({ theme: { palette } }) => ({
+const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) => ({
     Dialog: {
         title: {
             textAlign: "center",
@@ -32,9 +32,16 @@ const globalStyles: CreateGlobalStyles = ({ theme: { palette } }) => ({
     FormControlError: {
         fontSize: 14,
     },
+    FormControlLabel: {
+        label: {
+            ...typography.body3Regular,
+            maxWidth: "100%",
+        },
+    },
     Label: {
         label: {
             color: palette.component.label,
+            ...typography.body3Regular,
         },
     },
     Paper: {

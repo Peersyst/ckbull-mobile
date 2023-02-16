@@ -14,10 +14,11 @@ export const DarkLoadingModalOverlay = styled(View)(({ theme }) => ({
 export const LoadingModalRoot = styled(GradientPage, { gradient: true })(() => ({
     width: "100%",
     height: "100%",
-    justifyContent: "flex-end",
+    justifyContent: "center",
+    alignContent: "center",
 }));
 
-export const LoadingModalContent = styled(Col, { flex: 0.5, justifyContent: "space-between" })(({ safeAreaInsets }) => ({
+export const LoadingModalContent = styled(Col, { flex: 1, justifyContent: "space-between" })(({ safeAreaInsets }) => ({
     paddingHorizontal: 20,
     paddingBottom: safeAreaInsets.bottom + 20,
 }));
