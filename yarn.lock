@@ -2027,10 +2027,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@peersyst/react-components-core@^1.2.6":
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/@peersyst/react-components-core/-/react-components-core-1.2.6.tgz#c1ab1e49062674fa34b252100e81a3df9a81b8d7"
-  integrity sha512-bY6G9eCln+4EWO3ytw15VY0GrUHB+O96rB+Di7iRV9DpMx3ZADLEphebjwpZeBIRyqNdCYrzi4HLRYT62M8gZQ==
+"@peersyst/react-components-core@^1.2.7":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@peersyst/react-components-core/-/react-components-core-1.2.7.tgz#e6699f511fd1a90efd920d4373adfa10fee63a82"
+  integrity sha512-ShrwGJ6/NYeH3rJ+eu6m6gq0kr64mnX/ahh6yAT1DLX7atGA/5dnTWRTtWKpU79P+Z6goiqDiqmeZGE4Gqke/A==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@peersyst/react-hooks" "^2.2.0"
@@ -2046,13 +2046,13 @@
     "@babel/runtime" "^7.16.7"
     "@peersyst/react-utils" "^2.1.0"
 
-"@peersyst/react-native-components@^2.1.14":
-  version "2.1.14"
-  resolved "https://registry.yarnpkg.com/@peersyst/react-native-components/-/react-native-components-2.1.14.tgz#03abb291a93e247c37ad4e5824418313a4a20ea5"
-  integrity sha512-vvmlG7WqUXcuEJoqoOWJx4q1OlPoAKRZqpz9VknGmgO7zo4yjchHSc0oERbXHBbO9QV9N+XLSEZXrdQi78LJyA==
+"@peersyst/react-native-components@^2.1.16":
+  version "2.1.16"
+  resolved "https://registry.yarnpkg.com/@peersyst/react-native-components/-/react-native-components-2.1.16.tgz#e28b2af1911270e782f83c991eb2bf8c6d26f98b"
+  integrity sha512-i1jx+DUIIc8u0hML1kXa8TVyN4G2hjyC46+fEWEybKz5UQd0lHA6DF5Q++veWHnAkwIoJGDAzKNku0URlQdxFA==
   dependencies:
     "@babel/runtime" "^7.16.7"
-    "@peersyst/react-components-core" "^1.2.6"
+    "@peersyst/react-components-core" "^1.2.7"
     "@peersyst/react-hooks" "^2.2.0"
     "@peersyst/react-native-styled" "^2.0.0"
     "@peersyst/react-native-utils" "^1.0.1"
