@@ -39,7 +39,7 @@ const WalletAssetSelect = ({ index, ...rest }: WalletAssetSelectProps) => {
             {() => (
                 <AssetSelectProvider value={{ index, setSelectedAsset: handleAssetChange, asset }}>
                     <AssetSelectDisplay onPress={showModal} />
-                    <WalletAssetSelectModal onClose={hideModal} open={open} action="hide" />
+                    <WalletAssetSelectModal onClose={hideModal} open={open} />
                 </AssetSelectProvider>
             )}
         </FormControl>
