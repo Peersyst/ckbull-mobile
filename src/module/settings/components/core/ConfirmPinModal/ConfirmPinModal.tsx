@@ -43,13 +43,7 @@ const ConfirmPinModal = createBackdrop(
         };
 
         return (
-            <BaseSettingsModalScreen
-                open={open && openProp}
-                onClose={() => setOpen(false)}
-                title={translate("confirm_your_pin")}
-                onExited={handleExited}
-                {...rest}
-            >
+            <BaseSettingsModalScreen open={open && openProp} onClose={() => setOpen(false)} onExited={handleExited} {...rest}>
                 <AnimatedBiometricsNumericPad
                     error={error}
                     placeholder={translate("enter_your_pin")}
