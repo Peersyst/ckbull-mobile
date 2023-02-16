@@ -30,10 +30,7 @@ describe("SendAmountAndMessageScreen tests", () => {
         const screen = render(<SendSetAmountScreen />);
         await waitFor(() => expect(screen.getByPlaceholderText(translate("enter_amount"))).toBeDefined());
         expect(screen.getAllByText(config.tokenName)).toBeDefined();
-
         expect(screen.getByText(translate("select_asset"))).toBeDefined();
-
-        //expect(screen.getByPlaceholderText(translate("write_a_message"))).toBeDefined();
         expect(screen.getByText(translate("next"))).toBeDefined();
     });
 

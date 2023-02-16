@@ -10,10 +10,8 @@ describe("Test of the General Settings screen", () => {
         jest.spyOn(Recoil, "useRecoilState").mockReturnValue(mockedRecoilState as any);
         const screen = render(<GeneralSettingsScreen />);
 
-        //Selector of the network
-        /* expect(screen.getByText(translate("select_your_network"))).toBeDefined();
+        expect(screen.getByText(translate("select_your_network"))).toBeDefined();
         expect(screen.getByText(translate("network_name", { name: "Testnet" }))).toBeDefined();
-        expect(screen.getAllByText(translate("network_name", { name: "Mainnet" }))).toBeDefined(); */
 
         //Selector of the fee
         expect(screen.getByText(translate("modify_default_fee"))).toBeDefined();

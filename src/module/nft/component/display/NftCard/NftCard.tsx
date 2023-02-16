@@ -12,6 +12,9 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
         tokenId,
         data: { description },
     } = nft;
+
+    const showTotal = tokenId && typeof total === "number";
+
     return (
         <TouchableWithoutFeedback>
             <MainListCard gap={24} style={{ height: 128, paddingVertical: 20 }}>
@@ -29,7 +32,7 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
                             </Typography>
                         )}
                     </Col>
-                    {tokenId && total && (
+                    {showTotal && (
                         <Col>
                             <Typography variant="body3Strong" numberOfLines={1} color="gray.700">
                                 {`${tokenId}/${total}`}

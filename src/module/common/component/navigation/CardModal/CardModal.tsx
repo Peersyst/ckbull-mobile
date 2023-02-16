@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { LayoutChangeEvent, ViewStyle } from "react-native";
-import { CardModalBodyWrapper, CardModalContent, CardModalDivider, CardModalWrapper } from "./CardModal.styles";
+import { CardModalBodyWrapper, CardModalContent, CardModalWrapper } from "./CardModal.styles";
 import { Backdrop, ExposedBackdropProps } from "@peersyst/react-native-components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDimensions } from "@react-native-community/hooks";
@@ -33,7 +33,6 @@ const CardModal = ({ children, style, open, closable = true, onClose, ...backdro
                     <CardModalContent style={style} enabled={keyboardPaddingEnabled} behavior="padding">
                         <CardModalWrapper onLayout={handleLayout}>
                             {header}
-                            <CardModalDivider />
                             <KeyboardAwareScrollView
                                 style={{ flex: 1 }}
                                 keyboardShouldPersistTaps="handled"

@@ -1,6 +1,5 @@
-import { TouchableHighlightProps, ViewStyle } from "react-native";
+import { TouchableHighlightProps, TouchableOpacity, ViewStyle } from "react-native";
 import SettingsCard from "../../display/SettingsCard/SettingsCard";
-import { SettingsTouchableCardRoot } from "./SettingsTouchableCard.styles";
 
 type SettingsTouchableCardProps = TouchableHighlightProps & {
     cardStyle?: ViewStyle;
@@ -8,9 +7,9 @@ type SettingsTouchableCardProps = TouchableHighlightProps & {
 
 const SettingsTouchableCard = ({ children, cardStyle, ...rest }: SettingsTouchableCardProps) => {
     return (
-        <SettingsTouchableCardRoot {...rest}>
+        <TouchableOpacity activeOpacity={0.75} {...rest}>
             <SettingsCard style={cardStyle}>{children}</SettingsCard>
-        </SettingsTouchableCardRoot>
+        </TouchableOpacity>
     );
 };
 

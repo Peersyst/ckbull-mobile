@@ -118,6 +118,9 @@ const lightTheme = createTheme({
         component: {
             appbar: { backgroundColor: gray[900], borderColor: overlay[100]["8%"] },
             paper: white,
+            navbar: {
+                borderColor: overlay[700]["8%"],
+            },
             bottomBar: {
                 backgroundColor: white,
                 borderColor: overlay[700]["8%"],

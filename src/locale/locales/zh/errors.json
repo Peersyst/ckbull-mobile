@@ -21,5 +21,6 @@
     "invalid_end": "必须以{{end}}结尾",
     "nothing_to_show": "没有什么可以显示",
     "invalid_address": "地址无效",
+    "copied_to_clipboard": "已复制到剪贴板",
     "incorrect_mnemonic": "您输入的助记词不正确"
 }

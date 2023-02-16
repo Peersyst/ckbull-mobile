@@ -9,7 +9,7 @@ export const BUTTON_SIZES: Record<ButtonSize, number> = {
     sm: 36,
 };
 
-export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true, colorBtn }) => {
+export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
     return {
         borderRadius: rounded ? 10000 : undefined,
         //Size Styles
@@ -35,14 +35,14 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true, 
         variant: {
             primary: {
                 gradient: {
-                    colors: [theme.palette.green[200], theme.palette.green[800]],
+                    colors: theme.palette.gradient.greenDarkGreen,
                     start: { x: 0, y: 1 },
                     end: { x: 1, y: 0 },
                 },
                 color: theme.palette.white,
             },
             secondary: {
-                color: colorBtn ? colorBtn : theme.palette.gray[0],
+                color: theme.palette.gray[0],
                 backgroundColor: theme.palette.gray[900],
             },
             tertiary: {
@@ -62,7 +62,10 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true, 
             variant: {
                 primary: {
                     gradient: {
-                        colors: [darken(theme.palette.green[200], 0.15), darken(theme.palette.green[800], 0.15)],
+                        colors: [
+                            darken(theme.palette.gradient.greenDarkGreen[0], 0.15),
+                            darken(theme.palette.gradient.greenDarkGreen[1], 0.15),
+                        ],
                     },
                 },
                 secondary: {

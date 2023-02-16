@@ -1,6 +1,9 @@
 import { useTranslate } from "module/common/hook/useTranslate";
 
-export const useFormatNumber = (n: number | string, options?: Intl.NumberFormatOptions) => {
+export const useFormatNumber = () => {
     const translate = useTranslate();
-    return translate("number", { val: n, ...options });
+    function formatNumber(n: number | string, options?: Intl.NumberFormatOptions) {
+        return translate("number", { val: n, ...options });
+    }
+    return formatNumber;
 };

@@ -13,7 +13,9 @@ const FullScreenModal = ({ children, title, back, closable = true, ...rest }: Fu
                 <DarkThemeProvider>
                     <ImageBackgroundPage>
                         <Toolbar>
-                            {Object.entries(navbarProps).length > 0 && <Navbar onBack={() => setOpen(false)} {...navbarProps} />}
+                            {Object.entries(navbarProps).length > 0 && (
+                                <Navbar onBack={() => setOpen(false)} style={{ borderBottomWidth: 0 }} {...navbarProps} />
+                            )}
                         </Toolbar>
                         {children}
                     </ImageBackgroundPage>

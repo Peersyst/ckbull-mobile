@@ -34,14 +34,14 @@ const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) =>
     },
     FormControlLabel: {
         label: {
-            ...typography.body3Strong,
+            ...typography.body3Regular,
             maxWidth: "100%",
         },
     },
     Label: {
         label: {
             color: palette.component.label,
-            ...typography.body3Strong,
+            ...typography.body3Regular,
         },
     },
     Paper: {

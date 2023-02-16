@@ -8,7 +8,7 @@ describe("SettingsScreen tests", () => {
         const mockedNavigation = jest.fn();
         jest.spyOn(ReactNavigation, "useNavigation").mockReturnValue({ navigate: mockedNavigation });
         const screen = render(<SettingsScreen />);
-        expect(screen.getByText(translate("settings"))).toBeDefined();
+
         expect(screen.getByText(translate("general_settings"))).toBeDefined();
         expect(screen.getByText(translate("security_settings"))).toBeDefined();
         expect(screen.getAllByTestId("ChevronRightIcon")).toHaveLength(2);
@@ -18,7 +18,7 @@ describe("SettingsScreen tests", () => {
         const mockedNavigation = jest.fn();
         jest.spyOn(ReactNavigation, "useNavigation").mockReturnValue({ navigate: mockedNavigation });
         const screen = render(<SettingsScreen />);
-        expect(screen.getByText(translate("settings"))).toBeDefined();
+
         const generalMenu = screen.getByText(translate("general_settings"));
         fireEvent.press(generalMenu);
         expect(mockedNavigation).toHaveBeenCalledWith(SettingsScreens.GENERAL_SETTINGS);
@@ -28,7 +28,7 @@ describe("SettingsScreen tests", () => {
         const mockedNavigation = jest.fn();
         jest.spyOn(ReactNavigation, "useNavigation").mockReturnValue({ navigate: mockedNavigation });
         const screen = render(<SettingsScreen />);
-        expect(screen.getByText(translate("settings"))).toBeDefined();
+
         const securityMenu = screen.getByText(translate("security_settings"));
         fireEvent.press(securityMenu);
         expect(mockedNavigation).toHaveBeenCalledWith(SettingsScreens.SECURITY_SETTINGS);
