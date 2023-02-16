@@ -1,4 +1,4 @@
-import { Col, Form, Paper, Typography, useSetTab } from "@peersyst/react-native-components";
+import { Col, Form, Typography, useSetTab } from "@peersyst/react-native-components";
 import Button from "module/common/component/input/Button/Button";
 import sendRecoilState from "module/transaction/state/SendState";
 import { SendScreens } from "module/transaction/component/core/SendModal/SendModal";
