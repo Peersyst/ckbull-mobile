@@ -31,7 +31,9 @@ export class BalanceOperations {
 
     static mul(a: string | number, b: string | number, decimals: string | number = config.defaultDecimals): string {
         const { aBN, bBN } = BalanceOperations.numbersToBN(a, b, decimals);
-        return BNToNumber(BigInteger.mul(aBN, bBN), decimals);
+        const tempResult = BigInteger.mul(aBN, bBN);
+        const result = BigInteger.div(tempResult, BigInteger.exp("10", decimals.toString()));
+        return BNToNumber(result, decimals);
     }
 
     static add(a: string | number, b: string | number, decimals: string | number = config.defaultDecimals): string {

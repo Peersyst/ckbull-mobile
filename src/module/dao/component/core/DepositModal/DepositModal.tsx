@@ -43,7 +43,7 @@ const DepositModal = createBackdrop(({ onExited, ...rest }: ExposedBackdropProps
                     <DepositSelectAccountScreen />
                 </TabPanel>
                 <TabPanel index={DepositScreens.AMOUNT_AND_MESSAGE}>
-                    <SendSetAmountScreen type="dao" />
+                    <SendSetAmountScreen />
                 </TabPanel>
                 <TabPanel index={DepositScreens.CONFIRMATION}>
                     <DepositConfirmationScreen />

@@ -37,18 +37,16 @@ const DepositSelectAccountScreen = () => {
         <Form onSubmit={handleSubmit}>
             <Col>
                 <Col gap={40}>
-                    <Paper style={{ padding: 20 }} elevation={8}>
-                        <WalletSelector
-                            label={translate("select_a_wallet") + ":"}
-                            required
-                            name="sender"
-                            defaultValue={sendState.senderWalletIndex ?? finalSelectedWallet}
-                        />
-                    </Paper>
+                    <WalletSelector
+                        label={translate("select_a_wallet") + ":"}
+                        required
+                        name="sender"
+                        defaultValue={sendState.senderWalletIndex ?? finalSelectedWallet}
+                    />
                     <Col gap={8}>
                         <Button
                             type="submit"
-                            variant="outlined"
+                            variant="primary"
                             fullWidth
                             disabled={uncommittedTransaction}
                             loading={uncommittedTransaction}
