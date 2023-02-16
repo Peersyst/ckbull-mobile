@@ -44,6 +44,9 @@ const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) =>
             ...typography.body3Regular,
         },
     },
+    Modal: {
+        backgroundColor: palette.component.paper,
+    },
     Paper: {
         backgroundColor: palette.component.paper,
     },
