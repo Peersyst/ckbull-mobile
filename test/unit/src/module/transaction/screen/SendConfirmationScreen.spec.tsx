@@ -28,6 +28,7 @@ describe("SendConfirmationScreen tests", () => {
         expect(screen.getByText(`1,000.001 ${config.tokenName}`)).toBeDefined();
 
         expect(screen.getByText(translate("from"))).toBeDefined();
+
         expect(screen.getByText(state.wallets[0].name + " - " + formatHash(MOCKED_ADDRESS, "middle", 3))).toBeDefined();
         expect(screen.getByText(translate("to"))).toBeDefined();
         expect(screen.getByText(formatHash(MOCKED_ADDRESS, "middle", 3))).toBeDefined();
