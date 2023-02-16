@@ -1,5 +1,5 @@
 import styled from "@peersyst/react-native-styled";
-import { Col, Divider } from "@peersyst/react-native-components";
+import { Col } from "@peersyst/react-native-components";
 import { KeyboardAvoidingView } from "react-native";
 
 export const CardModalContent = styled(KeyboardAvoidingView)(({ theme, dimensions }) => ({
@@ -19,8 +19,4 @@ export const CardModalWrapper = styled(Col)(({ safeAreaInsets }) => ({
 
 export const CardModalBodyWrapper = styled(Col)(() => ({
     padding: 20,
-}));
-
-export const CardModalDivider = styled(Divider)(({ theme }) => ({
-    backgroundColor: theme.palette.overlay[theme.palette.mode === "light" ? "700" : "900"]["8%"],
 }));

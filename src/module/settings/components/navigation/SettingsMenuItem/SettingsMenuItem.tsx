@@ -10,7 +10,7 @@ export interface SettingsMenuItemProps {
 const SettingsMenuItem = ({ text, onPress, destructive = false }: SettingsMenuItemProps): JSX.Element => (
     <SettingsTouchableCard onPress={onPress}>
         <Row flex={1} alignItems="center">
-            <Typography variant="body3Strong" color={destructive ? "status.error" : "text"}>
+            <Typography variant="body2Light" color={destructive ? "status.error" : "text"}>
                 {text}
             </Typography>
         </Row>

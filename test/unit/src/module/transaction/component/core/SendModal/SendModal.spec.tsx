@@ -1,6 +1,6 @@
-import { render, translate } from "test-utils";
 import SendModal from "module/transaction/component/core/SendModal/SendModal";
 import * as Recoil from "recoil";
+import { render, translate } from "test-utils";
 import { fireEvent, waitFor } from "@testing-library/react-native";
 import { UseWalletStateMock, UseServiceInstanceMock } from "test-mocks";
 

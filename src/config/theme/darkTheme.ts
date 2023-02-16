@@ -122,6 +122,9 @@ const darkTheme = createTheme({
             label: gray[900],
             appbar: { backgroundColor: black, borderColor: overlay[900]["16%"] },
             paper: gray[0],
+            navbar: {
+                borderColor: overlay[900]["12%"],
+            },
             bottomBar: {
                 backgroundColor: gray[0],
                 borderColor: overlay[900]["12%"],

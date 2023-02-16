@@ -1,8 +1,8 @@
 import useNavigation from "module/common/hook/useNavigation";
 import { Row, Typography } from "@peersyst/react-native-components";
-import { ChevronRightIcon } from "icons";
 import SettingsTouchableCard from "../SettingsTouchableCard/SettingsTouchableCard";
 import { RootStackParamsList } from "stack-navigator";
+import { SettingsMenuChevron } from "./SettingsMenu.styles";
 
 interface SettingsMenuProps {
     label: string;
@@ -14,8 +14,8 @@ const SettingsMenu = ({ label, location }: SettingsMenuProps): JSX.Element => {
     return (
         <SettingsTouchableCard onPress={() => navigation.navigate(location)}>
             <Row justifyContent="space-between" alignItems="center" flex={1}>
-                <Typography variant="body2Strong">{label}</Typography>
-                <ChevronRightIcon />
+                <Typography variant="body2Light">{label}</Typography>
+                <SettingsMenuChevron />
             </Row>
         </SettingsTouchableCard>
     );
