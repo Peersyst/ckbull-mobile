@@ -8,8 +8,8 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
     const {
         nftName,
         tokenUri,
-        tokenId,
         total,
+        tokenId,
         data: { description },
     } = nft;
 
@@ -17,26 +17,28 @@ const NftCard = ({ nft }: NftCardProps): JSX.Element => {
 
     return (
         <TouchableWithoutFeedback>
-            <MainListCard gap="6.5%">
+            <MainListCard gap={24} style={{ height: 128, paddingVertical: 20 }}>
                 <NftCardImage source={{ uri: tokenUri }} />
-                <Col flex={1} gap={12} justifyContent="center">
-                    <Col gap={2} flex={1}>
+                <Col gap={10} flex={1} justifyContent={"space-between"}>
+                    <Col>
                         {nftName && (
-                            <Typography variant="body1Strong" numberOfLines={1}>
+                            <Typography variant="body2Strong" numberOfLines={1}>
                                 {nftName}
                             </Typography>
                         )}
                         {description && (
-                            <Typography variant="body1Strong" numberOfLines={1}>
+                            <Typography variant="body3Strong" numberOfLines={1} color="green.200">
                                 {description}
                             </Typography>
                         )}
-                        {showTotal && (
-                            <Typography variant="body3Strong" numberOfLines={1} color="primary">
+                    </Col>
+                    {showTotal && (
+                        <Col>
+                            <Typography variant="body3Strong" numberOfLines={1} color="gray.700">
                                 {`${tokenId}/${total}`}
                             </Typography>
-                        )}
-                    </Col>
+                        </Col>
+                    )}
                 </Col>
             </MainListCard>
         </TouchableWithoutFeedback>
