@@ -4,17 +4,14 @@ import { useEffect, useState } from "react";
 import { notificationAsync, NotificationFeedbackType } from "expo-haptics";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { Backdrop, Col, Typography } from "@peersyst/react-native-components";
-import Button from "module/common/component/input/Button/Button";
 import ImageBackgroundPage from "../../layout/ImageBackgroundPage/ImageBackgroundPage";
 import darkTheme from "config/theme/darkTheme";
 import { ThemeProvider } from "@peersyst/react-native-styled";
 import { LoadingIcon, SuccessIcon } from "icons";
-import { useTheme } from "@peersyst/react-native-styled";
 
 const LoadingModal = ({ loading, successMessage, error, success, ...backdropProps }: LoadingModalProps): JSX.Element => {
     const [open, setOpen] = useState(false);
     const translate = useTranslate();
-    const { palette } = useTheme();
 
     useEffect(() => {
         if (!open) setOpen(loading || success || error);
