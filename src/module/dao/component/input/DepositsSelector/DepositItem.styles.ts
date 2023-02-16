@@ -3,7 +3,7 @@ import { styledWithAs } from "@peersyst/react-native-styled";
 import { DepositItemTextProps, getDepositItemTextColorParams } from "./DepositItem";
 
 const getDepositItemTextColor = ({ theme, type, unlockable }: getDepositItemTextColorParams) => {
-    if (type === "deposit") return theme.palette.black;
+    if (type === "deposit") return theme.palette.text;
     return unlockable ? theme.palette.status.success : theme.palette.status.warning;
 };
 

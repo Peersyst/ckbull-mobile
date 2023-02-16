@@ -3,6 +3,7 @@ import Balance from "module/wallet/component/display/Balance/Balance";
 import useGetBalance from "module/wallet/query/useGetBalance";
 import useWallet from "module/wallet/hook/useWallet";
 import { config } from "config";
+import { serviceInstancesMap } from "module/wallet/state/WalletState";
 
 export interface WalletItemProps {
     index: number;
@@ -11,7 +12,7 @@ export interface WalletItemProps {
 
 const WalletItem = ({ index, units = config.tokenName }: WalletItemProps): JSX.Element => {
     const { name } = useWallet(index);
-    const { data: balance, isLoading: balanceIsLoading } = useGetBalance(index);
+    const { data: { freeBalance = 0 } = {}, isLoading: balanceIsLoading } = useGetBalance(index);
 
     return (
         <Row alignItems="center" style={{ overflow: "hidden" }}>
@@ -21,7 +22,7 @@ const WalletItem = ({ index, units = config.tokenName }: WalletItemProps): JSX.E
             <Row>
                 <Typography variant="body2Light">{" · "}</Typography>
                 <Suspense isLoading={balanceIsLoading} activityIndicatorSize="small">
-                    <Balance balance={balance?.freeBalance || 0} variant="body2Light" light units={units} />
+                    <Balance balance={freeBalance} variant="body2Light" light units={units} />
                 </Suspense>
             </Row>
         </Row>

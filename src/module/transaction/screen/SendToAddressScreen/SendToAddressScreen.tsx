@@ -44,7 +44,6 @@ const SendToAddressScreen = () => {
     };
 
     const handleSubmit = ({ sender, receiver }: SendForm) => {
-        Keyboard.dismiss();
         setSendState((oldState) => ({ ...oldState, senderWalletIndex: sender, receiverAddress: receiver }));
         setTab(SendScreens.AMOUNT_AND_MESSAGE);
     };
