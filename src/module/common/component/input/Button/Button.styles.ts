@@ -35,7 +35,7 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
         variant: {
             primary: {
                 gradient: {
-                    colors: [theme.palette.green[200], theme.palette.green[800]],
+                    colors: theme.palette.gradient.greenDarkGreen,
                     start: { x: 0, y: 1 },
                     end: { x: 1, y: 0 },
                 },
@@ -62,7 +62,10 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
             variant: {
                 primary: {
                     gradient: {
-                        colors: [darken(theme.palette.green[200], 0.15), darken(theme.palette.green[800], 0.15)],
+                        colors: [
+                            darken(theme.palette.gradient.greenDarkGreen[0], 0.15),
+                            darken(theme.palette.gradient.greenDarkGreen[1], 0.15),
+                        ],
                     },
                 },
                 secondary: {
