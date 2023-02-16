@@ -9,9 +9,9 @@ export interface SummaryFieldProps {
 
 const SummaryField = ({ label, children }: SummaryFieldProps): JSX.Element => {
     return (
-        <SummaryFieldRoot variant="body2Strong" label={label}>
+        <SummaryFieldRoot variant="body2Regular" label={label}>
             {typeof children === "string" ? (
-                <Typography testID="infoText" variant="body2Strong" numberOfLines={2}>
+                <Typography testID="infoText" variant="body2Regular" numberOfLines={2}>
                     {children}
                 </Typography>
             ) : (

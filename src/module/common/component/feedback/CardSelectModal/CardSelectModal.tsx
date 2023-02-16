@@ -18,7 +18,7 @@ const CardSelectModal = ({ children, title, action, onClose, ...rest }: CardSele
             {(open, setOpen) => ({
                 header: (
                     <CardSelectModalNavbar>
-                        <Typography style={{ lineHeight: 30 }} variant="body1Light" textTransform="uppercase">
+                        <Typography style={{ lineHeight: 30 }} variant="body1Light">
                             {title}
                         </Typography>
                         <ActionIconRoot>

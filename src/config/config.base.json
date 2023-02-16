@@ -4,15 +4,16 @@
     "minimumDaoDeposit": 102,
     "mainnetExplorerLink": "https://explorer.nervos.org/",
     "testnetExplorerLink": "https://pudge.explorer.nervos.org/",
-    "ckbTestnetUrl": "http://ckb-node-test-1.peersyst.com/rpc",
-    "indexerTestnetUrl": "http://ckb-node-test-1.peersyst.com/indexer",
+    "ckbTestnetUrl": "https://testnet.ckb.dev/rpc",
+    "indexerTestnetUrl": "https://testnet.ckb.dev/indexer",
     "ckbMainnetUrl": "https://ckb-node-mainnet.peersyst.com/rpc",
     "indexerMainnetUrl": "https://ckb-node-mainnet.peersyst.com/indexer",
     "faucetUrl": "https://faucet.nervos.org/",
     "testnetExplorerApi": "https://testnet-api.explorer.nervos.org/api/v1/",
     "mainnetExplorerApi": "https://mainnet-api.explorer.nervos.org/api/v1/",
-    "maxNumberOfDecimals": 6,
     "enableMainnet": true,
     "tokenName": "CKB",
-    "newsRSSUrl": "https://fetchrss.com/rss/6239aa2ceb62c371b8448ee26239aa120841546894777912.xml"
+    "newsRSSUrl": "https://fetchrss.com/rss/6239aa2ceb62c371b8448ee26239aa120841546894777912.xml",
+    "defaultDecimals": 8,
+    "miniUnits": "CKS"
 }
