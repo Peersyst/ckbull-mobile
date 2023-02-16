@@ -1,6 +1,5 @@
 //@ts-nocheck
 export { default as empty_folder } from "./EmptyFolder.png";
-export { default as deposit } from "./deposit.png";
 export { default as image_background } from "./image_background.png";
 export { default as key } from "./key.png";
 export { default as lock } from "./lock.png";
