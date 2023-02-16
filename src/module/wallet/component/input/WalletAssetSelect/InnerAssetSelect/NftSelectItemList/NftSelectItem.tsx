@@ -23,7 +23,7 @@ export const NftSelectItem = ({ nft }: NftSelectItemProps) => {
     return (
         <SelectItemCard onPress={handleOnPress}>
             <NftSelectItemImage uri={tokenUri} tokenId={tokenId} />
-            <Typography variant="body2Regular" numberOfLines={1} color="overlay.100">
+            <Typography variant="body2Regular" numberOfLines={1}>
                 {nftName}
             </Typography>
         </SelectItemCard>

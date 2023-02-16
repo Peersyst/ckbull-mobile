@@ -9,9 +9,10 @@ import AssetValueDisplay from "./AssetValueDisplay";
 
 export interface AssetSelectDisplayProps {
     onPress: () => void;
+    fee?: string;
 }
 
-const AssetSelectDisplay = ({ onPress }: AssetSelectDisplayProps) => {
+const AssetSelectDisplay = ({ onPress, fee }: AssetSelectDisplayProps) => {
     const translate = useTranslate();
     const { asset } = useAssetSelect();
     return (
@@ -20,13 +21,13 @@ const AssetSelectDisplay = ({ onPress }: AssetSelectDisplayProps) => {
                 <Col alignItems="center" flex={1} gap="2%">
                     <Row alignItems="center" gap={5} justifyContent="center" style={{ maxWidth: "100%" }}>
                         {asset?.type ? (
-                            <AssetValueDisplay variant="title4Regular" color="gray.700" />
+                            <AssetValueDisplay variant="title4Regular" />
                         ) : (
                             <Typography variant="body1Regular">{translate("select_asset")}</Typography>
                         )}
                         <ChevronDownIcon />
                     </Row>
-                    <Fee typographyVariant="body2" color="gray.300" />
+                    <Fee typographyVariant="body2" fee={fee} />
                 </Col>
             </Container>
         </TouchableWithoutFeedback>

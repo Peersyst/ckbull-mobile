@@ -2,25 +2,23 @@ import useGetBalance from "module/wallet/query/useGetBalance";
 import { config } from "config";
 import BaseAssetAmountTextField from "../BaseAssetAmountTextField/BaseAssetAmountTextField";
 import { NumericTextFieldProps } from "module/common/component/input/NumericTextField/NumericTextField";
-//import { useNEARAmountTextFieldValidator } from "./hook/useNEARAmountTextFieldValidator";
-import { useControlled } from "@peersyst/react-hooks";
+import { useCKBAmountTextField } from "./hook/useCKBAmountTextField";
 
-export interface NEARAmountTextFieldProps extends Omit<NumericTextFieldProps, "validators" | "maxDecimals"> {
+export interface CKBAmountTextFieldProps extends Omit<NumericTextFieldProps, "maxDecimals"> {
     index?: number;
-    maxAmount?: string; //in NEAR
+    maxAmount?: string;
+    minAmount?: string;
+    fee?: string;
 }
 
-const CKBAmountTextField = ({ index, defaultValue = "", value, onChange, error: errorProp, ...rest }: NEARAmountTextFieldProps) => {
-    const [amount, setAmount] = useControlled(defaultValue, value, onChange);
-    //const { error } = useNEARAmountTextFieldValidator({ index, amount, maxAmount });
+const CKBAmountTextField = ({ index, maxAmount, minAmount, validators: validatorsProp, fee, ...rest }: CKBAmountTextFieldProps) => {
     const { isLoading } = useGetBalance(index);
+    const { validators } = useCKBAmountTextField({ maxAmount, minAmount, fee });
 
     return (
         <BaseAssetAmountTextField
-            error={errorProp}
-            value={amount}
-            maxDecimals={24}
-            onChange={setAmount}
+            validators={{ ...validators, ...validatorsProp }}
+            maxDecimals={config.defaultDecimals}
             loading={isLoading}
             units={config.tokenName}
             {...rest}

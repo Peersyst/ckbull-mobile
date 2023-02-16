@@ -13,13 +13,13 @@ const WalletItem = ({ index }: WalletItemProps): JSX.Element => {
 
     return (
         <Row alignItems="center" style={{ overflow: "hidden" }}>
-            <Typography numberOfLines={1} variant="body2Regular" style={{ maxWidth: "100%" }}>
+            <Typography numberOfLines={1} variant="body2Light" style={{ maxWidth: "100%" }}>
                 {name}
             </Typography>
             <Row>
-                <Typography variant="body2Regular">{" · "}</Typography>
+                <Typography variant="body2Light">{" · "}</Typography>
                 <Suspense isLoading={balanceIsLoading} activityIndicatorSize="small">
-                    <Balance balance={balance?.freeBalance || 0} variant="body2Strong" light />
+                    <Balance balance={balance?.freeBalance || 0} variant="body2Light" light />
                 </Suspense>
             </Row>
         </Row>

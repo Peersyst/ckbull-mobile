@@ -11,7 +11,9 @@ const Balance = ({
     loading = false,
     ...typographyProps
 }: BalanceProps): JSX.Element => {
-    const formattedBalance = useFormatBalance(balance, {
+    const formatBalance = useFormatBalance();
+
+    const formattedBalance = formatBalance(balance, {
         numberFormatOptions: { maximumFractionDigits: 2, ...options },
         units,
         unitsPosition,

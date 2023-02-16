@@ -1,3 +1,6 @@
+import { config } from "config";
+import { BNToNumber } from "module/common/utils/BalanceOperations/utils/BNtoNumber";
+
 export function convertShannonsToCKB(num: string | number | bigint) {
-    return Number(num) / 10 ** 8;
+    return BNToNumber(num.toString(), config.defaultDecimals);
 }
