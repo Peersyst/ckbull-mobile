@@ -9,7 +9,7 @@
     "invalid_password": "La contraseña debe contener 8 carácteres, almenos 1 minúscula y una mayúscula y algún caracácter especial",
     "invalid_equal": "Los campos no pueden ser iguales",
     "invalid_number_gt": "El número no puede ser mayor a {{n}}",
-    "invalid_number_gte": "El número deber ser mayor a {{n}}",
+    "invalid_number_gte": "El número deber ser mayor o igual a {{n}}",
     "invalid_number_eq": "El número debe de ser igual a {{n}}",
     "invalid_number_lt": "El número debe de ser menor a {{n}}",
     "invalid_number_lte": "El número debe de ser menor o igual a {{n}}",

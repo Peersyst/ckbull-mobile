@@ -21,9 +21,8 @@ export const LoadingModalRoot = styled(GradientPage, { gradient: true })(({ them
     secondaryBackgroundColor: palette.gradient.greenDarkGreen[1],
 }));
 
-export const LoadingModalContent = styled(Col, { flex: 1, justifyContent: "space-between" })(({ safeAreaInsets }) => ({
+export const LoadingModalContent = styled(Col, { flex: 1, justifyContent: "space-between" })(() => ({
     paddingHorizontal: 20,
-    paddingBottom: safeAreaInsets.bottom + 20,
 }));
 
 export const Gradient = styled(LinearGradient)(() => ({
@@ -36,6 +35,10 @@ export const Gradient = styled(LinearGradient)(() => ({
     height: "100%",
 }));
 
-export const LoadingModalButton = styled(Button, { variant: "secondary" })(({ theme }) => ({
+export const LoadingModalButton = styled(Button, { variant: "secondary" })(({ theme, safeAreaInsets, dimensions }) => ({
     color: theme.palette.white,
+    position: "absolute",
+    width: dimensions.width - 40,
+    marginLeft: 20,
+    bottom: safeAreaInsets.bottom + 40,
 }));

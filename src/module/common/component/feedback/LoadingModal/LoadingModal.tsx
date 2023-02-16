@@ -45,7 +45,7 @@ const LoadingModal = ({ loading, successMessage, error, success, ...backdropProp
             <LoadingModalRoot start={{ x: 0, y: 0.5 }} end={{ x: 0.5, y: 1 }}>
                 <ThemeProvider theme={darkTheme}>
                     {success ? (
-                        <Col flex={1} style={{ paddingBottom: 30, paddingHorizontal: 20 }}>
+                        <>
                             <Col alignItems="center" justifyContent="center" gap={14} flex={1}>
                                 <SuccessIcon style={{ fontSize: 80, color: "white" }} />
                                 <Typography textAlign="center" color="white" variant="body2Strong">
@@ -55,10 +55,10 @@ const LoadingModal = ({ loading, successMessage, error, success, ...backdropProp
                             <LoadingModalButton fullWidth onPress={handleClose}>
                                 {translate("continue")}
                             </LoadingModalButton>
-                        </Col>
+                        </>
                     ) : (
                         <ImageBackgroundPage>
-                            <Col alignItems="center" justifyContent="center" gap={20} flex={1}>
+                            <Col alignItems="center" justifyContent="center" gap={14} flex={1}>
                                 <LoadingIcon style={{ fontSize: 80 }} />
                                 <Typography textAlign="center" color="white" variant="body2Strong">
                                     {translate("processing")}
