@@ -12,11 +12,11 @@ export const CardModalContent = styled(KeyboardAvoidingView)(({ theme, dimension
     backgroundColor: theme.palette.component.paper,
 }));
 
-export const CardModalWrapper = styled(Col)(({ safeAreaInsets }) => ({
-    paddingBottom: safeAreaInsets.bottom + 10,
+export const CardModalWrapper = styled(Col)(() => ({
     height: "100%",
 }));
 
-export const CardModalBodyWrapper = styled(Col)(() => ({
+export const CardModalBodyWrapper = styled(Col)(({ safeAreaInsets }) => ({
+    paddingBottom: safeAreaInsets.bottom + 10,
     padding: 20,
 }));

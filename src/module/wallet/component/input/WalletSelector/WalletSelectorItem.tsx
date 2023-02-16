@@ -8,7 +8,7 @@ export interface WalletSelectorItemProps {
 
 const WalletSelectorItem = ({ index, walletIndex }: WalletSelectorItemProps): JSX.Element => {
     return (
-        <SelectItem value={walletIndex} key={index} style={{ backgroundColor: "blue" }}>
+        <SelectItem value={walletIndex} key={index}>
             <WalletItem index={walletIndex} />
         </SelectItem>
     );
