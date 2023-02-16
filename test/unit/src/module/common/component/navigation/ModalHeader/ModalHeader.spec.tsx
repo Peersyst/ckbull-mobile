@@ -14,7 +14,7 @@ describe("ModalHeader", () => {
     test("Renders hide dismissal correctly", () => {
         render(<ModalHeader title={titleMock} dismissal="hide" onDismiss={jest.fn()} />);
 
-        expect(screen.getByTestId("ChevronDownIcon")).toBeDefined();
+        expect(screen.getByTestId("ChevronUpIcon")).toBeDefined();
     });
 
     test("Renders close dismissal correctly", () => {
