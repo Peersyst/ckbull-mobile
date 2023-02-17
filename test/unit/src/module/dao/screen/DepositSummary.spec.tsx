@@ -30,6 +30,6 @@ describe("Test for the DepositSummary", () => {
         expect(screen.getByText(translate("estimated_apc")));
         await waitFor(() => expect(screen.getByText(`${daoInfo.estimated_apc}%`)).toBeDefined());
         //Warning text
-        expect(screen.getByText(translate("deposit_summary_warning")));
+        expect(screen.getByText(translate("attention") + " " + translate("deposit_summary_warning")));
     });
 });

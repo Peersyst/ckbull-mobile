@@ -20,7 +20,7 @@ const WithdrawFooter = ({ unlockableDeposit, hasDeposits }: WithdrawButtonProps)
     return (
         <Col gap="7%">
             {uncommittedTransaction && (
-                <Typography variant="body4Regular" textAlign="center">
+                <Typography variant="body4Regular" textAlign="center" color={"orange"}>
                     {translate("pending_transaction_text")}
                 </Typography>
             )}

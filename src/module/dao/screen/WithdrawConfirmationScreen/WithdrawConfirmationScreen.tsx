@@ -18,9 +18,7 @@ interface WithdrawConfirmationScreenProps {
     withdrawInfo: WithdrawSummaryType;
 }
 
-const WithdrawConfirmationScreen = ({
-    withdrawInfo: { receiverIndex, depositIndex, feeRate },
-}: WithdrawConfirmationScreenProps): JSX.Element => {
+const WithdrawConfirmationScreen = ({ withdrawInfo: { receiverIndex, depositIndex } }: WithdrawConfirmationScreenProps): JSX.Element => {
     //Hooks
     const translate = useTranslate();
     const [showConfirmation, setShowConfirmation] = useState(false);

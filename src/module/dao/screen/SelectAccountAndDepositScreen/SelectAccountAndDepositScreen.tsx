@@ -43,7 +43,7 @@ const SelectAccountAndDepositScreen = ({ setWithdrawInfo }: WithdrawSelectAccoun
     const { data: unlockableDeposits = [], isLoading } = useGetDAOUnlockableAmounts(selectedWallet);
 
     const handleSubmit = (withdrawInfo: WithdrawForm) => {
-        setWithdrawInfo({ ...withdrawInfo, feeRate: feeInShannons });
+        setWithdrawInfo({ ...withdrawInfo });
         setTab(WithdrawScreens.CONFIRMATION);
     };
 

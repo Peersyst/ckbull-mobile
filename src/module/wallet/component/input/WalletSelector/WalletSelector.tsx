@@ -1,5 +1,4 @@
 import Select, { SelectProps } from "module/common/component/input/Select/Select";
-import useWalletState from "module/wallet/hook/useWalletState";
 import WalletItem from "./WalletItem";
 import WalletSelectorItem from "./WalletSelectorItem";
 import { useTranslate } from "module/common/hook/useTranslate";

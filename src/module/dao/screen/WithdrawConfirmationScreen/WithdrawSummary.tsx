@@ -4,6 +4,7 @@ import { Col } from "@peersyst/react-native-components";
 import BaseSendSummary, { BaseSendSummaryProps } from "../../../transaction/component/display/BaseSendSummary/BaseSendSummary";
 import SummaryField from "../../../transaction/component/display/SummaryField/SummaryField";
 import { useTranslate } from "module/common/hook/useTranslate";
+import { config } from "config";
 
 export interface WithdrawSummaryProps extends Omit<BaseSendSummaryProps, "token"> {
     receiverName: string;
@@ -22,7 +23,7 @@ const WithdrawSummary = ({ amount, receiverName, receiverAddress, depositAPC, co
                 </SummaryField>
                 <SummaryField label={translate("deposit_apc")}>{`${depositAPC}%`}</SummaryField>
                 <SummaryField label={translate("compensation")}>
-                    <Balance balance={compensation} variant="body1" />
+                    <Balance balance={compensation} variant="body1" units={config.tokenName} />
                 </SummaryField>
             </Col>
         </BaseSendSummary>

@@ -12,7 +12,6 @@ import useSelectedNetwork from "module/settings/hook/useSelectedNetwork";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { CameraIcon } from "icons";
 import QrScanner from "module/common/component/input/QrScanner/QrScanner";
-import { Keyboard } from "react-native";
 
 export interface SendForm {
     sender: number;
