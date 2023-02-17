@@ -15,7 +15,7 @@ const Advise = ({ title, text, style }: AdviseProps): JSX.Element => (
             </Typography>
         )}
         {text && (
-            <Typography variant="body3Light" textAlign="center" color="gray.450">
+            <Typography variant="body3Light" textAlign="center" light>
                 {text}
             </Typography>
         )}

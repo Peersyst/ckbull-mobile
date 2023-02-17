@@ -65,7 +65,7 @@ const CreateWalletNavigatorGroup = () => {
         } else setActiveTab(t);
     };
 
-    const handleGlassExit = () => {
+    const handleCardExit = () => {
         if (showPin) setActiveTab(CreateWalletScreens.SET_WALLET_PIN);
         else if (showSuccess) setActiveTab(CreateWalletScreens.CREATE_WALLET_SUCCESS);
         else {
@@ -80,7 +80,7 @@ const CreateWalletNavigatorGroup = () => {
                 <CardNavigatorModal
                     onClose={() => setShowModal(false)}
                     open={showModal}
-                    onExited={handleGlassExit}
+                    onExited={handleCardExit}
                     navbar={{ back: true, title: translate("create_wallet"), onBack: handleBack, steps: { index: activeTab, length: 4 } }}
                     renderBackdrop={false}
                 >

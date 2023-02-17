@@ -27,7 +27,7 @@ const ImportWalletNavigatorGroup = () => {
     const translate = useTranslate();
     const [activeTab, setActiveTab] = useState(0);
     const setTab = useTabs()[1];
-    const [showGlass, setShowGlass] = useState(true);
+    const [showCard, setShowCard] = useState(true);
     const [showPin, setShowPin] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     useLogoPageFlex(showSuccess ? 1 : 0.4);
@@ -39,10 +39,10 @@ const ImportWalletNavigatorGroup = () => {
 
     const handleBack = () => {
         if (activeTab === ImportWalletScreens.SET_WALLET_NAME) {
-            setShowGlass(false);
+            setShowCard(false);
         } else if (activeTab === ImportWalletScreens.SET_WALLET_PIN) {
             setShowPin(false);
-            setShowGlass(true);
+            setShowCard(true);
             setActiveTab(ImportWalletScreens.ENTER_WALLET_MNEMONIC);
         } else if (activeTab >= 0) setActiveTab((t) => t - 1);
     };
@@ -50,7 +50,7 @@ const ImportWalletNavigatorGroup = () => {
     const handleTabChange = (t: number) => {
         if (t === ImportWalletScreens.SET_WALLET_PIN) {
             setShowPin(true);
-            setShowGlass(false);
+            setShowCard(false);
         } else if (t === ImportWalletScreens.IMPORT_WALLET_SUCCESS) {
             setShowPin(false);
             setShowSuccess(true);
@@ -58,7 +58,7 @@ const ImportWalletNavigatorGroup = () => {
         } else setActiveTab(t);
     };
 
-    const handleGlassExit = () => {
+    const handleCardExit = () => {
         if (showPin) setActiveTab(ImportWalletScreens.SET_WALLET_PIN);
         else if (showSuccess) setActiveTab(ImportWalletScreens.IMPORT_WALLET_SUCCESS);
         else {
@@ -72,9 +72,9 @@ const ImportWalletNavigatorGroup = () => {
             <LightThemeProvider>
                 <CardNavigatorModal
                     renderBackdrop={false}
-                    onClose={() => setShowGlass(false)}
-                    open={showGlass}
-                    onExited={handleGlassExit}
+                    onClose={() => setShowCard(false)}
+                    open={showCard}
+                    onExited={handleCardExit}
                     navbar={{ back: true, title: translate("import_wallet"), onBack: handleBack, steps: { index: activeTab, length: 3 } }}
                 >
                     <TabPanel index={ImportWalletScreens.SET_WALLET_NAME}>

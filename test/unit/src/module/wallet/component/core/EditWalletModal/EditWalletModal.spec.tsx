@@ -45,7 +45,7 @@ describe("EditWallet tests", () => {
         fireEvent.changeText(screen.getByDisplayValue(wallet.name), "New name");
         expect(setName).toHaveBeenCalledWith("New name");
         fireEvent.press(screen.getAllByRole("button")[5]);
-        expect(setColorIndex).toHaveBeenCalledWith(3);
+        expect(setColorIndex).toHaveBeenCalledWith(4);
 
         fireEvent.press(screen.getByText(translate("save")));
         expect(editWallet).toHaveBeenCalledWith(0, expect.any(Object));
@@ -72,9 +72,9 @@ describe("EditWallet tests", () => {
         fireEvent.changeText(screen.getByDisplayValue(wallet.name), "New name");
         expect(setName).toHaveBeenCalledWith("New name");
         fireEvent.press(screen.getAllByRole("button")[5]);
-        expect(setColorIndex).toHaveBeenCalledWith(3);
+        expect(setColorIndex).toHaveBeenCalledWith(4);
 
-        fireEvent.press(screen.getByText(translate("cancel")));
+        fireEvent.press(screen.getByTestId("CircleErrorIcon"));
         expect(reset).toHaveBeenCalled();
     });
 });

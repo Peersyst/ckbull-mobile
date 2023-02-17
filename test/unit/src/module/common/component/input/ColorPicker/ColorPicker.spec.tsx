@@ -6,7 +6,9 @@ import lightTheme from "config/theme/lightTheme";
 describe("ColorPicker tests", () => {
     test("Renders correctly", () => {
         const handlePick = jest.fn();
-        const screen = render(<ColorPicker onColorPicked={handlePick} />);
+
+        const screen = render(<ColorPicker onChange={handlePick} />);
+
         const samples = screen.getAllByRole("button");
         fireEvent.press(samples[0]);
         expect(handlePick).toHaveBeenCalledWith(lightTheme.palette.wallet[0]);
