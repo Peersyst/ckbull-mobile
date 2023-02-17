@@ -17,7 +17,7 @@ export interface SendTransactionParams {
 }
 
 export interface TransferTokensParams {
-    amount: bigint | number;
+    amount: string;
     mnemonic: string[];
     to: string;
     token: string;
