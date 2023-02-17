@@ -13,10 +13,12 @@ export const TextFieldRoot = styled(TextField)<TextFieldRootProps>(({ theme, siz
         md: {
             height: 45,
             ...theme.typography.body3Light,
+            lineHeight: undefined,
         },
         lg: {
             height: 60,
             ...theme.typography.body2Light,
+            lineHeight: undefined,
         },
     };
 

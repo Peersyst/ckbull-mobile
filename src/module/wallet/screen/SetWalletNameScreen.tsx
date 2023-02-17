@@ -19,11 +19,14 @@ const SetWalletNameScreen = ({ onSubmit, submitText }: SetWalletNameScreenProps)
         setName,
         state: { name },
     } = useCreateWallet();
+
     const translate = useTranslate();
+
     const handleSubmit = ({ walletName }: SetWalletNameForm) => {
         setName(walletName);
         onSubmit();
     };
+
     return (
         <Col flex={1} gap={24} justifyContent="flex-end">
             <Advise title={translate("security_first")} text={translate("set_wallet_name_text")} />

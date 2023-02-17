@@ -31,7 +31,7 @@
         "@ckb-lumos/lumos": "^0.18.0-rc6",
         "@expo/config-plugins": "^5.0.2",
         "@peersyst/react-hooks": "^2.2.0",
-        "@peersyst/react-native-components": "^2.1.14",
+        "@peersyst/react-native-components": "^2.1.17",
         "@peersyst/react-native-styled": "^2.0.0",
         "@peersyst/react-types": "^1.5.0",
         "@peersyst/react-utils": "^2.1.0",
@@ -80,7 +80,7 @@
         "react-native-qrcode-svg": "^6.1.2",
         "react-native-safe-area-context": "4.4.1",
         "react-native-screens": "~3.18.0",
-        "react-native-svg": "13.5.0",
+        "react-native-svg": "13.4.0",
         "react-native-web": "~0.18.7",
         "react-native-webp-format": "^1.1.2",
         "react-query": "^3.34.14",
@@ -122,6 +122,7 @@
         "react": "18.1.0",
         "@types/react-dom": "18.0.8",
         "react-dom": "18.1.0",
-        "react-native-pager-view": "6.0.0"
+        "react-native-pager-view": "6.0.0",
+        "react-native-svg": "13.4.0"
     }
 }
