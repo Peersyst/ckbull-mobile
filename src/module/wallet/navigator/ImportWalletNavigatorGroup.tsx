@@ -80,7 +80,7 @@ const ImportWalletNavigatorGroup = () => {
                     <TabPanel index={ImportWalletScreens.SET_WALLET_NAME}>
                         <SetWalletNameScreen
                             onSubmit={() => handleTabChange(ImportWalletScreens.WALLET_ADVISES)}
-                            submitText={translate("enter_mnemonic")}
+                            submitText={translate("next")}
                         />
                     </TabPanel>
                     <TabPanel index={ImportWalletScreens.WALLET_ADVISES}>

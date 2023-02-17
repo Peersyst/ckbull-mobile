@@ -1,7 +1,7 @@
 import styled from "@peersyst/react-native-styled";
 import { Select, Typography } from "@peersyst/react-native-components";
 
-export const SelectRoot = styled(Select)(({ theme }) => ({
+export const SelectRoot = styled(Select)(({ theme, dimensions }) => ({
     component: {
         display: {
             borderRadius: theme.borderRadiusSm,
@@ -15,6 +15,21 @@ export const SelectRoot = styled(Select)(({ theme }) => ({
             icon: {
                 color: theme.palette.gray[300],
                 fontSize: 20,
+            },
+        },
+        menu: {
+            position: "absolute",
+            bottom: 0,
+            maxWidth: dimensions.width,
+            width: dimensions.width,
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0,
+        },
+        item: {
+            ...theme.typography.body2Light,
+            selected: {
+                ...theme.typography.body2Regular,
+                backgroundColor: theme.palette.primary,
             },
         },
     },

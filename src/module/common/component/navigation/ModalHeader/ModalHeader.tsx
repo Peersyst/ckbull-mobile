@@ -1,5 +1,6 @@
 import { Col, Row, Typography } from "@peersyst/react-native-components";
 import { BackIcon } from "icons";
+import { isValidElement } from "react";
 import { DISMISSAL_ICONS } from "./DismissalIcons";
 import { BackIconButton, DismissalIconButton, ModalHeaderRoot } from "./ModalHeader.styles";
 import { ModalHeaderProps } from "./ModalHeader.types";
@@ -16,7 +17,7 @@ const ModalHeader = ({ title, dismissal, onDismiss, onBack }: ModalHeaderProps) 
                             <BackIcon />
                         </BackIconButton>
                     )}
-                    <Typography variant="body1Light">{title}</Typography>
+                    {isValidElement(title) ? title : <Typography variant="body1Light">{title}</Typography>}
                     <DismissalIconButton onPress={onDismiss}>
                         <DismissalIcon />
                     </DismissalIconButton>

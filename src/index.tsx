@@ -2,7 +2,7 @@ import Providers from "./Providers";
 import Navigator from "./navigator/Navigator";
 import { useLoad } from "module/common/query/useLoad";
 import LogoPage from "module/common/component/layout/LogoPage/LogoPage";
-import { Suspense } from "@peersyst/react-native-components";
+import { StatusBar, Suspense } from "@peersyst/react-native-components";
 import { useRecoilValue } from "recoil";
 import settingsState from "module/settings/state/SettingsState";
 import { Platform, UIManager } from "react-native";
@@ -20,9 +20,12 @@ const App = (): JSX.Element => {
     const { loading: loadingSettings = false } = useRecoilValue(settingsState);
 
     return (
-        <Suspense fallback={<LogoPage />} isLoading={loading || loadingSettings}>
-            <Navigator />
-        </Suspense>
+        <>
+            <Suspense fallback={<LogoPage />} isLoading={loading || loadingSettings}>
+                <Navigator />
+            </Suspense>
+            <StatusBar appearance="dark" />
+        </>
     );
 };
 
