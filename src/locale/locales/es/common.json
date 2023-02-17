@@ -178,5 +178,6 @@
     "send_only_one_nft": "Solo puedes enviar 1 Nft",
     "connected_sites": "Sitios conectados",
     "today": "Hoy",
-    "select_the_amount_to_deposit": "Selecciona la cantidad a enviar"
+    "select_the_amount_to_deposit": "Selecciona la cantidad a enviar",
+    "select_theme": "Cambiar tema"
 }

@@ -178,5 +178,6 @@
     "send_only_one_nft": "You can only send 1 Nft",
     "connected_sites": "Connected sites",
     "today": "Today",
-    "select_the_amount_to_deposit": "Select the amount to deposit"
+    "select_the_amount_to_deposit": "Select the amount to deposit",
+    "select_theme": "Change theme"
 }
