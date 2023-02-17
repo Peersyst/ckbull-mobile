@@ -4,10 +4,9 @@ import { useTranslate } from "module/common/hook/useTranslate";
 import { BalanceOperations } from "module/common/utils/BalanceOperations/BalanceOperations";
 import { BNToNumber } from "module/common/utils/BalanceOperations/utils/BNtoNumber";
 import { getDecimals } from "module/common/utils/BalanceOperations/utils/getDecimals";
-import settingsState from "module/settings/state/SettingsState";
+import { useSettings } from "module/settings/hook/useSettings";
 import { useFormatBalance } from "module/wallet/component/display/Balance/hook/useFormatBalance";
 import useGetBalance from "module/wallet/query/useGetBalance";
-import { useRecoilValue } from "recoil";
 
 export interface UseCKBAmountTextFieldParams {
     maxAmount?: string | number;
@@ -36,7 +35,7 @@ export function useCKBAmountTextField({
     const formatBalance = useFormatBalance();
     const translateError = useTranslate("error");
 
-    const { fee } = useRecoilValue(settingsState);
+    const { fee } = useSettings();
     const { data: { freeBalance = 0 } = {} } = useGetBalance(walletIndex);
 
     const maxAmount = getMaxAmount(maxAmountParam, freeBalance, BNToNumber(fee));

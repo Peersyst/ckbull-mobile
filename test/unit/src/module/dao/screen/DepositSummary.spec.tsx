@@ -1,28 +1,27 @@
-/* import { formatHash } from "@peersyst/react-utils";
+import { formatHash } from "@peersyst/react-utils";
 import DepositSummary from "module/dao/screen/DepositConfirmationScreen/DepositSummary";
 import { render, SuccessApiCall, waitFor, translate } from "test-utils";
 import { MockedDAOBalance } from "mocks/DAO";
 import * as UseGetDaoInfo from "module/dao/query/useGetDaoInfo";
 import daoInfo from "mocks/daoInfo";
-import { UseServiceInstanceMock, UseWalletStateMock } from "test-mocks"; */
+import { UseServiceInstanceMock, UseWalletStateMock } from "test-mocks";
 import { config } from "config";
 
 describe("Test for the DepositSummary", () => {
-    /*  const { serviceInstance } = new UseServiceInstanceMock();
+    const { serviceInstance } = new UseServiceInstanceMock();
     new UseWalletStateMock();
 
     afterEach(() => {
         jest.restoreAllMocks();
-    }); */
+    });
 
     test("Renders correctly", async () => {
-        expect(config.tokenName).toBe(config.tokenName);
-        /* jest.spyOn(serviceInstance, "getDAOBalance").mockReturnValue(SuccessApiCall(MockedDAOBalance));
+        jest.spyOn(serviceInstance, "getDAOBalance").mockReturnValue(SuccessApiCall(MockedDAOBalance));
 
         jest.spyOn(UseGetDaoInfo, "default").mockReturnValue({ data: daoInfo, isLoading: false } as any);
-        const screen = render(<DepositSummary senderAddress={"0xMockedAddress"} amount={1000} fee={"0.001"} senderName={"Peersyst"} />);
+        const screen = render(<DepositSummary senderAddress={"0xMockedAddress"} amount={1000} senderName={"Peersyst"} />);
         expect(screen.getByText(`1,000 ${config.tokenName}`)).toBeDefined();
-        expect(screen.getByText(translate("transaction_fee_label") + ":")).toBeDefined();
+
         expect(screen.getByText(`0.001 ${config.tokenName}`)).toBeDefined();
         //Sender
         expect(screen.getByText(translate("from")));
@@ -31,6 +30,6 @@ describe("Test for the DepositSummary", () => {
         expect(screen.getByText(translate("estimated_apc")));
         await waitFor(() => expect(screen.getByText(`${daoInfo.estimated_apc}%`)).toBeDefined());
         //Warning text
-        expect(screen.getByText(translate("deposit_summary_warning"))); */
+        expect(screen.getByText(translate("deposit_summary_warning")));
     });
 });

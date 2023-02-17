@@ -1,4 +1,4 @@
-import { Col, Form, Paper, Typography, useSetTab } from "@peersyst/react-native-components";
+import { Col, Form, Typography, useSetTab } from "@peersyst/react-native-components";
 import Button from "module/common/component/input/Button/Button";
 import sendRecoilState from "module/transaction/state/SendState";
 import { SendScreens } from "module/transaction/component/core/SendModal/SendModal";
@@ -37,18 +37,16 @@ const DepositSelectAccountScreen = () => {
         <Form onSubmit={handleSubmit}>
             <Col>
                 <Col gap={40}>
-                    <Paper style={{ padding: 20 }} elevation={8}>
-                        <WalletSelector
-                            label={translate("select_a_wallet") + ":"}
-                            required
-                            name="sender"
-                            defaultValue={sendState.senderWalletIndex ?? finalSelectedWallet}
-                        />
-                    </Paper>
+                    <WalletSelector
+                        label={translate("select_a_wallet") + ":"}
+                        required
+                        name="sender"
+                        defaultValue={sendState.senderWalletIndex ?? finalSelectedWallet}
+                    />
                     <Col gap={8}>
                         <Button
                             type="submit"
-                            variant="outlined"
+                            variant="primary"
                             fullWidth
                             disabled={uncommittedTransaction}
                             loading={uncommittedTransaction}

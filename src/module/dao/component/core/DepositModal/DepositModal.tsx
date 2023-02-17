@@ -4,9 +4,9 @@ import CardNavigatorModal from "module/common/component/navigation/CardNavigator
 import { useResetRecoilState } from "recoil";
 import sendState from "module/transaction/state/SendState";
 import DepositSelectAccountScreen from "module/dao/screen/DepositSelectAccountScreen/DepositSelectAccountScreen";
-import SendSetAmountScreen from "module/transaction/screen/SendSetAmountScreen/SendSetAmountScreen";
 import DepositConfirmationScreen from "module/dao/screen/DepositConfirmationScreen/DepositConfirmationScreen";
 import { useTranslate } from "module/common/hook/useTranslate";
+import DepositSetAmountScreen from "module/dao/screen/DepositSetAmountScreen/DepositSetAmountScreen";
 
 export enum DepositScreens {
     SELECT_ACCOUNT,
@@ -43,7 +43,7 @@ const DepositModal = createBackdrop(({ onExited, ...rest }: ExposedBackdropProps
                     <DepositSelectAccountScreen />
                 </TabPanel>
                 <TabPanel index={DepositScreens.AMOUNT_AND_MESSAGE}>
-                    <SendSetAmountScreen type="dao" />
+                    <DepositSetAmountScreen />
                 </TabPanel>
                 <TabPanel index={DepositScreens.CONFIRMATION}>
                     <DepositConfirmationScreen />
