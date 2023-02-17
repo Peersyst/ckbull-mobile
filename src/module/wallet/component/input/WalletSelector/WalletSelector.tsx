@@ -2,7 +2,6 @@ import Select, { SelectProps } from "module/common/component/input/Select/Select
 import useWalletState from "module/wallet/hook/useWalletState";
 import WalletItem from "./WalletItem";
 import WalletSelectorItem from "./WalletSelectorItem";
-import { useControlled } from "@peersyst/react-hooks";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { useWalletSelect } from "module/wallet/hook/useWalletSelect";
 
@@ -31,6 +30,10 @@ const WalletSelector = ({
     });
     const translate = useTranslate();
 
+    function renderValue() {
+        return selectedWallet && <WalletItem index={selectedWallet.index} />;
+    }
+
     return (
         <Select
             value={selectedIndex}
@@ -40,11 +43,11 @@ const WalletSelector = ({
             style={style}
             title={translate("select_a_wallet")}
             placeholder={translate("no_account_selected")}
-            renderValue={() => selectedWallet && <WalletItem index={selectedWallet.index} />}
+            renderValue={renderValue}
             {...rest}
         >
-            {wallets.map(({ index: walletIndex }) => {
-                return <WalletSelectorItem walletIndex={walletIndex} key={walletIndex} />;
+            {wallets.map(({ index: walletIndex }, index) => {
+                return <WalletSelectorItem walletIndex={walletIndex} key={index} />;
             })}
         </Select>
     );

@@ -8,14 +8,14 @@ import { useTranslate } from "module/common/hook/useTranslate";
 export interface WithdrawSummaryProps extends Omit<BaseSendSummaryProps, "token"> {
     receiverName: string;
     receiverAddress: string;
-    depositAPC: number;
-    compensation: number;
+    depositAPC: number | string;
+    compensation: number | string;
 }
 
-const WithdrawSummary = ({ amount, fee, receiverName, receiverAddress, depositAPC, compensation }: WithdrawSummaryProps): JSX.Element => {
+const WithdrawSummary = ({ amount, receiverName, receiverAddress, depositAPC, compensation }: WithdrawSummaryProps): JSX.Element => {
     const translate = useTranslate();
     return (
-        <BaseSendSummary amount={amount} fee={fee} token="token">
+        <BaseSendSummary amount={amount}>
             <Col gap="3%" style={{ alignSelf: "flex-start" }}>
                 <SummaryField label={translate("destination_wallet")}>
                     {receiverName + " - " + formatHash(receiverAddress, "middle", 3)}

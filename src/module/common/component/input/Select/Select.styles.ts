@@ -1,7 +1,11 @@
 import styled from "@peersyst/react-native-styled";
 import { Select, Typography } from "@peersyst/react-native-components";
+import { alpha } from "@peersyst/react-utils";
 
 export const SelectRoot = styled(Select)(({ theme, dimensions }) => ({
+    hint: {
+        color: theme.palette.component.input.hintColor,
+    },
     component: {
         display: {
             borderRadius: theme.borderRadiusSm,
@@ -15,6 +19,9 @@ export const SelectRoot = styled(Select)(({ theme, dimensions }) => ({
             icon: {
                 color: theme.palette.gray[300],
                 fontSize: 20,
+            },
+            disabled: {
+                borderColor: alpha(theme.palette.component.input.borderColor, 0.15),
             },
         },
         menu: {

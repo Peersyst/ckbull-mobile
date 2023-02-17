@@ -51,9 +51,7 @@ const DepositItem = ({
                     variant="body1"
                 />
                 <DepositItemText type={type} unlockable={unlockable} selected={isSelected} variant="body1">
-                    {" (APC: " +
-                        getAPC({ daoCompensation: convertShannonsToCKB(compensation), daoDeposit: convertShannonsToCKB(amount) }) +
-                        "%)"}
+                    {" (APC: " + getAPC({ daoCompensation: compensation, daoDeposit: amount }) + "%)"}
                 </DepositItemText>
             </Row>
             <Row justifyContent="flex-start">

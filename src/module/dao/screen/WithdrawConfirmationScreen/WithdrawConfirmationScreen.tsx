@@ -57,9 +57,8 @@ const WithdrawConfirmationScreen = ({
                     compensation={convertShannonsToCKB(compensation)}
                     receiverName={receiverName}
                     receiverAddress={serviceInstance?.getAddress() || ""}
-                    depositAPC={getAPC({ daoCompensation: convertShannonsToCKB(compensation), daoDeposit: convertShannonsToCKB(amount) })}
+                    depositAPC={getAPC({ daoCompensation: compensation, daoDeposit: amount })}
                     amount={convertShannonsToCKB(amount)}
-                    fee={convertShannonsToCKB(feeRate!).toString()}
                 />
                 <Typography variant="caption" textAlign="center">
                     {translate("send_confirmation_text")}
@@ -67,7 +66,7 @@ const WithdrawConfirmationScreen = ({
                 <CountdownButton
                     loading={loading}
                     disabled={isSuccess}
-                    variant="outlined"
+                    variant="primary"
                     seconds={5}
                     fullWidth
                     onPress={() => setShowConfirmation(true)}
