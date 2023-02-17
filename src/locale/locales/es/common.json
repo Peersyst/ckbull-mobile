@@ -177,5 +177,6 @@
     "select_asset": "Elige entre tus activos",
     "send_only_one_nft": "Solo puedes enviar 1 Nft",
     "connected_sites": "Sitios conectados",
-    "today": "Hoy"
+    "today": "Hoy",
+    "walletColor": "Color del wallet"
 }
