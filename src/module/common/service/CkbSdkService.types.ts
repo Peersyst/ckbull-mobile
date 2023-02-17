@@ -1,4 +1,4 @@
-import { DAOUnlockableAmount, FeeRate, Transaction } from "ckb-peersyst-sdk";
+import { DAOUnlockableAmount, FeeRate, Nft, Transaction } from "ckb-peersyst-sdk";
 
 export type Chain = "mainnet" | "testnet";
 
@@ -13,6 +13,21 @@ export interface SendTransactionParams {
     mnemonic: string[];
     message: string;
     to: string;
+    feeRate?: FeeRate;
+}
+
+export interface TransferTokensParams {
+    amount: string;
+    mnemonic: string[];
+    to: string;
+    token: string;
+    feeRate?: FeeRate;
+}
+
+export interface TransferNftParams {
+    mnemonic: string[];
+    to: string;
+    nft: Nft;
     feeRate?: FeeRate;
 }
 
