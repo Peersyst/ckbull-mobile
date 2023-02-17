@@ -8,6 +8,7 @@ import MainListCard from "module/main/component/display/MainListCard/MainListCar
 import { placeholder_image } from "images";
 import { TokenAmount } from "module/token/types";
 import { BNToNumber } from "module/common/utils/BalanceOperations/utils/BNtoNumber";
+import { BalanceOperations } from "module/common/utils/BalanceOperations/BalanceOperations";
 
 export interface TokenCardProps {
     token: TokenAmount;
@@ -17,6 +18,8 @@ const TokenCard = ({ token: { type, amount } }: TokenCardProps): JSX.Element => 
     const { name, tokenName, imageUri } = type;
     const { fiat } = useRecoilValue(settingsState);
     const { data: tokenValue } = useGetTokenPrice(fiat, type);
+    const parsedAmount = BNToNumber(amount, type.decimals);
+    const tokenAmountInFiat = tokenValue !== undefined ? BalanceOperations.mul(parsedAmount, tokenValue, type.decimals) : 0;
 
     return (
         <MainListCard alignItems="center" justifyContent="space-between">
@@ -29,11 +32,12 @@ const TokenCard = ({ token: { type, amount } }: TokenCardProps): JSX.Element => 
             <Col alignItems="flex-end" justifyContent="center" gap={2}>
                 <Balance
                     options={{ maximumFractionDigits: 4 }}
-                    balance={BNToNumber(amount, type.decimals)}
+                    adjustsFontSizeToFit={false}
+                    balance={parsedAmount}
                     units={tokenName ? (tokenName === "Unknown Token" ? "?" : tokenName) : ""}
                     variant="body3Regular"
                 />
-                {tokenValue && <Balance action="round" light balance={tokenValue} units={fiat} variant="body3Light" />}
+                {tokenValue && <Balance action="round" light balance={tokenAmountInFiat} units={fiat} variant="body3Light" />}
             </Col>
         </MainListCard>
     );

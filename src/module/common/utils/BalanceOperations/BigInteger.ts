@@ -29,4 +29,8 @@ export class BigInteger {
     static add(a: string, b: string): string {
         return BN(a).add(b).toString();
     }
+
+    static div(a: string, b: string): string {
+        return BN(a).divide(b).toString();
+    }
 }

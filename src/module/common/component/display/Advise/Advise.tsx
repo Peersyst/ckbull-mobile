@@ -2,16 +2,18 @@ import { Col, Typography } from "@peersyst/react-native-components";
 import { ViewStyle } from "react-native";
 
 export interface AdviseProps {
-    title: string;
+    title?: string;
     text?: string;
     style?: ViewStyle;
 }
 
 const Advise = ({ title, text, style }: AdviseProps): JSX.Element => (
     <Col alignItems="center" style={style} gap={24}>
-        <Typography variant="body3Regular" textAlign="center">
-            {title}
-        </Typography>
+        {title && (
+            <Typography variant="body3Regular" textAlign="center">
+                {title}
+            </Typography>
+        )}
         {text && (
             <Typography variant="body3Light" textAlign="center" light>
                 {text}
