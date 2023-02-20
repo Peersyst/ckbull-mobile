@@ -104,8 +104,8 @@
     "deposit_completed": "Depósito completado\ncorrectamente",
     "sent": "Enviado",
     "received": "Recibido",
-    "sent_nft": "Coleccionable Enviado",
-    "received_nft": "Coleccionable Recibido",
+    "sent_nft": "NFT Enviado",
+    "received_nft": "NFT Recibido",
     "DAO_deposit": "Depósito DAO",
     "DAO_withdrawal": "Retiro DAO",
     "smart_contract": "Smart Contract",
@@ -158,7 +158,6 @@
     "processing": "Procesando...",
     "dismiss": "Cerrar",
     "pending_transaction_text": "Tienes una transacción no cometida. Por favor, espera a que esté cometida para poder enviar una nueva.",
-    "sentTo": "Enviado a",
     "boughtFor": "Comprado por",
     "selectAToken": "Select una moneda",
     "continue": "Continuar",
@@ -180,5 +179,9 @@
     "today": "Hoy",
     "select_the_amount_to_deposit": "Selecciona la cantidad a enviar",
     "walletColor": "Color del wallet",
-    "loading_deposits": "Cargando depósitos..."
+    "loading_deposits": "Cargando depósitos...",
+    "token_sent": "{{token}} $t(sent)",
+    "token_received": "{{token}} $t(received)",
+    "CKB_sent": "CKB $t(sent)",
+    "CKB_received": "CKB $t(received)"
 }

@@ -1,22 +1,14 @@
-import { useTranslate } from "module/common/hook/useTranslate";
 import { FullTransaction } from "module/common/service/CkbSdkService.types";
-import { TX_LABEL } from "./utils/txLabel";
 import { Typography, TypographyProps } from "@peersyst/react-native-components";
+import { useGetTxLabel } from "./hooks/useGetTxLabel";
 
 export interface TransactionLabelProps extends Omit<TypographyProps, "children"> {
-    type: FullTransaction["type"];
-    accountId?: string;
+    transaction: FullTransaction;
 }
 
-const TransactionLabel = ({ type, accountId, ...typographyProps }: TransactionLabelProps): JSX.Element => {
-    const translate = useTranslate();
-
-    return (
-        <Typography {...typographyProps}>
-            {translate(TX_LABEL[type])}
-            {accountId && ` (${accountId})`}
-        </Typography>
-    );
+const TransactionLabel = ({ transaction, ...typographyProps }: TransactionLabelProps): JSX.Element => {
+    const getTxLabel = useGetTxLabel();
+    return <Typography {...typographyProps}>{getTxLabel(transaction)}</Typography>;
 };
 
 export default TransactionLabel;

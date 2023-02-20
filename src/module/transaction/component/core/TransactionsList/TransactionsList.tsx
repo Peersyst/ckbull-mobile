@@ -2,10 +2,10 @@ import useGetTransactions from "module/transaction/query/useGetTransactions";
 import MainList from "module/main/component/display/MainList/MainList";
 import EmptyListComponent from "module/common/component/display/EmptyListComponent/EmptyListComponent";
 import TransactionCard from "module/transaction/component/display/TransactionCard/TransactionCard";
-import isCKBTransaction from "module/transaction/component/utils/isCKBTransaction";
+import isSupportedTransaction from "./utils/isSupportedTransaction";
 
 const TransactionsList = (): JSX.Element => {
-    const { data = [], isLoading, refetch } = useGetTransactions({ filter: (tx) => isCKBTransaction(tx.type) });
+    const { data = [], isLoading, refetch } = useGetTransactions({ filter: (tx) => isSupportedTransaction(tx.type) });
     return (
         <MainList
             onRefresh={refetch}

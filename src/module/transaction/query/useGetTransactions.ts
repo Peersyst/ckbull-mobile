@@ -3,6 +3,7 @@ import useUncommittedTransactions from "module/transaction/query/useUncommittedT
 import { FullTransaction } from "module/common/service/CkbSdkService.types";
 import { useMemo } from "react";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
+import Queries from "../../../query/queries";
 
 export interface UseGetTransactionsOptions {
     index?: number;
@@ -13,9 +14,12 @@ const useGetTransactions = ({ index, filter }: UseGetTransactionsOptions = {}) =
     const { serviceInstance, index: usedIndex, network } = useServiceInstance(index);
     const { data: uncommitedTransactions = [], isLoading: uncommitedTransactionsLoading, refetch } = useUncommittedTransactions(usedIndex);
 
-    const { data: transactions = [], isLoading: transactionsLoading } = useQuery(["transactions", usedIndex, network], async () => {
-        return serviceInstance?.getTransactions().reverse();
-    });
+    const { data: transactions = [], isLoading: transactionsLoading } = useQuery(
+        [Queries.GET_TRANSACTIONS, usedIndex, network],
+        async () => {
+            return serviceInstance?.getTransactions().reverse();
+        },
+    );
 
     const txs = useMemo(() => {
         const filteredTransacations = transactions.filter(

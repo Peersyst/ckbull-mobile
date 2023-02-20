@@ -180,5 +180,9 @@
     "today": "Today",
     "select_the_amount_to_deposit": "Select the amount to deposit",
     "walletColor": "Wallet color",
-    "loading_deposits": "Loading deposits..."
+    "loading_deposits": "Loading deposits...",
+    "token_sent": "{{token}} $t(sent)",
+    "token_received": "{{token}} $t(received)",
+    "CKB_sent": "CKB $t(sent)",
+    "CKB_received": "$t(token_received, { token: CKB})"
 }

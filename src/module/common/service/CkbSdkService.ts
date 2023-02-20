@@ -40,6 +40,17 @@ export function getTokenTypeFromScript(scriptType: ScriptType) {
     return getTokenTypeFromIndex(tokenIndex, scriptType);
 }
 
+export const MAIN_SUPPORTED_TRANSACTION_TYPES = [
+    TransactionType.SEND_NATIVE_TOKEN,
+    TransactionType.RECEIVE_NATIVE_TOKEN,
+    TransactionType.SEND_NFT,
+    TransactionType.RECEIVE_NFT,
+    TransactionType.SEND_TOKEN,
+    TransactionType.RECEIVE_TOKEN,
+    TransactionType.SMART_CONTRACT_RECEIVE,
+    TransactionType.SMART_CONTRACT_SEND,
+];
+
 export const testnetConnectionService = new ConnectionService(config.ckbTestnetUrl, config.indexerTestnetUrl, Environments.Testnet);
 export const mainnetConnectionService = new ConnectionService(config.ckbMainnetUrl, config.indexerMainnetUrl, Environments.Mainnet);
 

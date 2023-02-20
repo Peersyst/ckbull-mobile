@@ -8,11 +8,9 @@ import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import SendTransactionModal from "module/transaction/component/feedback/SendTransactionModal/SendTransactionModal";
 import { useSend } from "module/transaction/hook/useSend";
-import SendModal from "module/transaction/component/core/SendModal/SendModal";
 
 const SendConfirmationScreen = (): JSX.Element => {
     const translate = useTranslate();
-    const { hideModal } = useModal();
     const { amount, senderWalletIndex, receiverAddress, message, asset } = useRecoilValue(sendState);
     const {
         state: { wallets },
@@ -22,12 +20,8 @@ const SendConfirmationScreen = (): JSX.Element => {
     const { serviceInstance } = useServiceInstance(index);
     const sendTransactionWithStatus = useSend();
 
-    const handleOnError = () => {
-        hideModal(SendModal.id);
-    };
-
     return (
-        <SendTransactionModal {...sendTransactionWithStatus} onError={handleOnError}>
+        <SendTransactionModal {...sendTransactionWithStatus}>
             {({ showModal, isSuccess, isLoading }) => (
                 <Col gap={24} onStartShouldSetResponder={() => true}>
                     <SendSummary

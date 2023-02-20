@@ -23,14 +23,13 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
     const showAmount = type !== TransactionType.SEND_NFT && type !== TransactionType.RECEIVE_NFT;
     const formatDate = useFormatDate();
     const formattedDate = formatDate(timestamp);
-
     return (
         <TouchableWithoutFeedback onPress={() => showModal(TransactionDetailsModal, { transaction })}>
             <MainListCard gap="4%" alignItems="center">
                 <TransactionIcon type={type} />
                 <Col flex={1}>
                     <Row justifyContent="space-between">
-                        <TransactionLabel variant="body3Regular" type={type} numberOfLines={1} style={{ maxWidth: "45%" }} />
+                        <TransactionLabel variant="body3Regular" transaction={transaction} numberOfLines={1} style={{ flex: 1 }} />
                         {showAmount && (
                             <TransactionAmount
                                 variant="body3Regular"

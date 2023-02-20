@@ -158,7 +158,6 @@
     "processing": "处理...",
     "dismiss": "驳回",
     "pending_transaction_text": "你有一个未承诺的交易。请等待，直到它被承诺后再发送一个新的。",
-    "sentTo": "发送给",
     "boughtFor": "购买者",
     "selectAToken": "选择一个硬币",
     "continue": "继续",
@@ -179,5 +178,9 @@
     "connected_sites": "連接的站點",
     "today": "今天",
     "select_the_amount_to_deposit": "选择要存入的金额",
-    "loading_deposits": "正在加载..."
+    "loading_deposits": "正在加载...",
+    "token_sent": "{{token}} $t(sent)",
+    "token_received": "{{token}} $t(received)",
+    "CKB_sent": "CKB $t(sent)",
+    "CKB_received": "$t(token_received, { token: CKB})"
 }
