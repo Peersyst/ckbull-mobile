@@ -287,7 +287,7 @@ export class TransactionService {
                 }
 
                 // Got enough capacity
-                if (currentCapacity === BigInt(0) && changeCapacity > BigInt(0)) {
+                if (currentCapacity.toString() === BigInt(0).toString() && changeCapacity > BigInt(0)) {
                     changeCell = {
                         cell_output: {
                             capacity: "0x" + changeCapacity.toString(16),
@@ -390,10 +390,11 @@ export class TransactionService {
 
             // Got enough capacity and amount and changeCell does not include tokens
             if (
-                currentCapacity === BigInt(0) &&
-                currentAmount === BigInt(0) &&
-                changeAmount === BigInt(0) &&
-                (changeCapacity === BigInt(0) || changeCapacity >= helpers.minimalCellCapacityCompatible(changeCellWithoutSudt).toBigInt())
+                currentCapacity.toString() === BigInt(0).toString() &&
+                currentAmount.toString() === BigInt(0).toString() &&
+                changeAmount.toString() === BigInt(0).toString() &&
+                (changeCapacity.toString() === BigInt(0).toString() ||
+                    changeCapacity >= helpers.minimalCellCapacityCompatible(changeCellWithoutSudt).toBigInt())
             ) {
                 changeCell.cell_output.type = undefined;
                 changeCell.data = "0x";
@@ -402,8 +403,8 @@ export class TransactionService {
 
             // Got enough capacity and amount and changeCell includes tokens
             if (
-                currentCapacity === BigInt(0) &&
-                currentAmount === BigInt(0) &&
+                currentCapacity.toString() === BigInt(0).toString() &&
+                currentAmount.toString() === BigInt(0).toString() &&
                 changeAmount > BigInt(0) &&
                 changeCapacity >= helpers.minimalCellCapacityCompatible(changeCell).toBigInt()
             ) {
