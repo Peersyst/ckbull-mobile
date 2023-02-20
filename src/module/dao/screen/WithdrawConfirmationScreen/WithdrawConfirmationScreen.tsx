@@ -63,7 +63,7 @@ const WithdrawConfirmationScreen = ({
                 <Typography variant="caption" textAlign="center">
                     {translate("send_confirmation_text")}
                 </Typography>
-                <SwipeButton loading={loading} disabled={isSuccess} onSlide={() => setShowConfirmation(true)}>
+                <SwipeButton loading={loading} disabled={isSuccess} onSwipe={() => setShowConfirmation(true)}>
                     {translate("slideToAccept")}
                 </SwipeButton>
             </Col>

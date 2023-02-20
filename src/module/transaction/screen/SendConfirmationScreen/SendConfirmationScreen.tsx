@@ -59,7 +59,7 @@ const SendConfirmationScreen = (): JSX.Element => {
                 <Typography variant="body3Light" textAlign="center" light>
                     {translate("send_confirmation_text")}
                 </Typography>
-                <SwipeButton loading={loading} disabled={isSuccess} onSlide={() => setShowConfirmation(true)}>
+                <SwipeButton loading={loading} disabled={isSuccess} onSwipe={() => setShowConfirmation(true)}>
                     {translate("slideToAccept")}
                 </SwipeButton>
             </Col>
