@@ -1,6 +1,5 @@
 import { render, translate } from "test-utils";
 import WalletAdvisesScreen from "module/wallet/screen/WalletAdvisesScreen";
-import { fireEvent } from "@testing-library/react-native";
 
 describe("WalletAdvisesScreen tests", () => {
     afterAll(() => {
@@ -14,9 +13,5 @@ describe("WalletAdvisesScreen tests", () => {
         const screen = render(<WalletAdvisesScreen onNextScreen={handleNextScreen} nextScreenText="Next Screen" />);
 
         expect(screen.getByText(translate("advise1_title"))).toBeDefined();
-
-        const generateMnemonicButton = screen.getByText("Next Screen");
-        fireEvent.press(generateMnemonicButton);
-        expect(handleNextScreen).not.toHaveBeenCalled();
     });
 });

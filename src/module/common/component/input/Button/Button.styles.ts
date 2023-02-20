@@ -32,65 +32,61 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
             paddingVertical: 8,
         },
         //Variant Styles
-        variant: {
-            primary: {
-                gradient: {
-                    colors: theme.palette.gradient.greenDarkGreen,
-                    start: { x: 0, y: 1 },
-                    end: { x: 1, y: 0 },
-                },
-                color: theme.palette.white,
+        primary: {
+            backgroundGradient: {
+                colors: theme.palette.gradient.greenDarkGreen,
+                start: { x: 0, y: 1 },
+                end: { x: 1, y: 0 },
             },
-            secondary: {
-                color: theme.palette.gray[0],
-                backgroundColor: theme.palette.gray[900],
-            },
-            tertiary: {
-                backgroundColor: theme.palette.overlay[900]["12%"],
-                color: theme.palette.gray[900],
-            },
-            outlined: {
-                borderColor: theme.palette.overlay[900]["12%"],
-                color: theme.palette.text,
-            },
-            text: {
-                color: theme.palette.text,
-            },
+            color: theme.palette.white,
         },
+        secondary: {
+            color: theme.palette.gray[0],
+            backgroundColor: theme.palette.gray[900],
+        },
+        tertiary: {
+            backgroundColor: theme.palette.overlay[900]["12%"],
+            color: theme.palette.gray[900],
+        },
+        outlined: {
+            borderColor: theme.palette.overlay[900]["12%"],
+            color: theme.palette.text,
+        },
+        text: {
+            color: theme.palette.text,
+        },
+
         //State Styles
         pressed: {
-            variant: {
-                primary: {
-                    gradient: {
-                        colors: [
-                            darken(theme.palette.gradient.greenDarkGreen[0], 0.15),
-                            darken(theme.palette.gradient.greenDarkGreen[1], 0.15),
-                        ],
-                    },
+            primary: {
+                backgroundGradient: {
+                    colors: [
+                        darken(theme.palette.gradient.greenDarkGreen[0], 0.15),
+                        darken(theme.palette.gradient.greenDarkGreen[1], 0.15),
+                    ],
                 },
-                secondary: {
-                    backgroundColor: emphasize(theme.palette.gray[900], 0.1),
-                },
-                tertiary: {
-                    backgroundColor: theme.palette.overlay[100]["24%"],
-                },
-                outlined: {
-                    backgroundColor: theme.palette.overlay[100]["8%"],
-                },
+            },
+            secondary: {
+                backgroundColor: emphasize(theme.palette.gray[900], 0.1),
+            },
+            tertiary: {
+                backgroundColor: theme.palette.overlay[100]["24%"],
+            },
+            outlined: {
+                backgroundColor: theme.palette.overlay[100]["8%"],
             },
         },
         disabled: {
             color: "white",
-            variant: {
-                outlined: {
-                    backgroundColor: "transparent",
-                    color: theme.palette.overlay[100]["24%"],
-                    borderColor: theme.palette.overlay[100]["24%"],
-                },
-                primary: {
-                    gradient: { colors: [theme.palette.overlay[900]["12%"], theme.palette.overlay[900]["12%"]] },
-                    color: theme.palette.overlay[100]["48%"],
-                },
+
+            outlined: {
+                backgroundColor: "transparent",
+                color: theme.palette.overlay[100]["24%"],
+                borderColor: theme.palette.overlay[100]["24%"],
+            },
+            primary: {
+                backgroundGradient: { colors: [theme.palette.overlay[900]["12%"], theme.palette.overlay[900]["12%"]] },
+                color: theme.palette.overlay[100]["48%"],
             },
         },
     };

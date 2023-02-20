@@ -1,5 +1,4 @@
-import { Col, Typography, useModal } from "@peersyst/react-native-components";
-import CountdownButton from "module/common/component/input/CountdownButton/CountdownButton";
+import { Col, SwipeButton, Typography, useModal } from "@peersyst/react-native-components";
 import LoadingModal from "module/common/component/feedback/LoadingModal/LoadingModal";
 import useWalletState from "module/wallet/hook/useWalletState";
 import WithdrawModal, { WithdrawSummary as WithdrawSummaryType } from "module/dao/component/core/WithdrawModal/WithdrawModal";
@@ -64,16 +63,9 @@ const WithdrawConfirmationScreen = ({
                 <Typography variant="caption" textAlign="center">
                     {translate("send_confirmation_text")}
                 </Typography>
-                <CountdownButton
-                    loading={loading}
-                    disabled={isSuccess}
-                    variant="outlined"
-                    seconds={5}
-                    fullWidth
-                    onPress={() => setShowConfirmation(true)}
-                >
-                    {translate("confirm")}
-                </CountdownButton>
+                <SwipeButton loading={loading} disabled={isSuccess} onSlide={() => setShowConfirmation(true)}>
+                    {translate("slideToAccept")}
+                </SwipeButton>
             </Col>
             <ConfirmPinModal
                 open={showConfirmation}

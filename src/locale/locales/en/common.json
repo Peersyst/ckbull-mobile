@@ -178,5 +178,6 @@
     "send_only_one_nft": "You can only send 1 Nft",
     "connected_sites": "Connected sites",
     "today": "Today",
-    "walletColor": "Wallet color"
+    "walletColor": "Wallet color",
+    "slideToAccept": "Slide to accept"
 }
