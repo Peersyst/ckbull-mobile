@@ -40,5 +40,5 @@ export const LoadingModalButton = styled(Button, { variant: "secondary" })(({ th
     position: "absolute",
     width: dimensions.width - 40,
     marginLeft: 20,
-    bottom: safeAreaInsets.bottom + 40,
+    bottom: safeAreaInsets.bottom + 30,
 }));

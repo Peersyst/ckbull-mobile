@@ -6,6 +6,7 @@ import { getAPC } from "module/dao/utils/getAPC";
 import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useFormatTimeDAORemainingCycle from "module/transaction/component/hook/UseFormatTimeDAORemainingCycle/useFormatTimeDAORemaningCycle";
+import { config } from "config";
 
 export interface DepositItemProps {
     amount: DAOUnlockableAmount["amount"];
@@ -49,11 +50,10 @@ const DepositItem = ({
                     selected={isSelected}
                     balance={convertShannonsToCKB(amount)}
                     variant="body1"
+                    units={config.tokenName}
                 />
                 <DepositItemText type={type} unlockable={unlockable} selected={isSelected} variant="body1">
-                    {" (APC: " +
-                        getAPC({ daoCompensation: convertShannonsToCKB(compensation), daoDeposit: convertShannonsToCKB(amount) }) +
-                        "%)"}
+                    {" (APC: " + getAPC({ daoCompensation: compensation, daoDeposit: amount }) + "%)"}
                 </DepositItemText>
             </Row>
             <Row justifyContent="flex-start">

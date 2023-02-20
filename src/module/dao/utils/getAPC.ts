@@ -1,12 +1,22 @@
-import { DAOBalance } from "ckb-peersyst-sdk";
+import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
 
 const NUMBER_OF_APC_DECIMALS = 3;
 
-export function getAPC(params?: DAOBalance): number {
-    if (params === undefined || params.daoDeposit === 0) return 0;
+export interface GetAPCParams {
+    daoDeposit: string | number | bigint; //In shannons
+    daoCompensation: string | number | bigint; //In shannons
+}
+
+export function getAPC(params?: GetAPCParams): number {
+    if (!params) return 0;
+
+    const { daoCompensation, daoDeposit } = params;
+    const depositInCKB = convertShannonsToCKB(daoDeposit.toString());
+    const compensationInCKB = convertShannonsToCKB(daoCompensation.toString());
+
+    if (depositInCKB === "0") return 0;
     else {
-        const { daoDeposit, daoCompensation } = params;
-        const result = (Number(daoCompensation) / Number(daoDeposit)) * 100;
-        return Number(result.toFixed(NUMBER_OF_APC_DECIMALS));
+        //As is an estimation we operate with numbers and not with bigints
+        return Number(((Number(compensationInCKB) / Number(depositInCKB)) * 100).toFixed(NUMBER_OF_APC_DECIMALS));
     }
 }

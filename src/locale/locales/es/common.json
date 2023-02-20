@@ -153,7 +153,7 @@
     "delete_wallet": "Borrar {{walletName}}",
     "delete_wallet_text": "Estás seguro de que quieres borrar {{walletName}} de este dispositivo? Deberás introducir tu PIN para realizar esta acción.",
     "delete_only_wallet_text": "Estás seguro de que quieres borrar {{walletName}} de este dispositivo? Esto también borrará tus otros datos, ya que {{walletName}} es tu unico wallet. Deberás introducir tu PIN para realizar esta acción.",
-    "no_deposits": "Actualmente no tienes ningún depósito en curso",
+    "no_deposits": "Sin depósitos",
     "withdrawals": "Retiros",
     "processing": "Procesando...",
     "dismiss": "Cerrar",
@@ -179,5 +179,6 @@
     "connected_sites": "Sitios conectados",
     "today": "Hoy",
     "select_the_amount_to_deposit": "Selecciona la cantidad a enviar",
-    "walletColor": "Color del wallet"
+    "walletColor": "Color del wallet",
+    "loading_deposits": "Cargando depósitos..."
 }

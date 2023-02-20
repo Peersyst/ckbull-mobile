@@ -22,5 +22,6 @@
     "nothing_to_show": "没有什么可以显示",
     "invalid_address": "地址无效",
     "copied_to_clipboard": "已复制到剪贴板",
-    "incorrect_mnemonic": "您输入的助记词不正确"
+    "incorrect_mnemonic": "您输入的助记词不正确",
+    "invalid_account_without_balance": "该账户应至少有{{minAmount}}个{{units}}"
 }
