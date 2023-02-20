@@ -58,6 +58,7 @@ export function useSend(): UseSendTransactionReturn {
                     amount: convertCKBToShannons(amount),
                     to: receiverAddress!,
                     feeRate: fee,
+                    message: undefined,
                 });
             return {
                 sendTransaction,
