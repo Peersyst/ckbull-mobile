@@ -38,7 +38,7 @@ export function useSend(): UseSendTransactionReturn {
                     {
                         amount: convertCKBToShannons(amount),
                         to: receiverAddress!,
-                        token: asset.ft?.type.codeHash!,
+                        token: asset.ft!.type.codeHash,
                         feeRate: fee,
                     },
                     {
@@ -88,7 +88,6 @@ export function useSend(): UseSendTransactionReturn {
                         amount: convertCKBToShannons(amount),
                         to: receiverAddress!,
                         feeRate: fee,
-                        message: undefined,
                     },
                     {
                         onSuccess: async () => {

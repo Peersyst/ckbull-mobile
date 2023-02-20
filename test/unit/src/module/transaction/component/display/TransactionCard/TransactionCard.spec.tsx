@@ -18,7 +18,7 @@ describe("TransactionCard tests", () => {
     test("Renders correctly with amount", async () => {
         const screen = render(<TransactionCard transaction={transaction} />);
         expect(screen.getByText(formatDate(transaction.timestamp))).toBeDefined();
-        expect(screen.getByText(translate(TX_LABEL[transaction.type]))).toBeDefined();
+        expect(screen.getByText(translate("CKB_sent"))).toBeDefined();
         expect(screen.getByTestId("SendIcon")).toBeDefined();
     });
 });

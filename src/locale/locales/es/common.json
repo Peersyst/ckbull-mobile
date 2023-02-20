@@ -158,6 +158,7 @@
     "processing": "Procesando...",
     "dismiss": "Cerrar",
     "pending_transaction_text": "Tienes una transacción no cometida. Por favor, espera a que esté cometida para poder enviar una nueva.",
+    "sentTo": "Enviado a",
     "boughtFor": "Comprado por",
     "selectAToken": "Select una moneda",
     "continue": "Continuar",

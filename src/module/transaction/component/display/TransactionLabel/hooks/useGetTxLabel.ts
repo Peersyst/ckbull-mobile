@@ -3,8 +3,8 @@ import { useTranslate } from "module/common/hook/useTranslate";
 import { FullTransaction } from "module/common/service/CkbSdkService.types";
 
 export const useGetTxLabel = (): ((tx: FullTransaction) => string) => {
+    const translate = useTranslate();
     function getTxLabel({ type, token }: FullTransaction) {
-        const translate = useTranslate();
         switch (type) {
             case TransactionType.SEND_NATIVE_TOKEN: {
                 return translate("CKB_sent");

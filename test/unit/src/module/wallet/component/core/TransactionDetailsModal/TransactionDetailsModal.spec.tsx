@@ -13,7 +13,7 @@ describe("TransactionDetailsModal test", () => {
         const screen = render(<TransactionDetailsModal transaction={sentTransaction} />);
         //Header
         expect(screen.getByTestId("SendIcon")).toBeDefined();
-        expect(screen.getByText(translate(TX_LABEL[sentTransaction.type]))).toBeDefined();
+        expect(screen.getByText(translate("CKB_sent"))).toBeDefined();
 
         expect(screen.getByText(ACTION_LABEL[action!] + sentTransaction.amount + " " + config.tokenName)).toBeDefined();
         //Body
@@ -28,7 +28,7 @@ describe("TransactionDetailsModal test", () => {
         const screen = render(<TransactionDetailsModal transaction={receivedTransaction} />);
         //HEADER
         expect(screen.getByTestId("ReceiveIcon")).toBeDefined();
-        expect(screen.getByText(translate(TX_LABEL[receivedTransaction.type]))).toBeDefined();
+        expect(screen.getByText(translate("CKB_received"))).toBeDefined();
         expect(screen.getByText(ACTION_LABEL[action!] + receivedTransaction.amount + " " + config.tokenName)).toBeDefined();
         //BODY
         expect(screen.getByText(translate("hash"))).toBeDefined();

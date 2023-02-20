@@ -7,22 +7,24 @@ import TransactionStatusIndicator from "module/transaction/component/display/Tra
 import TransactionStatus from "../TransactionStatus/TransactionStatus";
 import { useRecoilValue } from "recoil";
 import settingsState from "module/settings/state/SettingsState";
-import { useGetTokenPrice } from "module/token/query/useGetTokenPrice";
 import { TransactionCardProps } from "./TransactionCard.types";
 import { TouchableWithoutFeedback } from "react-native";
 import TransactionIcon from "../TransactionIcon/TransactionIcon";
 import Balance from "module/wallet/component/display/Balance/Balance";
 import MainListCard from "module/main/component/display/MainListCard/MainListCard";
 import useFormatDate from "module/common/hook/useFormatDate";
+import useCkbConversion from "module/common/hook/useCkbConversion";
 
 const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => {
     const { showModal } = useModal();
     const { fiat } = useRecoilValue(settingsState);
-    const { data: tokenValue } = useGetTokenPrice(fiat, "nervos-network");
+    const { convertBalance } = useCkbConversion();
     const { timestamp, amount, type, token = "token", status } = transaction;
     const showAmount = type !== TransactionType.SEND_NFT && type !== TransactionType.RECEIVE_NFT;
     const formatDate = useFormatDate();
     const formattedDate = formatDate(timestamp);
+    const amountInFiat = convertBalance(amount.toString());
+
     return (
         <TouchableWithoutFeedback onPress={() => showModal(TransactionDetailsModal, { transaction })}>
             <MainListCard gap="4%" alignItems="center">
@@ -51,13 +53,12 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
                         {status !== TransactionStatusEnum.COMMITTED ? (
                             <TransactionStatusIndicator status={status} />
                         ) : (
-                            showAmount &&
-                            tokenValue && (
+                            showAmount && (
                                 <Balance
                                     options={{ maximumFractionDigits: 2, minimumFractionDigits: 2 }}
                                     action="round"
                                     light
-                                    balance={tokenValue * amount}
+                                    balance={amountInFiat}
                                     units={fiat}
                                     variant="body3Light"
                                 />

@@ -1,4 +1,4 @@
-import { Col, Typography, useModal } from "@peersyst/react-native-components";
+import { Col, Typography } from "@peersyst/react-native-components";
 import CountdownButton from "module/common/component/input/CountdownButton/CountdownButton";
 import { useRecoilValue } from "recoil";
 import sendState from "module/transaction/state/SendState";

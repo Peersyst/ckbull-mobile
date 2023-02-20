@@ -6,13 +6,16 @@ import { impactAsync, ImpactFeedbackStyle } from "expo-haptics";
 import Balance from "../../display/Balance/Balance";
 import WalletCard, { WalletComponentCardProps } from "module/wallet/component/surface/WalletCard/WalletCard";
 import AccountCardButtons from "module/wallet/component/core/AccountCard/AccountCardButtons";
+import useCkbConversion from "module/common/hook/useCkbConversion";
 
 const AccountCard = ({ wallet, style }: WalletComponentCardProps): JSX.Element => {
     const { index, synchronizing } = wallet;
-
     const { fiat } = useRecoilValue(settingsState);
-    const { data: { freeBalance } = {} } = useGetBalance(index);
+    const { data: { freeBalance = 0 } = {}, isLoading: isBalanceLoading } = useGetBalance(index);
     const [showFiat, setCurrencyMode] = useState<boolean>(false);
+    const { value: balanceInFiat } = useCkbConversion(freeBalance.toString(), fiat);
+
+    const isLoading = synchronizing || isBalanceLoading;
 
     const changeCurrencyMode = () => {
         impactAsync(ImpactFeedbackStyle.Medium);
@@ -25,10 +28,10 @@ const AccountCard = ({ wallet, style }: WalletComponentCardProps): JSX.Element =
                 content: (
                     <Balance
                         style={{ width: "100%" }}
-                        loading={synchronizing}
+                        loading={isLoading}
                         options={{ maximumFractionDigits: 2 }}
                         onPress={changeCurrencyMode}
-                        balance={showFiat ? "10" : freeBalance || 0}
+                        balance={showFiat ? balanceInFiat : freeBalance}
                         variant="h1Strong"
                         units={showFiat ? fiat : "token"}
                         unitsPosition={showFiat ? "left" : "right"}
