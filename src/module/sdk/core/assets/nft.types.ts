@@ -1,10 +1,10 @@
 // TODO change @nervosnetwork/ckb-sdk-core Cell and RawTransaction types
-import { Cell, RawTransaction } from "@ckb-lumos/lumos";
+import { Cell, HashType, RawTransaction } from "@ckb-lumos/lumos";
 
 export interface NftScript {
     args: string;
     codeHash: string;
-    hashType: string;
+    hashType: HashType;
 }
 
 export interface MintNftParams {

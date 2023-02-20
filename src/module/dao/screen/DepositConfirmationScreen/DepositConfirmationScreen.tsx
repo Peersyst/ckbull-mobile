@@ -6,18 +6,18 @@ import useWalletState from "module/wallet/hook/useWalletState";
 import DepositModal from "module/dao/component/core/DepositModal/DepositModal";
 import DepositSummary from "./DepositSummary";
 import useDepositInDAO from "module/dao/query/useDepositInDAO";
-import settingsState from "module/settings/state/SettingsState";
 import { convertCKBToShannons } from "module/wallet/utils/convertCKBToShannons";
 import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/ConfirmPinModal";
 import { useState } from "react";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
+import { useSettings } from "module/settings/hook/useSettings";
 
 const DepositConfirmationScreen = (): JSX.Element => {
     const translate = useTranslate();
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { amount, fee: feeInCKB, senderWalletIndex } = useRecoilValue(sendState);
+    const { amount, senderWalletIndex } = useRecoilValue(sendState);
 
     const {
         state: { wallets },
@@ -26,12 +26,14 @@ const DepositConfirmationScreen = (): JSX.Element => {
 
     const { name: senderName } = senderWallet;
     const { serviceInstance } = useServiceInstance(senderWalletIndex);
-    const { fee: feeInShannons } = useRecoilValue(settingsState);
+    const { fee: feeInShannons } = useSettings();
+
     const { mutate: depositInDAO, isLoading, isSuccess, isError } = useDepositInDAO(senderWalletIndex!);
     const { hideModal } = useModal();
+
     const handleConfirmation = async () => {
         depositInDAO(
-            { amount: convertCKBToShannons(amount!), feeRate: feeInShannons },
+            { amount: BigInt(convertCKBToShannons(amount!)), feeRate: feeInShannons },
             {
                 onSettled: () => setLoading(false),
             },
@@ -41,14 +43,9 @@ const DepositConfirmationScreen = (): JSX.Element => {
 
     return (
         <>
-            <Col gap={"5%"}>
-                <DepositSummary
-                    amount={amount!}
-                    fee={feeInCKB!}
-                    senderName={senderName}
-                    senderAddress={serviceInstance?.getAddress() || ""}
-                />
-                <Typography variant="caption" textAlign="center">
+            <Col gap={"6%"}>
+                <DepositSummary showTotal amount={amount!} senderName={senderName} senderAddress={serviceInstance?.getAddress() || ""} />
+                <Typography variant="body4Light" textAlign="center">
                     {translate("send_confirmation_text")}
                 </Typography>
                 <SwipeButton loading={loading} disabled={isSuccess} onSlide={() => setShowConfirmation(true)}>

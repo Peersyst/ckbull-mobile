@@ -13,6 +13,6 @@ describe("Test for the Token Card", () => {
         //Balance in the token
         expect(await screen.findByText("20 " + token.type.tokenName)).toBeDefined();
         //Balance in EUR
-        expect(screen.getByText("≈ 10 €")).toBeDefined();
+        expect(screen.getByText("≈ 200 €")).toBeDefined(); // 20 * 10
     });
 });

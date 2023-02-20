@@ -2,6 +2,7 @@ import { render } from "test-utils";
 import { fireEvent } from "@testing-library/react-native";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
 import { UseServiceInstanceMock, UseWalletStateMock } from "test-mocks";
+import { config } from "config";
 
 describe("WalletSelector tests", () => {
     const { serviceInstance } = new UseServiceInstanceMock();
@@ -18,6 +19,6 @@ describe("WalletSelector tests", () => {
         });
         const screen = render(<WalletSelector />);
         fireEvent.press(screen.getByText(state.wallets[0].name));
-        expect(await screen.findAllByText("1")).toHaveLength(3);
+        expect(await screen.findAllByText("1 " + config.tokenName)).toHaveLength(3);
     });
 });
