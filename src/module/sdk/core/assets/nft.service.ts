@@ -212,7 +212,7 @@ export class NftService {
         }
 
         const mNftCfg = this.getMNftConfig();
-        if (cellTypeScript.codeHash === mNftCfg.codeHash && this.connection.getEnvironment() === Environments.Mainnet) {
+        if (cellTypeScript.codeHash === mNftCfg.codeHash) {
             const cellProvider = this.connection.getCellProvider({
                 type: {
                     code_hash: mNftCfg.classCodeHash!,
@@ -264,29 +264,6 @@ export class NftService {
         }
         let txSkeleton = TransactionSkeleton({ cellProvider: this.connection.getCellProvider() });
 
-        // Add output
-        const toScript = this.connection.getLockFromAddress(to);
-        txSkeleton = txSkeleton.update("outputs", (outputs) => {
-            return outputs.push({
-                cell_output: {
-                    capacity: "0x" + this.nftCellSize.toString(16),
-                    lock: toScript,
-                    type: {
-                        code_hash: nft.script.codeHash,
-                        hash_type: nft.script.hashType,
-                        args: nft.script.args,
-                    },
-                },
-                data: nft.rawData,
-            });
-        });
-        txSkeleton = txSkeleton.update("fixedEntries", (fixedEntries) => {
-            return fixedEntries.push({
-                field: "outputs",
-                index: txSkeleton.get("outputs").size - 1,
-            });
-        });
-
         // Inject token capacity
         txSkeleton = this.transactionService.addSecp256CellDep(txSkeleton);
         if (nft.script.codeHash === this.getMNftConfig().codeHash) {
@@ -296,8 +273,7 @@ export class NftService {
             // Add nrc-721 code deps
             txSkeleton = this.addCellDepFromNftConfig(txSkeleton, this.getNrc721Config());
         }
-        // txSkeleton = this.transactionService.addSudtCellDep(txSkeleton);
-        txSkeleton = this.transactionService.injectNftCapacity(txSkeleton, nft, cells);
+        txSkeleton = this.transactionService.injectNftCapacity(txSkeleton, nft, cells, to);
 
         // Pay fee
         txSkeleton = await common.payFeeByFeeRate(txSkeleton, fromAddresses, feeRate, undefined, this.connection.getConfigAsObject());

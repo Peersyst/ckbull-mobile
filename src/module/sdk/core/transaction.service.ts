@@ -441,12 +441,35 @@ export class TransactionService {
         return txSkeleton;
     }
 
-    injectNftCapacity(txSkeleton: TransactionSkeletonType, nft: Nft, cells: Cell[]): TransactionSkeletonType {
+    injectNftCapacity(txSkeleton: TransactionSkeletonType, nft: Nft, cells: Cell[], to: string): TransactionSkeletonType {
         const nftCells = cells.filter((cell) => TransactionService.cellIsScriptType(cell, nft.script) && cell.data === nft.rawData);
         if (nftCells.length === 0) {
             throw new Error("Nft not found");
         }
         const [cell] = nftCells;
+
+        // Add output
+        const toScript = this.connection.getLockFromAddress(to);
+        txSkeleton = txSkeleton.update("outputs", (outputs) => {
+            return outputs.push({
+                cell_output: {
+                    capacity: cell.cell_output.capacity,
+                    lock: toScript,
+                    type: {
+                        code_hash: nft.script.codeHash,
+                        hash_type: nft.script.hashType,
+                        args: nft.script.args,
+                    },
+                },
+                data: nft.rawData,
+            });
+        });
+        txSkeleton = txSkeleton.update("fixedEntries", (fixedEntries) => {
+            return fixedEntries.push({
+                field: "outputs",
+                index: txSkeleton.get("outputs").size - 1,
+            });
+        });
 
         txSkeleton = txSkeleton.update("inputs", (inputs) => inputs.push(cell));
         txSkeleton = txSkeleton.update("witnesses", (witnesses) => witnesses.push("0x"));
