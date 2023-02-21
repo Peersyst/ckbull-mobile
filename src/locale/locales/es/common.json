@@ -35,7 +35,7 @@
     "usd": "usd",
     "send": "enviar",
     "receive": "recibir",
-    "receive_info": "Neuron elige una nueva dirección de recepción para mejorar la privacidad. Por favor, diríjase a la Libreta de Direcciones si desea utilizar una dirección de recepción previamente utilizada.",
+    "receive_info": "CKBull elige una nueva dirección de recepción nueva cada vez para mejorar la privacidad.",
     "copy": "Copiar",
     "import_wallet_text": "Importar tu wallet CKBull",
     "import_wallet": "Importar wallet",

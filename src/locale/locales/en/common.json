@@ -35,7 +35,7 @@
     "usd": "usd",
     "send": "send",
     "receive": "receive",
-    "receive_info": "Neuron picks a new receiving address for better privacy. Please go to the Address Book if you want to use a previously used receiving address.",
+    "receive_info": "CKBull picks a new receiving address for better privacy.",
     "copy": "Copy",
     "import_wallet_text": "Import your CKBull Wallet",
     "import_wallet": "Import Wallet",
