@@ -181,5 +181,5 @@
     "select_the_amount_to_deposit": "Select the amount to deposit",
     "walletColor": "Wallet color",
     "how_add_account": "How to add an account?",
-    "can_add_account" : "You can add an account by importing a private key. You can also create an account from scratch"
+    "can_add_account": "You can add an account by importing a private key. You can also create an account from scratch"
 }
