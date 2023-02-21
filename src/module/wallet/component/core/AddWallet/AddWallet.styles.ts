@@ -6,7 +6,7 @@ export const AddWalletRoot = styled(Col)(({ theme, dimensions: { height } }) => 
     marginTop: 100,
     paddingHorizontal: "10%",
     paddingVertical: "10%",
-    backgroundColor: theme.palette.mode === "light" ? theme.palette.gray[0] : theme.palette.gray[50],
+    backgroundColor: theme.palette.gray[theme.palette.mode === "light" ? 0 : 50],
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
 }));
