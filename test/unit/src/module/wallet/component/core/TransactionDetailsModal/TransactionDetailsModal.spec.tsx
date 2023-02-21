@@ -2,7 +2,6 @@ import { render, translate } from "test-utils";
 import TransactionDetailsModal from "module/transaction/component/core/TransactionDetailsModal/TransactionDetailsModal";
 import { receivedTransaction, sentTransaction } from "mocks/transaction";
 import { formatHash } from "@peersyst/react-utils";
-import { TX_LABEL } from "module/transaction/component/display/TransactionLabel/utils/txLabel";
 import { config } from "config";
 import { ACTION_LABEL } from "module/wallet/component/display/Balance/utils/actionLabels";
 import transactionTypeToBalanceAction from "module/transaction/component/display/TransactionAmount/utils/transactionTypeToBalanceAction";

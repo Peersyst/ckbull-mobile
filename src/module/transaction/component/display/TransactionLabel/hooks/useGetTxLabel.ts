@@ -13,10 +13,10 @@ export const useGetTxLabel = (): ((tx: FullTransaction) => string) => {
                 return translate("CKB_received");
             }
             case TransactionType.SEND_TOKEN: {
-                return translate("token_sent", { token: token || "token" });
+                return translate("token_sent", { token: token ? token : "token" });
             }
             case TransactionType.RECEIVE_TOKEN: {
-                return translate("token_received", { token: token || "token" });
+                return translate("token_received", { token: token ? token : "token" });
             }
             case TransactionType.SEND_NFT: {
                 return translate("sent_nft");
@@ -24,6 +24,7 @@ export const useGetTxLabel = (): ((tx: FullTransaction) => string) => {
             case TransactionType.RECEIVE_NFT: {
                 return translate("received_nft");
             }
+
             default: {
                 return "Unkown transaction"; //assert (maybe in the future there are new actions)
             }

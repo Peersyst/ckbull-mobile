@@ -158,6 +158,7 @@
     "processing": "处理...",
     "dismiss": "驳回",
     "pending_transaction_text": "你有一个未承诺的交易。请等待，直到它被承诺后再发送一个新的。",
+    "sentTo": "发送给",
     "boughtFor": "购买者",
     "selectAToken": "选择一个硬币",
     "continue": "继续",

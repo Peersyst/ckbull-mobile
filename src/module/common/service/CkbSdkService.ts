@@ -40,7 +40,7 @@ export function getTokenTypeFromScript(scriptType: ScriptType) {
     return getTokenTypeFromIndex(tokenIndex, scriptType);
 }
 
-export const MAIN_SUPPORTED_TRANSACTION_TYPES = [
+export const MAIN_TRANSACTION_TYPES = [
     TransactionType.SEND_NATIVE_TOKEN,
     TransactionType.RECEIVE_NATIVE_TOKEN,
     TransactionType.SEND_NFT,
@@ -96,6 +96,8 @@ export class CKBSDKService {
                 const tokenIndex = getTokenIndexTypeFromScript(tx.scriptType);
                 if (tokenIndex !== -1) {
                     fullTxs.push({ ...tx, token: getTokenTypeFromIndex(tokenIndex).tokenName });
+                } else {
+                    fullTxs.push({ ...tx, token: UknownToken.tokenName });
                 }
             } else {
                 fullTxs.push(tx);
