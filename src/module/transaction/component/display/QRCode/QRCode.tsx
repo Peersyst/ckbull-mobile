@@ -16,7 +16,7 @@ const QRCode = ({ style: { color, ...style } = {} }: QRCodeProps): JSX.Element =
         <View testID="QRCode" style={style}>
             <QRCodeBase
                 color={color || palette.gray[900]}
-                backgroundColor={palette.component.paper}
+                backgroundColor={"transparent"}
                 value={serviceInstance?.getAddress()}
                 size={height}
             />
