@@ -61,7 +61,7 @@ const config = createConfig({
         },
         Label: {
             defaultProps: {
-                variant: "body2Strong",
+                variant: "body2Light",
             },
         },
         FormControlLabel: {
