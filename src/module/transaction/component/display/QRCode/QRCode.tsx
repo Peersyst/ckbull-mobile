@@ -12,7 +12,6 @@ const QRCode = ({ style: { color, ...style } = {} }: QRCodeProps): JSX.Element =
     const { palette } = useTheme();
     const { height: screenHeight } = useWindowDimensions();
     const height = screenHeight * 0.25;
-
     return (
         <View testID="QRCode" style={style}>
             <QRCodeBase
