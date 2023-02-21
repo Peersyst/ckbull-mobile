@@ -1,5 +1,5 @@
 import SignedTransactionsList from "module/activity/component/display/SignedTransactionsList/SignedTransactionsList";
-import { render, wait, screen, waitFor } from "test-utils";
+import { render, screen, waitFor } from "test-utils";
 import { UseServiceInstanceMock } from "mocks/common";
 import * as useGetSignedTransactionRequest from "module/activity/queries/useGetSignedTransactions";
 
