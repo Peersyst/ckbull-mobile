@@ -225,7 +225,13 @@ export class TransactionService {
             }
         } else {
             scriptType = inputType!;
-            type = TransactionType.UNLOCK_DAO;
+            if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
+                type = !isReceive ? TransactionType.SEND_TOKEN : TransactionType.RECEIVE_TOKEN;
+            } else if (await this.nftService.isScriptNftScript(scriptType)) {
+                type = !isReceive ? TransactionType.SEND_NFT : TransactionType.RECEIVE_NFT;
+            } else {
+                type = TransactionType.UNLOCK_DAO;
+            }
         }
 
         const transaction: Transaction = {
