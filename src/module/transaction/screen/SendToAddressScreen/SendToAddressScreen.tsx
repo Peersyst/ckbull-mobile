@@ -74,13 +74,7 @@ const SendToAddressScreen = () => {
                         style={{ component: { backgroundColor: "transparent" } }}
                     />
                     <Col gap={8}>
-                        <Button
-                            type="submit"
-                            variant="primary"
-                            fullWidth
-                            disabled={uncommittedTransaction}
-                            loading={uncommittedTransaction}
-                        >
+                        <Button type="submit" variant="primary" fullWidth disabled={uncommittedTransaction}>
                             {translate("next")}
                         </Button>
                         {uncommittedTransaction && (

@@ -1,4 +1,4 @@
-import { Col, Typography } from "@peersyst/react-native-components";
+import { Col, Typography, useModal } from "@peersyst/react-native-components";
 import CountdownButton from "module/common/component/input/CountdownButton/CountdownButton";
 import { useRecoilValue } from "recoil";
 import sendState from "module/transaction/state/SendState";
@@ -8,6 +8,7 @@ import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import SendTransactionModal from "module/transaction/component/feedback/SendTransactionModal/SendTransactionModal";
 import { useSend } from "module/transaction/hook/useSend";
+import SendModal from "module/transaction/component/core/SendModal/SendModal";
 
 const SendConfirmationScreen = (): JSX.Element => {
     const translate = useTranslate();
@@ -19,9 +20,14 @@ const SendConfirmationScreen = (): JSX.Element => {
     const { name: senderName, index } = senderWallet;
     const { serviceInstance } = useServiceInstance(index);
     const sendTransactionWithStatus = useSend();
+    const { hideModal } = useModal();
+
+    function closeSendModal() {
+        hideModal(SendModal.id);
+    }
 
     return (
-        <SendTransactionModal {...sendTransactionWithStatus}>
+        <SendTransactionModal {...sendTransactionWithStatus} onSuccess={closeSendModal} onExited={closeSendModal}>
             {({ showModal, isSuccess, isLoading }) => (
                 <Col gap={24} onStartShouldSetResponder={() => true}>
                     <SendSummary

@@ -44,7 +44,6 @@ export function useSend(): UseSendTransactionReturn {
                     {
                         onSuccess: async () => {
                             await invalidateQueries([Queries.GET_TOKENS, ...baseQueries]);
-                            closeSendModal();
                         },
                         onError: closeSendModal,
                     },
@@ -68,7 +67,6 @@ export function useSend(): UseSendTransactionReturn {
                     {
                         onSuccess: async () => {
                             await invalidateQueries([Queries.GET_NFTS, ...baseQueries]);
-                            closeSendModal();
                         },
                         onError: closeSendModal,
                     },
@@ -92,7 +90,6 @@ export function useSend(): UseSendTransactionReturn {
                     {
                         onSuccess: async () => {
                             await invalidateQueries(baseQueries);
-                            closeSendModal();
                         },
                         onError: closeSendModal,
                     },

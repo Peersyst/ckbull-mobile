@@ -1,18 +1,17 @@
 import { Col, Typography, useModal } from "@peersyst/react-native-components";
 import CountdownButton from "module/common/component/input/CountdownButton/CountdownButton";
-import LoadingModal from "module/common/component/feedback/LoadingModal/LoadingModal";
 import useWalletState from "module/wallet/hook/useWalletState";
 import WithdrawModal, { WithdrawSummary as WithdrawSummaryType } from "module/dao/component/core/WithdrawModal/WithdrawModal";
 import WithdrawSummary from "./WithdrawSummary";
 import useGetDAOUnlockableAmounts from "module/dao/query/useGetDAOUnlockableAmounts";
 import useWithdrawOrUnlock from "module/dao/query/useWithdrawOrUnlock";
 import { getAPC } from "module/dao/utils/getAPC";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { serviceInstancesMap } from "module/wallet/state/WalletState";
 import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
-import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/ConfirmPinModal";
 import useSelectedNetwork from "module/settings/hook/useSelectedNetwork";
 import { useTranslate } from "module/common/hook/useTranslate";
+import SendTransactionModal from "module/transaction/component/feedback/SendTransactionModal/SendTransactionModal";
 
 interface WithdrawConfirmationScreenProps {
     withdrawInfo: WithdrawSummaryType;
@@ -21,15 +20,13 @@ interface WithdrawConfirmationScreenProps {
 const WithdrawConfirmationScreen = ({ withdrawInfo: { receiverIndex, depositIndex } }: WithdrawConfirmationScreenProps): JSX.Element => {
     //Hooks
     const translate = useTranslate();
-    const [showConfirmation, setShowConfirmation] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const { hideModal } = useModal();
     const network = useSelectedNetwork();
     const {
         state: { wallets },
     } = useWalletState();
     const { data: unlockableDeposits = [] } = useGetDAOUnlockableAmounts();
     const { mutate: withdrawFromDAO, isLoading, isSuccess, isError } = useWithdrawOrUnlock(receiverIndex);
+    const { hideModal } = useModal();
 
     //Variables
     const { name: receiverName } = wallets[receiverIndex]; //Receiver info
@@ -39,53 +36,42 @@ const WithdrawConfirmationScreen = ({ withdrawInfo: { receiverIndex, depositInde
     //Functions
     const handleConfirmation = async () => {
         if (unlockableDeposits.length > depositIndex) {
-            withdrawFromDAO(
-                { unlockableAmount: unlockableDeposits[depositIndex] },
-                {
-                    onSettled: () => setLoading(false),
-                },
-            );
+            withdrawFromDAO({ unlockableAmount: unlockableDeposits[depositIndex] });
         }
     };
 
+    function closeModal() {
+        hideModal(WithdrawModal.id);
+    }
+
     return (
-        <>
-            <Col gap={"7%"}>
-                <WithdrawSummary
-                    compensation={convertShannonsToCKB(compensation)}
-                    receiverName={receiverName}
-                    receiverAddress={serviceInstance?.getAddress() || ""}
-                    depositAPC={getAPC({ daoCompensation: compensation, daoDeposit: amount })}
-                    amount={convertShannonsToCKB(amount)}
-                />
-                <Typography variant="caption" textAlign="center">
-                    {translate("send_confirmation_text")}
-                </Typography>
-                <CountdownButton
-                    loading={loading}
-                    disabled={isSuccess}
-                    variant="primary"
-                    seconds={5}
-                    fullWidth
-                    onPress={() => setShowConfirmation(true)}
-                >
-                    {translate("confirm")}
-                </CountdownButton>
-            </Col>
-            <ConfirmPinModal
-                open={showConfirmation}
-                onClose={() => setShowConfirmation(false)}
-                onPinConfirmed={() => setLoading(true)}
-                onConfirmedExited={handleConfirmation}
-            />
-            <LoadingModal
-                loading={isLoading}
-                success={isSuccess}
-                error={isError}
-                onExited={() => hideModal(WithdrawModal.id)}
-                successMessage={translate("withdraw_completed")}
-            />
-        </>
+        <SendTransactionModal
+            successMessage={translate("withdraw_completed")}
+            onError={closeModal}
+            onExited={closeModal}
+            sendTransaction={handleConfirmation}
+            isError={isError}
+            isLoading={isLoading}
+            isSuccess={isSuccess}
+        >
+            {({ showModal, isSuccess, isLoading }) => (
+                <Col gap={"7%"}>
+                    <WithdrawSummary
+                        compensation={convertShannonsToCKB(compensation)}
+                        receiverName={receiverName}
+                        receiverAddress={serviceInstance?.getAddress() || ""}
+                        depositAPC={getAPC({ daoCompensation: compensation, daoDeposit: amount })}
+                        amount={convertShannonsToCKB(amount)}
+                    />
+                    <Typography variant="caption" textAlign="center">
+                        {translate("send_confirmation_text")}
+                    </Typography>
+                    <CountdownButton loading={isLoading} disabled={isSuccess} variant="primary" seconds={5} fullWidth onPress={showModal}>
+                        {translate("confirm")}
+                    </CountdownButton>
+                </Col>
+            )}
+        </SendTransactionModal>
     );
 };
 

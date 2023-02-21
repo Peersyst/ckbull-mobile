@@ -14,4 +14,5 @@ export interface SendTransactionModalProps extends TransactionStatus {
     sendTransaction: () => void | Promise<unknown>;
     onError?: () => unknown;
     onSuccess?: () => unknown;
+    successMessage?: string;
 }

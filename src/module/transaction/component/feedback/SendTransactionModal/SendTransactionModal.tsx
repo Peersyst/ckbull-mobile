@@ -13,6 +13,7 @@ function SendTransactionModal({
     isError,
     onError,
     onSuccess,
+    successMessage,
 }: SendTransactionModalProps) {
     const translate = useTranslate();
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -41,7 +42,7 @@ function SendTransactionModal({
                 success={isSuccess}
                 error={isError}
                 onExited={onExited}
-                successMessage={translate("transaction_completed")}
+                successMessage={successMessage || translate("transaction_completed")}
             />
         </>
     );
