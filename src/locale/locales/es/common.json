@@ -181,5 +181,6 @@
     "select_the_amount_to_deposit": "Selecciona la cantidad a enviar",
     "walletColor": "Color del wallet",
     "how_add_account": "¿Cómo añadir una cuenta?",
-    "can_add_account": "Puedes añadir una cuenta importando una clave privada. Tambien puedes crear una cuenta de cero"
+    "can_add_account": "Puedes añadir una cuenta importando una clave privada. Tambien puedes crear una cuenta de cero",
+    "select_theme": "Cambiar tema"
 }
