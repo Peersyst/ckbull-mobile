@@ -12,12 +12,11 @@ const QRCode = ({ style: { color, ...style } = {} }: QRCodeProps): JSX.Element =
     const { palette } = useTheme();
     const { height: screenHeight } = useWindowDimensions();
     const height = screenHeight * 0.25;
-
     return (
         <View testID="QRCode" style={style}>
             <QRCodeBase
                 color={color || palette.gray[900]}
-                backgroundColor={palette.background}
+                backgroundColor={"transparent"}
                 value={serviceInstance?.getAddress()}
                 size={height}
             />
