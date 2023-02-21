@@ -15,6 +15,7 @@ export const status: Theme["palette"]["status"] = {
 
 export const gray: Theme["palette"]["gray"] = {
     0: "#FFFFFF",
+    50: "#191919",
     100: "#EBEBEB",
     200: "#A7A7A7",
     300: "#8C8C8C",
