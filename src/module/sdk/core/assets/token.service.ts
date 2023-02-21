@@ -91,6 +91,7 @@ export class TokenService {
                 data: utils.toBigUInt128LE(amount.toString()),
             });
         });
+
         txSkeleton = txSkeleton.update("fixedEntries", (fixedEntries) => {
             return fixedEntries.push({
                 field: "outputs",

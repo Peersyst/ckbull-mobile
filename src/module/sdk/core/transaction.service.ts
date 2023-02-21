@@ -341,7 +341,7 @@ export class TransactionService {
                 lock: tokenCells[0].cell_output.lock,
                 type: tokenType,
             },
-            data: utils.toBigUInt128LE(BigInt(0)),
+            data: utils.toBigUInt128LE(BigInt(0).valueOf()),
             out_point: undefined,
             block_hash: undefined,
         };
@@ -431,7 +431,7 @@ export class TransactionService {
         if (changeCapacity > BigInt(0)) {
             changeCell.cell_output.capacity = "0x" + changeCapacity.toString(16);
             if (changeAmount > 0) {
-                changeCell.data = utils.toBigUInt128LE(changeAmount);
+                changeCell.data = utils.toBigUInt128LE(changeAmount.toString());
             }
 
             txSkeleton = txSkeleton.update("outputs", (outputs) => outputs.push(changeCell));

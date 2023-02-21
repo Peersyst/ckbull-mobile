@@ -27,7 +27,7 @@ const SendConfirmationScreen = (): JSX.Element => {
     }
 
     return (
-        <SendTransactionModal {...sendTransactionWithStatus} onSuccess={closeSendModal} onExited={closeSendModal}>
+        <SendTransactionModal {...sendTransactionWithStatus} onError={closeSendModal} onExited={closeSendModal}>
             {({ showModal, isSuccess, isLoading }) => (
                 <Col gap={24} onStartShouldSetResponder={() => true}>
                     <SendSummary

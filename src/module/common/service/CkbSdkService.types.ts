@@ -20,7 +20,7 @@ export interface TransferTokensParams {
     amount: string;
     mnemonic: string[];
     to: string;
-    token: string;
+    tokenArgs: string;
     feeRate?: FeeRate;
 }
 

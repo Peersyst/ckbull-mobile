@@ -11,6 +11,7 @@ import sendState, { SendState } from "../state/SendState";
 import Queries from "../../../query/queries";
 import { useModal } from "@peersyst/react-native-components";
 import SendModal from "../component/core/SendModal/SendModal";
+import { numberToBN } from "module/common/utils/BalanceOperations/utils/numberToBN";
 
 export interface UseSendTransactionReturn extends TransactionStatus {
     sendTransaction: () => void | Promise<unknown>;
@@ -33,12 +34,12 @@ export function useSend(): UseSendTransactionReturn {
     switch (asset.type) {
         case AssetType.FT: {
             const { mutate: sendFT, isError, isLoading, isSuccess } = sendFTMutationResult;
-            const sendTransaction = () =>
+            const sendTransaction = () => {
                 sendFT(
                     {
-                        amount: convertCKBToShannons(amount),
+                        amount: numberToBN(amount, asset.ft?.type.decimals || 0),
                         to: receiverAddress!,
-                        token: asset.ft!.type.codeHash,
+                        tokenArgs: asset.ft!.type.args,
                         feeRate: fee,
                     },
                     {
@@ -48,6 +49,8 @@ export function useSend(): UseSendTransactionReturn {
                         onError: closeSendModal,
                     },
                 );
+            };
+
             return {
                 sendTransaction,
                 isError,

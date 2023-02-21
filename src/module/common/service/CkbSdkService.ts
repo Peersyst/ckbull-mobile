@@ -136,7 +136,7 @@ export class CKBSDKService {
     }
 
     async sendToken(params: TransferTokensParams): Promise<string> {
-        return this.wallet.transferTokens(BigInt(params.amount), params.mnemonic.join(" "), params.to, params.token, params.feeRate);
+        return this.wallet.transferTokens(BigInt(params.amount), params.mnemonic.join(" "), params.to, params.tokenArgs, params.feeRate);
     }
 
     async sendNft(params: TransferNftParams): Promise<string> {

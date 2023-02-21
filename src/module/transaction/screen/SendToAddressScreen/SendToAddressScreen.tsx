@@ -73,15 +73,15 @@ const SendToAddressScreen = () => {
                         autoCorrect={false}
                         style={{ component: { backgroundColor: "transparent" } }}
                     />
-                    <Col gap={8}>
-                        <Button type="submit" variant="primary" fullWidth disabled={uncommittedTransaction}>
-                            {translate("next")}
-                        </Button>
+                    <Col gap="5%">
                         {uncommittedTransaction && (
                             <Typography variant="body2" textAlign="center">
                                 {translate("pending_transaction_text")}
                             </Typography>
                         )}
+                        <Button type="submit" variant="primary" fullWidth disabled={uncommittedTransaction}>
+                            {translate("next")}
+                        </Button>
                     </Col>
                 </Col>
             </Form>
