@@ -6,10 +6,12 @@ const AddWallet = (): JSX.Element => {
     const translate = useTranslate();
 
     return (
-        <AddWalletRoot flex={1} gap="14%" alignItems="center">
+        <AddWalletRoot flex={1} gap="14%" alignItems="center" justifyContent="center">
             <Col gap="4%" alignItems="center">
                 <Typography variant="body2Strong">{translate("how_add_account")}</Typography>
-                <Typography variant="body2Light">{translate("can_add_account")}</Typography>
+                <Typography variant="body2Light" style={{ textAlign: "center" }}>
+                    {translate("can_add_account")}
+                </Typography>
             </Col>
         </AddWalletRoot>
     );
