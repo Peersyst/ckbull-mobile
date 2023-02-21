@@ -96,8 +96,6 @@ export class CKBSDKService {
                 const tokenIndex = getTokenIndexTypeFromScript(tx.scriptType);
                 if (tokenIndex !== -1) {
                     fullTxs.push({ ...tx, token: getTokenTypeFromIndex(tokenIndex).tokenName });
-                } else {
-                    fullTxs.push({ ...tx, token: UknownToken.tokenName });
                 }
             } else {
                 fullTxs.push(tx);

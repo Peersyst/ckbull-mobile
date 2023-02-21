@@ -24,7 +24,21 @@ export const useGetTxLabel = (): ((tx: FullTransaction) => string) => {
             case TransactionType.RECEIVE_NFT: {
                 return translate("received_nft");
             }
-
+            case TransactionType.DEPOSIT_DAO: {
+                return translate("DAO_deposit");
+            }
+            case TransactionType.WITHDRAW_DAO: {
+                return translate("DAO_withdrawal");
+            }
+            case TransactionType.UNLOCK_DAO: {
+                return translate("unlock_DAO");
+            }
+            case TransactionType.SMART_CONTRACT_SEND: {
+                return translate("smart_contract_sent");
+            }
+            case TransactionType.SMART_CONTRACT_RECEIVE: {
+                return translate("smart_contract_received");
+            }
             default: {
                 return "Unkown transaction"; //assert (maybe in the future there are new actions)
             }

@@ -1,17 +1,5 @@
 import { TokenAmount, TokenType } from "module/token/types";
 
-export const defaulTokenTypes: TokenType = {
-    name: "Uknown Token",
-    description: "Uknown Token",
-    tokenName: "Uknown Token",
-    decimals: 6,
-    imageUri: "",
-    args: "",
-    codeHash: "",
-    hashType: "type",
-    apiId: "usd-coin",
-};
-
 export const tokensList: TokenType[] = [
     {
         name: "Wrapped USDC",
