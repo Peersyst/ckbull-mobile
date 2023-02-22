@@ -23,6 +23,9 @@ export const TextFieldRoot = styled(TextField)<TextFieldRootProps>(({ theme, siz
     };
 
     return {
+        hint: {
+            color: theme.palette.component.input.hintColor,
+        },
         component: {
             input: {
                 ...inputSizeStyles[size],

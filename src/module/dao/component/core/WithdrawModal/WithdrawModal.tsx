@@ -3,7 +3,6 @@ import { useState } from "react";
 import CardNavigatorModal from "module/common/component/navigation/CardNavigatorModal/CardNavigatorModal";
 import SelectAccountAndDepositScreen from "module/dao/screen/SelectAccountAndDepositScreen/SelectAccountAndDepositScreen";
 import WithdrawConfirmationScreen from "module/dao/screen/WithdrawConfirmationScreen/WithdrawConfirmationScreen";
-import { FeeRate } from "ckb-peersyst-sdk";
 import { useTranslate } from "module/common/hook/useTranslate";
 
 export enum WithdrawScreens {
@@ -17,9 +16,7 @@ export interface WithdrawForm {
     depositIndex: number;
 }
 
-export interface WithdrawSummary extends WithdrawForm {
-    feeRate?: FeeRate;
-}
+export type WithdrawSummary = WithdrawForm;
 
 const WithdrawModal = createBackdrop((props: ExposedBackdropProps) => {
     const [activeIndex, setActiveIndex] = useState(WithdrawScreens.SELECT_ACCOUNT);

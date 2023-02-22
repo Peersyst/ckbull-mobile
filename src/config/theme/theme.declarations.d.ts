@@ -102,6 +102,7 @@ declare module "@peersyst/react-native-components" {
                 placeholderColor: string;
                 displayColor: string;
                 backgroundColor: string;
+                hintColor: string;
             };
         };
     }

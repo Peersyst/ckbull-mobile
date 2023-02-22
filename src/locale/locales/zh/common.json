@@ -179,5 +179,6 @@
     "connected_sites": "連接的站點",
     "today": "今天",
     "select_the_amount_to_deposit": "选择要存入的金额",
-    "select_theme": "主题"
+    "select_theme": "主题",
+    "loading_deposits": "正在加载..."
 }

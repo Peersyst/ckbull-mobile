@@ -5,10 +5,11 @@ import useGetTransactions from "module/transaction/query/useGetTransactions";
 import { isDAODeposit } from "../../../utils/isDAODeposit";
 
 const DAODepositsList = (): JSX.Element => {
-    const { data = [], isLoading } = useGetTransactions({ filter: (tx) => isDAODeposit(tx.type) });
+    const { data = [], isLoading, refetch } = useGetTransactions({ filter: (tx) => isDAODeposit(tx.type) });
 
     return (
         <MainList
+            onRefresh={refetch}
             loading={isLoading}
             data={data}
             ListEmptyComponent={isLoading ? undefined : <EmptyListComponent />}
