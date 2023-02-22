@@ -4,8 +4,8 @@ import SelectAccountAndDepositScreen from "module/dao/screen/SelectAccountAndDep
 import * as Genesys from "@peersyst/react-native-components";
 import { WithdrawScreens } from "module/dao/component/core/WithdrawModal/WithdrawModal";
 import { MockedUnlockableAmounts } from "mocks/DAO";
-import { FeeRate } from "ckb-peersyst-sdk";
 import { UseServiceInstanceMock, UseWalletStateMock } from "test-mocks";
+import { config } from "config";
 
 describe("SelectAccountAndDepositScreen tests", () => {
     const { serviceInstance } = new UseServiceInstanceMock();
@@ -39,12 +39,12 @@ describe("SelectAccountAndDepositScreen tests", () => {
         const screen = render(<SelectAccountAndDepositScreen setWithdrawInfo={setWithdrawInfo} />);
         expect(await screen.findByText(translate("select_a_wallet") + ":")).toBeDefined();
         expect(screen.getByText(translate("select_a_wallet") + ":")).toBeDefined();
-        expect(screen.getByText("500")).toBeDefined();
+        expect(screen.getByText("500 " + config.tokenName)).toBeDefined();
         const button = screen.getByText(translate("withdraw"));
         fireEvent.press(button);
         //The deposit is zero because it corresponds to the 0 pos of the MockedUnlockableAmounts
         //The receiver is zero because is the first wallet
-        await waitFor(() => expect(setWithdrawInfo).toHaveBeenCalledWith({ receiverIndex: 0, depositIndex: 0, feeRate: FeeRate.NORMAL }));
+        await waitFor(() => expect(setWithdrawInfo).toHaveBeenCalledWith({ receiverIndex: 0, depositIndex: 0 }));
         expect(setTab).toHaveBeenCalledWith(WithdrawScreens.CONFIRMATION);
     });
 });

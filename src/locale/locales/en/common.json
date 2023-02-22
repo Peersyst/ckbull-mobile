@@ -153,7 +153,7 @@
     "delete_wallet": "Delete {{walletName}}",
     "delete_wallet_text": "Are you sure you want to delete {{walletName}} from this device? You'll be asked for your PIN in order to do so.",
     "delete_only_wallet_text": "Are you sure you want to delete {{walletName}} from this device? This will also erase your other data, as {{walletName}} is your only wallet. You'll be asked for your PIN in order to do so.",
-    "no_deposits": "You do not have any deposits in progress",
+    "no_deposits": "Without deposits",
     "withdrawals": "Withdrawals",
     "processing": "Processing...",
     "dismiss": "Dismiss",
@@ -182,5 +182,6 @@
     "walletColor": "Wallet color",
     "how_add_account": "How to add an account?",
     "can_add_account": "You can add an account by importing a private key. You can also create an account from scratch",
-    "select_theme": "Change theme"
+    "select_theme": "Change theme",
+    "loading_deposits": "Loading deposits..."
 }

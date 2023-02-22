@@ -2,6 +2,9 @@ import styled from "@peersyst/react-native-styled";
 import { TextArea } from "@peersyst/react-native-components";
 
 export const TextAreaRoot = styled(TextArea)(({ theme }) => ({
+    hint: {
+        color: theme.palette.component.input.hintColor,
+    },
     component: {
         borderRadius: theme.borderRadiusSm,
         backgroundColor: theme.palette.component.input.backgroundColor,

@@ -22,5 +22,6 @@
     "nothing_to_show": "No hay nada que mostrar",
     "invalid_address": "Dirección inválida",
     "copied_to_clipboard": "Copied to clipboard",
-    "incorrect_mnemonic": "Mnemonic incorrecto"
+    "incorrect_mnemonic": "Mnemonic incorrecto",
+    "invalid_account_without_balance": "La cuenta debe tener almenos {{minAmount}} {{units}}"
 }
