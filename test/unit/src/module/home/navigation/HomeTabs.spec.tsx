@@ -1,7 +1,7 @@
 import { render, translate } from "test-utils";
 import { fireEvent } from "@testing-library/react-native";
-import HomeTabs from "module/home/component/navigation/HomeTabs";
 import { UseServiceInstanceMock, UseWalletStateMock } from "test-mocks";
+import HomeTabs from "module/home/component/navigation/HomeTabs/HomeTabs";
 
 describe("HomeTabs tests", () => {
     test("Renders correctly", () => {
