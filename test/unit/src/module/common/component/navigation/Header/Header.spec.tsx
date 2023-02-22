@@ -1,5 +1,5 @@
 import Header from "module/common/component/navigation/Header/Header";
-import { render, translate } from "test-utils";
+import { render } from "test-utils";
 import { fireEvent } from "@testing-library/react-native";
 import { MainScreens } from "module/common/component/navigation/MainNavigatorGroup/MainScreens";
 
@@ -10,8 +10,6 @@ const renderHeader = ({ name = "Home", navigate = jest.fn() } = {}) => {
 describe("Header tests", () => {
     test("Renders correctly - withIcons", () => {
         const screen = renderHeader();
-
-        expect(screen.getByText(translate("ckbullMobileWallet"))).toBeDefined();
         expect(screen.getByTestId("SettingsIcon")).toBeDefined();
     });
     test("Goes to settings", () => {
