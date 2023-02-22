@@ -180,5 +180,6 @@
     "today": "Today",
     "select_the_amount_to_deposit": "Select the amount to deposit",
     "walletColor": "Wallet color",
+    "select_theme": "Change theme",
     "loading_deposits": "Loading deposits..."
 }

@@ -180,5 +180,6 @@
     "today": "Hoy",
     "select_the_amount_to_deposit": "Selecciona la cantidad a enviar",
     "walletColor": "Color del wallet",
+    "select_theme": "Cambiar tema",
     "loading_deposits": "Cargando depósitos..."
 }
