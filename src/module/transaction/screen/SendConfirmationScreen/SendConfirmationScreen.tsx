@@ -38,7 +38,7 @@ const SendConfirmationScreen = (): JSX.Element => {
                         nft={asset.nft}
                         message={message!}
                         senderName={senderName}
-                        senderAddress={serviceInstance?.getAddress()!}
+                        senderAddress={serviceInstance!.getAddress()}
                     />
                     <Typography variant="body3Light" textAlign="center" light>
                         {translate("send_confirmation_text")}
