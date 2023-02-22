@@ -180,5 +180,8 @@
     "today": "今天",
     "select_the_amount_to_deposit": "选择要存入的金额",
     "select_theme": "主题",
+    "wallet_color": "钱包颜色",
+    "how_add_account": "如何添加一个账户？",
+    "can_add_account": "你可以通过导入私钥来添加一个账户。你也可以从头开始创建一个账户",
     "loading_deposits": "正在加载..."
 }
