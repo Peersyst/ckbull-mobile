@@ -35,7 +35,7 @@
     "usd": "usd",
     "send": "send",
     "receive": "receive",
-    "receive_info": "Neuron picks a new receiving address for better privacy. Please go to the Address Book if you want to use a previously used receiving address.",
+    "receive_info": "CKBull picks a new receiving address for better privacy.",
     "copy": "Copy",
     "import_wallet_text": "Import your CKBull Wallet",
     "import_wallet": "Import Wallet",
@@ -183,5 +183,11 @@
     "how_add_account": "How to add an account?",
     "can_add_account": "You can add an account by importing a private key. You can also create an account from scratch",
     "select_theme": "Change theme",
-    "loading_deposits": "Loading deposits..."
+    "loading_deposits": "Loading deposits...",
+    "token_sent": "{{token}} $t(sent)",
+    "token_received": "{{token}} $t(received)",
+    "CKB_sent": "CKB $t(sent)",
+    "CKB_received": "CKB $t(received)",
+    "smart_contract_sent": "Smart Contract $t(sent)",
+    "smart_contract_received": "Smart Contract $t(received)"
 }

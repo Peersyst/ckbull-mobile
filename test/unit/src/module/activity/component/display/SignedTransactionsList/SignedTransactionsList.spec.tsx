@@ -1,8 +1,7 @@
 import SignedTransactionsList from "module/activity/component/display/SignedTransactionsList/SignedTransactionsList";
-import { render } from "test-utils";
+import { render, screen, waitFor } from "test-utils";
 import { UseServiceInstanceMock } from "mocks/common";
 import * as useGetSignedTransactionRequest from "module/activity/queries/useGetSignedTransactions";
-import { screen, waitFor } from "@testing-library/react-native";
 
 describe("SignedTransactionsList tests", () => {
     let serviceInstance: UseServiceInstanceMock;

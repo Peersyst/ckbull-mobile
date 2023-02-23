@@ -16,6 +16,30 @@ export const TX_ICON: Partial<Record<TransactionType, TxIcon>> = {
         Icon: ReceiveIcon,
         active: true,
     },
+    [TransactionType.SEND_NFT]: {
+        Icon: SendIcon,
+        active: false,
+    },
+    [TransactionType.RECEIVE_NFT]: {
+        Icon: ReceiveIcon,
+        active: true,
+    },
+    [TransactionType.SEND_TOKEN]: {
+        Icon: SendIcon,
+        active: false,
+    },
+    [TransactionType.RECEIVE_TOKEN]: {
+        Icon: ReceiveIcon,
+        active: true,
+    },
+    [TransactionType.SMART_CONTRACT_RECEIVE]: {
+        Icon: ReceiveIcon,
+        active: true,
+    },
+    [TransactionType.SMART_CONTRACT_SEND]: {
+        Icon: SendIcon,
+        active: false,
+    },
     [TransactionType.DEPOSIT_DAO]: {
         Icon: SendIcon,
         active: false,

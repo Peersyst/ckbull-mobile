@@ -225,7 +225,13 @@ export class TransactionService {
             }
         } else {
             scriptType = inputType!;
-            type = TransactionType.UNLOCK_DAO;
+            if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
+                type = !isReceive ? TransactionType.SEND_TOKEN : TransactionType.RECEIVE_TOKEN;
+            } else if (await this.nftService.isScriptNftScript(scriptType)) {
+                type = !isReceive ? TransactionType.SEND_NFT : TransactionType.RECEIVE_NFT;
+            } else {
+                type = TransactionType.UNLOCK_DAO;
+            }
         }
 
         const transaction: Transaction = {
@@ -287,7 +293,7 @@ export class TransactionService {
                 }
 
                 // Got enough capacity
-                if (currentCapacity === BigInt(0) && changeCapacity > BigInt(0)) {
+                if (currentCapacity.toString() === BigInt(0).toString() && changeCapacity > BigInt(0)) {
                     changeCell = {
                         cell_output: {
                             capacity: "0x" + changeCapacity.toString(16),
@@ -335,7 +341,7 @@ export class TransactionService {
                 lock: tokenCells[0].cell_output.lock,
                 type: tokenType,
             },
-            data: utils.toBigUInt128LE(BigInt(0)),
+            data: utils.toBigUInt128LE(BigInt(0).valueOf()),
             out_point: undefined,
             block_hash: undefined,
         };
@@ -390,10 +396,11 @@ export class TransactionService {
 
             // Got enough capacity and amount and changeCell does not include tokens
             if (
-                currentCapacity === BigInt(0) &&
-                currentAmount === BigInt(0) &&
-                changeAmount === BigInt(0) &&
-                (changeCapacity === BigInt(0) || changeCapacity >= helpers.minimalCellCapacityCompatible(changeCellWithoutSudt).toBigInt())
+                currentCapacity.toString() === BigInt(0).toString() &&
+                currentAmount.toString() === BigInt(0).toString() &&
+                changeAmount.toString() === BigInt(0).toString() &&
+                (changeCapacity.toString() === BigInt(0).toString() ||
+                    changeCapacity >= helpers.minimalCellCapacityCompatible(changeCellWithoutSudt).toBigInt())
             ) {
                 changeCell.cell_output.type = undefined;
                 changeCell.data = "0x";
@@ -402,8 +409,8 @@ export class TransactionService {
 
             // Got enough capacity and amount and changeCell includes tokens
             if (
-                currentCapacity === BigInt(0) &&
-                currentAmount === BigInt(0) &&
+                currentCapacity.toString() === BigInt(0).toString() &&
+                currentAmount.toString() === BigInt(0).toString() &&
                 changeAmount > BigInt(0) &&
                 changeCapacity >= helpers.minimalCellCapacityCompatible(changeCell).toBigInt()
             ) {
@@ -424,7 +431,7 @@ export class TransactionService {
         if (changeCapacity > BigInt(0)) {
             changeCell.cell_output.capacity = "0x" + changeCapacity.toString(16);
             if (changeAmount > 0) {
-                changeCell.data = utils.toBigUInt128LE(changeAmount);
+                changeCell.data = utils.toBigUInt128LE(changeAmount.toString());
             }
 
             txSkeleton = txSkeleton.update("outputs", (outputs) => outputs.push(changeCell));
@@ -441,12 +448,35 @@ export class TransactionService {
         return txSkeleton;
     }
 
-    injectNftCapacity(txSkeleton: TransactionSkeletonType, nft: Nft, cells: Cell[]): TransactionSkeletonType {
+    injectNftCapacity(txSkeleton: TransactionSkeletonType, nft: Nft, cells: Cell[], to: string): TransactionSkeletonType {
         const nftCells = cells.filter((cell) => TransactionService.cellIsScriptType(cell, nft.script) && cell.data === nft.rawData);
         if (nftCells.length === 0) {
             throw new Error("Nft not found");
         }
         const [cell] = nftCells;
+
+        // Add output
+        const toScript = this.connection.getLockFromAddress(to);
+        txSkeleton = txSkeleton.update("outputs", (outputs) => {
+            return outputs.push({
+                cell_output: {
+                    capacity: cell.cell_output.capacity,
+                    lock: toScript,
+                    type: {
+                        code_hash: nft.script.codeHash,
+                        hash_type: nft.script.hashType,
+                        args: nft.script.args,
+                    },
+                },
+                data: nft.rawData,
+            });
+        });
+        txSkeleton = txSkeleton.update("fixedEntries", (fixedEntries) => {
+            return fixedEntries.push({
+                field: "outputs",
+                index: txSkeleton.get("outputs").size - 1,
+            });
+        });
 
         txSkeleton = txSkeleton.update("inputs", (inputs) => inputs.push(cell));
         txSkeleton = txSkeleton.update("witnesses", (witnesses) => witnesses.push("0x"));

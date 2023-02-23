@@ -13,7 +13,7 @@ export interface CKBAmountTextFieldProps extends Omit<NumericTextFieldProps, "ma
 
 const CKBAmountTextField = ({ index, maxAmount, minAmount, validators: validatorsProp, fee, ...rest }: CKBAmountTextFieldProps) => {
     const { isLoading } = useGetBalance(index);
-    const { validators } = useCKBAmountTextField({ maxAmount, minAmount, fee });
+    const { validators } = useCKBAmountTextField({ maxAmount, minAmount, fee, walletIndex: index });
 
     return (
         <BaseAssetAmountTextField

@@ -11,7 +11,7 @@ export interface DepositInDAOParams {
 export interface SendTransactionParams {
     amount: bigint | number | string;
     mnemonic: string[];
-    message: string;
+    message?: string;
     to: string;
     feeRate?: FeeRate;
 }
@@ -20,7 +20,7 @@ export interface TransferTokensParams {
     amount: string;
     mnemonic: string[];
     to: string;
-    token: string;
+    tokenArgs: string;
     feeRate?: FeeRate;
 }
 
