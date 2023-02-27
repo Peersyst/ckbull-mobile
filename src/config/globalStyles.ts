@@ -34,14 +34,12 @@ const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) =>
     },
     FormControlLabel: {
         label: {
-            ...typography.body3Regular,
             maxWidth: "100%",
         },
     },
     Label: {
         label: {
             color: palette.component.label,
-            ...typography.body3Regular,
         },
     },
     Modal: {
@@ -49,6 +47,29 @@ const globalStyles: CreateGlobalStyles = ({ theme: { palette, typography } }) =>
     },
     Paper: {
         backgroundColor: palette.component.paper,
+    },
+    SwipeButton: {
+        height: 52,
+        borderRadius: 52,
+        backgroundGradient: {
+            colors: palette.gradient.greenDarkGreen,
+            start: { x: 0, y: 1 },
+            end: { x: 1, y: 0 },
+        },
+        ...typography.body2Regular,
+        color: palette.white,
+        track: {
+            padding: 6,
+        },
+        thumb: {
+            backgroundColor: palette.white,
+            color: palette.primary,
+        },
+        disabled: {
+            backgroundGradient: {
+                colors: [palette.disabled, palette.disabled],
+            },
+        },
     },
     Typography: {
         light: {

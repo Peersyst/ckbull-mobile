@@ -1,5 +1,4 @@
-import { Col, Typography, useModal } from "@peersyst/react-native-components";
-import CountdownButton from "module/common/component/input/CountdownButton/CountdownButton";
+import { Col, SwipeButton, Typography, useModal } from "@peersyst/react-native-components";
 import { useRecoilValue } from "recoil";
 import sendState from "module/transaction/state/SendState";
 import useWalletState from "module/wallet/hook/useWalletState";
@@ -56,9 +55,9 @@ const DepositConfirmationScreen = (): JSX.Element => {
                     <Typography variant="body4Light" textAlign="center">
                         {translate("send_confirmation_text")}
                     </Typography>
-                    <CountdownButton loading={isLoading} disabled={isSuccess} variant="primary" seconds={5} fullWidth onPress={showModal}>
+                    <SwipeButton loading={isLoading} disabled={isSuccess} onSwipe={showModal}>
                         {translate("confirm")}
-                    </CountdownButton>
+                    </SwipeButton>
                 </Col>
             )}
         </SendTransactionModal>

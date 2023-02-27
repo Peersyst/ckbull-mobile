@@ -39,6 +39,7 @@ export * from "./SmartContractIcon";
 export * from "./StarIcon";
 export * from "./SuccessIcon";
 export * from "./SunIcon";
+export * from "./ToTheRightIcon";
 export * from "./TransactionReceivedIcon";
 export * from "./TransactionSentIcon";
 export * from "./WalletIcon";

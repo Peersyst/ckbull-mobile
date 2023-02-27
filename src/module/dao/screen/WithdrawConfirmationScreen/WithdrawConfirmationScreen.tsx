@@ -1,5 +1,4 @@
-import { Col, Typography, useModal } from "@peersyst/react-native-components";
-import CountdownButton from "module/common/component/input/CountdownButton/CountdownButton";
+import { Col, SwipeButton, Typography, useModal } from "@peersyst/react-native-components";
 import useWalletState from "module/wallet/hook/useWalletState";
 import WithdrawModal, { WithdrawSummary as WithdrawSummaryType } from "module/dao/component/core/WithdrawModal/WithdrawModal";
 import WithdrawSummary from "./WithdrawSummary";
@@ -66,9 +65,9 @@ const WithdrawConfirmationScreen = ({ withdrawInfo: { receiverIndex, depositInde
                     <Typography variant="caption" textAlign="center">
                         {translate("send_confirmation_text")}
                     </Typography>
-                    <CountdownButton loading={isLoading} disabled={isSuccess} variant="primary" seconds={5} fullWidth onPress={showModal}>
+                    <SwipeButton loading={isLoading} disabled={isSuccess} onSwipe={showModal}>
                         {translate("confirm")}
-                    </CountdownButton>
+                    </SwipeButton>
                 </Col>
             )}
         </SendTransactionModal>

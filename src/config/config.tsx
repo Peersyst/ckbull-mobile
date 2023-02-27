@@ -6,7 +6,7 @@ import stagingConfig from "./config.staging.json";
 import baseConfig from "./config.base.json";
 import { CkbAddressValidator } from "config/validators/CkbAddressValidator";
 import globalStyles from "config/globalStyles";
-import { ChevronDownIcon } from "icons";
+import { ChevronDownIcon, ToTheRightIcon } from "icons";
 import darkTheme from "config/theme/darkTheme";
 import Button from "module/common/component/input/Button/Button";
 import { MinAmountValidator } from "./validators/MinAmountValidator";
@@ -61,7 +61,7 @@ const config = createConfig({
         },
         Label: {
             defaultProps: {
-                variant: "body2Strong",
+                variant: "body2Light",
             },
         },
         FormControlLabel: {
@@ -77,6 +77,11 @@ const config = createConfig({
         Select: {
             defaultProps: {
                 icon: <ChevronDownIcon />,
+            },
+        },
+        SwipeButton: {
+            defaultProps: {
+                thumbContent: <ToTheRightIcon />,
             },
         },
         Switch: {
