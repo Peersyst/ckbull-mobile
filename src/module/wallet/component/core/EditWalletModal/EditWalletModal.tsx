@@ -68,7 +68,7 @@ const EditWalletModal = createModal<ExposedBackdropProps>(({ closable = true, cl
                                 placeholder={translate("wallet_name")}
                                 label={translate("wallet_name")}
                             />
-                            <ColorPicker value={walletColors[colorIndex]} onChange={handleColorPicked} label={translate("walletColor")} />
+                            <ColorPicker value={walletColors[colorIndex]} onChange={handleColorPicked} label={translate("wallet_color")} />
                         </Col>
                         <Button size="lg" fullWidth disabled={name === ""} onPress={() => handleClose(true)}>
                             {translate("save")}

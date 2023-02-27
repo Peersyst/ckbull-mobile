@@ -15,6 +15,7 @@ export const status: Theme["palette"]["status"] = {
 
 export const gray: Theme["palette"]["gray"] = {
     0: "#FFFFFF",
+    50: "#D3D3D3",
     100: "#EBEBEB",
     200: "#A7A7A7",
     300: "#8C8C8C",
@@ -132,6 +133,7 @@ const lightTheme = createTheme({
                 borderColor: overlay[300]["24%"],
                 displayColor: gray[600],
                 backgroundColor: gray[0],
+                hintColor: gray[200],
             },
         },
     },

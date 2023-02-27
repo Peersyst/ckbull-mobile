@@ -13,6 +13,7 @@ describe("Test for the SecuritySettingsScreen", () => {
     });
 
     test("Renders correctly", () => {
+        new UseWalletStateMock();
         const screen = render(<SecuritySettingsScreen />);
         expect(screen.getByText(translate("change_passcode")));
     });

@@ -15,12 +15,12 @@ const DepositSummary = ({ amount, senderName, senderAddress, ...rest }: DepositS
     const translate = useTranslate();
     return (
         <BaseSendSummary amount={amount} {...rest}>
-            <Col gap="5%" style={{ alignSelf: "flex-start" }}>
+            <Col gap="7%" style={{ alignSelf: "flex-start" }}>
                 <SummaryField label={translate("from")}>{senderName + " - " + formatHash(senderAddress, "middle", 3)}</SummaryField>
                 <SummaryField label={translate("estimated_apc")}>
                     {loadingDao ? `${translate("loading_apc")}...` : `${estimated_apc}%`}
                 </SummaryField>
-                <Typography variant="body4Regular" textAlign="center">
+                <Typography variant="body4Light" textAlign="center">
                     <Typography variant="body4Strong" textAlign="center">
                         {`${translate("attention")} `}
                     </Typography>

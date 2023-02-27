@@ -1,4 +1,4 @@
-import { Row, Typography, Suspense } from "@peersyst/react-native-components";
+import { Row, Typography } from "@peersyst/react-native-components";
 import Balance from "module/wallet/component/display/Balance/Balance";
 import useGetBalance from "module/wallet/query/useGetBalance";
 import useWallet from "module/wallet/hook/useWallet";
@@ -11,19 +11,17 @@ export interface WalletItemProps {
 
 const WalletItem = ({ index, units = config.tokenName }: WalletItemProps): JSX.Element => {
     const { name } = useWallet(index);
-    const { data: balance, isLoading: balanceIsLoading } = useGetBalance(index);
+    const { data: { freeBalance = 0 } = {}, isLoading: balanceIsLoading } = useGetBalance(index);
 
     return (
         <Row alignItems="center" style={{ overflow: "hidden" }}>
             <Typography numberOfLines={1} variant="body2Light" style={{ maxWidth: "100%" }}>
                 {name}
             </Typography>
-            <Row>
-                <Typography variant="body2Light">{" · "}</Typography>
-                <Suspense isLoading={balanceIsLoading} activityIndicatorSize="small">
-                    <Balance balance={balance?.freeBalance || 0} variant="body2Light" light units={units} />
-                </Suspense>
-            </Row>
+            <Typography variant="body2Light">
+                {" · "}
+                <Balance loading={balanceIsLoading} balance={freeBalance} variant="body2Light" light units={units} />
+            </Typography>
         </Row>
     );
 };

@@ -1,24 +1,19 @@
 import { Col, SwipeButton, Typography, useModal } from "@peersyst/react-native-components";
 import { useRecoilValue } from "recoil";
 import sendState from "module/transaction/state/SendState";
-import LoadingModal from "module/common/component/feedback/LoadingModal/LoadingModal";
 import useWalletState from "module/wallet/hook/useWalletState";
 import DepositModal from "module/dao/component/core/DepositModal/DepositModal";
 import DepositSummary from "./DepositSummary";
 import useDepositInDAO from "module/dao/query/useDepositInDAO";
 import { convertCKBToShannons } from "module/wallet/utils/convertCKBToShannons";
-import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/ConfirmPinModal";
-import { useState } from "react";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { useSettings } from "module/settings/hook/useSettings";
+import SendTransactionModal from "module/transaction/component/feedback/SendTransactionModal/SendTransactionModal";
 
 const DepositConfirmationScreen = (): JSX.Element => {
     const translate = useTranslate();
-    const [showConfirmation, setShowConfirmation] = useState(false);
-    const [loading, setLoading] = useState(false);
     const { amount, senderWalletIndex } = useRecoilValue(sendState);
-
     const {
         state: { wallets },
     } = useWalletState();
@@ -32,40 +27,40 @@ const DepositConfirmationScreen = (): JSX.Element => {
     const { hideModal } = useModal();
 
     const handleConfirmation = async () => {
-        depositInDAO(
-            { amount: BigInt(convertCKBToShannons(amount!)), feeRate: feeInShannons },
-            {
-                onSettled: () => setLoading(false),
-            },
-        );
-        //The SendState is cleaned in the "onExited" method of DepositModal
+        depositInDAO({ amount: BigInt(convertCKBToShannons(amount!)), feeRate: feeInShannons });
     };
 
+    function closeModal() {
+        hideModal(DepositModal.id);
+    }
+
     return (
-        <>
-            <Col gap={"6%"}>
-                <DepositSummary showTotal amount={amount!} senderName={senderName} senderAddress={serviceInstance?.getAddress() || ""} />
-                <Typography variant="body4Light" textAlign="center">
-                    {translate("send_confirmation_text")}
-                </Typography>
-                <SwipeButton loading={loading} disabled={isSuccess} onSwipe={() => setShowConfirmation(true)}>
-                    {translate("slideToAccept")}
-                </SwipeButton>
-            </Col>
-            <ConfirmPinModal
-                open={showConfirmation}
-                onClose={() => setShowConfirmation(false)}
-                onPinConfirmed={() => setLoading(true)}
-                onConfirmedExited={handleConfirmation}
-            />
-            <LoadingModal
-                loading={isLoading}
-                success={isSuccess}
-                error={isError}
-                onExited={() => hideModal(DepositModal.id)}
-                successMessage={translate("deposit_completed")}
-            />
-        </>
+        <SendTransactionModal
+            successMessage={translate("deposit_completed")}
+            sendTransaction={handleConfirmation}
+            onExited={closeModal}
+            onError={closeModal}
+            isLoading={isLoading}
+            isSuccess={isSuccess}
+            isError={isError}
+        >
+            {({ showModal, isSuccess, isLoading }) => (
+                <Col gap={"6%"}>
+                    <DepositSummary
+                        showTotal
+                        amount={amount!}
+                        senderName={senderName}
+                        senderAddress={serviceInstance?.getAddress() || ""}
+                    />
+                    <Typography variant="body4Light" textAlign="center">
+                        {translate("send_confirmation_text")}
+                    </Typography>
+                    <SwipeButton loading={isLoading} disabled={isSuccess} onSwipe={showModal}>
+                        {translate("confirm")}
+                    </SwipeButton>
+                </Col>
+            )}
+        </SendTransactionModal>
     );
 };
 

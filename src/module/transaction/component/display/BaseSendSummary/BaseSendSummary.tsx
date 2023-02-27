@@ -29,7 +29,7 @@ const BaseSendSummary = ({ amount, token, children, showTotal, nft }: BaseSendSu
     const isNativeToken = !token && !nft;
     return (
         <Container>
-            <Col gap="8%" alignItems="center">
+            <Col gap="7%" alignItems="center">
                 <Col gap="2%" alignItems="center">
                     {nft ? (
                         <Typography variant="title3Regular" textAlign="center" numberOfLines={1}>

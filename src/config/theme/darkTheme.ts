@@ -26,6 +26,7 @@ const gray: Theme["palette"]["gray"] = {
     300: "#3F4246",
     200: "#292929",
     100: "#262626",
+    50: "#191919",
     0: "#1A1A1A",
 };
 
@@ -135,6 +136,7 @@ const darkTheme = createTheme({
                 borderColor: overlay[700]["24%"],
                 displayColor: gray[600],
                 backgroundColor: gray[0],
+                hintColor: gray[500],
             },
         },
     },

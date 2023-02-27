@@ -10,7 +10,8 @@ export interface TransactionDetailsHeaderProps {
     transaction: FullTransaction;
 }
 
-const TransactionDetailsHeader = ({ transaction: { type, amount, token, timestamp } }: TransactionDetailsHeaderProps): JSX.Element => {
+const TransactionDetailsHeader = ({ transaction }: TransactionDetailsHeaderProps): JSX.Element => {
+    const { type, amount, token, timestamp } = transaction;
     const showAmount = type !== TransactionType.SEND_NFT && type !== TransactionType.RECEIVE_NFT;
     const formatDate = useFormatDate();
     const formattedDate = formatDate(timestamp);
@@ -19,7 +20,7 @@ const TransactionDetailsHeader = ({ transaction: { type, amount, token, timestam
         <Col alignItems="center" gap={10}>
             <TransactionIcon type={type} />
             <Col gap={5} alignItems="center">
-                <TransactionLabel variant="body1Strong" type={type} numberOfLines={2} textAlign="center" />
+                <TransactionLabel variant="body1Strong" transaction={transaction} numberOfLines={2} textAlign="center" />
                 {showAmount && <TransactionAmount variant="body1Strong" type={type} amount={amount} units={token ?? "token"} />}
                 {timestamp && <Typography variant="body4Regular">{formattedDate}</Typography>}
             </Col>

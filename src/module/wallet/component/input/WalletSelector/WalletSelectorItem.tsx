@@ -2,11 +2,11 @@ import { SelectItem } from "@peersyst/react-native-components";
 import WalletItem from "./WalletItem";
 
 export interface WalletSelectorItemProps {
-    index: number;
     walletIndex: number;
+    index?: number;
 }
 
-const WalletSelectorItem = ({ index, walletIndex }: WalletSelectorItemProps): JSX.Element => {
+const WalletSelectorItem = ({ walletIndex, index }: WalletSelectorItemProps): JSX.Element => {
     return (
         <SelectItem value={walletIndex} key={index}>
             <WalletItem index={walletIndex} />
