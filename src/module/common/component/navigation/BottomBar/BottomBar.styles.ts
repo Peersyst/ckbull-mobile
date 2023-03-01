@@ -2,7 +2,7 @@ import styled from "@peersyst/react-native-styled";
 import { Row } from "@peersyst/react-native-components";
 import { config } from "config";
 
-export const VERTICAL_PADDING = config.enableSignerApp ? 12 : 8;
+export const VERTICAL_PADDING = config.enableSignerApp ? 8 : 12;
 
 export const BottomBarRoot = styled(Row, { justifyContent: "space-around" })(({ theme, safeAreaInsets }) => ({
     backgroundColor: theme.palette.component.bottomBar.backgroundColor,
