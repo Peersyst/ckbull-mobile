@@ -1,5 +1,5 @@
+import EmptyListComponent from "module/common/component/display/EmptyListComponent/EmptyListComponent";
 import { useTranslate } from "module/common/hook/useTranslate";
-import { EmptyDepositsComponentRoot } from "./EmptyDepositsComponent.styles";
 
 export interface EmptyDepositsComponentProps {
     loading?: boolean;
@@ -7,10 +7,12 @@ export interface EmptyDepositsComponentProps {
 
 const EmptyDepositsComponent = ({ loading }: EmptyDepositsComponentProps) => {
     const translate = useTranslate();
+    const translateError = useTranslate("error");
     return (
-        <EmptyDepositsComponentRoot variant="body2Light">
-            {translate(loading ? "loading_deposits" : "no_deposits")}
-        </EmptyDepositsComponentRoot>
+        <EmptyListComponent
+            title={loading ? translate("loading_deposits") : translateError("no_deposits")}
+            text={loading ? undefined : translate("start_creating_deposits")}
+        />
     );
 };
 

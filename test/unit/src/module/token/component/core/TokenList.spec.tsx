@@ -20,6 +20,6 @@ describe("Renders the token list properly", () => {
     test("Renders empty token list", async () => {
         jest.spyOn(serviceInstance, "getTokensBalance").mockResolvedValue([]);
         const screen = render(<TokensList />);
-        await waitFor(() => expect(screen.getAllByText(translate("nothing_to_show", { ns: "error" }))));
+        await waitFor(() => expect(screen.getAllByText(translate("no_tokens", { ns: "error" }))));
     });
 });

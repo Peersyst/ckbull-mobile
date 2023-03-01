@@ -23,5 +23,10 @@
     "invalid_address": "Dirección inválida",
     "copied_to_clipboard": "Copied to clipboard",
     "incorrect_mnemonic": "Mnemonic incorrecto",
-    "invalid_account_without_balance": "La cuenta debe tener almenos {{minAmount}} {{units}}"
+    "invalid_account_without_balance": "La cuenta debe tener almenos {{minAmount}} {{units}}",
+    "no_transactions": "No hay transacciones",
+    "no_nfts": "No hay NFTs",
+    "no_tokens": "No hay tokens",
+    "no_deposits": "Sin depósitos",
+    "no_withdrawals": "Sin retiros"
 }

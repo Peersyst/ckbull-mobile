@@ -23,5 +23,10 @@
     "invalid_address": "地址无效",
     "copied_to_clipboard": "已复制到剪贴板",
     "incorrect_mnemonic": "您输入的助记词不正确",
-    "invalid_account_without_balance": "该账户应至少有{{minAmount}}个{{units}}"
+    "invalid_account_without_balance": "该账户应至少有{{minAmount}}个{{units}}",
+    "no_transactions": "还没有交易",
+    "no_nfts": "目前还没有NFTs",
+    "no_tokens": "还没有代币",
+    "no_deposits": "没有存款",
+    "no_withdrawals": "没有提款"
 }
