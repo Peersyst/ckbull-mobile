@@ -9,13 +9,9 @@ import useFormatTimeDAORemainingCycle from "module/transaction/component/hook/Us
 import { config } from "config";
 
 export interface DepositItemProps {
-    amount: DAOUnlockableAmount["amount"];
-    compensation: DAOUnlockableAmount["compensation"];
+    deposit: DAOUnlockableAmount;
     value: number;
     selectedIndex: number;
-    remainingCycleMinutes: DAOUnlockableAmount["remainingCycleMinutes"];
-    unlockable: DAOUnlockableAmount["unlockable"];
-    type: DAOUnlockableAmount["type"];
 }
 
 export interface DepositItemTextProps {
@@ -28,18 +24,12 @@ export interface getDepositItemTextColorParams extends DepositItemTextProps {
     theme: Theme;
 }
 
-const DepositItem = ({
-    value,
-    selectedIndex,
-    amount,
-    remainingCycleMinutes,
-    unlockable,
-    compensation,
-    type,
-}: DepositItemProps): JSX.Element => {
+const DepositItem = ({ value, selectedIndex, deposit }: DepositItemProps): JSX.Element => {
+    const { amount, unlockable, compensation, type } = deposit;
     const isSelected = useSelected(value, selectedIndex, false);
     const translate = useTranslate();
     const formatTimeDAORemainingCycle = useFormatTimeDAORemainingCycle();
+
     return (
         <SelectItem value={value} key={value}>
             <Row justifyContent="flex-start">
@@ -71,9 +61,7 @@ const DepositItem = ({
             </Row>
             <Row justifyContent="flex-start">
                 <DepositItemText type={type} unlockable={unlockable} selected={isSelected} variant="body2">
-                    {unlockable
-                        ? translate("available")
-                        : translate("remaining_time") + ": " + formatTimeDAORemainingCycle(remainingCycleMinutes)}
+                    {unlockable ? translate("available") : translate("remaining_time") + ": " + formatTimeDAORemainingCycle(deposit)}
                 </DepositItemText>
             </Row>
         </SelectItem>

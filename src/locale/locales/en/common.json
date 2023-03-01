@@ -190,5 +190,6 @@
     "CKB_received": "CKB $t(received)",
     "smart_contract_sent": "Smart Contract $t(sent)",
     "smart_contract_received": "Smart Contract $t(received)",
-    "slideToAccept": "Slide to accept"
+    "slideToAccept": "Slide to accept",
+    "epochs": "Epochs"
 }
