@@ -9,18 +9,16 @@ const renderUseFormatTimeDAORemainingCycle = () =>
 describe("formatTimeDAORemainingCycle tests", () => {
     const formatTimeDAORemainingCycle = renderUseFormatTimeDAORemainingCycle().result.current;
     test("Returns only minutes", () => {
-        expect(formatTimeDAORemainingCycle(45)).toEqual(`00 ${translate("hours")}, 45 ${translate("minutes")}`);
-    });
-    test("Returns 1 hour and 30 minutes", () => {
-        expect(formatTimeDAORemainingCycle(90)).toEqual(`01 ${translate("hour")}, 30 ${translate("minutes")}`);
-    });
-    test("Returns some hours with minutes", () => {
-        expect(formatTimeDAORemainingCycle(90)).toEqual(`01 ${translate("hour")}, 30 ${translate("minutes")}`);
-    });
-    test("Returns one day with hours", () => {
-        expect(formatTimeDAORemainingCycle(90)).toEqual(`01 ${translate("hour")}, 30 ${translate("minutes")}`);
-    });
-    test("Returns one day with hours", () => {
-        expect(formatTimeDAORemainingCycle(90)).toEqual(`01 ${translate("hour")}, 30 ${translate("minutes")}`);
+        expect(
+            formatTimeDAORemainingCycle({
+                amount: BigInt(10 * 10 ** 8),
+                compensation: BigInt(1 * 10 ** 8),
+                remainingCycleMinutes: 0,
+                remainingEpochs: 120,
+                txHash: "",
+                unlockable: true,
+                type: "deposit",
+            }),
+        ).toEqual(`120 ${translate("epochs")}`);
     });
 });

@@ -53,19 +53,8 @@ const DepositsSelector = ({
             hint={hintProp || hint}
             {...rest}
         >
-            {deposits.map(({ remainingCycleMinutes, amount, unlockable, compensation, type }, index) => {
-                return (
-                    <DepositItem
-                        type={type}
-                        compensation={compensation}
-                        remainingCycleMinutes={remainingCycleMinutes}
-                        amount={amount}
-                        unlockable={unlockable}
-                        key={index}
-                        selectedIndex={selectedIndex}
-                        value={index}
-                    />
-                );
+            {deposits.map((deposit, index) => {
+                return <DepositItem deposit={deposit} key={index} selectedIndex={selectedIndex} value={index} />;
             })}
         </Select>
     );
