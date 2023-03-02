@@ -1,3 +1,4 @@
 {
-    "enableMainnet": true
+    "enableMainnet": true,
+    "enableSignerApp": true
 }

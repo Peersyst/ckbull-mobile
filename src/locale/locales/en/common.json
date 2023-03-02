@@ -153,7 +153,6 @@
     "delete_wallet": "Delete {{walletName}}",
     "delete_wallet_text": "Are you sure you want to delete {{walletName}} from this device? You'll be asked for your PIN in order to do so.",
     "delete_only_wallet_text": "Are you sure you want to delete {{walletName}} from this device? This will also erase your other data, as {{walletName}} is your only wallet. You'll be asked for your PIN in order to do so.",
-    "no_deposits": "Without deposits",
     "withdrawals": "Withdrawals",
     "processing": "Processing...",
     "dismiss": "Dismiss",
@@ -191,5 +190,10 @@
     "smart_contract_sent": "Smart Contract $t(sent)",
     "smart_contract_received": "Smart Contract $t(received)",
     "slideToAccept": "Slide to accept",
+    "start_receiving_nfts": "To start seeing NFTs, send NFTs to your wallet's address.",
+    "start_receiving_tokens": "To start seeing tokens, send tokens to your wallet's address.",
+    "start_making_transactions": "To start using CKBull, send CKBs, tokens or NFTs to your wallet address and unleash the power of the Nervos network.",
+    "start_creating_deposits": "To create your first deposit send some CKB to the Nervos DAO and start eraning rewards.",
+    "withdraw_explanation": "Remember that each deposit period is 180 epochs (~30 days) starting from the time of your deposit.",
     "epochs": "Epochs"
 }

@@ -7,6 +7,7 @@ import BottomBarItem from "./BottomBarItem/BottomBarItem";
 import { ActivityIcon } from "module/common/icons/ActivityIcon";
 import MainButton from "../../input/MainButton/MainButton";
 import { MainStackParamsList } from "stack-navigator";
+import { config } from "config";
 
 type BottomBarProps = Pick<BottomTabBarProps, "state" | "navigation">;
 
@@ -32,13 +33,15 @@ const BottomBar = ({ state, navigation }: BottomBarProps): JSX.Element => {
                 label={translate("account")}
                 Icon={<AccountIcon />}
             />
-            <MainButton label={translate("scan")} icon={<QrIcon />} style={{ marginTop: -15 }} />
-            <BottomBarItem
-                onPress={() => handleNavigation(MainBottomScreens.ACTIVITY)}
-                isActive={activeTab === MainBottomScreens.ACTIVITY}
-                label={translate("activity")}
-                Icon={<ActivityIcon />}
-            />
+            {config.enableSignerApp && <MainButton label={translate("scan")} icon={<QrIcon />} style={{ marginTop: -15 }} />}
+            {config.enableSignerApp && (
+                <BottomBarItem
+                    onPress={() => handleNavigation(MainBottomScreens.ACTIVITY)}
+                    isActive={activeTab === MainBottomScreens.ACTIVITY}
+                    label={translate("activity")}
+                    Icon={<ActivityIcon />}
+                />
+            )}
             <BottomBarItem
                 onPress={() => handleNavigation(MainBottomScreens.NEWS)}
                 isActive={activeTab === MainBottomScreens.NEWS}

@@ -153,7 +153,6 @@
     "delete_wallet": "删除 %walletName%",
     "delete_wallet_text": "确定要从此设备中删除 %walletName% 吗？为此，系统会要求您提供 PIN 码。",
     "delete_only_wallet_text": "确定要从此设备中删除 %walletName% 吗？这也会删除您的其他数据，因为 %walletName% 是您唯一的钱包。为此，系统会要求您提供 PIN 码。",
-    "no_deposits": "没有存款",
     "withdrawals": "提款",
     "processing": "处理...",
     "dismiss": "驳回",
@@ -190,6 +189,11 @@
     "CKB_received": "CKB $t(received)",
     "smart_contract_sent": "Smart Contract $t(sent)",
     "smart_contract_received": "Smart Contract $t(received)",
+    "start_receiving_nfts": "要开始看到NFTs，请向你的钱包地址发送NFTs。",
+    "start_receiving_tokens": "要开始看到代币，请向你的钱包地址发送代币。",
+    "start_making_transactions": "要开始使用CKBull，请向您的钱包地址发送CKB、代币或NFT，并释放Nervos网络的力量。",
+    "start_creating_deposits": "为了创造你的第一笔存款，向Nervos DAO发送一些CKB，并开始获取奖励。",
+    "withdraw_explanation": "请记住，每个存款期是180个epochs（约30天），从你存款的时间开始。",
     "slideToAccept": "滑动以接受",
     "epochs": "Epochs"
 }

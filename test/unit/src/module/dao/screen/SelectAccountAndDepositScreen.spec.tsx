@@ -28,7 +28,7 @@ describe("SelectAccountAndDepositScreen tests", () => {
         const screen = render(<SelectAccountAndDepositScreen setWithdrawInfo={jest.fn()} />);
         expect(await screen.findByText(translate("select_a_wallet") + ":")).toBeDefined();
         expect(screen.getByText(state.wallets[0].name)).toBeDefined();
-        expect(screen.getByText(translate("no_deposits"))).toBeDefined();
+        expect(screen.getByText(translate("no_deposits", { ns: "error" }))).toBeDefined();
     });
 
     test("Updates withdraw state and moves forward to the next screen", async () => {
