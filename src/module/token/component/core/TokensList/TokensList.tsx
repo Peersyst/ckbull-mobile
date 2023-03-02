@@ -1,13 +1,13 @@
 import TokenCard from "../../display/TokenCard/TokenCard";
 import useGetTokens from "../../../query/useGetTokens";
 import MainList from "module/main/component/display/MainList/MainList";
-import EmptyListComponent from "module/common/component/display/EmptyListComponent/EmptyListComponent";
 import useSelectedWallet from "module/wallet/hook/useSelectedWallet";
 import settingsState from "module/settings/state/SettingsState";
 import { useRecoilValue } from "recoil";
 import { tokensList } from "module/token/mock/token";
 import { useRefetchQueries } from "../../../../../query/useRefetchQueries";
 import { useMemo } from "react";
+import EmptyTokenList from "../../feedback/EmptyTokenList/EmptyTokenList";
 
 const TokensList = (): JSX.Element => {
     const { fiat } = useRecoilValue(settingsState);
@@ -24,7 +24,7 @@ const TokensList = (): JSX.Element => {
         <MainList
             onRefresh={handleRefetch}
             loading={isLoading}
-            ListEmptyComponent={isLoading ? undefined : <EmptyListComponent />}
+            ListEmptyComponent={isLoading ? undefined : <EmptyTokenList />}
             data={tokens}
             renderItem={({ item: token }) => <TokenCard token={token} />}
             keyExtractor={(tx) => tx.type.args}

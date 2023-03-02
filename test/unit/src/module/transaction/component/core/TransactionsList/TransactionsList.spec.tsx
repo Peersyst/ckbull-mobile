@@ -22,6 +22,6 @@ describe("TransactionsList tests", () => {
         const { serviceInstance } = new UseServiceInstanceMock();
         jest.spyOn(serviceInstance, "getTransactions").mockReturnValue([]);
         const screen = render(<TransactionsList />);
-        await waitFor(() => expect(screen.getAllByText(translate("nothing_to_show", { ns: "error" }))));
+        await waitFor(() => expect(screen.getAllByText(translate("no_transactions", { ns: "error" }))));
     });
 });
