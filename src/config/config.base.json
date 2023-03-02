@@ -15,5 +15,6 @@
     "tokenName": "CKB",
     "newsRSSUrl": "https://fetchrss.com/rss/6239aa2ceb62c371b8448ee26239aa120841546894777912.xml",
     "defaultDecimals": 8,
-    "miniUnits": "CKS"
+    "miniUnits": "CKS",
+    "enableSignerApp": false
 }

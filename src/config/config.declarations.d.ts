@@ -28,6 +28,7 @@ declare module "@peersyst/react-native-components" {
         newsRSSUrl: string;
         defaultDecimals: number;
         miniUnits: string;
+        enableSignerApp: boolean;
     }
 
     export interface CreateConfig {
@@ -47,6 +48,7 @@ declare module "@peersyst/react-native-components" {
         newsRSSUrl: string;
         defaultDecimals: number;
         miniUnits: string;
+        enableSignerApp: boolean;
     }
 
     export interface ExtraValidators {
