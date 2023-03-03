@@ -3,10 +3,12 @@ import { SettingsStorage } from "module/settings/SettingsStorage";
 import { LanguageDetectorAsyncModule } from "i18next";
 import { LocaleType } from "locale";
 
+//https://www.localeplanet.com/icu/iso3166.html
 export function getDefaultLocale(): LocaleType {
-    const locales: LocaleType[] = ["en", "es"];
-    const systemLocaleEnd = Localization.locale.slice(-2).toLowerCase();
-    const systemLocaleStart = Localization.locale.slice(0, 2).toLowerCase();
+    const locales: LocaleType[] = ["en", "es", "zh", "pt", "el", "fr"];
+    const locale = Localization.getLocales()[0].languageCode || Localization.locale || "en";
+    const systemLocaleEnd = locale.slice(-2).toLowerCase();
+    const systemLocaleStart = locale.slice(0, 2).toLowerCase();
     return locales.find((l) => systemLocaleStart === l || systemLocaleEnd === l) ?? "en";
 }
 
@@ -15,19 +17,22 @@ export async function initLang(): Promise<LocaleType> {
     return storedLocale || getDefaultLocale();
 }
 
+export async function detectLang(): Promise<LocaleType> {
+    try {
+        return await initLang();
+    } catch (error) {
+        /* eslint-disable no-console */
+        console.warn("Error reading language", error);
+        return "en";
+    }
+}
+
 const LanguageDetectorPlugin: LanguageDetectorAsyncModule = {
     type: "languageDetector",
     async: true,
     /* eslint-disable @typescript-eslint/no-empty-function */
     init: () => {},
-    detect: async function (callback: (lang: string) => void) {
-        try {
-            callback(await initLang());
-        } catch (error) {
-            /* eslint-disable no-console */
-            console.log("Error reading language", error);
-        }
-    },
+    detect: detectLang,
     /* eslint-disable @typescript-eslint/no-empty-function */
     cacheUserLanguage: () => {},
 };

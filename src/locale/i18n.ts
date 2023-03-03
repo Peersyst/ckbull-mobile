@@ -1,14 +1,16 @@
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
-import { en } from "./locales/en/en";
-import { es } from "./locales/es/es";
-import { zh } from "./locales/zh/zh";
 
 // Polyfill Intl as it is not included in RN
 import "intl";
 import "intl/locale-data/jsonp/en";
 import "intl/locale-data/jsonp/es";
+import "intl/locale-data/jsonp/zh";
+import "intl/locale-data/jsonp/pt";
+import "intl/locale-data/jsonp/fr";
+import "intl/locale-data/jsonp/el";
 import LanguageDetectorPlugin from "./pluguins/LanguageDetectorPlugin/LanguageDetectorPlugin";
+import { el, fr, pt, en, es, zh } from "./locales";
 
 export const defaultNS = "translation";
 
@@ -16,6 +18,9 @@ export const resources = {
     en,
     es,
     zh,
+    el,
+    pt,
+    fr,
 } as const;
 
 i18next
