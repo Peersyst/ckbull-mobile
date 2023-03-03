@@ -41,6 +41,8 @@ jest.mock("expo-localization", () => ({
     ...jest.requireActual("expo-localization"),
     digitGroupingSeparator: ",",
     decimalSeparator: ".",
+    getLocales: () => ["en-US"],
+    locale: "en-US",
 }));
 
 jest.mock("@peersyst/react-native-components", () => {

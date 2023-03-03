@@ -6,7 +6,7 @@ import { LocaleType } from "locale";
 //https://www.localeplanet.com/icu/iso3166.html
 export function getDefaultLocale(): LocaleType {
     const locales: LocaleType[] = ["en", "es", "zh", "pt", "el", "fr"];
-    const locale = Localization.getLocales()[0].languageCode || Localization.locale || "en";
+    const locale = Localization.getLocales()[0]?.languageCode || Localization?.locale || "en";
     const systemLocaleEnd = locale.slice(-2).toLowerCase();
     const systemLocaleStart = locale.slice(0, 2).toLowerCase();
     return locales.find((l) => systemLocaleStart === l || systemLocaleEnd === l) ?? "en";
