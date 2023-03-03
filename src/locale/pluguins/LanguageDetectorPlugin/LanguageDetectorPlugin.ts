@@ -12,14 +12,10 @@ export function getDefaultLocale(): LocaleType {
     return locales.find((l) => systemLocaleStart === l || systemLocaleEnd === l) ?? "en";
 }
 
-export async function initLang(): Promise<LocaleType> {
-    const storedLocale = await SettingsStorage?.getLocale();
-    return storedLocale || getDefaultLocale();
-}
-
 export async function detectLang(): Promise<LocaleType> {
     try {
-        return await initLang();
+        const storedLocale = await SettingsStorage?.getLocale();
+        return storedLocale || getDefaultLocale();
     } catch (error) {
         /* eslint-disable no-console */
         console.warn("Error reading language", error);
