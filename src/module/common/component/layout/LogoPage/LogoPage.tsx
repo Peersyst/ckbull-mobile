@@ -3,10 +3,9 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { LogoPageProvider } from "module/common/component/layout/LogoPage/LogoPageContext";
 import { Animated } from "react-native";
 import { useDimensions } from "@react-native-community/hooks";
-import { ThemeProvider } from "@peersyst/react-native-styled";
-import darkTheme from "config/theme/darkTheme";
 import ImageBackgroundPage from "../ImageBackgroundPage/ImageBackgroundPage";
 import { LogoIcon } from "icons";
+import DarkThemeProvider from "../../util/ThemeProvider/DarkThemeProvider";
 
 export interface LogoPageProps {
     children?: ReactNode;
@@ -30,14 +29,14 @@ const LogoPage = ({ children }: LogoPageProps): JSX.Element => {
     }, [logoFlex, logoAnim]);
 
     return (
-        <ThemeProvider theme={darkTheme}>
+        <DarkThemeProvider>
             <ImageBackgroundPage>
                 <LogoPageIconRoot style={{ height: logoAnim.interpolate({ inputRange: [0, 1], outputRange: [0, height] }) }}>
                     <LogoIcon style={{ fontSize: 72 }} />
                 </LogoPageIconRoot>
                 <LogoPageProvider value={{ setLogoFlex }}>{children}</LogoPageProvider>
             </ImageBackgroundPage>
-        </ThemeProvider>
+        </DarkThemeProvider>
     );
 };
 
