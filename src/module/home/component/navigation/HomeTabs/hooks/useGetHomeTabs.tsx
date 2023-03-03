@@ -32,5 +32,5 @@ export function useGetHomeTabs() {
                 item: getHomeTabItem(<NftsList />, isEmptyWallet),
             },
         ];
-    }, [isEmptyWallet]);
+    }, [isEmptyWallet, translate]);
 }

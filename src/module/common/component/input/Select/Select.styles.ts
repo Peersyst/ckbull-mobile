@@ -31,6 +31,8 @@ export const SelectRoot = styled(Select)(({ theme, dimensions }) => ({
             width: dimensions.width,
             borderBottomLeftRadius: 0,
             borderBottomRightRadius: 0,
+            height: "55%",
+            maxHeight: 410,
         },
         item: {
             ...theme.typography.body2Light,

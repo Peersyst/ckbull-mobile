@@ -11,18 +11,31 @@ const SelectLocale = (): JSX.Element => {
     const translate = useTranslate();
     const localeOptions: SelectOption<LocaleType>[] = [
         {
-            label: translate("es"),
-            value: "es",
+            label: translate("el"),
+            value: "el",
         },
         {
             label: translate("en"),
             value: "en",
         },
         {
+            label: translate("es"),
+            value: "es",
+        },
+        {
+            label: translate("fr"),
+            value: "fr",
+        },
+        {
+            label: translate("pt"),
+            value: "pt",
+        },
+        {
             label: translate("zh"),
             value: "zh",
         },
     ];
+
     const [settings, setSettings] = useRecoilState(settingsState);
 
     const handleSelect = (value: LocaleType) => {
