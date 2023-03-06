@@ -6,6 +6,12 @@ import { StatusBar, Suspense } from "@peersyst/react-native-components";
 import { useRecoilValue } from "recoil";
 import settingsState from "module/settings/state/SettingsState";
 import { Platform, UIManager } from "react-native";
+/**
+ * URL polyfill
+ * @see https://github.com/facebook/react-native/blob/1e9f63fe277c42d812ef007ced7eff1688602b62/Libraries/Blob/URL.js#L131-L133
+ * @see https://github.com/facebook/react-native/issues/23922#issuecomment-648096619
+ */
+import "react-native-url-polyfill/auto";
 
 if (typeof BigInt === "undefined") global.BigInt = require("big-integer");
 

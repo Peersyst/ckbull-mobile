@@ -47,7 +47,6 @@ const useUncommittedTransactions = (index?: number): QueryResult<FullTransaction
                 }
             }
             if (shouldSync) {
-                //Use another thread
                 await serviceInstance!.synchronize();
                 setWalletState((state) => ({
                     ...state,
