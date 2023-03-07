@@ -11,7 +11,7 @@ import {
     DAOUnlockableAmount,
     Transaction,
 } from "ckb-peersyst-sdk";
-import { tokenAmountZeroBalanceList, tokensList, UknownToken } from "module/token/mock/token";
+import { tokensList, UknownToken } from "module/token/mock/token";
 import {
     Chain,
     DepositInDAOParams,
@@ -111,7 +111,10 @@ export class CKBSDKService {
 
     getTokensBalance(): TokenAmount[] {
         const tokens = this.wallet.getTokensBalance();
-        const tokenAmounts: TokenAmount[] = [...tokenAmountZeroBalanceList];
+        const tokenAmounts: TokenAmount[] = tokensList.map((_, i) => ({
+            type: tokensList[i],
+            amount: 0,
+        }));
 
         for (const token of tokens) {
             const tokenIndex = getTokenIndexTypeFromScript(token.type);

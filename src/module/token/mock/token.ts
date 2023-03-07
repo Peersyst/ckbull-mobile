@@ -1,4 +1,4 @@
-import { TokenAmount, TokenType } from "module/token/types";
+import { TokenType } from "module/token/types";
 
 export const tokensList: TokenType[] = [
     {
@@ -70,11 +70,6 @@ export const tokensList: TokenType[] = [
         apiId: "wrapped-bitcoin",
     },
 ];
-
-export const tokenAmountZeroBalanceList: TokenAmount[] = tokensList.map((_, i) => ({
-    type: tokensList[i],
-    amount: 0,
-}));
 
 export const UknownToken: TokenType = {
     name: "Unknown Token",
