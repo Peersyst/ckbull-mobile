@@ -2,6 +2,7 @@ import GeneralSettingsScreen from "module/settings/screen/GeneralSettingsScreen"
 import { render, translate } from "test-utils";
 import * as Recoil from "recoil";
 import { defaultSettingsState } from "module/settings/state/SettingsState";
+import { capitalize } from "@peersyst/react-utils";
 
 describe("Test of the General Settings screen", () => {
     test("Renders correctly", () => {
@@ -11,7 +12,7 @@ describe("Test of the General Settings screen", () => {
         const screen = render(<GeneralSettingsScreen />);
 
         expect(screen.getByText(translate("select_your_network"))).toBeDefined();
-        expect(screen.getByText(translate("network_name", { name: "Testnet" }))).toBeDefined();
+        expect(screen.getByText(translate("network_name", { name: capitalize(defaultSettingsState.network) }))).toBeDefined();
 
         //Selector of the fee
         expect(screen.getByText(translate("modify_default_fee"))).toBeDefined();
