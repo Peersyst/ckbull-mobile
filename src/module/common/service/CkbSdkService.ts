@@ -11,7 +11,7 @@ import {
     DAOUnlockableAmount,
     Transaction,
 } from "ckb-peersyst-sdk";
-import { tokenAmountZeroBalanceList, tokensList, UknownToken } from "module/token/mock/token";
+import { tokensList, UknownToken } from "module/token/mock/token";
 import {
     Chain,
     DepositInDAOParams,

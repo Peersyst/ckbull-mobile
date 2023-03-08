@@ -1,4 +1,4 @@
-import { TokenAmount, TokenType } from "module/token/types";
+import { TokenType } from "module/token/types";
 
 export const tokensList: TokenType[] = [
     {
