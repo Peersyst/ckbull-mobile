@@ -191,6 +191,8 @@ export class WalletService {
         }
 
         const allAddresses = this.getAllAddresses();
+        //Aquí crec que ja es podria donar el loading per finalitzat ja que un cop tens el cellsMap ja pots saber el balance no?
+        //Es podria agafar les 10 últimes tx més recents a mostrar no?
         for (let i = 0; i < keysArr.length && i < lumosTxsArr.length && i < addressesArr.length; i += 1) {
             const address = addressesArr[i];
             let transactions: Transaction[] = [];
