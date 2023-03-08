@@ -199,7 +199,7 @@ export class WalletService {
                     let t0 = Date.now();
                     const lumosTx = await this.transactionService.getTransactionFromLumosTx(tx, address, allAddresses);
                     let t1 = Date.now();
-                    this.logger.info(`getTransactionFromLumosTx: ${t1 - t0}ms or ${((t1 - t0) / 1000).toFixed(5)}s`);
+                    this.logger.info(`getTransactionFromLumosTx finished in: ${t1 - t0}ms or ${((t1 - t0) / 1000).toFixed(5)}s`);
                     transactions.push(lumosTx);
                 } catch (e) {
                     this.logger.error(`getTransactionFromLumosTx error: ${JSON.stringify(e)}`);
@@ -212,7 +212,7 @@ export class WalletService {
 
         this.lastHashBlock = currentBlock.number;
         let t_f = Date.now();
-        this.logger.info(`synchronize: ${t_f - t_0}ms or ${((t_f - t_0) / 1000).toFixed(5)}s`);
+        this.logger.info(`synchronize finished in: ${t_f - t_0}ms or ${((t_f - t_0) / 1000).toFixed(5)}s`);
         const walletState = this.getWalletState();
         if (this.onSync) {
             await this.onSync(walletState);

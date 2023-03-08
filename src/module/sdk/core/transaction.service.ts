@@ -130,6 +130,7 @@ export class TransactionService {
         let isRealSender = false;
         for (let i = 0; i < lumosTx.transaction.inputs.length; i += 1) {
             const input = lumosTx.transaction.inputs[i];
+            //Aquí la tx with status no la tienes ya previamente?
             const inputTx = await this.connection.getTransactionFromHash(input.previous_output.tx_hash);
             const output = inputTx.transaction.outputs[parseInt(input.previous_output.index, 16)];
             const inputAddress = this.connection.getAddressFromLock(output.lock);
@@ -191,6 +192,8 @@ export class TransactionService {
 
         let type: TransactionType;
         const isReceive = inputIndex === null;
+
+        //El tipo de tx se puede hacer bajo demanda?
         if (inputType === null && outputIndex === null) {
             // If neither input or output has type then it is a simple ckb transaction
             if (Math.abs(amount) < 1) {
@@ -244,6 +247,7 @@ export class TransactionService {
             amount,
         };
         if (lumosTx.tx_status.block_hash) {
+            //El header es pot demanar sota demanada?
             const header = await this.connection.getBlockHeaderFromHash(lumosTx.tx_status.block_hash);
             transaction.blockHash = lumosTx.tx_status.block_hash;
             transaction.blockNumber = parseInt(header.number, 16);
