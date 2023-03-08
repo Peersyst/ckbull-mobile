@@ -151,7 +151,7 @@ export class WalletService {
         const keysArr: string[] = [];
         const addressesArr: string[] = [];
         const lumosTxsArr: TransactionWithStatus[][] = [];
-
+        let t_0 = Date.now();
         for (const addressType of addressTypes) {
             let currentIndex = 0;
             let firstIndex = addressType === AddressType.Receiving ? this.firstRIndexWithoutTxs : this.firstCIndexWithoutTxs;
@@ -193,16 +193,26 @@ export class WalletService {
         const allAddresses = this.getAllAddresses();
         for (let i = 0; i < keysArr.length && i < lumosTxsArr.length && i < addressesArr.length; i += 1) {
             const address = addressesArr[i];
-            const promises = lumosTxsArr[i].map((tx) => this.transactionService.getTransactionFromLumosTx(tx, address, allAddresses));
-            const transactions = await Promise.all(promises);
-
+            let transactions: Transaction[] = [];
+            for (const tx of lumosTxsArr[i]) {
+                try {
+                    let t0 = Date.now();
+                    const lumosTx = await this.transactionService.getTransactionFromLumosTx(tx, address, allAddresses);
+                    let t1 = Date.now();
+                    this.logger.info(`getTransactionFromLumosTx: ${t1 - t0}ms or ${((t1 - t0) / 1000).toFixed(5)}s`);
+                    transactions.push(lumosTx);
+                } catch (e) {
+                    this.logger.error(`getTransactionFromLumosTx error: ${JSON.stringify(e)}`);
+                }
+            }
             // Update transactions
             const currentTxs: Transaction[] = this.accountTransactionMap[keysArr[i]] || [];
             this.accountTransactionMap[keysArr[i]] = [...currentTxs, ...transactions];
         }
 
         this.lastHashBlock = currentBlock.number;
-
+        let t_f = Date.now();
+        this.logger.info(`synchronize: ${t_f - t_0}ms or ${((t_f - t_0) / 1000).toFixed(5)}s`);
         const walletState = this.getWalletState();
         if (this.onSync) {
             await this.onSync(walletState);
