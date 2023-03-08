@@ -25,7 +25,7 @@ export enum ImportWalletScreens {
 
 const ImportWalletNavigatorGroup = () => {
     const translate = useTranslate();
-    const [activeTab, setActiveTab] = useState(0);
+    const [activeTab, setActiveTab] = useState(ImportWalletScreens.IMPORT_WALLET_SUCCESS);
     const setTab = useTabs()[1];
     const [showCard, setShowCard] = useState(true);
     const [showPin, setShowPin] = useState(false);

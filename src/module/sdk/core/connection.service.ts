@@ -11,6 +11,7 @@ import {
 } from "@ckb-lumos/base";
 import { Config, ScriptConfig } from "@ckb-lumos/config-manager";
 import { isSecp256k1Blake160Address, isAcpAddress, isSecp256k1Blake160MultisigAddress } from "@ckb-lumos/common-scripts/lib/helper";
+import log from "utils/log";
 
 // AGGRON4 for test, LINA for main
 const { AGGRON4, LINA } = config.predefined;
@@ -87,8 +88,18 @@ export class ConnectionService {
 
     async getBlockHeaderFromHash(blockHash: string): Promise<Header> {
         if (!this.blockHeaderHashMap.has(blockHash)) {
-            const header = await this.rpc.get_header(blockHash);
-            this.setBlockHeaderMaps(header!);
+            log(`[WALLET]: Getting block hash ${blockHash}`, "green");
+            try {
+                const header = await this.rpc.get_header(blockHash);
+                log(`[HEADER]: Getting block header ${header}`, "purple");
+                this.setBlockHeaderMaps(header!);
+            } catch (e) {
+                console.error(`[HEADER_HASH_ERROR]: ${blockHash}:
+                ${e}`);
+                const header = await this.rpc.get_header(blockHash);
+                log(`[HEADER]: Getting block header ${header}`, "purple");
+                this.setBlockHeaderMaps(header!);
+            }
         }
         return this.blockHeaderHashMap.get(blockHash)!;
     }

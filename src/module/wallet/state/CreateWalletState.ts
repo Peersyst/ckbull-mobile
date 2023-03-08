@@ -12,13 +12,18 @@ export interface CreateWalletState {
     colorIndex: number | undefined;
 }
 
+// 3:45:00
+const privatePond = ["private", "pond", "zero", "popular", "fashion", "omit", "february", "obscure", "pattern", "city", "camp", "pistol"];
+// 1:15:00
+const teachAct = "teach act exotic into script once dutch choice menu elite apple faith".split(" ");
+
 const createWalletState = atom<CreateWalletState>({
     key: "createWallet",
     default: {
-        name: undefined,
-        pin: undefined,
-        mnemonic: undefined,
-        colorIndex: undefined,
+        name: "Test",
+        pin: "0000",
+        mnemonic: privatePond,
+        colorIndex: 1,
     },
 });
 

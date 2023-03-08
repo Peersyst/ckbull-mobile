@@ -8,6 +8,7 @@ import { CKBIndexerQueryOptions } from "@ckb-lumos/ckb-indexer/src/type";
 import { ConnectionService } from "./connection.service";
 import { Logger } from "../utils/logger";
 import { Nft, NftService } from "./assets/nft.service";
+import log from "utils/log";
 
 const { ScriptValue } = values;
 
@@ -120,6 +121,7 @@ export class TransactionService {
     }
 
     async getTransactionFromLumosTx(lumosTx: TransactionWithStatus, address: string, allAddresses: string[]): Promise<Transaction> {
+        log(`[WALLET]: Getting transaction ${JSON.stringify(lumosTx)}`, "orange");
         const inputs: DataRow[] = [];
         const inputAddresses: string[] = [];
         let scriptType: ScriptType;

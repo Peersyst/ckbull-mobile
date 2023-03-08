@@ -9,6 +9,8 @@ import { Cell, Script } from "@ckb-lumos/lumos";
 import { QueryOptions } from "@ckb-lumos/base";
 import { Nft, NftService } from "./assets/nft.service";
 import { Logger } from "../utils/logger";
+import log from "utils/log";
+import { TestingStorage } from "./TestingStorage";
 
 export enum AddressScriptType {
     SECP256K1_BLAKE160 = "SECP256K1_BLAKE160",
@@ -132,6 +134,7 @@ export class WalletService {
     }
 
     async synchronize(): Promise<WalletState> {
+        log("[WALLET]: Sync", "white");
         if (this.synchronizing) return this.getWalletState();
         this.synchronizing = true;
         if (this.onSyncStart) this.onSyncStart();
@@ -146,51 +149,55 @@ export class WalletService {
             toBlock = currentBlock.number;
         }
 
+        const { keysArr = [], lumosTxsArr = [], addressesArr = [] } = (await TestingStorage.get()) || {};
         const cellProvider = this.connection.getCellProvider({ toBlock });
         const addressTypes: AddressType[] = [AddressType.Receiving, AddressType.Change];
-        const keysArr: string[] = [];
-        const addressesArr: string[] = [];
-        const lumosTxsArr: TransactionWithStatus[][] = [];
 
-        for (const addressType of addressTypes) {
-            let currentIndex = 0;
-            let firstIndex = addressType === AddressType.Receiving ? this.firstRIndexWithoutTxs : this.firstCIndexWithoutTxs;
+        if (keysArr.length === 0 || lumosTxsArr.length === 0 || addressesArr.length === 0) {
+            log("[WALLET]: Initializing", "white");
 
-            while (currentIndex <= firstIndex) {
-                const address = this.getAddress(currentIndex, addressType);
-                const lumosTxs = await this.transactionService.getLumosTransactions(address, toBlock, fromBlock!);
+            for (const addressType of addressTypes) {
+                let currentIndex = 0;
+                let firstIndex = addressType === AddressType.Receiving ? this.firstRIndexWithoutTxs : this.firstCIndexWithoutTxs;
 
-                if (lumosTxs.length > 0) {
-                    const lock = this.getLock(currentIndex, addressType);
-                    const mapKey = `${addressType}-${currentIndex}`;
-                    keysArr.push(mapKey);
-                    addressesArr.push(address);
-                    lumosTxsArr.push(lumosTxs);
+                while (currentIndex <= firstIndex) {
+                    const address = this.getAddress(currentIndex, addressType);
+                    const lumosTxs = await this.transactionService.getLumosTransactions(address, toBlock, fromBlock!);
 
-                    // Update cells
-                    const newCells: Cell[] = [];
-                    const collectorOptions: QueryOptions = { lock, toBlock };
-                    const cellCollector = cellProvider.collector(collectorOptions);
-                    for await (const cell of cellCollector.collect()) {
-                        newCells.push(cell);
+                    if (lumosTxs.length > 0) {
+                        const lock = this.getLock(currentIndex, addressType);
+                        const mapKey = `${addressType}-${currentIndex}`;
+                        keysArr.push(mapKey);
+                        addressesArr.push(address);
+                        lumosTxsArr.push(lumosTxs);
+
+                        // Update cells
+                        const newCells: Cell[] = [];
+                        const collectorOptions: QueryOptions = { lock, toBlock };
+                        const cellCollector = cellProvider.collector(collectorOptions);
+                        for await (const cell of cellCollector.collect()) {
+                            newCells.push(cell);
+                        }
+                        this.accountCellsMap[mapKey] = newCells;
+
+                        // Update indexes
+                        if (currentIndex === firstIndex) {
+                            firstIndex += 1;
+                        }
                     }
-                    this.accountCellsMap[mapKey] = newCells;
-
-                    // Update indexes
-                    if (currentIndex === firstIndex) {
-                        firstIndex += 1;
-                    }
+                    currentIndex += 1;
                 }
-                currentIndex += 1;
-            }
-            if (addressType === AddressType.Receiving) {
-                this.firstRIndexWithoutTxs = firstIndex;
-            } else {
-                this.firstCIndexWithoutTxs = firstIndex;
+                if (addressType === AddressType.Receiving) {
+                    this.firstRIndexWithoutTxs = firstIndex;
+                } else {
+                    this.firstCIndexWithoutTxs = firstIndex;
+                }
             }
         }
 
         const allAddresses = this.getAllAddresses();
+        log("[WALLET]: Fetched transactions", "pink");
+        await TestingStorage.set({ keysArr, lumosTxsArr, addressesArr });
         for (let i = 0; i < keysArr.length && i < lumosTxsArr.length && i < addressesArr.length; i += 1) {
             const address = addressesArr[i];
             const promises = lumosTxsArr[i].map((tx) => this.transactionService.getTransactionFromLumosTx(tx, address, allAddresses));
