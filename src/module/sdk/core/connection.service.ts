@@ -37,6 +37,40 @@ const OnepassConfig: { [key in Environments]: ScriptConfig } = {
     },
 };
 
+const OmnilockConfig: { [key in Environments]: ScriptConfig } = {
+    [Environments.Mainnet]: {
+        CODE_HASH: "0x9b819793a64463aed77c615d6cb226eea5487ccfc0783043a587254cda2b6f26",
+        HASH_TYPE: "type",
+        TX_HASH: "0xdfdb40f5d229536915f2d5403c66047e162e25dedd70a79ef5164356e1facdc8",
+        INDEX: "0x0",
+        DEP_TYPE: "code",
+    },
+    [Environments.Testnet]: {
+        CODE_HASH: "0xf329effd1c475a2978453c8600e1eaf0bc2087ee093c3ee64cc96ec6847752cb",
+        HASH_TYPE: "type",
+        TX_HASH: "0x27b62d8be8ed80b9f56ee0fe41355becdb6f6a40aeba82d3900434f43b1c8b60",
+        INDEX: "0x0",
+        DEP_TYPE: "code",
+    },
+};
+
+const PwlockK1AcplConfig: { [key in Environments]: ScriptConfig } = {
+    [Environments.Mainnet]: {
+        CODE_HASH: "0xbf43c3602455798c1a61a596e0d95278864c552fafe231c063b3fabf97a8febc",
+        HASH_TYPE: "type",
+        TX_HASH: "0x1d60cb8f4666e039f418ea94730b1a8c5aa0bf2f7781474406387462924d15d4",
+        INDEX: "0x0",
+        DEP_TYPE: "code",
+    },
+    [Environments.Testnet]: {
+        CODE_HASH: "",
+        HASH_TYPE: "type",
+        TX_HASH: "",
+        INDEX: "0x0",
+        DEP_TYPE: "code",
+    },
+};
+
 class CustomCellProvider implements CellProvider {
     public readonly uri: string;
 
@@ -168,7 +202,9 @@ export class ConnectionService {
                 isSecp256k1Blake160Address(address, this.config) ||
                 isAcpAddress(address, this.config) ||
                 isSecp256k1Blake160MultisigAddress(address, this.config) ||
-                this.isOnepassAddress(address)
+                this.isOnepassAddress(address) ||
+                this.isOmnilockAddress(address) ||
+                this.isPwlockK1AcplAddress(address)
             );
         } catch (err) {
             return false;
@@ -180,6 +216,16 @@ export class ConnectionService {
         return lock.code_hash === OnepassConfig[this.env].CODE_HASH && lock.hash_type === OnepassConfig[this.env].HASH_TYPE;
     }
 
+    isOmnilockAddress(address: string): boolean {
+        const lock = this.getLockFromAddress(address);
+        return lock.code_hash === OmnilockConfig[this.env].CODE_HASH && lock.hash_type === OmnilockConfig[this.env].HASH_TYPE;
+    }
+
+    isPwlockK1AcplAddress(address: string): boolean {
+        const lock = this.getLockFromAddress(address);
+        return lock.code_hash === PwlockK1AcplConfig[this.env].CODE_HASH && lock.hash_type === PwlockK1AcplConfig[this.env].HASH_TYPE;
+    }
+
     static isAddress(network: Environments, address: string): boolean {
         const config = network === Environments.Mainnet ? LINA : AGGRON4;
         try {
@@ -187,7 +233,9 @@ export class ConnectionService {
                 isSecp256k1Blake160Address(address, config) ||
                 isAcpAddress(address, config) ||
                 isSecp256k1Blake160MultisigAddress(address, config) ||
-                ConnectionService.isOnepassAddress(network, address)
+                ConnectionService.isOnepassAddress(network, address) ||
+                ConnectionService.isOmnilockAddress(network, address) ||
+                ConnectionService.isPwlockK1AcplAddress(network, address)
             );
         } catch (err) {
             return false;
@@ -198,5 +246,17 @@ export class ConnectionService {
         const config = network === Environments.Mainnet ? LINA : AGGRON4;
         const lock = ConnectionService.getLockFromAddress(address, config);
         return lock.code_hash === OnepassConfig[network].CODE_HASH && lock.hash_type === OnepassConfig[network].HASH_TYPE;
+    }
+
+    static isOmnilockAddress(network: Environments, address: string): boolean {
+        const config = network === Environments.Mainnet ? LINA : AGGRON4;
+        const lock = ConnectionService.getLockFromAddress(address, config);
+        return lock.code_hash === OmnilockConfig[network].CODE_HASH && lock.hash_type === OmnilockConfig[network].HASH_TYPE;
+    }
+
+    static isPwlockK1AcplAddress(network: Environments, address: string): boolean {
+        const config = network === Environments.Mainnet ? LINA : AGGRON4;
+        const lock = ConnectionService.getLockFromAddress(address, config);
+        return lock.code_hash === PwlockK1AcplConfig[network].CODE_HASH && lock.hash_type === PwlockK1AcplConfig[network].HASH_TYPE;
     }
 }

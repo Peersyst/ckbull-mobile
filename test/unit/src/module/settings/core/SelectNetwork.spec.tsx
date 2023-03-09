@@ -16,7 +16,7 @@ describe("Test for the select network", () => {
     });
     test("Change the network correctly", async () => {
         const setSettingsState = jest.fn();
-        const mockedRecoilState = [defaultSettingsState, setSettingsState];
+        const mockedRecoilState = [{ network: "mainnet" }, setSettingsState];
         jest.spyOn(Recoil, "useRecoilState").mockReturnValue(mockedRecoilState as any);
         const setSettingsStorage = jest.spyOn(SettingsStorage, "set").mockResolvedValue();
         const screen = render(<SelectNetwork />);

@@ -33,6 +33,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         },
         splash: { image: "./assets/images/splash.png", resizeMode: "cover", backgroundColor: "#141414" },
     },
+    extra: {
+        eas: {
+            projectId: "b1dac2fd-013a-4e87-a82e-de40c714f416",
+        },
+    },
     get android(): ExpoConfig["android"] {
         return {
             package: "com.peersyst.ckbull",
