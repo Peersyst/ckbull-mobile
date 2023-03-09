@@ -1,31 +1,27 @@
 import { LoadingModalProps } from "./LoadingModal.types";
-import { LoadingModalBackdrop, SuccessIcon, SuccessMessage } from "./LoadingModal.styles";
-import { ThemeProvider } from "@peersyst/react-native-styled";
-import { darkTheme } from "module/common/style/darkTheme";
-import Isotip from "module/common/component/display/Logos/Isotip/Isotip";
+import { LoadingModalButton, LoadingModalRoot } from "./LoadingModal.styles";
 import { useEffect, useState } from "react";
-import { translate } from "locale";
 import { notificationAsync, NotificationFeedbackType } from "expo-haptics";
-import AnimationContainer from "module/common/component/display/AnimationContainer/AnimationContainer";
+import { useTranslate } from "module/common/hook/useTranslate";
+import { Backdrop, Col, Typography } from "@peersyst/react-native-components";
+import ImageBackgroundPage from "../../layout/ImageBackgroundPage/ImageBackgroundPage";
+import darkTheme from "config/theme/darkTheme";
+import { ThemeProvider } from "@peersyst/react-native-styled";
+import { LoadingIcon, SuccessIcon } from "icons";
 
 const LoadingModal = ({ loading, successMessage, error, success, ...backdropProps }: LoadingModalProps): JSX.Element => {
     const [open, setOpen] = useState(false);
+    const translate = useTranslate();
 
     useEffect(() => {
         if (!open) setOpen(loading || success || error);
         else if (error) setOpen(false);
-        if (success) setTimeout(() => setOpen(false), 3000);
     }, [loading, success, error]);
 
     useEffect(() => {
-        let closeTimeout: NodeJS.Timeout;
         if (success) {
             notificationAsync(NotificationFeedbackType.Success);
-            closeTimeout = setTimeout(() => setOpen(false), 3000);
         }
-        return () => {
-            if (closeTimeout) clearTimeout(closeTimeout);
-        };
     }, [success]);
 
     const handleClose = () => {
@@ -33,35 +29,43 @@ const LoadingModal = ({ loading, successMessage, error, success, ...backdropProp
     };
 
     return (
-        <ThemeProvider theme={darkTheme}>
-            <LoadingModalBackdrop
-                open={open}
-                closable={success}
-                swipeable={false}
-                onClose={handleClose}
-                animationIn="fadeIn"
-                animationOut="fadeOut"
-                {...backdropProps}
-            >
-                {success ? (
-                    <>
-                        <AnimationContainer style={{ height: 75, width: 75 }}>
-                            <SuccessIcon />
-                        </AnimationContainer>
-                        <SuccessMessage textAlign="center" variant="body1">
-                            {successMessage}
-                        </SuccessMessage>
-                    </>
-                ) : (
-                    <>
-                        <Isotip size="md" />
-                        <SuccessMessage textAlign="center" variant="body1">
-                            {translate("processing")}
-                        </SuccessMessage>
-                    </>
-                )}
-            </LoadingModalBackdrop>
-        </ThemeProvider>
+        <Backdrop
+            open={open}
+            closable={success}
+            swipeable={false}
+            onClose={handleClose}
+            animationIn="fadeIn"
+            animationOut="fadeOut"
+            closeOnBackdropTap={false}
+            {...backdropProps}
+        >
+            <LoadingModalRoot start={{ x: 0, y: 0.5 }} end={{ x: 0.5, y: 1 }}>
+                <ThemeProvider theme={darkTheme}>
+                    {success ? (
+                        <>
+                            <Col alignItems="center" justifyContent="center" gap={14} flex={1}>
+                                <SuccessIcon style={{ fontSize: 80, color: "white" }} />
+                                <Typography textAlign="center" color="white" variant="body2Strong">
+                                    {successMessage}
+                                </Typography>
+                            </Col>
+                            <LoadingModalButton fullWidth onPress={handleClose}>
+                                {translate("continue")}
+                            </LoadingModalButton>
+                        </>
+                    ) : (
+                        <ImageBackgroundPage>
+                            <Col alignItems="center" justifyContent="center" gap={14} flex={1}>
+                                <LoadingIcon style={{ fontSize: 80 }} />
+                                <Typography textAlign="center" color="white" variant="body2Strong">
+                                    {translate("processing")}
+                                </Typography>
+                            </Col>
+                        </ImageBackgroundPage>
+                    )}
+                </ThemeProvider>
+            </LoadingModalRoot>
+        </Backdrop>
     );
 };
 export default LoadingModal;

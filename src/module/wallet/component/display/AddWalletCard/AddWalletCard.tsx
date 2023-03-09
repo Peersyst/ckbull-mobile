@@ -1,21 +1,26 @@
-import { translate } from "locale";
-import { AddIcon, AddText, AddWalletCardRoot, ContentRoot } from "./AddWalletCard.style";
-import useCreateWallet from "module/wallet/hook/useCreateWallet";
-import { useTheme } from "@peersyst/react-native-styled";
+import { AddWalletCardRoot } from "./AddWalletCard.style";
+import { useTranslate } from "module/common/hook/useTranslate";
+import Button from "module/common/component/input/Button/Button";
+import { Row, Typography, useModal } from "@peersyst/react-native-components";
+import CreateWalletModal from "../../core/CreateWalletModal/CreateWalletModal";
+import ImportWalletModal from "../../core/ImportWalletModal/ImportWalletModal";
 
 const AddWalletCard = (): JSX.Element => {
-    const {
-        state: { colorIndex },
-    } = useCreateWallet();
-    const {
-        palette: { wallet: walletColors },
-    } = useTheme();
+    const translate = useTranslate();
+    const { showModal } = useModal();
     return (
-        <AddWalletCardRoot style={colorIndex !== undefined ? { backgroundColor: walletColors[colorIndex] } : undefined}>
-            <ContentRoot>
-                <AddIcon />
-                <AddText variant="h3">{translate("add_a_wallet")}</AddText>
-            </ContentRoot>
+        <AddWalletCardRoot justifyContent="center" gap={24} alignItems="center">
+            <Typography variant="body1Light" color="white">
+                {translate("add_a_new_account")}
+            </Typography>
+            <Row justifyContent="center" gap={10}>
+                <Button variant="outlined" color="gray.0" onPress={() => showModal(CreateWalletModal)}>
+                    {translate("create")}
+                </Button>
+                <Button variant="secondary" onPress={() => showModal(ImportWalletModal)}>
+                    {translate("import")}
+                </Button>
+            </Row>
         </AddWalletCardRoot>
     );
 };

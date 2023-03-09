@@ -1,22 +1,19 @@
 import styled from "@peersyst/react-native-styled";
 import { Pressable } from "react-native";
-import { Icon, Typography } from "react-native-components";
 import { LinkItemIconProps, LinkTextProps } from "../BottomBar.types";
+import { Icon, Typography } from "@peersyst/react-native-components";
+import { BOTTOM_BAR_HORIZONTAL_PADDING } from "../BottomBar.styles";
+import { config } from "config";
 
 export const LinkItemText = styled(Typography, { textAlign: "center" })<LinkTextProps>(({ theme, isActive }) => ({
-    color: isActive ? theme.palette.black : theme.palette.darkGray,
-    marginTop: -2,
+    color: isActive ? theme.palette.gray[900] : theme.palette.overlay[900]["48%"],
 }));
 
 export const LinkItemIcon = styled(Icon)<LinkItemIconProps>(({ theme, isActive }) => ({
-    color: isActive ? theme.palette.black : theme.palette.darkGray,
-    fontSize: 27,
+    color: isActive ? theme.palette.gray[900] : theme.palette.overlay[900]["48%"],
+    fontSize: 20,
 }));
 
-export const BottomBarItemRoot = styled(Pressable)(() => ({
-    flexDirection: "column",
-    height: "100%",
-    width: 60,
-    alignItems: "center",
-    justifyContent: "flex-start",
+export const BottomBarItemRoot = styled(Pressable)(({ dimensions }) => ({
+    width: (dimensions.width - 2 * BOTTOM_BAR_HORIZONTAL_PADDING) / (config.enableSignerApp ? 5 : 3),
 }));

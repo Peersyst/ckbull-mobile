@@ -1,5 +1,5 @@
 import { ScriptConfig } from "@ckb-lumos/config-manager";
-import { Cell, commons, hd, Script, utils } from "@ckb-lumos/lumos";
+import { Cell, commons, hd, helpers, Script, utils, HashType } from "@ckb-lumos/lumos";
 import { sealTransaction, TransactionSkeletonType } from "@ckb-lumos/helpers";
 import { TransactionWithStatus, values, core, WitnessArgs } from "@ckb-lumos/base";
 import { TransactionCollector as TxCollector } from "@ckb-lumos/ckb-indexer";
@@ -7,14 +7,14 @@ import { Reader, normalizers } from "@ckb-lumos/toolkit";
 import { CKBIndexerQueryOptions } from "@ckb-lumos/ckb-indexer/src/type";
 import { ConnectionService } from "./connection.service";
 import { Logger } from "../utils/logger";
-import { NftService } from "./assets/nft.service";
+import { Nft, NftService } from "./assets/nft.service";
 
 const { ScriptValue } = values;
 
 export interface ScriptType {
     args: string;
     codeHash: string;
-    hashType: string;
+    hashType: HashType;
 }
 
 export interface DataRow {
@@ -45,8 +45,8 @@ export enum TransactionStatus {
 }
 
 export enum TransactionType {
-    SEND_CKB = "send_ckb",
-    RECEIVE_CKB = "receive_ckb",
+    SEND_NATIVE_TOKEN = "send_ckb",
+    RECEIVE_NATIVE_TOKEN = "receive_ckb",
     SEND_TOKEN = "send_token",
     RECEIVE_TOKEN = "receive_token",
     SEND_NFT = "send_nft",
@@ -94,6 +94,17 @@ export class TransactionService {
 
     static isScriptTypeScript(scriptType: ScriptType, scriptConfig: ScriptConfig): boolean {
         return scriptConfig.CODE_HASH === scriptType.codeHash && scriptConfig.HASH_TYPE === scriptType.hashType;
+    }
+
+    static cellIsScriptType(cell: Cell, scriptType: ScriptType): boolean {
+        const { type } = cell.cell_output;
+        return !!type && type.args === scriptType.args && type.code_hash === scriptType.codeHash && type.hash_type === scriptType.hashType;
+    }
+
+    private cellIsTokenType(cell: Cell, tokenHash: string): boolean {
+        const sudt = this.connection.getConfig().SCRIPTS.SUDT!;
+        const { type } = cell.cell_output;
+        return !!type && type.code_hash === sudt.CODE_HASH && type.hash_type === sudt.HASH_TYPE && type.args === tokenHash;
     }
 
     private getTransactionCollector(address: string, includeStatus = false, toBlock?: string, fromBlock?: string): any {
@@ -185,14 +196,14 @@ export class TransactionService {
             if (Math.abs(amount) < 1) {
                 // It is fee, same receiver and sender
                 if (isRealSender) {
-                    type = TransactionType.SEND_CKB;
+                    type = TransactionType.SEND_NATIVE_TOKEN;
                     amount = complexAmount;
                 } else {
-                    type = TransactionType.RECEIVE_CKB;
+                    type = TransactionType.RECEIVE_NATIVE_TOKEN;
                     amount = receiveAmount;
                 }
             } else {
-                type = !isReceive ? TransactionType.SEND_CKB : TransactionType.RECEIVE_CKB;
+                type = !isReceive ? TransactionType.SEND_NATIVE_TOKEN : TransactionType.RECEIVE_NATIVE_TOKEN;
             }
         } else if (outputIndex !== null) {
             const { type: outputType, data, quantity } = outputs[outputIndex];
@@ -214,7 +225,13 @@ export class TransactionService {
             }
         } else {
             scriptType = inputType!;
-            type = TransactionType.UNLOCK_DAO;
+            if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
+                type = !isReceive ? TransactionType.SEND_TOKEN : TransactionType.RECEIVE_TOKEN;
+            } else if (await this.nftService.isScriptNftScript(scriptType)) {
+                type = !isReceive ? TransactionType.SEND_NFT : TransactionType.RECEIVE_NFT;
+            } else {
+                type = TransactionType.UNLOCK_DAO;
+            }
         }
 
         const transaction: Transaction = {
@@ -240,11 +257,15 @@ export class TransactionService {
         return TransactionService.addCellDep(txSkeleton, this.connection.getConfig().SCRIPTS.SECP256K1_BLAKE160!);
     }
 
+    addSudtCellDep(txSkeleton: TransactionSkeletonType): TransactionSkeletonType {
+        return TransactionService.addCellDep(txSkeleton, this.connection.getConfig().SCRIPTS.SUDT!);
+    }
+
     injectCapacity(txSkeleton: TransactionSkeletonType, capacity: bigint, cells: Cell[]): TransactionSkeletonType {
         let lastScript: Script | undefined;
-        let changeCell: Cell;
+        let changeCell: Cell | undefined;
         let changeCapacity = BigInt(0);
-        let currentAmount = BigInt(capacity);
+        let currentCapacity = BigInt(capacity);
 
         for (const cell of cells) {
             // Cell is empty
@@ -254,10 +275,10 @@ export class TransactionService {
 
                 const inputCapacity = BigInt(cell.cell_output.capacity);
                 let deductCapacity = inputCapacity;
-                if (deductCapacity > currentAmount) {
-                    deductCapacity = currentAmount;
+                if (deductCapacity > currentCapacity) {
+                    deductCapacity = currentCapacity;
                 }
-                currentAmount -= deductCapacity;
+                currentCapacity -= deductCapacity;
                 changeCapacity += inputCapacity - deductCapacity;
 
                 const lockScript = cell.cell_output.lock;
@@ -271,8 +292,8 @@ export class TransactionService {
                     lastScript = lockScript;
                 }
 
-                // Got enough amount
-                if (Number(currentAmount) === 0 && Number(changeCapacity) > 0) {
+                // Got enough capacity
+                if (currentCapacity.toString() === BigInt(0).toString() && changeCapacity > BigInt(0)) {
                     changeCell = {
                         cell_output: {
                             capacity: "0x" + changeCapacity.toString(16),
@@ -288,9 +309,178 @@ export class TransactionService {
             }
         }
 
-        if (changeCapacity > BigInt(0)) {
-            txSkeleton = txSkeleton.update("outputs", (outputs) => outputs.push(changeCell));
+        if (changeCell !== undefined && changeCapacity > helpers.minimalCellCapacityCompatible(changeCell).toBigInt()) {
+            txSkeleton = txSkeleton.update("outputs", (outputs) => outputs.push(changeCell!));
         }
+
+        return txSkeleton;
+    }
+
+    injectTokenCapacity(
+        txSkeleton: TransactionSkeletonType,
+        token: string,
+        amount: bigint,
+        capacity: bigint,
+        cells: Cell[],
+    ): TransactionSkeletonType {
+        const sudt = this.connection.getConfig().SCRIPTS.SUDT!;
+        const tokenType = {
+            code_hash: sudt.CODE_HASH,
+            hash_type: sudt.HASH_TYPE,
+            args: token,
+        };
+        const tokenCells = cells.filter((cell) => this.cellIsTokenType(cell, token));
+        const noTypeCells = cells.filter((cell) => !cell.cell_output.type);
+        if (tokenCells.length === 0) {
+            throw new Error("Insufficient tokens amount");
+        }
+
+        const changeCell: Cell = {
+            cell_output: {
+                capacity: "0x0",
+                lock: tokenCells[0].cell_output.lock,
+                type: tokenType,
+            },
+            data: utils.toBigUInt128LE(BigInt(0).valueOf()),
+            out_point: undefined,
+            block_hash: undefined,
+        };
+        const changeCellWithoutSudt: Cell = {
+            cell_output: {
+                capacity: "0x0",
+                lock: tokenCells[0].cell_output.lock,
+                type: undefined,
+            },
+            data: "0x",
+            out_point: undefined,
+            block_hash: undefined,
+        };
+        let lastScript: Script | undefined;
+        let changeCapacity = BigInt(0);
+        let changeAmount = BigInt(0);
+        let currentCapacity = capacity;
+        let currentAmount = amount;
+
+        for (const cell of [...tokenCells, ...noTypeCells]) {
+            txSkeleton = txSkeleton.update("inputs", (inputs) => inputs.push(cell));
+            txSkeleton = txSkeleton.update("witnesses", (witnesses) => witnesses.push("0x"));
+
+            const inputCapacity = BigInt(cell.cell_output.capacity);
+            let deductCapacity = inputCapacity;
+            if (deductCapacity > currentCapacity) {
+                deductCapacity = currentCapacity;
+            }
+            currentCapacity -= deductCapacity;
+            changeCapacity += inputCapacity - deductCapacity;
+
+            if (cell.cell_output.type) {
+                const inputAmount = utils.readBigUInt128LECompatible(cell.data).toBigInt();
+                let deductAmount = inputAmount;
+                if (deductAmount > currentAmount) {
+                    deductAmount = currentAmount;
+                }
+                currentAmount -= deductAmount;
+                changeAmount += inputAmount - deductAmount;
+            }
+
+            const lockScript = cell.cell_output.lock;
+            if (
+                !lastScript ||
+                lastScript.args !== lockScript.args ||
+                lastScript.code_hash !== lockScript.code_hash ||
+                lastScript.hash_type !== lockScript.hash_type
+            ) {
+                txSkeleton = this.addWitnesses(txSkeleton, lockScript);
+                lastScript = lockScript;
+            }
+
+            // Got enough capacity and amount and changeCell does not include tokens
+            if (
+                currentCapacity.toString() === BigInt(0).toString() &&
+                currentAmount.toString() === BigInt(0).toString() &&
+                changeAmount.toString() === BigInt(0).toString() &&
+                (changeCapacity.toString() === BigInt(0).toString() ||
+                    changeCapacity >= helpers.minimalCellCapacityCompatible(changeCellWithoutSudt).toBigInt())
+            ) {
+                changeCell.cell_output.type = undefined;
+                changeCell.data = "0x";
+                break;
+            }
+
+            // Got enough capacity and amount and changeCell includes tokens
+            if (
+                currentCapacity.toString() === BigInt(0).toString() &&
+                currentAmount.toString() === BigInt(0).toString() &&
+                changeAmount > BigInt(0) &&
+                changeCapacity >= helpers.minimalCellCapacityCompatible(changeCell).toBigInt()
+            ) {
+                break;
+            }
+        }
+
+        if (currentAmount > 0) {
+            throw new Error("Insufficient tokens amount");
+        }
+        if (currentCapacity > 0) {
+            throw new Error("Insufficient capacity");
+        }
+        if (changeAmount > 0 && changeCapacity < helpers.minimalCellCapacityCompatible(changeCell).toBigInt()) {
+            throw new Error("Insufficient capacity for change cell");
+        }
+
+        if (changeCapacity > BigInt(0)) {
+            changeCell.cell_output.capacity = "0x" + changeCapacity.toString(16);
+            if (changeAmount > 0) {
+                changeCell.data = utils.toBigUInt128LE(changeAmount.toString());
+            }
+
+            txSkeleton = txSkeleton.update("outputs", (outputs) => outputs.push(changeCell));
+            if (changeAmount > 0) {
+                txSkeleton = txSkeleton.update("fixedEntries", (fixedEntries) => {
+                    return fixedEntries.push({
+                        field: "outputs",
+                        index: txSkeleton.get("outputs").size - 1,
+                    });
+                });
+            }
+        }
+
+        return txSkeleton;
+    }
+
+    injectNftCapacity(txSkeleton: TransactionSkeletonType, nft: Nft, cells: Cell[], to: string): TransactionSkeletonType {
+        const nftCells = cells.filter((cell) => TransactionService.cellIsScriptType(cell, nft.script) && cell.data === nft.rawData);
+        if (nftCells.length === 0) {
+            throw new Error("Nft not found");
+        }
+        const [cell] = nftCells;
+
+        // Add output
+        const toScript = this.connection.getLockFromAddress(to);
+        txSkeleton = txSkeleton.update("outputs", (outputs) => {
+            return outputs.push({
+                cell_output: {
+                    capacity: cell.cell_output.capacity,
+                    lock: toScript,
+                    type: {
+                        code_hash: nft.script.codeHash,
+                        hash_type: nft.script.hashType,
+                        args: nft.script.args,
+                    },
+                },
+                data: nft.rawData,
+            });
+        });
+        txSkeleton = txSkeleton.update("fixedEntries", (fixedEntries) => {
+            return fixedEntries.push({
+                field: "outputs",
+                index: txSkeleton.get("outputs").size - 1,
+            });
+        });
+
+        txSkeleton = txSkeleton.update("inputs", (inputs) => inputs.push(cell));
+        txSkeleton = txSkeleton.update("witnesses", (witnesses) => witnesses.push("0x"));
+        txSkeleton = this.addWitnesses(txSkeleton, cell.cell_output.lock);
 
         return txSkeleton;
     }
@@ -341,13 +531,13 @@ export class TransactionService {
         const signingPrivKeys: string[] = [];
 
         for (let i = 0; i < fromAddresses.length; i += 1) {
-            if (this.getScriptFirstIndex(txSkeleton, this.connection.getLockFromAddress(fromAddresses[i])) !== -1) {
-                this.logger.info(i);
-                signingPrivKeys.push(privateKeys[i]);
+            const index = this.getScriptFirstIndex(txSkeleton, this.connection.getLockFromAddress(fromAddresses[i]));
+            if (index !== -1) {
+                signingPrivKeys[index] = privateKeys[i];
             }
         }
 
-        return signingPrivKeys;
+        return signingPrivKeys.filter((privKey) => !!privKey);
     }
 
     async addressHasTransactions(address: string, toBlock?: string, fromBlock?: string): Promise<boolean> {

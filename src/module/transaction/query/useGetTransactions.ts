@@ -1,10 +1,9 @@
 import { useQuery } from "react-query";
-import { serviceInstancesMap } from "module/wallet/state/WalletState";
-import useSelectedWalletIndex from "module/wallet/hook/useSelectedWalletIndex";
 import useUncommittedTransactions from "module/transaction/query/useUncommittedTransactions";
 import { FullTransaction } from "module/common/service/CkbSdkService.types";
 import { useMemo } from "react";
-import useSelectedNetwork from "module/settings/hook/useSelectedNetwork";
+import useServiceInstance from "module/wallet/hook/useServiceInstance";
+import Queries from "../../../query/queries";
 
 export interface UseGetTransactionsOptions {
     index?: number;
@@ -12,14 +11,15 @@ export interface UseGetTransactionsOptions {
 }
 
 const useGetTransactions = ({ index, filter }: UseGetTransactionsOptions = {}) => {
-    const network = useSelectedNetwork();
-    const selectedWallet = useSelectedWalletIndex();
-    const usedIndex = index ?? selectedWallet;
-    const { data: uncommitedTransactions = [], isLoading: uncommitedTransactionsLoading } = useUncommittedTransactions(usedIndex);
-    const { data: transactions = [], isLoading: transactionsLoading } = useQuery(["transactions", usedIndex, network], () => {
-        const serviceInstance = serviceInstancesMap.get(usedIndex)?.[network];
-        return serviceInstance?.getTransactions().reverse();
-    });
+    const { serviceInstance, index: usedIndex, network } = useServiceInstance(index);
+    const { data: uncommitedTransactions = [], isLoading: uncommitedTransactionsLoading, refetch } = useUncommittedTransactions(usedIndex);
+
+    const { data: transactions = [], isLoading: transactionsLoading } = useQuery(
+        [Queries.GET_TRANSACTIONS, usedIndex, network],
+        async () => {
+            return serviceInstance?.getTransactions().reverse();
+        },
+    );
 
     const txs = useMemo(() => {
         const filteredTransacations = transactions.filter(
@@ -33,6 +33,7 @@ const useGetTransactions = ({ index, filter }: UseGetTransactionsOptions = {}) =
     return {
         data: txs,
         isLoading: uncommitedTransactionsLoading || transactionsLoading,
+        refetch,
     };
 };
 

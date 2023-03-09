@@ -1,60 +1,72 @@
-import { Col, Row, Typography, useModal } from "react-native-components";
-import formatDate from "utils/formatDate";
-import { TransactionAmountConversion, TransactionCardRoot } from "./TransactionCard.styles";
-import TransactionIcon from "module/transaction/component/display/TransactionIcon/TransactionIcon";
+import { Col, Row, Typography, useModal } from "@peersyst/react-native-components";
 import TransactionAmount from "module/transaction/component/display/TransactionAmount/TransactionAmount";
 import TransactionLabel from "module/transaction/component/display/TransactionLabel/TransactionLabel";
-import { FullTransaction } from "module/common/service/CkbSdkService.types";
-import { TouchableWithoutFeedback } from "react-native";
 import TransactionDetailsModal from "../../core/TransactionDetailsModal/TransactionDetailsModal";
 import { TransactionStatus as TransactionStatusEnum, TransactionType } from "ckb-peersyst-sdk";
 import TransactionStatusIndicator from "module/transaction/component/display/TransactionStatusIndicator/TransactionStatusIndicator";
 import TransactionStatus from "../TransactionStatus/TransactionStatus";
 import { useRecoilValue } from "recoil";
 import settingsState from "module/settings/state/SettingsState";
-import { useGetTokenPrice } from "module/token/query/useGetTokenPrice";
-
-export interface TransactionCardProps {
-    transaction: FullTransaction;
-}
+import { TransactionCardProps } from "./TransactionCard.types";
+import { TouchableWithoutFeedback } from "react-native";
+import TransactionIcon from "../TransactionIcon/TransactionIcon";
+import Balance from "module/wallet/component/display/Balance/Balance";
+import MainListCard from "module/main/component/display/MainListCard/MainListCard";
+import useFormatDate from "module/common/hook/useFormatDate";
+import useCkbConversion from "module/common/hook/useCkbConversion";
 
 const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => {
     const { showModal } = useModal();
     const { fiat } = useRecoilValue(settingsState);
-    const { data: tokenValue } = useGetTokenPrice(fiat, "nervos-network");
-    const { timestamp, amount, type, token = "CKB", status } = transaction;
+    const { convertBalance } = useCkbConversion();
+    const { timestamp, amount, type, token = "token", status } = transaction;
     const showAmount = type !== TransactionType.SEND_NFT && type !== TransactionType.RECEIVE_NFT;
+    const formatDate = useFormatDate();
+    const formattedDate = formatDate(timestamp);
+    const amountInFiat = convertBalance(amount.toString());
 
     return (
         <TouchableWithoutFeedback onPress={() => showModal(TransactionDetailsModal, { transaction })}>
-            <TransactionCardRoot>
+            <MainListCard gap="4%" alignItems="center">
                 <TransactionIcon type={type} />
-                <Col gap={2} flex={1}>
+                <Col flex={1}>
                     <Row justifyContent="space-between">
-                        <TransactionLabel variant="body1" fontWeight="bold" type={type} />
+                        <TransactionLabel variant="body3Regular" transaction={transaction} numberOfLines={1} style={{ flex: 1 }} />
                         {showAmount && (
-                            <TransactionAmount variant="body1" boldUnits type={type} fontWeight="bold" amount={amount} currency={token} />
+                            <TransactionAmount
+                                variant="body3Regular"
+                                type={type}
+                                amount={amount}
+                                units={token}
+                                style={{ maxWidth: "50%" }}
+                            />
                         )}
                     </Row>
                     <Row justifyContent="space-between" alignItems="center">
                         {timestamp ? (
-                            <Typography variant="body2" style={{ marginLeft: 10 }}>
-                                {formatDate(new Date(timestamp))}
+                            <Typography variant="body3Light" light>
+                                {formattedDate}
                             </Typography>
                         ) : (
-                            <TransactionStatus variant="body2" status={status} style={{ marginLeft: 10 }} />
+                            <TransactionStatus variant="body3Light" status={status} />
                         )}
                         {status !== TransactionStatusEnum.COMMITTED ? (
                             <TransactionStatusIndicator status={status} />
                         ) : (
-                            showAmount &&
-                            tokenValue && (
-                                <TransactionAmountConversion type={type} amount={tokenValue * amount} currency={fiat} variant="body2" />
+                            showAmount && (
+                                <Balance
+                                    options={{ maximumFractionDigits: 2, minimumFractionDigits: 2 }}
+                                    action="round"
+                                    light
+                                    balance={amountInFiat}
+                                    units={fiat}
+                                    variant="body3Light"
+                                />
                             )
                         )}
                     </Row>
                 </Col>
-            </TransactionCardRoot>
+            </MainListCard>
         </TouchableWithoutFeedback>
     );
 };

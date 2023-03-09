@@ -1,20 +1,8 @@
-const image = {
-    emptyFolder: require("./EmptyFolder.png"),
-    coloredBackground: require("./coloredBackground.png"),
-    coloredLogo: require("./coloredLogo.png"),
-    deposit: require("./deposit.png"),
-    key: require("./key.png"),
-    lock: require("./lock.png"),
-    logo: require("./logo.svg"),
-    notes: require("./notes.png"),
-    send: require("./send.png"),
-    wallet: require("./wallet.png"),
-    nervosCoin: require("./nervos-coin.png"),
-    dollarCoin: require("./dollar-coin.png"),
-    euroCoin: require("./euro-coin.png"),
-    poundCoin: require("./pound-coin.png"),
-    yenCoin: require("./yen-coin.png"),
-    yuanCoin: require("./yuan-coin.png"),
-    animation: require("./animation.webp"),
-};
-export { image };
+//@ts-nocheck
+export { default as image_background } from "./image_background.png";
+export { default as key } from "./key.png";
+export { default as lock } from "./lock.png";
+export { default as notes } from "./notes.png";
+export { default as placeholder_image } from "./placeholder_image.jpg";
+export { default as send } from "./send.png";
+export { default as wallet } from "./wallet.png";

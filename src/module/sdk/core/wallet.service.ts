@@ -78,6 +78,7 @@ export class WalletService {
         this.connection = connectionService;
         this.nftService = new NftService(this.connection);
         this.transactionService = new TransactionService(this.connection, this.nftService);
+        this.nftService.setTransactionService(this.transactionService);
         this.ckbService = new CKBService(this.connection, this.transactionService);
         this.tokenService = new TokenService(this.connection, this.transactionService);
         this.daoService = new DAOService(this.connection, this.transactionService);
@@ -394,8 +395,7 @@ export class WalletService {
         return this.tokenService.issue(address, amount, privateKey, feeRate);
     }
 
-    // Deprecated in accounts
-    async transferTokens(
+    async transferTokensSingleAccount(
         amount: number,
         mnemo: string,
         to: string,
@@ -404,8 +404,17 @@ export class WalletService {
         feeRate: FeeRate = FeeRate.NORMAL,
     ): Promise<string> {
         const { address, privateKey } = this.getAddressAndPrivateKey(mnemo, accountId);
+        await this.synchronize();
 
         return this.tokenService.transfer(address, to, token, amount, privateKey, feeRate);
+    }
+
+    async transferTokens(amount: bigint, mnemo: string, to: string, token: string, feeRate: FeeRate = FeeRate.NORMAL): Promise<string> {
+        await this.synchronize();
+        const addresses = this.getAllAddresses();
+        const privateKeys = this.getAllPrivateKeys(mnemo);
+
+        return this.tokenService.transferFromCells(this.getCells(), addresses, to, token, amount, privateKeys, feeRate);
     }
 
     async getTokensBalanceFromAccount(accountId = 0, addressType: AddressType = AddressType.Receiving): Promise<TokenAmount[]> {
@@ -420,7 +429,6 @@ export class WalletService {
     // -----------------------------
     // -- Nft service functions --
     // -----------------------------
-
     async getNftsBalanceFromAccount(accountId = 0, addressType: AddressType = AddressType.Receiving): Promise<Nft[]> {
         const address = this.getAddress(accountId, addressType);
         return this.nftService.getBalance(address);
@@ -428,6 +436,14 @@ export class WalletService {
 
     async getNftsBalance(): Promise<Nft[]> {
         return this.nftService.getBalanceFromCells(this.getCells());
+    }
+
+    async transferNfts(mnemo: string, to: string, nft: Nft, feeRate: FeeRate = FeeRate.NORMAL): Promise<string> {
+        await this.synchronize();
+        const addresses = this.getAllAddresses();
+        const privateKeys = this.getAllPrivateKeys(mnemo);
+
+        return this.nftService.transferFromCells(this.getCells(), addresses, to, nft, privateKeys, feeRate);
     }
 
     // ---------------------------

@@ -1,40 +1,93 @@
-import { Button } from "react-native-components";
+import { Button, ButtonSize } from "@peersyst/react-native-components";
 import styled from "@peersyst/react-native-styled";
-import { useButtonStyles } from "./hooks/useButtonStyles";
-import { ButtonAppearanceProps } from "./Button.types";
+import { ButtonProps } from "./Button.types";
+import { darken, emphasize } from "@peersyst/react-utils";
 
-export const ButtonRoot = styled(Button)<ButtonAppearanceProps>(({ theme, appearance }) => {
-    const { outlined, pressed, contained, pressedContained } = useButtonStyles(theme);
+export const BUTTON_SIZES: Record<ButtonSize, number> = {
+    lg: 52,
+    md: 44,
+    sm: 36,
+};
+
+export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
     return {
-        borderRadius: 42,
-        fontWeight: "700",
-        textTransform: "uppercase",
+        borderRadius: rounded ? 10000 : undefined,
+        //Size Styles
         lg: {
-            borderWidth: 5,
-            height: 50,
-            fontSize: 16,
-            paddingHorizontal: 20,
+            ...theme.typography.body2Regular,
+            height: BUTTON_SIZES.lg,
+            paddingHorizontal: 18,
+            paddingVertical: 12,
+        },
+        md: {
+            ...theme.typography.body2Regular,
+            height: BUTTON_SIZES.md,
+            paddingHorizontal: 18,
+            paddingVertical: 6,
         },
         sm: {
-            borderWidth: 3,
-            height: 36,
-            fontSize: 14,
-            paddingHorizontal: 30,
+            ...theme.typography.body3Regular,
+            height: BUTTON_SIZES.sm,
+            paddingHorizontal: 16,
+            paddingVertical: 8,
+        },
+        //Variant Styles
+        primary: {
+            backgroundGradient: {
+                colors: theme.palette.gradient.greenDarkGreen,
+                start: { x: 0, y: 1 },
+                end: { x: 1, y: 0 },
+            },
+            color: theme.palette.white,
+        },
+        secondary: {
+            color: theme.palette.gray[0],
+            backgroundColor: theme.palette.gray[900],
+        },
+        tertiary: {
+            backgroundColor: theme.palette.overlay[900]["12%"],
+            color: theme.palette.gray[900],
         },
         outlined: {
-            ...outlined[appearance],
+            borderColor: theme.palette.overlay[900]["12%"],
+            color: theme.palette.text,
         },
+        text: {
+            color: theme.palette.text,
+        },
+
+        //State Styles
         pressed: {
-            ...pressed[appearance],
-            contained: {
-                ...pressedContained[appearance],
+            primary: {
+                backgroundGradient: {
+                    colors: [
+                        darken(theme.palette.gradient.greenDarkGreen[0], 0.15),
+                        darken(theme.palette.gradient.greenDarkGreen[1], 0.15),
+                    ],
+                },
+            },
+            secondary: {
+                backgroundColor: emphasize(theme.palette.gray[900], 0.1),
+            },
+            tertiary: {
+                backgroundColor: theme.palette.overlay[100]["24%"],
+            },
+            outlined: {
+                backgroundColor: theme.palette.overlay[100]["8%"],
             },
         },
-        contained: {
-            ...contained[appearance],
-        },
         disabled: {
-            borderColor: theme.palette.disabled,
+            color: "white",
+
+            outlined: {
+                backgroundColor: "transparent",
+                color: theme.palette.overlay[100]["24%"],
+                borderColor: theme.palette.overlay[100]["24%"],
+            },
+            primary: {
+                backgroundGradient: { colors: [theme.palette.overlay[900]["12%"], theme.palette.overlay[900]["12%"]] },
+                color: theme.palette.overlay[100]["48%"],
+            },
         },
     };
 });

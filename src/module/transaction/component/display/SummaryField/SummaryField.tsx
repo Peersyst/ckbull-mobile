@@ -1,6 +1,6 @@
+import { Typography } from "@peersyst/react-native-components";
 import { ReactNode } from "react";
-import { Col } from "react-native-components";
-import { SummaryText } from "./SummaryField.styles";
+import { SummaryFieldRoot } from "./SummaryField.styles";
 
 export interface SummaryFieldProps {
     label: string;
@@ -9,16 +9,15 @@ export interface SummaryFieldProps {
 
 const SummaryField = ({ label, children }: SummaryFieldProps): JSX.Element => {
     return (
-        <Col gap={2} justifyContent="flex-start" style={{ width: "100%" }}>
-            <SummaryText variant="body2">{label}:</SummaryText>
+        <SummaryFieldRoot variant="body2Regular" label={label}>
             {typeof children === "string" ? (
-                <SummaryText testID="infoText" variant="body1" style={{ paddingLeft: "5%" }} numberOfLines={2}>
+                <Typography testID="infoText" variant="body2Regular" numberOfLines={2}>
                     {children}
-                </SummaryText>
+                </Typography>
             ) : (
                 children
             )}
-        </Col>
+        </SummaryFieldRoot>
     );
 };
 

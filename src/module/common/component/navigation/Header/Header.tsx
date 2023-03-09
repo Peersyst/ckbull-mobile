@@ -1,37 +1,25 @@
-import { HeaderRoot } from "./Header.styles";
-import Toolbar from "../../layout/Toolbar/Toolbar";
-import LogoRow from "module/common/component/display/Logos/LogoRow/LogoRow";
-import { IconButton, Row } from "react-native-components";
 import { SettingsIcon } from "icons";
-import useNavigation from "../../../hook/useNavigation";
-import FaucetButton from "module/wallet/component/input/FaucetButton/FaucetButton";
-import { useRecoilValue } from "recoil";
-import settingsState from "module/settings/state/SettingsState";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { HeaderRoot, HeaderSettingsButton } from "./Header.styles";
+import { Row, StatusBar } from "@peersyst/react-native-components";
+import { MainScreens } from "../MainNavigatorGroup/MainScreens";
+import DarkThemeProvider from "module/common/component/util/ThemeProvider/DarkThemeProvider";
+import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs";
+import LogoRow from "../../display/Logos/LogoRow/LogoRow";
 
-export interface HeaderProps {
-    showIcons?: boolean;
-}
-
-const Header = ({ showIcons = true }: HeaderProps): JSX.Element => {
-    const navigation = useNavigation();
-    const { network } = useRecoilValue(settingsState);
-    const { top } = useSafeAreaInsets();
+const Header = ({ navigation }: BottomTabHeaderProps): JSX.Element => {
     return (
-        <HeaderRoot elevation={6} square style={{ paddingTop: top }}>
-            <Toolbar>
-                <Row alignItems="center" justifyContent="space-between" flex={1}>
+        <HeaderRoot>
+            <DarkThemeProvider>
+                <Row alignItems="center" justifyContent="center" flex={1}>
                     <LogoRow />
-                    {showIcons && (
-                        <Row gap={16}>
-                            {network === "testnet" && <FaucetButton />}
-                            <IconButton onPress={() => navigation.navigate("Settings")}>
-                                <SettingsIcon />
-                            </IconButton>
-                        </Row>
-                    )}
+                    <Row style={{ position: "absolute", right: 0 }}>
+                        <HeaderSettingsButton onPress={() => navigation.navigate(MainScreens.SETTINGS)}>
+                            <SettingsIcon />
+                        </HeaderSettingsButton>
+                    </Row>
                 </Row>
-            </Toolbar>
+                <StatusBar />
+            </DarkThemeProvider>
         </HeaderRoot>
     );
 };

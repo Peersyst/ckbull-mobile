@@ -1,9 +1,11 @@
-import BasePage from "module/common/component/layout/BasePage/BasePage";
-import LogoCol from "module/common/component/display/Logos/LogoCol/LogoCol";
 import { LogoPageIconRoot } from "./LogoPage.styles";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { LogoPageProvider } from "module/common/component/layout/LogoPage/LogoPageContext";
 import { Animated } from "react-native";
+import { useDimensions } from "@react-native-community/hooks";
+import ImageBackgroundPage from "../ImageBackgroundPage/ImageBackgroundPage";
+import { LogoIcon } from "icons";
+import DarkThemeProvider from "../../util/ThemeProvider/DarkThemeProvider";
 
 export interface LogoPageProps {
     children?: ReactNode;
@@ -14,21 +16,27 @@ const LogoPage = ({ children }: LogoPageProps): JSX.Element => {
 
     const logoAnim = useRef(new Animated.Value(1)).current;
 
+    const {
+        screen: { height },
+    } = useDimensions();
+
     useEffect(() => {
         Animated.timing(logoAnim, {
             toValue: logoFlex,
-            duration: 200,
+            duration: 300,
             useNativeDriver: false,
         }).start();
     }, [logoFlex, logoAnim]);
 
     return (
-        <BasePage appearance="dark" header={false}>
-            <LogoPageIconRoot style={{ flex: logoAnim }}>
-                <LogoCol />
-            </LogoPageIconRoot>
-            <LogoPageProvider value={{ setLogoFlex }}>{children}</LogoPageProvider>
-        </BasePage>
+        <DarkThemeProvider>
+            <ImageBackgroundPage>
+                <LogoPageIconRoot style={{ height: logoAnim.interpolate({ inputRange: [0, 1], outputRange: [0, height] }) }}>
+                    <LogoIcon style={{ fontSize: 72 }} />
+                </LogoPageIconRoot>
+                <LogoPageProvider value={{ setLogoFlex }}>{children}</LogoPageProvider>
+            </ImageBackgroundPage>
+        </DarkThemeProvider>
     );
 };
 

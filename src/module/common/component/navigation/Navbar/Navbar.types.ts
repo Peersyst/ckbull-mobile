@@ -1,8 +1,10 @@
-import { ReactNode } from "react";
+import { StepsProps } from "module/common/component/display/Steps/Steps";
+import { ViewStyle } from "react-native";
 
 export interface NavbarProps {
-    back?: ReactNode;
+    back?: boolean;
     onBack?: () => unknown;
     title?: string;
-    logo?: boolean;
+    steps?: StepsProps;
+    style?: ViewStyle;
 }

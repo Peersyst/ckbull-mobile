@@ -22,12 +22,13 @@ export function useLoad(): boolean {
                 setWalletState((state) => ({
                     ...state,
                     hasWallet: true,
+                    //Order wallets and remove mnemonic
                     // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     wallets: wallets.map(({ mnemonic, ...wallet }) => wallet).sort((w1, w2) => w1.index - w2.index),
                 }));
 
                 //Get the settings from storage and set it to the state
-                const settings = (await SettingsStorage.getAllSettings()) || defaultSettingsState;
+                const settings = { ...defaultSettingsState, ...((await SettingsStorage.getAllSettings()) || {}) };
                 setSettingsState(settings);
 
                 for (let i = 0; i < wallets.length; i += 1) {
@@ -42,6 +43,7 @@ export function useLoad(): boolean {
                     }
                 });
             }
+
             setLoading(false);
         };
         getStorage();

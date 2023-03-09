@@ -1,37 +1,32 @@
-import { formatAddress } from "@peersyst/react-utils";
-import { translate } from "locale";
-import { Col } from "react-native-components";
+import { formatHash } from "@peersyst/react-utils";
+import { Col, Typography } from "@peersyst/react-native-components";
 import BaseSendSummary, { BaseSendSummaryProps } from "../../../transaction/component/display/BaseSendSummary/BaseSendSummary";
 import SummaryField from "../../../transaction/component/display/SummaryField/SummaryField";
-import { SummaryText } from "module/transaction/component/display/SummaryField/SummaryField.styles";
 import useGetDaoInfo from "module/dao/query/useGetDaoInfo";
+import { useTranslate } from "module/common/hook/useTranslate";
 
-export interface DepositSummaryProps extends BaseSendSummaryProps {
+export interface DepositSummaryProps extends Omit<BaseSendSummaryProps, "token" | "nft"> {
     senderName: string;
     senderAddress: string;
 }
 
-const DepositSummary = ({ amount, fee, senderName, senderAddress }: DepositSummaryProps): JSX.Element => {
+const DepositSummary = ({ amount, senderName, senderAddress, ...rest }: DepositSummaryProps): JSX.Element => {
     const { data: { estimated_apc = "0" } = {}, isLoading: loadingDao } = useGetDaoInfo();
-
+    const translate = useTranslate();
     return (
-        <BaseSendSummary amount={amount} fee={fee}>
-            <>
-                <Col gap="3%" style={{ alignSelf: "flex-start" }}>
-                    <SummaryField label={translate("from")}>{senderName + " - " + formatAddress(senderAddress, "middle", 3)}</SummaryField>
-                    <SummaryField label={translate("estimated_apc")}>
-                        {loadingDao ? `${translate("loading_apc")}...` : `${estimated_apc}%`}
-                    </SummaryField>
-                </Col>
-                <Col>
-                    <SummaryText variant="body2" textAlign="center">
-                        <SummaryText variant="body2" fontWeight="bold" textAlign="center">
-                            {`${translate("attention")} `}
-                        </SummaryText>
-                        {translate("deposit_summary_warning")}
-                    </SummaryText>
-                </Col>
-            </>
+        <BaseSendSummary amount={amount} {...rest}>
+            <Col gap="7%" style={{ alignSelf: "flex-start" }}>
+                <SummaryField label={translate("from")}>{senderName + " - " + formatHash(senderAddress, "middle", 3)}</SummaryField>
+                <SummaryField label={translate("estimated_apc")}>
+                    {loadingDao ? `${translate("loading_apc")}...` : `${estimated_apc}%`}
+                </SummaryField>
+                <Typography variant="body4Light" textAlign="center">
+                    <Typography variant="body4Strong" textAlign="center">
+                        {`${translate("attention")} `}
+                    </Typography>
+                    {translate("deposit_summary_warning")}
+                </Typography>
+            </Col>
         </BaseSendSummary>
     );
 };

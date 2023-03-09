@@ -1,15 +1,14 @@
-import { Col } from "react-native-components";
-import { image } from "asset/image";
-import { EmptyListComponentImage, EmptyListComponentText } from "./EmptyListComponent.styles";
-import { translate } from "locale";
+import { Col } from "@peersyst/react-native-components";
+import { useTranslate } from "module/common/hook/useTranslate";
+import Advise, { AdviseProps } from "../Advise/Advise";
 
-const EmptyListComponent = (): JSX.Element => {
+export type EmptyListComponentProps = Pick<AdviseProps, "title" | "text">;
+
+const EmptyListComponent = ({ title, text }: EmptyListComponentProps): JSX.Element => {
+    const translate = useTranslate("error");
     return (
-        <Col alignItems="center" style={{ marginTop: "10%" }}>
-            <EmptyListComponentText variant="body1" fontWeight="bold" textTransform="uppercase">
-                {translate("nothing_to_show")}
-            </EmptyListComponentText>
-            <EmptyListComponentImage source={image.emptyFolder} accessibilityRole="image" />
+        <Col alignItems="center" style={{ paddingTop: "10%", paddingHorizontal: "5%" }}>
+            <Advise gap={0} title={title || translate("nothing_to_show")} text={text} />
         </Col>
     );
 };

@@ -1,11 +1,9 @@
-import { Col, Form, Typography } from "react-native-components";
-import { translate } from "locale";
-import Card from "module/common/component/surface/Card/Card";
+import { Col, Form } from "@peersyst/react-native-components";
 import TextField from "module/common/component/input/TextField/TextField";
 import Button from "module/common/component/input/Button/Button";
 import useCreateWallet from "module/wallet/hook/useCreateWallet";
-import { image } from "asset/image";
-import WalletImage from "../component/display/WalletImage/WalletImage";
+import { useTranslate } from "module/common/hook/useTranslate";
+import Advise from "module/common/component/display/Advise/Advise";
 
 interface SetWalletNameForm {
     walletName: string;
@@ -22,32 +20,26 @@ const SetWalletNameScreen = ({ onSubmit, submitText }: SetWalletNameScreenProps)
         state: { name },
     } = useCreateWallet();
 
+    const translate = useTranslate();
+
     const handleSubmit = ({ walletName }: SetWalletNameForm) => {
         setName(walletName);
         onSubmit();
     };
+
     return (
-        <Col flex={1} gap={30} justifyContent="flex-end">
-            <Col alignItems="center" justifyContent="center" flex={1}>
-                <WalletImage source={image.wallet} />
-            </Col>
-            <Card>
-                <Typography variant="body1">
-                    <Typography fontWeight="bold" variant="body1">
-                        {translate("security_first")}
-                    </Typography>
-                    {translate("set_wallet_name_text")}
-                </Typography>
-            </Card>
+        <Col flex={1} gap={24} justifyContent="flex-end">
+            <Advise title={translate("security_first")} text={translate("set_wallet_name_text")} />
             <Form onSubmit={handleSubmit}>
-                <Col gap={30} style={{ paddingHorizontal: 20 }}>
+                <Col gap={30}>
                     <TextField
                         name="walletName"
                         defaultValue={name}
                         placeholder={translate("wallet_name")}
-                        validators={{ required: true }}
+                        required
+                        style={{ component: { backgroundColor: "transparent" } }}
                     />
-                    <Button fullWidth variant="outlined">
+                    <Button fullWidth variant="primary" type="submit">
                         {submitText}
                     </Button>
                 </Col>

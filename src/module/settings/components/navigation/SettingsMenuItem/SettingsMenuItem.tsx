@@ -1,5 +1,5 @@
-import { SettingsMenuItemRoot, SettingsMenuItemText } from "module/settings/components/navigation/SettingsMenuItem/SettingsMenuItem.styles";
-import { TouchableOpacity } from "react-native";
+import { Row, Typography } from "@peersyst/react-native-components";
+import SettingsTouchableCard from "../../input/SettingsTouchableCard/SettingsTouchableCard";
 
 export interface SettingsMenuItemProps {
     text: string;
@@ -8,13 +8,13 @@ export interface SettingsMenuItemProps {
 }
 
 const SettingsMenuItem = ({ text, onPress, destructive = false }: SettingsMenuItemProps): JSX.Element => (
-    <TouchableOpacity onPress={onPress}>
-        <SettingsMenuItemRoot>
-            <SettingsMenuItemText destructive={destructive} variant="body1">
+    <SettingsTouchableCard onPress={onPress}>
+        <Row flex={1} alignItems="center">
+            <Typography variant="body2Light" color={destructive ? "status.error" : "text"}>
                 {text}
-            </SettingsMenuItemText>
-        </SettingsMenuItemRoot>
-    </TouchableOpacity>
+            </Typography>
+        </Row>
+    </SettingsTouchableCard>
 );
 
 export default SettingsMenuItem;

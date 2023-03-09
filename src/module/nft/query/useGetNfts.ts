@@ -1,15 +1,11 @@
 import { useQuery, UseQueryResult } from "react-query";
-import { Nft } from "module/nft/types";
-import { serviceInstancesMap } from "module/wallet/state/WalletState";
-import useSelectedWalletIndex from "module/wallet/hook/useSelectedWalletIndex";
-import useSelectedNetwork from "module/settings/hook/useSelectedNetwork";
+import useServiceInstance from "module/wallet/hook/useServiceInstance";
+import Queries from "../../../query/queries";
+import { Nft } from "ckb-peersyst-sdk";
 
 export default function (index?: number): UseQueryResult<Nft[]> {
-    const network = useSelectedNetwork();
-    const selectedWallet = useSelectedWalletIndex();
-    const usedIndex = index ?? selectedWallet;
-    return useQuery(["nfts", usedIndex, network], () => {
-        const serviceInstance = serviceInstancesMap.get(usedIndex)?.[network];
+    const { index: usedIndex, network, serviceInstance } = useServiceInstance(index);
+    return useQuery([Queries.GET_NFTS, usedIndex, network], () => {
         return serviceInstance?.getNfts();
     });
 }

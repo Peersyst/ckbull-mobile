@@ -1,67 +1,62 @@
 import { DAOUnlockableAmount } from "ckb-peersyst-sdk";
-import { useControlled } from "@peersyst/react-hooks";
-import { translate } from "locale";
-import ControlledSuspense from "module/common/component/base/feedback/ControlledSuspense/ControlledSuspense";
-import Select, { SelectProps } from "module/common/component/input/Select/Select";
 import Balance from "module/wallet/component/display/Balance/Balance";
-import { Typography } from "react-native-components";
-import DepositItem from "./DepositItem";
-import { DepositItemText } from "./DepositItem.styles";
+import DepositItem from "./DepositItem/DepositItem";
 import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
+import Select, { SelectProps } from "module/common/component/input/Select/Select";
+import { useTranslate } from "module/common/hook/useTranslate";
+import { config } from "config";
+import EmptyDepositsComponent from "./EmptyDepositsComponent/EmptyDepositsComponent";
+import { DepositItemText } from "./DepositItem/DepositItem.styles";
+import { useDepositsSelect } from "./hooks/useDepositsSelector";
 
-interface DepositsSelectorProps extends Omit<SelectProps, "children" | "renderValue" | "icon" | "placeholder" | "title" | "multiple"> {
+interface DepositsSelectorProps
+    extends Omit<SelectProps<number>, "options" | "children" | "renderValue" | "icon" | "placeholder" | "title" | "multiple"> {
     deposits: DAOUnlockableAmount[];
+    loading?: boolean;
 }
 
-const EmptyDepositsComponent = () => {
-    return (
-        <Typography variant="body1" textAlign="center" fontWeight="bold" style={{ marginVertical: 4 }}>
-            {translate("no_deposits")}
-        </Typography>
-    );
-};
+const DepositsSelector = ({
+    deposits,
+    value,
+    onChange,
+    disabled: disabledProp,
+    hint: hintProp,
+    loading,
+    ...rest
+}: DepositsSelectorProps): JSX.Element => {
+    const translate = useTranslate();
+    const { selectedIndex, onChangeDeposit, disabled, currentDeposit, hint } = useDepositsSelect({ deposits, value, onChange });
+    const depositAmount = convertShannonsToCKB(currentDeposit?.amount || 0);
+    const showEmptyDeposits = deposits.length === 0;
 
-const DepositsSelector = ({ deposits, value, onChange, ...rest }: DepositsSelectorProps): JSX.Element => {
-    const [selectedIndex, setSelectedIndex] = useControlled(0, value as number, onChange);
-    const handleItemChange = (i: unknown) => {
-        setSelectedIndex(i as number);
-    };
     return (
-        <ControlledSuspense isLoading={deposits.length === 0} fallback={<EmptyDepositsComponent />}>
-            <Select
-                value={selectedIndex}
-                onChange={handleItemChange}
-                renderValue={() => (
+        <Select
+            value={selectedIndex}
+            onChange={onChangeDeposit}
+            disabled={disabledProp || disabled}
+            renderValue={() => {
+                return showEmptyDeposits ? (
+                    <EmptyDepositsComponent loading={loading} />
+                ) : (
                     <DepositItemText
                         as={Balance}
-                        balance={convertShannonsToCKB(deposits[selectedIndex].amount)}
-                        units={"CKB"}
-                        variant="body1"
-                        boldUnits
-                        unlockable={deposits[selectedIndex].unlockable}
+                        units={config.tokenName}
+                        balance={depositAmount}
+                        variant="body2Light"
+                        unlockable={currentDeposit.unlockable}
                         selected={false}
-                        type={deposits[selectedIndex].type}
+                        type={currentDeposit.type}
                     />
-                )}
-                title={translate("select_deposit")}
-                {...rest}
-            >
-                {deposits.map(({ remainingCycleMinutes, amount, unlockable, compensation, type }, index) => {
-                    return (
-                        <DepositItem
-                            type={type}
-                            compensation={compensation}
-                            remainingCycleMinutes={remainingCycleMinutes}
-                            amount={amount}
-                            unlockable={unlockable}
-                            key={index}
-                            selectedIndex={selectedIndex}
-                            value={index}
-                        />
-                    );
-                })}
-            </Select>
-        </ControlledSuspense>
+                );
+            }}
+            title={translate("select_deposit")}
+            hint={hintProp || hint}
+            {...rest}
+        >
+            {deposits.map((deposit, index) => {
+                return <DepositItem deposit={deposit} key={index} selectedIndex={selectedIndex} value={index} />;
+            })}
+        </Select>
     );
 };
 

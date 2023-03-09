@@ -1,27 +1,33 @@
-import { ChipRootProps } from "./Chip.types";
+import { ChipRootProps, ChipTextProps } from "./Chip.types";
 import styled from "@peersyst/react-native-styled";
 import { View, Text } from "react-native";
-import { AppearanceProps } from "module/common/types";
 
-export const ChipRoot = styled(View)<ChipRootProps>(({ theme, appearance, fullWidth }) => ({
-    height: 30,
-    paddingHorizontal: 20,
+export const ChipRoot = styled(View)<ChipRootProps>(({ theme, variant, fullWidth }) => ({
+    height: 28,
+    paddingHorizontal: 22,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: theme.borderRadius,
-    shadowColor: theme.palette.fullBlack,
-    shadowOffset: {
-        width: 0,
-        height: 2,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
-    elevation: 6,
     alignSelf: fullWidth ? undefined : "flex-start",
-    backgroundColor: appearance === "light" ? theme.palette.lighterGray : theme.palette.black,
+    borderWidth: 2,
+    borderStyle: "solid",
+    backgroundColor: variant === "filled" ? theme.palette.gray[700] : "transparent",
+    ...(variant === "secondary" && {
+        borderColor: theme.palette.mode === "dark" ? "transparent" : theme.palette.overlay[700]["8%"],
+        backgroundColor: theme.palette.mode === "dark" ? theme.palette.gray[200] : theme.palette.white,
+    }),
+    ...(variant === "primary" && {
+        borderColor: "transparent",
+        backgroundColor: theme.palette.mode === "dark" ? theme.palette.gray[900] : theme.palette.gray[700],
+    }),
 }));
 
-export const ChipText = styled(Text)<AppearanceProps>(({ theme, appearance }) => ({
-    fontSize: 14,
-    color: appearance === "light" ? theme.palette.darkFont : theme.palette.white,
+export const ChipText = styled(Text)<ChipTextProps>(({ theme, variant }) => ({
+    ...theme.typography.body3Regular,
+    ...(variant === "secondary" && {
+        color: theme.palette.mode === "dark" ? theme.palette.gray[900] : theme.palette.overlay[900]["60%"],
+    }),
+    ...(variant === "primary" && {
+        color: theme.palette.gray[0],
+    }),
 }));
