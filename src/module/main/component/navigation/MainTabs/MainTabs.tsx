@@ -1,32 +1,19 @@
-import { MainTabsContent } from "./MainTabs.styles";
-import { TabGroup, TabPanel, Tabs } from "react-native-components";
-import MainTab from "module/main/component/navigation/MainTabs/MainTab/MainTab";
-import { useState } from "react";
-import { MainTabsType as MainTabsProps } from "./MainTabs.types";
+import BaseTabs from "module/common/component/navigation/BaseTabs/BaseTabs";
+import MainTabsNavigator from "module/main/component/navigation/MainTabs/MainTabsNavigator/MainTabsNavigator";
+import MainTabsContent from "module/main/component/navigation/MainTabs/MainTabsContent/MainTabsContent";
+import { BaseTabsRoot } from "module/common/component/navigation/BaseTabs/BaseTabGroup/BaseTabGroup.styles";
+import { TabsComponentProps } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 
-const MainTabs = ({ tabs }: MainTabsProps): JSX.Element => {
-    const [index, setIndex] = useState(0);
+const MainTabs = ({ tabs }: TabsComponentProps): JSX.Element => {
     return (
-        <Tabs gap={0} index={index} onIndexChange={setIndex}>
-            <TabGroup renderIndicator={false} style={{ justifyContent: "space-between", zIndex: 1 }}>
-                {tabs.map(({ title }, index) => {
-                    return (
-                        <MainTab key={index} index={index}>
-                            {title}
-                        </MainTab>
-                    );
-                })}
-            </TabGroup>
-            <MainTabsContent numberOfTabs={tabs.length} activeIndex={index}>
-                {tabs.map(({ item }, index) => {
-                    return (
-                        <TabPanel key={index} index={index}>
-                            {item}
-                        </TabPanel>
-                    );
-                })}
-            </MainTabsContent>
-        </Tabs>
+        <BaseTabsRoot>
+            <BaseTabs>
+                {{
+                    navbar: <MainTabsNavigator tabs={tabs} />,
+                    content: <MainTabsContent tabs={tabs} />,
+                }}
+            </BaseTabs>
+        </BaseTabsRoot>
     );
 };
 

@@ -1,8 +1,8 @@
-import { ButtonProps } from "./Button.types";
 import { ButtonRoot } from "./Button.styles";
+import { ButtonProps } from "./Button.types";
 
-const Button = ({ appearance = "dark", size = "lg", ...rest }: ButtonProps): JSX.Element => {
-    return <ButtonRoot size={size} appearance={appearance} {...rest} />;
+const Button = (props: ButtonProps): JSX.Element => {
+    return <ButtonRoot {...props} />;
 };
 
 export default Button;

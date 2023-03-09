@@ -1,7 +1,6 @@
-import { act, render } from "test-utils";
+import { act, render, translate } from "test-utils";
 import { useEffect, useState } from "react";
 import LoadingModal from "module/common/component/feedback/LoadingModal/LoadingModal";
-import { translate } from "locale";
 
 const SuccessLoadingModal = (): JSX.Element => {
     const [success, setSuccess] = useState(false);
@@ -36,7 +35,6 @@ describe("LoadingModal tests", () => {
         jest.useFakeTimers();
         const screen = render(<SuccessLoadingModal />);
 
-        expect(screen.getByTestId("LogoIcon")).toBeDefined();
         expect(screen.getByText(translate("processing"))).toBeDefined();
         act(() => jest.runAllTimers());
         expect(screen.getByTestId("SuccessIcon")).toBeDefined();
@@ -48,10 +46,8 @@ describe("LoadingModal tests", () => {
         jest.useFakeTimers();
         const screen = render(<ErrorLoadingModal />);
 
-        expect(screen.getByTestId("LogoIcon")).toBeDefined();
         act(() => jest.runAllTimers());
         expect(screen.queryByTestId("SuccessIcon")).toBeNull();
-        expect(screen.getByTestId("LogoIcon")).toBeDefined();
         act(() => jest.runAllTimers());
         jest.useRealTimers();
     });

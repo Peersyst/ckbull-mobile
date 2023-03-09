@@ -1,11 +1,15 @@
 import styled from "@peersyst/react-native-styled";
-import { Row } from "../../base/layout/Row";
+import { Row } from "@peersyst/react-native-components";
+import { config } from "config";
 
-export const BottomBarRoot = styled(Row, { justifyContent: "space-around" })(({ theme }) => ({
-    ...theme.shadows[8],
-    backgroundColor: theme.palette.lighterGray,
-    borderTopWidth: 1.2,
-    borderTopColor: "rgba(0,0,0,0.05)",
-    paddingTop: 10,
-    paddingHorizontal: 20,
+export const BOTTOM_BAR_VERTICAL_PADDING = config.enableSignerApp ? 8 : 12;
+export const BOTTOM_BAR_HORIZONTAL_PADDING = 10;
+
+export const BottomBarRoot = styled(Row, { justifyContent: "space-around" })(({ theme, safeAreaInsets }) => ({
+    backgroundColor: theme.palette.component.bottomBar.backgroundColor,
+    borderTopWidth: theme.borderWidth,
+    borderTopColor: theme.palette.component.bottomBar.borderColor,
+    paddingHorizontal: BOTTOM_BAR_HORIZONTAL_PADDING,
+    paddingBottom: safeAreaInsets.bottom + BOTTOM_BAR_VERTICAL_PADDING,
+    paddingTop: BOTTOM_BAR_VERTICAL_PADDING,
 }));

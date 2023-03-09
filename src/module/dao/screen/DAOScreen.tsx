@@ -1,16 +1,16 @@
-import BaseWithBackgroundMainScreen from "module/main/component/layout/BaseWithBackgroundMainScreen/BaseWithBackgroundMainScreen";
-import { Col } from "react-native-components";
-import DAOCard from "../component/core/DAOAccountCard/DAOCard";
+import { Col } from "@peersyst/react-native-components";
 import DAOTabs from "../navigation/DAOTabs/DAOTabs";
+import DAOSlider from "module/dao/component/core/DAOSlider/DAOSlider";
+import BaseMainScreen from "module/main/component/layout/BaseMainScreen/BaseMainScreen";
 
 const DAOScreen = (): JSX.Element => {
     return (
-        <BaseWithBackgroundMainScreen>
-            <Col style={{ padding: 20, paddingBottom: 40 }}>
-                <DAOCard />
+        <BaseMainScreen>
+            <Col flex={1} gap="5%">
+                <DAOSlider />
+                <DAOTabs />
             </Col>
-            <DAOTabs />
-        </BaseWithBackgroundMainScreen>
+        </BaseMainScreen>
     );
 };
 

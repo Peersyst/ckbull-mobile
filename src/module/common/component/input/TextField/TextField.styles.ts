@@ -1,72 +1,44 @@
 import styled from "@peersyst/react-native-styled";
-import TextField from "module/common/component/base/input/TextInput/TextField";
-import { InputStyle, TextInputStyles } from "react-native-components";
+import { TextField } from "@peersyst/react-native-components";
+import { InputStyle } from "@peersyst/react-native-components";
 
-export type TextFieldVariant = "elevated" | "underlined";
 export type TextFieldSize = "md" | "lg";
 
 export interface TextFieldRootProps {
-    variant?: TextFieldVariant;
     size?: TextFieldSize;
 }
 
-export const TextFieldRoot = styled(TextField)<TextFieldRootProps>(({ theme, variant = "elevated", size = "md" }) => {
+export const TextFieldRoot = styled(TextField)<TextFieldRootProps>(({ theme, size = "lg" }) => {
     const inputSizeStyles: Record<TextFieldSize, InputStyle> = {
         md: {
             height: 45,
+            ...theme.typography.body3Light,
+            lineHeight: undefined,
         },
         lg: {
             height: 60,
-            fontSize: 29,
+            ...theme.typography.body2Light,
+            lineHeight: undefined,
         },
     };
 
-    const commonStyles: TextInputStyles = {
-        input: {
-            ...inputSizeStyles[size],
-            placeholderColor: theme.palette.darkGray,
-            highlightColor: theme.palette.text,
-        },
-    };
-    const { input: commonInputStyles, ...commonRestStyles } = commonStyles;
-
-    const elevatedStyle: TextInputStyles = {
-        ...commonStyles,
-        borderRadius: 45,
-        backgroundColor: theme.palette.lighterGray,
-        borderColor: "transparent",
-        focused: {
-            borderColor: "transparent",
-        },
-        ...theme.shadows[7],
-    };
-
-    const underlinedStyle: TextInputStyles = {
-        ...commonRestStyles,
-        backgroundColor: "transparent",
-        borderTopWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderColor: theme.palette.darkGray2,
-        borderRadius: 0,
-        borderBottomWidth: 1.4,
-        paddingHorizontal: 0,
-        input: {
-            ...commonInputStyles,
-            color: theme.palette.darkGray2,
-        },
+    return {
         hint: {
-            fontSize: 14,
+            color: theme.palette.component.input.hintColor,
         },
-        error: {
-            fontSize: 14,
+        component: {
+            input: {
+                ...inputSizeStyles[size],
+                placeholderColor: theme.palette.component.input.placeholderColor,
+                highlightColor: theme.palette.primary,
+            },
+            borderRadius: theme.borderRadiusSm,
+            backgroundColor: theme.palette.component.input.backgroundColor,
+            color: theme.palette.component.input.displayColor,
+            borderWidth: theme.borderWidth,
+            borderStyle: "solid",
+            borderColor: theme.palette.component.input.borderColor,
+            paddingHorizontal: 20,
         },
     };
-
-    const variantStyles: Record<TextFieldVariant, TextInputStyles> = {
-        elevated: elevatedStyle,
-        underlined: underlinedStyle,
-    };
-
-    return variantStyles[variant];
 });

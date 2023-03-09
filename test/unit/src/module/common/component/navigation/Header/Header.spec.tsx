@@ -1,19 +1,22 @@
 import Header from "module/common/component/navigation/Header/Header";
 import { render } from "test-utils";
 import { fireEvent } from "@testing-library/react-native";
-import * as Navigation from "@react-navigation/native";
+import { MainScreens } from "module/common/component/navigation/MainNavigatorGroup/MainScreens";
+
+const renderHeader = ({ name = "Home", navigate = jest.fn() } = {}) => {
+    return render(<Header layout={{} as any} options={{} as any} route={{ name } as any} navigation={{ navigate } as any} />);
+};
 
 describe("Header tests", () => {
     test("Renders correctly - withIcons", () => {
-        const screen = render(<Header showIcons />);
-        expect(screen.getByTestId("SettingsIcon"));
+        const screen = renderHeader();
+        expect(screen.getByTestId("SettingsIcon")).toBeDefined();
     });
     test("Goes to settings", () => {
         const mockedNavigation = jest.fn();
-        jest.spyOn(Navigation, "useNavigation").mockReturnValue({ navigate: mockedNavigation });
-        const screen = render(<Header showIcons />);
+        const screen = renderHeader({ navigate: mockedNavigation });
         const icon = screen.getByTestId("SettingsIcon");
         fireEvent.press(icon);
-        expect(mockedNavigation).toHaveBeenCalled();
+        expect(mockedNavigation).toHaveBeenCalledWith(MainScreens.SETTINGS);
     });
 });

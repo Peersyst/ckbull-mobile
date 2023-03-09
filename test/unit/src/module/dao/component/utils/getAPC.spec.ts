@@ -11,8 +11,8 @@ describe("getAPC tests", () => {
     });
     test("Get the correct APC", () => {
         const daoBalance: DAOBalance = {
-            daoDeposit: 100,
-            daoCompensation: 30,
+            daoDeposit: 100 * 10 ** 8,
+            daoCompensation: 30 * 10 ** 8,
         };
         expect(getAPC(daoBalance)).toEqual(30);
     });

@@ -1,18 +1,17 @@
 import useGetTransactions from "module/transaction/query/useGetTransactions";
 import MainList from "module/main/component/display/MainList/MainList";
-import EmptyListComponent from "module/common/component/display/EmptyListComponent/EmptyListComponent";
 import TransactionCard from "module/transaction/component/display/TransactionCard/TransactionCard";
-import isCKBTransaction from "module/transaction/component/utils/isCKBTransaction";
+import isSupportedTransaction from "./utils/isSupportedTransaction";
+import EmptyTransactionsList from "../../feedback/EmptyTransactionsList/EmptyTransactionsList";
 
 const TransactionsList = (): JSX.Element => {
-    const { data = [], refetch, isLoading } = useGetTransactions({ filter: (tx) => isCKBTransaction(tx.type) });
-
+    const { data = [], isLoading, refetch } = useGetTransactions({ filter: (tx) => isSupportedTransaction(tx.type) });
     return (
         <MainList
             onRefresh={refetch}
             loading={isLoading}
             data={data}
-            ListEmptyComponent={isLoading ? undefined : <EmptyListComponent />}
+            ListEmptyComponent={isLoading ? undefined : <EmptyTransactionsList />}
             renderItem={({ item: tx }) => <TransactionCard transaction={tx} />}
             keyExtractor={(_, index) => index.toString()}
         />

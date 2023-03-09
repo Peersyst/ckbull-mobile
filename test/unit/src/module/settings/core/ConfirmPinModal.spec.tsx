@@ -1,4 +1,3 @@
-import { translate } from "locale";
 import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/ConfirmPinModal";
 import { fireEvent, render, SuccessApiCall, waitFor } from "test-utils";
 import { WalletStorage } from "module/wallet/WalletStorage";
@@ -9,7 +8,6 @@ describe("Test for the Confirm Pin Modal", () => {
     });
     test("Renders correctly", () => {
         const screen = render(<ConfirmPinModal onPinConfirmed={jest.fn()} />);
-        expect(screen.getByText(translate("confirm_your_pin")));
         expect(screen.getAllByTestId("BackIcon")).toHaveLength(2);
     });
     test("Updates pin correctly", async () => {

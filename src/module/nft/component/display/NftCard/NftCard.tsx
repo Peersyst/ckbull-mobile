@@ -1,30 +1,48 @@
-import { Nft } from "ckb-peersyst-sdk";
-import { Col, Typography } from "react-native-components";
-import { NftCardImage, NftCardRoot } from "./NftCard.styles";
+import { Col, Typography } from "@peersyst/react-native-components";
+import MainListCard from "module/main/component/display/MainListCard/MainListCard";
+import { TouchableWithoutFeedback } from "react-native";
+import { NftCardImage } from "./NftCard.styles";
+import { NftCardProps } from "./NftCard.types";
 
-export type NftCardProps = Nft;
+const NftCard = ({ nft }: NftCardProps): JSX.Element => {
+    const {
+        nftName,
+        tokenUri,
+        total,
+        tokenId,
+        data: { description },
+    } = nft;
 
-const NftCard = ({ nftName, tokenUri, tokenId, total, data: { description } }: NftCardProps): JSX.Element => (
-    <NftCardRoot>
-        <NftCardImage source={{ uri: tokenUri }} />
-        <Col flex={1} justifyContent="space-between" style={{ paddingVertical: 12 }}>
-            <Col gap={2}>
-                <Typography variant="body1" fontWeight="bold" numberOfLines={1}>
-                    {nftName}
-                </Typography>
-                <Typography variant="body1" numberOfLines={3}>
-                    {description}
-                </Typography>
-            </Col>
-            {tokenId && total && (
-                <Col alignItems="flex-end">
-                    <Typography variant="body1" fontWeight="bold">
-                        {`${tokenId}/${total}`}
-                    </Typography>
+    const showTotal = tokenId && typeof total === "number";
+
+    return (
+        <TouchableWithoutFeedback>
+            <MainListCard gap={24} style={{ height: 128, paddingVertical: 20 }}>
+                <NftCardImage source={{ uri: tokenUri }} />
+                <Col gap={10} flex={1} justifyContent={"space-between"}>
+                    <Col>
+                        {nftName && (
+                            <Typography variant="body2Strong" numberOfLines={1}>
+                                {nftName}
+                            </Typography>
+                        )}
+                        {description && (
+                            <Typography variant="body3Strong" numberOfLines={1} color="green.200">
+                                {description}
+                            </Typography>
+                        )}
+                    </Col>
+                    {showTotal && (
+                        <Col>
+                            <Typography variant="body3Strong" numberOfLines={1} color="gray.700">
+                                {`${tokenId}/${total}`}
+                            </Typography>
+                        </Col>
+                    )}
                 </Col>
-            )}
-        </Col>
-    </NftCardRoot>
-);
+            </MainListCard>
+        </TouchableWithoutFeedback>
+    );
+};
 
 export default NftCard;

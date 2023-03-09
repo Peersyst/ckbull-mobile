@@ -1,4 +1,10 @@
 import styled from "@peersyst/react-native-styled";
-import { Toolbar } from "react-native-components";
+import { Toolbar } from "@peersyst/react-native-components";
 
-export const ToolbarRoot = styled(Toolbar)(() => ({ alignItems: "flex-end" }));
+export const TOOLBAR_HEIGHT = 64;
+
+export const ToolbarRoot = styled(Toolbar)(({ safeAreaInsets }) => ({
+    alignItems: "flex-end",
+    height: safeAreaInsets.top + TOOLBAR_HEIGHT,
+    paddingHorizontal: 16,
+}));

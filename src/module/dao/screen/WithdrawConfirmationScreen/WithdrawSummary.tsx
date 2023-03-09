@@ -1,35 +1,29 @@
-import { formatAddress } from "@peersyst/react-utils";
-import { translate } from "locale";
-import { SummaryText } from "module/transaction/component/display/SummaryField/SummaryField.styles";
+import { formatHash } from "@peersyst/react-utils";
 import Balance from "module/wallet/component/display/Balance/Balance";
-import { Col } from "react-native-components";
+import { Col } from "@peersyst/react-native-components";
 import BaseSendSummary, { BaseSendSummaryProps } from "../../../transaction/component/display/BaseSendSummary/BaseSendSummary";
 import SummaryField from "../../../transaction/component/display/SummaryField/SummaryField";
+import { useTranslate } from "module/common/hook/useTranslate";
+import { config } from "config";
 
-export interface WithdrawSummaryProps extends BaseSendSummaryProps {
+export interface WithdrawSummaryProps extends Omit<BaseSendSummaryProps, "token"> {
     receiverName: string;
     receiverAddress: string;
-    depositAPC: number;
-    compensation: number;
+    depositAPC: number | string;
+    compensation: number | string;
 }
 
-const WithdrawSummary = ({ amount, fee, receiverName, receiverAddress, depositAPC, compensation }: WithdrawSummaryProps): JSX.Element => {
+const WithdrawSummary = ({ amount, receiverName, receiverAddress, depositAPC, compensation }: WithdrawSummaryProps): JSX.Element => {
+    const translate = useTranslate();
     return (
-        <BaseSendSummary amount={amount} fee={fee}>
+        <BaseSendSummary amount={amount}>
             <Col gap="3%" style={{ alignSelf: "flex-start" }}>
                 <SummaryField label={translate("destination_wallet")}>
-                    {receiverName + " - " + formatAddress(receiverAddress, "middle", 3)}
+                    {receiverName + " - " + formatHash(receiverAddress, "middle", 3)}
                 </SummaryField>
                 <SummaryField label={translate("deposit_apc")}>{`${depositAPC}%`}</SummaryField>
                 <SummaryField label={translate("compensation")}>
-                    <SummaryText
-                        as={Balance}
-                        style={{ paddingLeft: "5%" }}
-                        balance={compensation}
-                        units={"CKB"}
-                        variant="body1"
-                        boldUnits
-                    />
+                    <Balance balance={compensation} variant="body1" units={config.tokenName} />
                 </SummaryField>
             </Col>
         </BaseSendSummary>

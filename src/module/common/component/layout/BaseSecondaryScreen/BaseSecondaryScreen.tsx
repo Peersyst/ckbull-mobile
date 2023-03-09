@@ -1,31 +1,12 @@
-import styled from "@peersyst/react-native-styled";
 import BaseMainScreen, { BaseMainScreenProps } from "module/main/component/layout/BaseMainScreen/BaseMainScreen";
-import { BottomTabScreenNavigatonProps } from "module/main/component/navigation/MainBottomNavigatorGroup/MainBottomNavigatorGroup.types";
-import { ScrollView } from "react-native";
-import { Col } from "../../base/layout/Col";
-import CardBackgroundWrapper from "../../surface/CardBackgroundWrapper/CardBackgroundWrapper";
+import { SecondaryScreenScrollView } from "module/common/component/layout/BaseSecondaryScreen/BaseSecondaryScreen.styles";
 
-export type BaseSecondaryScreenProps = Partial<BottomTabScreenNavigatonProps> & Omit<BaseMainScreenProps, "onBack">;
+export type BaseSecondaryScreenProps = Omit<BaseMainScreenProps, "onBack">;
 
-const ContentRoot = styled(Col)(() => ({
-    paddingHorizontal: "5%",
-    paddingBottom: 40,
-}));
-
-const BaseSecondaryScreen = ({ children, title, back, navigation }: BaseSecondaryScreenProps): JSX.Element => {
-    const handleBack = () => {
-        if (navigation && navigation.canGoBack()) {
-            navigation.goBack();
-        }
-    };
+const BaseSecondaryScreen = ({ children }: BaseSecondaryScreenProps): JSX.Element => {
     return (
-        /* This is structure is used to avoid */
-        <BaseMainScreen title={title} back={back} onBack={handleBack}>
-            <CardBackgroundWrapper>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    <ContentRoot>{children}</ContentRoot>
-                </ScrollView>
-            </CardBackgroundWrapper>
+        <BaseMainScreen>
+            <SecondaryScreenScrollView showsVerticalScrollIndicator={false}>{children}</SecondaryScreenScrollView>
         </BaseMainScreen>
     );
 };

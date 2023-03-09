@@ -1,45 +1,38 @@
-import { render } from "test-utils";
+import { render, translate } from "test-utils";
 import SendConfirmationScreen from "module/transaction/screen/SendConfirmationScreen/SendConfirmationScreen";
-import * as UseWalletState from "module/wallet/hook/useWalletState";
 import * as Recoil from "recoil";
-import { translate } from "locale";
-import { formatAddress } from "@peersyst/react-utils";
-import { mockedUseWallet } from "mocks/useWalletState";
-import { CKBSDKService } from "module/common/service/CkbSdkService";
-import { serviceInstancesMap } from "module/wallet/state/WalletState";
-import { MnemonicMocked } from "mocks/MnemonicMocked";
+import { formatHash } from "@peersyst/react-utils";
+import { config } from "config";
+import { MOCKED_ADDRESS, UseServiceInstanceMock, UseWalletStateMock } from "test-mocks";
+import { SendStateMock } from "mocks/common/transaction/sendState.mock";
+import * as UseSettings from "module/settings/hook/useSettings";
+import { defaultSettingsState } from "module/settings/state/SettingsState";
 
 describe("SendConfirmationScreen tests", () => {
-    const sdkInstance = new CKBSDKService("testnet", MnemonicMocked);
-
+    new UseServiceInstanceMock();
+    const { state } = new UseWalletStateMock();
     afterEach(() => {
         jest.restoreAllMocks();
     });
 
     test("Renders correctly", () => {
-        jest.spyOn(UseWalletState, "default").mockReturnValue(mockedUseWallet);
-        jest.spyOn(serviceInstancesMap, "get").mockReturnValue({ testnet: sdkInstance, mainnet: sdkInstance });
-        jest.spyOn(sdkInstance, "getAddress").mockReturnValue("0xMockedAddress");
-        jest.spyOn(Recoil, "useRecoilValue").mockReturnValue({
-            amount: 1000,
-            fee: 10,
-            senderWalletIndex: mockedUseWallet.state.wallets[0].index,
-            receiverAddress: "receiver_address",
-            message: "Send message",
-        });
+        const sendState = new SendStateMock({ amount: "1000", message: "Send message" });
+        jest.spyOn(Recoil, "useRecoilValue").mockReturnValue(sendState);
+        jest.spyOn(UseSettings, "useSettings").mockReturnValue(defaultSettingsState);
 
         const screen = render(<SendConfirmationScreen />);
-        expect(screen.getByText("1,000")).toBeDefined();
-        expect(screen.getByText(translate("transaction_fee_label") + ":")).toBeDefined();
-        expect(screen.getByText("10")).toBeDefined();
+        expect(screen.getByText(`1,000 ${config.tokenName}`)).toBeDefined();
 
-        expect(screen.getByText(translate("from") + ":")).toBeDefined();
-        expect(
-            screen.getByText(mockedUseWallet.state.wallets[0].name + " - " + formatAddress("0xMockedAddress", "middle", 3)),
-        ).toBeDefined();
-        expect(screen.getByText(translate("to") + ":")).toBeDefined();
-        expect(screen.getByText("recei...ess")).toBeDefined();
-        expect(screen.getByText(translate("message") + ":")).toBeDefined();
+        expect(screen.getByText(`0.001 ${config.tokenName}`)).toBeDefined();
+
+        expect(screen.getByText(`1,000.001 ${config.tokenName}`)).toBeDefined();
+
+        expect(screen.getByText(translate("from"))).toBeDefined();
+
+        expect(screen.getByText(state.wallets[0].name + " - " + formatHash(MOCKED_ADDRESS, "middle", 3))).toBeDefined();
+        expect(screen.getByText(translate("to"))).toBeDefined();
+        expect(screen.getByText(formatHash(MOCKED_ADDRESS, "middle", 3))).toBeDefined();
+        expect(screen.getByText(translate("message"))).toBeDefined();
         expect(screen.getByText("Send message")).toBeDefined();
     });
 });

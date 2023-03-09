@@ -1,43 +1,45 @@
-import { Col, Row, Typography } from "react-native-components";
-import { TokenIcon, TokenPlaceholder, TokenRoot } from "./TokenCard.styles";
+import { Col, Row, Typography } from "@peersyst/react-native-components";
+import { TokenIcon } from "./TokenCard.styles";
 import Balance from "module/wallet/component/display/Balance/Balance";
-import { TokenAmount } from "module/token/types";
-import { translate } from "locale";
 import settingsState from "module/settings/state/SettingsState";
 import { useGetTokenPrice } from "module/token/query/useGetTokenPrice";
 import { useRecoilValue } from "recoil";
+import MainListCard from "module/main/component/display/MainListCard/MainListCard";
+import { placeholder_image } from "images";
+import { TokenAmount } from "module/token/types";
+import { BNToNumber } from "module/common/utils/BalanceOperations/utils/BNtoNumber";
+import { BalanceOperations } from "module/common/utils/BalanceOperations/BalanceOperations";
 
-interface TokenProps {
+export interface TokenCardProps {
     token: TokenAmount;
 }
 
-const TokenCard = ({ token: { type, amount } }: TokenProps): JSX.Element => {
-    const { name, tokenName, imageUri, description } = type;
+const TokenCard = ({ token: { type, amount } }: TokenCardProps): JSX.Element => {
+    const { name, tokenName, imageUri } = type;
     const { fiat } = useRecoilValue(settingsState);
     const { data: tokenValue } = useGetTokenPrice(fiat, type);
+    const parsedAmount = BNToNumber(amount, type.decimals);
+    const tokenAmountInFiat = tokenValue !== undefined ? BalanceOperations.mul(parsedAmount, tokenValue, type.decimals) : 0;
+
     return (
-        <TokenRoot>
-            <Row alignItems="center" gap="6%">
-                {imageUri ? <TokenIcon source={{ uri: imageUri }} /> : <TokenPlaceholder />}
-                <Col>
-                    <Typography variant="body1" fontWeight="bold">
-                        {name === "Unknown Token" ? translate("unknown_token") : name}
-                    </Typography>
-                    <Typography variant="body2">{description}</Typography>
-                </Col>
+        <MainListCard alignItems="center" justifyContent="space-between">
+            <Row alignItems="center" gap={16}>
+                <TokenIcon source={imageUri ? { uri: imageUri } : placeholder_image} />
+                <Typography variant="body2Regular" numberOfLines={1} style={{ maxWidth: "70%" }}>
+                    {name}
+                </Typography>
             </Row>
-            <Col alignItems="flex-end">
+            <Col alignItems="flex-end" justifyContent="center" gap={2}>
                 <Balance
-                    balance={amount / 10 ** type.decimals}
-                    decimals={4}
-                    smallBalance
+                    options={{ maximumFractionDigits: 4 }}
+                    adjustsFontSizeToFit={false}
+                    balance={parsedAmount}
                     units={tokenName ? (tokenName === "Unknown Token" ? "?" : tokenName) : ""}
-                    boldUnits
-                    variant="body2"
+                    variant="body3Regular"
                 />
-                {tokenValue && <Balance balance={tokenValue * (amount / 10 ** type.decimals)} units={fiat} variant="body2" />}
+                {tokenValue && <Balance action="round" light balance={tokenAmountInFiat} units={fiat} variant="body3Light" />}
             </Col>
-        </TokenRoot>
+        </MainListCard>
     );
 };
 
