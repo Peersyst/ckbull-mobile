@@ -18,18 +18,28 @@ const useServiceInstanceCreation = (): ((
     return async (index, mnemonic, testnetInitialState, mainnetInitialState) => {
         if (!serviceInstancesMap.has(index)) {
             const stringMnemonic = mnemonic.join(" ");
-            const onSync = async (chain: Chain, walletState: WalletState) => {
-                await WalletStorage.setInitialState(index, chain, walletState);
+
+            const onSync = async (chain: Chain, walletState?: WalletState) => {
                 invalidateWalletQueries(index, chain);
-                setWalletState((state) => ({
-                    ...state,
-                    wallets: state.wallets.map((w) => (w.index === index ? { ...w, initialState: walletState, synchronizing: false } : w)),
-                }));
+                if (walletState) {
+                    await WalletStorage.setInitialState(index, chain, walletState);
+                    setWalletState((state) => ({
+                        ...state,
+                        wallets: state.wallets.map((w) =>
+                            w.index === index ? { ...w, initialState: walletState, synchronizing: false } : w,
+                        ),
+                    }));
+                } else {
+                    setWalletState((state) => ({
+                        ...state,
+                        wallets: state.wallets.map((w) => (w.index === index ? { ...w, synchronizingCells: false } : w)),
+                    }));
+                }
             };
             const onSyncStart = () => {
                 setWalletState((state) => ({
                     ...state,
-                    wallets: state.wallets.map((w) => (w.index === index ? { ...w, synchronizing: true } : w)),
+                    wallets: state.wallets.map((w) => (w.index === index ? { ...w, synchronizing: true, synchronizingCells: true } : w)),
                 }));
             };
             serviceInstancesMap.set(index, {

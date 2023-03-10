@@ -59,7 +59,7 @@ export class WalletService {
     private lastHashBlock!: string;
     private accountCellsMap: cellMapI = {};
     private accountTransactionMap: transactionMapI = {};
-    private onSync!: (walletState: WalletState) => Promise<void>;
+    private onSync!: (walletState?: WalletState) => Promise<void>;
     private onSyncStart!: () => void;
     private synchronizing = false;
 
@@ -67,7 +67,7 @@ export class WalletService {
         connectionService: ConnectionService,
         mnemo: string,
         walletState?: WalletState,
-        onSync?: (walletState: WalletState) => Promise<void>,
+        onSync?: (walletState?: WalletState) => Promise<void>,
         onSyncStart?: () => void,
     ) {
         if (!WalletService.validateMnemonic(mnemo)) {
@@ -190,6 +190,7 @@ export class WalletService {
             }
         }
 
+        if (this.onSync) this.onSync();
         const allAddresses = this.getAllAddresses();
         for (let i = 0; i < keysArr.length && i < lumosTxsArr.length && i < addressesArr.length; i += 1) {
             const address = addressesArr[i];
