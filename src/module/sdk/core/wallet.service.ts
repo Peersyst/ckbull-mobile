@@ -197,7 +197,8 @@ export class WalletService {
             const transactions: Transaction[] = [];
 
             for (const tx of lumosTxsArr[i]) {
-                transactions.push(await this.transactionService.getTransactionFromLumosTx(tx, address, allAddresses));
+                const finalTx = await this.transactionService.getTransactionFromLumosTx(tx, address, allAddresses);
+                transactions.push(finalTx);
             }
 
             // Update transactions
@@ -335,7 +336,6 @@ export class WalletService {
 
     getTransactions(): Transaction[] {
         const sortedTxs = [...Object.values(this.accountTransactionMap)].flat(1).sort((txa, txb) => txa.blockNumber! - txb.blockNumber!);
-
         // Remove equal transactions
         for (let i = 0; i < sortedTxs.length; i += 1) {
             let j = i + 1;

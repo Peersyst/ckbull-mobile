@@ -150,7 +150,6 @@ export class NftService {
                 nodeUrl: this.connection.getCKBUrl(),
                 indexerUrl: this.connection.getIndexerUrl(),
             });
-            this.logger.info("NftService initialized");
         } else if (!this.nftSdk) {
             while (!this.nftSdk) {
                 await sleep(100);
