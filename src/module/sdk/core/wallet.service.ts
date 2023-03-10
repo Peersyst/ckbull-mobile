@@ -194,8 +194,11 @@ export class WalletService {
         const allAddresses = this.getAllAddresses();
         for (let i = 0; i < keysArr.length && i < lumosTxsArr.length && i < addressesArr.length; i += 1) {
             const address = addressesArr[i];
-            const promises = lumosTxsArr[i].map((tx) => this.transactionService.getTransactionFromLumosTx(tx, address, allAddresses));
-            const transactions = await Promise.all(promises);
+            const transactions: Transaction[] = [];
+
+            for (const tx of lumosTxsArr[i]) {
+                transactions.push(await this.transactionService.getTransactionFromLumosTx(tx, address, allAddresses));
+            }
 
             // Update transactions
             const currentTxs: Transaction[] = this.accountTransactionMap[keysArr[i]] || [];
