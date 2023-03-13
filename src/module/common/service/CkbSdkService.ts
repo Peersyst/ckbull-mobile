@@ -62,7 +62,7 @@ export class CKBSDKService {
         chain: Chain,
         mnemonic: string,
         walletState?: WalletState,
-        onSync?: (walletState: WalletState) => Promise<void>,
+        onSync?: (walletState?: WalletState) => Promise<void>,
         onSyncStart?: () => void,
     ) {
         this.connectionService = chain === "testnet" ? testnetConnectionService : mainnetConnectionService;

@@ -59,7 +59,7 @@ export class WalletService {
     private lastHashBlock!: string;
     private accountCellsMap: cellMapI = {};
     private accountTransactionMap: transactionMapI = {};
-    private onSync!: (walletState: WalletState) => Promise<void>;
+    private onSync!: (walletState?: WalletState) => Promise<void>;
     private onSyncStart!: () => void;
     private synchronizing = false;
 
@@ -67,7 +67,7 @@ export class WalletService {
         connectionService: ConnectionService,
         mnemo: string,
         walletState?: WalletState,
-        onSync?: (walletState: WalletState) => Promise<void>,
+        onSync?: (walletState?: WalletState) => Promise<void>,
         onSyncStart?: () => void,
     ) {
         if (!WalletService.validateMnemonic(mnemo)) {
@@ -190,11 +190,16 @@ export class WalletService {
             }
         }
 
+        if (this.onSync) this.onSync();
         const allAddresses = this.getAllAddresses();
         for (let i = 0; i < keysArr.length && i < lumosTxsArr.length && i < addressesArr.length; i += 1) {
             const address = addressesArr[i];
-            const promises = lumosTxsArr[i].map((tx) => this.transactionService.getTransactionFromLumosTx(tx, address, allAddresses));
-            const transactions = await Promise.all(promises);
+            const transactions: Transaction[] = [];
+
+            for (const tx of lumosTxsArr[i]) {
+                const finalTx = await this.transactionService.getTransactionFromLumosTx(tx, address, allAddresses);
+                transactions.push(finalTx);
+            }
 
             // Update transactions
             const currentTxs: Transaction[] = this.accountTransactionMap[keysArr[i]] || [];
@@ -331,7 +336,6 @@ export class WalletService {
 
     getTransactions(): Transaction[] {
         const sortedTxs = [...Object.values(this.accountTransactionMap)].flat(1).sort((txa, txb) => txa.blockNumber! - txb.blockNumber!);
-
         // Remove equal transactions
         for (let i = 0; i < sortedTxs.length; i += 1) {
             let j = i + 1;

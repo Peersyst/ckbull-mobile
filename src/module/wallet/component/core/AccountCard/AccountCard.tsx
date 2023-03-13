@@ -9,13 +9,13 @@ import AccountCardButtons from "module/wallet/component/core/AccountCard/Account
 import useCkbConversion from "module/common/hook/useCkbConversion";
 
 const AccountCard = ({ wallet, style }: WalletComponentCardProps): JSX.Element => {
-    const { index, synchronizing } = wallet;
+    const { index, synchronizingCells } = wallet;
     const { fiat } = useRecoilValue(settingsState);
     const { data: { freeBalance = 0 } = {}, isLoading: isBalanceLoading } = useGetBalance(index);
     const [showFiat, setCurrencyMode] = useState<boolean>(false);
     const { value: balanceInFiat } = useCkbConversion(freeBalance.toString(), fiat);
 
-    const isLoading = synchronizing || isBalanceLoading;
+    const isLoading = synchronizingCells || isBalanceLoading;
 
     const changeCurrencyMode = () => {
         impactAsync(ImpactFeedbackStyle.Medium);
