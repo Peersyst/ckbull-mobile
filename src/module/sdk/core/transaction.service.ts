@@ -167,7 +167,7 @@ export class TransactionService {
         }
 
         let outputIndex = null;
-        let tokensDestinationsIndex: number[] = [];
+        const tokensDestinationsIndex: number[] = [];
         let receiveAmount = 0;
         let tokenAmount: undefined | number = undefined;
         const outputs: DataRow[] = lumosTx.transaction.outputs.map((output, index) => {
