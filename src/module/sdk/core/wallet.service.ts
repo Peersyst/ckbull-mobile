@@ -373,12 +373,9 @@ export class WalletService {
     }
 
     async sendTransaction(amount: bigint, mnemo: string, to: string, feeRate: FeeRate = FeeRate.NORMAL): Promise<string> {
-        console.log("Inside wallet.service::sendTransaction params:", amount, mnemo, to, feeRate);
         await this.synchronize();
         const addresses = this.getAllAddresses();
-        console.log("Inside wallet.service::sendTransaction addresses:", addresses.length, addresses);
         const privateKeys = this.getAllPrivateKeys(mnemo);
-        console.log("Inside wallet.service::sendTransaction pKey length:", privateKeys.length);
 
         return this.ckbService.transferFromCells(this.getCells(), addresses, to, amount, privateKeys, feeRate);
     }

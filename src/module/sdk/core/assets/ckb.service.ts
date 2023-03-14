@@ -44,8 +44,6 @@ export class CKBService {
         if (amount < this.transferCellSize) {
             throw new Error("Minimum transfer (cell) value is 61 CKB");
         }
-        console.log("Inside ckb.service::transferFromCells cells length:", cells.length);
-        console.log("Inside ckb.service::transferFromCells config obj:", this.connection.getConfigAsObject());
 
         let txSkeleton = TransactionSkeleton({ cellProvider: this.connection.getEmptyCellProvider() });
 
@@ -63,13 +61,10 @@ export class CKBService {
 
         // Inject capacity
         txSkeleton = this.transactionService.addSecp256CellDep(txSkeleton);
-        console.log("Inside ckb.service::transferFromCells added deps TxSkeleton:", JSON.stringify(txSkeleton));
         txSkeleton = this.transactionService.injectCapacity(txSkeleton, amount, cells);
-        console.log("Inside ckb.service::transferFromCells injected capacity from cells TxSkeleton:", JSON.stringify(txSkeleton));
 
         // Pay fee
         txSkeleton = await common.payFeeByFeeRate(txSkeleton, fromAddresses, feeRate, undefined, this.connection.getConfigAsObject());
-        console.log("Inside ckb.service::transferFromCells paid fee TxSkeleton:", JSON.stringify(txSkeleton));
 
         // Get signing private keys
         const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, fromAddresses, privateKeys);
