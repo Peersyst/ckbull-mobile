@@ -128,11 +128,13 @@ export class TransactionService {
         let amount = 0;
         let complexAmount = 0;
         let inputType = null;
+        let inputData = null;
         let isRealSender = false;
         for (let i = 0; i < lumosTx.transaction.inputs.length; i += 1) {
             const input = lumosTx.transaction.inputs[i];
             const inputTx = await this.connection.getTransactionFromHash(input.previous_output.tx_hash);
-            const output = inputTx.transaction.outputs[parseInt(input.previous_output.index, 16)];
+            const outputIdx = parseInt(input.previous_output.index, 16);
+            const output = inputTx.transaction.outputs[outputIdx];
             const inputAddress = this.connection.getAddressFromLock(output.lock);
             inputs.push({
                 quantity: parseInt(output.capacity, 16) / 100000000,
@@ -149,6 +151,14 @@ export class TransactionService {
                         codeHash: output.type.code_hash,
                         hashType: output.type.hash_type,
                     };
+                    const data = inputTx.transaction.outputs_data[outputIdx];
+                    if (data && data !== "0x") {
+                        if (data.length === 34) {
+                            inputData = Number(utils.readBigUInt128LE(data));
+                        } else if (data.length === 18) {
+                            inputData = Number(utils.readBigUInt64LE(data));
+                        }
+                    }
                 }
             }
             if (address === inputAddress) {
@@ -230,6 +240,9 @@ export class TransactionService {
             scriptType = inputType!;
             if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
                 type = !isReceive ? TransactionType.SEND_TOKEN : TransactionType.RECEIVE_TOKEN;
+                if (inputData) {
+                    tokenAmount = inputData;
+                }
             } else if (await this.nftService.isScriptNftScript(scriptType)) {
                 type = !isReceive ? TransactionType.SEND_NFT : TransactionType.RECEIVE_NFT;
             } else {
