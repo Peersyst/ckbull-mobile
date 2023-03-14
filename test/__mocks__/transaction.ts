@@ -1,5 +1,6 @@
 import { TransactionStatus, TransactionType } from "ckb-peersyst-sdk";
 import { FullTransaction } from "module/common/service/CkbSdkService.types";
+import { token } from "./CKBSdk";
 
 export const transaction: FullTransaction = {
     status: TransactionStatus.COMMITTED,
@@ -11,6 +12,14 @@ export const transaction: FullTransaction = {
     blockHash: "0x1234567890abcdef",
     blockNumber: 1,
     timestamp: new Date(2022, 0, 29),
+};
+
+export const txWithTokenAmount: FullTransaction = {
+    ...transaction,
+    tokenAmount: token.amount,
+    tokenType: token.type,
+    token: token.type.tokenName,
+    type: TransactionType.SEND_TOKEN,
 };
 
 export const sentTransaction: FullTransaction = {
