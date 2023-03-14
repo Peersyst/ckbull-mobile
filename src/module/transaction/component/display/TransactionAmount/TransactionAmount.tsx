@@ -16,11 +16,19 @@ const TransactionAmount = ({ transaction, ...rest }: TransactionAmountProps): JS
     const finalAmount = tokenType ? BNToNumber(tokenAmount || 0, tokenType.decimals) : amount;
     const showAmount =
         (type !== TransactionType.SEND_NFT && type !== TransactionType.RECEIVE_NFT) || (tokenType && tokenAmount === undefined);
+    const decimals = tokenType ? Math.min(Math.min(finalAmount.toString().split(".")[1]?.length, tokenType.decimals), 6) : undefined;
 
     return (
         <>
             {showAmount && (
-                <Balance action={action} units={token || "token"} balance={finalAmount} color={isPrimary ? "primary" : "text"} {...rest} />
+                <Balance
+                    options={{ maximumFractionDigits: decimals, minimumFractionDigits: decimals }}
+                    action={action}
+                    units={token || "token"}
+                    balance={finalAmount}
+                    color={isPrimary ? "primary" : "text"}
+                    {...rest}
+                />
             )}
         </>
     );

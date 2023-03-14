@@ -167,6 +167,7 @@ export class TransactionService {
         }
 
         let outputIndex = null;
+        let tokensDestinationsIndex: number[] = [];
         let receiveAmount = 0;
         let tokenAmount: undefined | number = undefined;
         const outputs: DataRow[] = lumosTx.transaction.outputs.map((output, index) => {
@@ -175,6 +176,11 @@ export class TransactionService {
                 amount += parseInt(output.capacity, 16) / 100000000;
                 if (output.type) {
                     outputIndex = index;
+                }
+            } else if (output.type) {
+                const outputScriptType = { args: output.type.args, codeHash: output.type.code_hash, hashType: output.type.hash_type };
+                if (TransactionService.isScriptTypeScript(outputScriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
+                    tokensDestinationsIndex.push(index);
                 }
             }
             if (inputAddresses.includes(outputAddress)) {
@@ -222,7 +228,11 @@ export class TransactionService {
             scriptType = outputType!;
             if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
                 type = !isReceive ? TransactionType.SEND_TOKEN : TransactionType.RECEIVE_TOKEN;
-                tokenAmount = data || 0;
+                if (type === TransactionType.RECEIVE_TOKEN) {
+                    tokenAmount = data || 0;
+                } else {
+                    tokenAmount = tokensDestinationsIndex.reduce((acc, outputIndex) => (acc += outputs[outputIndex].data || 0), 0);
+                }
             } else if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.DAO!)) {
                 if (data === 0) {
                     type = TransactionType.DEPOSIT_DAO;
