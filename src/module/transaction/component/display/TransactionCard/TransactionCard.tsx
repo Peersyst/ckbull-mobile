@@ -20,7 +20,6 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
     const { fiat } = useRecoilValue(settingsState);
     const { convertBalance } = useCkbConversion();
     const { timestamp, amount, type, status } = transaction;
-    const showAmount = type !== TransactionType.SEND_NFT && type !== TransactionType.RECEIVE_NFT;
     const showFiat = type === TransactionType.SEND_NATIVE_TOKEN || type === TransactionType.RECEIVE_NATIVE_TOKEN;
     const formatDate = useFormatDate();
     const formattedDate = formatDate(timestamp);
@@ -33,7 +32,7 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
                 <Col flex={1}>
                     <Row justifyContent="space-between">
                         <TransactionLabel variant="body3Regular" transaction={transaction} numberOfLines={1} style={{ flex: 1 }} />
-                        {showAmount && <TransactionAmount variant="body3Regular" transaction={transaction} style={{ maxWidth: "50%" }} />}
+                        <TransactionAmount variant="body3Regular" transaction={transaction} style={{ maxWidth: "50%" }} />
                     </Row>
                     <Row justifyContent="space-between" alignItems="center">
                         {timestamp ? (

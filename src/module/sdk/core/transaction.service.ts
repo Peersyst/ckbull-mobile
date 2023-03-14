@@ -1,5 +1,5 @@
 import { ScriptConfig } from "@ckb-lumos/config-manager";
-import { Cell, commons, hd, helpers, Script, utils, HashType, Header } from "@ckb-lumos/lumos";
+import { Cell, commons, hd, helpers, Script, utils, HashType } from "@ckb-lumos/lumos";
 import { sealTransaction, TransactionSkeletonType } from "@ckb-lumos/helpers";
 import { TransactionWithStatus, values, core, WitnessArgs } from "@ckb-lumos/base";
 import { TransactionCollector as TxCollector } from "@ckb-lumos/ckb-indexer";
@@ -7,7 +7,7 @@ import { Reader, normalizers } from "@ckb-lumos/toolkit";
 import { CKBIndexerQueryOptions } from "@ckb-lumos/ckb-indexer/src/type";
 import { ConnectionService } from "./connection.service";
 import { Logger } from "../utils/logger";
-import { Nft, NftService, sleep } from "./assets/nft.service";
+import { Nft, NftService } from "./assets/nft.service";
 
 const { ScriptValue } = values;
 

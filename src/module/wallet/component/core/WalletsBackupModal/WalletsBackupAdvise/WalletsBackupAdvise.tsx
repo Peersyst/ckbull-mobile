@@ -1,5 +1,4 @@
 import { Col, Row, Typography } from "@peersyst/react-native-components";
-import Card from "module/common/component/surface/Card/Card";
 import CountdownButton from "module/common/component/input/CountdownButton/CountdownButton";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
 import { useState } from "react";
