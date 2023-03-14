@@ -74,10 +74,8 @@ export class CKBSDKService {
             const tokenType = getTokenTypeFromScript(transaction.scriptType);
             return {
                 ...transaction,
-                token: {
-                    type: tokenType,
-                    amount: transaction.tokenAmount || 0,
-                },
+                token: tokenType.tokenName,
+                tokenType,
             };
         }
         return transaction;

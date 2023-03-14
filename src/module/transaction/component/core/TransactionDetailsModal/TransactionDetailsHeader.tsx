@@ -21,7 +21,7 @@ const TransactionDetailsHeader = ({ transaction }: TransactionDetailsHeaderProps
             <TransactionIcon type={type} />
             <Col gap={5} alignItems="center">
                 <TransactionLabel variant="body1Strong" transaction={transaction} numberOfLines={2} textAlign="center" />
-                {showAmount && <TransactionAmount variant="body1Strong" type={type} amount={amount} token={token} />}
+                {showAmount && <TransactionAmount variant="body1Strong" transaction={transaction} />}
                 {timestamp && <Typography variant="body4Regular">{formattedDate}</Typography>}
             </Col>
         </Col>

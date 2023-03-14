@@ -144,20 +144,16 @@ export class NftService {
     }
 
     async initialize() {
-        try {
-            if (!this.nftSdk && !this.initializing) {
-                this.initializing = true;
-                this.nftSdk = await NrcSdk.initialize({
-                    nodeUrl: this.connection.getCKBUrl(),
-                    indexerUrl: this.connection.getIndexerUrl(),
-                });
-            } else if (!this.nftSdk) {
-                while (!this.nftSdk) {
-                    await sleep(100);
-                }
+        if (!this.nftSdk && !this.initializing) {
+            this.initializing = true;
+            this.nftSdk = await NrcSdk.initialize({
+                nodeUrl: this.connection.getCKBUrl(),
+                indexerUrl: this.connection.getIndexerUrl(),
+            });
+        } else if (!this.nftSdk) {
+            while (!this.nftSdk) {
+                await sleep(100);
             }
-        } catch (error) {
-            this.logger.error(error);
         }
     }
 
