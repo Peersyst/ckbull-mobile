@@ -456,9 +456,19 @@ export class TransactionService {
         }
 
         if (changeCapacity > BigInt(0)) {
+            let splitFlag = false;
+
             changeCell.cell_output.capacity = "0x" + changeCapacity.toString(16);
             if (changeAmount > 0) {
                 changeCell.data = utils.toBigUInt128LE(changeAmount.toString());
+
+                const changeCellMin = helpers.minimalCellCapacityCompatible(changeCell).toBigInt();
+                const changeCellNoSudtMin = helpers.minimalCellCapacityCompatible(changeCellWithoutSudt).toBigInt();
+                if (changeCapacity >= changeCellMin + changeCellNoSudtMin) {
+                    changeCell.cell_output.capacity = "0x" + changeCellMin.toString(16);
+                    changeCellWithoutSudt.cell_output.capacity = "0x" + (changeCapacity - changeCellMin).toString(16);
+                    splitFlag = true;
+                }
             }
 
             txSkeleton = txSkeleton.update("outputs", (outputs) => outputs.push(changeCell));
@@ -469,6 +479,9 @@ export class TransactionService {
                         index: txSkeleton.get("outputs").size - 1,
                     });
                 });
+            }
+            if (splitFlag) {
+                txSkeleton = txSkeleton.update("outputs", (outputs) => outputs.push(changeCellWithoutSudt));
             }
         }
 
