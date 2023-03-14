@@ -71,7 +71,14 @@ export class CKBSDKService {
 
     static getFullTransactionFromTransaction(transaction: Transaction): FullTransaction {
         if ([TransactionType.RECEIVE_TOKEN, TransactionType.SEND_TOKEN].includes(transaction.type) && transaction.scriptType) {
-            return { ...transaction, token: getTokenTypeFromScript(transaction.scriptType).tokenName };
+            const tokenType = getTokenTypeFromScript(transaction.scriptType);
+            return {
+                ...transaction,
+                token: {
+                    type: tokenType,
+                    amount: transaction.tokenAmount || 0,
+                },
+            };
         }
         return transaction;
     }
@@ -89,19 +96,8 @@ export class CKBSDKService {
     }
 
     getTransactions(): FullTransaction[] {
-        const fullTxs: FullTransaction[] = [];
         const transactions = this.wallet.getTransactions();
-        for (const tx of transactions) {
-            if ([TransactionType.RECEIVE_TOKEN, TransactionType.SEND_TOKEN].includes(tx.type) && tx.scriptType) {
-                const tokenIndex = getTokenIndexTypeFromScript(tx.scriptType);
-                if (tokenIndex !== -1) {
-                    fullTxs.push({ ...tx, token: getTokenTypeFromIndex(tokenIndex).tokenName });
-                }
-            } else {
-                fullTxs.push(tx);
-            }
-        }
-        return fullTxs;
+        return transactions.map((tx) => CKBSDKService.getFullTransactionFromTransaction(tx));
     }
 
     async getTransaction(txHash: string): Promise<FullTransaction> {

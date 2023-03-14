@@ -15,6 +15,9 @@ export const AssetValueDisplay = ({ ...rest }: AssetValueDisplayProps): JSX.Elem
     const { index, asset } = useAssetSelect();
     const { data: { freeBalance } = { freeBalance: "0" } } = useGetBalance(index);
     const { type, nft, ft } = asset ?? {};
+    const tokenAmount = BNToNumber(ft?.amount || "0", ft?.type.decimals);
+    const tokenDecimals = tokenAmount.toString().split(".")[1]?.length || 0;
+
     return (
         <>
             {type === AssetType.NFT && (
@@ -23,7 +26,7 @@ export const AssetValueDisplay = ({ ...rest }: AssetValueDisplayProps): JSX.Elem
                 </Typography>
             )}
             {type === AssetType.FT && (
-                <Balance units={ft?.type.tokenName} balance={BNToNumber(ft?.amount || "0", ft?.type.decimals)} {...rest} />
+                <Balance units={ft?.type.tokenName} options={{ maximumFractionDigits: tokenDecimals }} balance={tokenAmount} {...rest} />
             )}
             {type === AssetType.NATIVE_TOKEN && <Balance units="token" balance={freeBalance} {...rest} />}
         </>

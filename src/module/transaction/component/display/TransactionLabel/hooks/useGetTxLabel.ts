@@ -13,10 +13,12 @@ export const useGetTxLabel = (): ((tx: FullTransaction) => string) => {
                 return translate("CKB_received");
             }
             case TransactionType.SEND_TOKEN: {
-                return translate("token_sent", { token: token ? token : "token" });
+                const tokenName = token?.type ? token.type.tokenName : "token";
+                return translate("token_sent", { token: tokenName });
             }
             case TransactionType.RECEIVE_TOKEN: {
-                return translate("token_received", { token: token ? token : "token" });
+                const tokenName = token?.type ? token.type.tokenName : "token";
+                return translate("token_received", { token: tokenName });
             }
             case TransactionType.SEND_NFT: {
                 return translate("sent_nft");

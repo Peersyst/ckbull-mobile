@@ -32,7 +32,7 @@ export interface MNft {
     total: number;
 }
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export enum NftTypes {
     nrc721 = "nrc721",
@@ -144,16 +144,20 @@ export class NftService {
     }
 
     async initialize() {
-        if (!this.nftSdk && !this.initializing) {
-            this.initializing = true;
-            this.nftSdk = await NrcSdk.initialize({
-                nodeUrl: this.connection.getCKBUrl(),
-                indexerUrl: this.connection.getIndexerUrl(),
-            });
-        } else if (!this.nftSdk) {
-            while (!this.nftSdk) {
-                await sleep(100);
+        try {
+            if (!this.nftSdk && !this.initializing) {
+                this.initializing = true;
+                this.nftSdk = await NrcSdk.initialize({
+                    nodeUrl: this.connection.getCKBUrl(),
+                    indexerUrl: this.connection.getIndexerUrl(),
+                });
+            } else if (!this.nftSdk) {
+                while (!this.nftSdk) {
+                    await sleep(100);
+                }
             }
+        } catch (error) {
+            this.logger.error(error);
         }
     }
 

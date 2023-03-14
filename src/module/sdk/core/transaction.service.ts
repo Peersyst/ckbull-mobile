@@ -1,5 +1,5 @@
 import { ScriptConfig } from "@ckb-lumos/config-manager";
-import { Cell, commons, hd, helpers, Script, utils, HashType } from "@ckb-lumos/lumos";
+import { Cell, commons, hd, helpers, Script, utils, HashType, Header } from "@ckb-lumos/lumos";
 import { sealTransaction, TransactionSkeletonType } from "@ckb-lumos/helpers";
 import { TransactionWithStatus, values, core, WitnessArgs } from "@ckb-lumos/base";
 import { TransactionCollector as TxCollector } from "@ckb-lumos/ckb-indexer";
@@ -7,7 +7,7 @@ import { Reader, normalizers } from "@ckb-lumos/toolkit";
 import { CKBIndexerQueryOptions } from "@ckb-lumos/ckb-indexer/src/type";
 import { ConnectionService } from "./connection.service";
 import { Logger } from "../utils/logger";
-import { Nft, NftService } from "./assets/nft.service";
+import { Nft, NftService, sleep } from "./assets/nft.service";
 
 const { ScriptValue } = values;
 
@@ -35,6 +35,7 @@ export interface Transaction {
     blockHash?: string;
     blockNumber?: number;
     timestamp?: Date;
+    tokenAmount?: number;
 }
 
 export enum TransactionStatus {
@@ -157,6 +158,7 @@ export class TransactionService {
 
         let outputIndex = null;
         let receiveAmount = 0;
+        let tokenAmount: undefined | number = undefined;
         const outputs: DataRow[] = lumosTx.transaction.outputs.map((output, index) => {
             const outputAddress = this.connection.getAddressFromLock(output.lock);
             if (allAddresses.includes(outputAddress)) {
@@ -210,6 +212,7 @@ export class TransactionService {
             scriptType = outputType!;
             if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
                 type = !isReceive ? TransactionType.SEND_TOKEN : TransactionType.RECEIVE_TOKEN;
+                tokenAmount = data || 0;
             } else if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.DAO!)) {
                 if (data === 0) {
                     type = TransactionType.DEPOSIT_DAO;
@@ -227,6 +230,7 @@ export class TransactionService {
             scriptType = inputType!;
             if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
                 type = !isReceive ? TransactionType.SEND_TOKEN : TransactionType.RECEIVE_TOKEN;
+                tokenAmount = 0;
             } else if (await this.nftService.isScriptNftScript(scriptType)) {
                 type = !isReceive ? TransactionType.SEND_NFT : TransactionType.RECEIVE_NFT;
             } else {
@@ -242,6 +246,7 @@ export class TransactionService {
             type: type!,
             scriptType: scriptType!,
             amount,
+            tokenAmount,
         };
         if (lumosTx.tx_status.block_hash) {
             const header = await this.connection.getBlockHeaderFromHash(lumosTx.tx_status.block_hash);

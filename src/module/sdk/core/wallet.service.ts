@@ -7,7 +7,7 @@ import { CKBBalance, CKBService } from "./assets/ckb.service";
 import { DAOBalance, DAOService, DAOStatistics, DAOUnlockableAmount } from "./dao/dao.service";
 import { Cell, Script } from "@ckb-lumos/lumos";
 import { QueryOptions } from "@ckb-lumos/base";
-import { Nft, NftService } from "./assets/nft.service";
+import { Nft, NftService, sleep } from "./assets/nft.service";
 import { Logger } from "../utils/logger";
 
 export enum AddressScriptType {

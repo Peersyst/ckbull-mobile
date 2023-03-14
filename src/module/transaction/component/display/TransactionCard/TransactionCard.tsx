@@ -19,7 +19,7 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
     const { showModal } = useModal();
     const { fiat } = useRecoilValue(settingsState);
     const { convertBalance } = useCkbConversion();
-    const { timestamp, amount, type, token = "token", status } = transaction;
+    const { timestamp, amount, type, token, status } = transaction;
     const showAmount = type !== TransactionType.SEND_NFT && type !== TransactionType.RECEIVE_NFT;
     const formatDate = useFormatDate();
     const formattedDate = formatDate(timestamp);
@@ -37,7 +37,7 @@ const TransactionCard = ({ transaction }: TransactionCardProps): JSX.Element => 
                                 variant="body3Regular"
                                 type={type}
                                 amount={amount}
-                                units={token}
+                                token={token}
                                 style={{ maxWidth: "50%" }}
                             />
                         )}
