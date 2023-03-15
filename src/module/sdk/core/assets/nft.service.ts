@@ -32,7 +32,7 @@ export interface MNft {
     total: number;
 }
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export enum NftTypes {
     nrc721 = "nrc721",

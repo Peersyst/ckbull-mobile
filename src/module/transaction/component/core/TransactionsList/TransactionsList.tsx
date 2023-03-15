@@ -6,6 +6,7 @@ import EmptyTransactionsList from "../../feedback/EmptyTransactionsList/EmptyTra
 
 const TransactionsList = (): JSX.Element => {
     const { data = [], isLoading, refetch } = useGetTransactions({ filter: (tx) => isSupportedTransaction(tx.type) });
+
     return (
         <MainList
             onRefresh={refetch}

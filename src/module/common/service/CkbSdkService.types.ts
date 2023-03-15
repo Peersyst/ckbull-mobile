@@ -1,4 +1,5 @@
 import { DAOUnlockableAmount, FeeRate, Nft, Transaction } from "ckb-peersyst-sdk";
+import { TokenType } from "module/token/types";
 
 export type Chain = "mainnet" | "testnet";
 
@@ -37,5 +38,6 @@ export interface WithdrawOrUnlockParams {
 }
 
 export interface FullTransaction extends Transaction {
-    token?: string;
+    token?: string; //CKB or tokenName
+    tokenType?: TokenType;
 }

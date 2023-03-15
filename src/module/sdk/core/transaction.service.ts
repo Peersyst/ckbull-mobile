@@ -35,6 +35,7 @@ export interface Transaction {
     blockHash?: string;
     blockNumber?: number;
     timestamp?: Date;
+    tokenAmount?: number;
 }
 
 export enum TransactionStatus {
@@ -127,11 +128,13 @@ export class TransactionService {
         let amount = 0;
         let complexAmount = 0;
         let inputType = null;
+        let inputData = null;
         let isRealSender = false;
         for (let i = 0; i < lumosTx.transaction.inputs.length; i += 1) {
             const input = lumosTx.transaction.inputs[i];
             const inputTx = await this.connection.getTransactionFromHash(input.previous_output.tx_hash);
-            const output = inputTx.transaction.outputs[parseInt(input.previous_output.index, 16)];
+            const outputIdx = parseInt(input.previous_output.index, 16);
+            const output = inputTx.transaction.outputs[outputIdx];
             const inputAddress = this.connection.getAddressFromLock(output.lock);
             inputs.push({
                 quantity: parseInt(output.capacity, 16) / 100000000,
@@ -148,6 +151,14 @@ export class TransactionService {
                         codeHash: output.type.code_hash,
                         hashType: output.type.hash_type,
                     };
+                    const data = inputTx.transaction.outputs_data[outputIdx];
+                    if (data && data !== "0x") {
+                        if (data.length === 34) {
+                            inputData = Number(utils.readBigUInt128LE(data));
+                        } else if (data.length === 18) {
+                            inputData = Number(utils.readBigUInt64LE(data));
+                        }
+                    }
                 }
             }
             if (address === inputAddress) {
@@ -156,13 +167,20 @@ export class TransactionService {
         }
 
         let outputIndex = null;
+        const tokensDestinationsIndex: number[] = [];
         let receiveAmount = 0;
+        let tokenAmount: undefined | number = undefined;
         const outputs: DataRow[] = lumosTx.transaction.outputs.map((output, index) => {
             const outputAddress = this.connection.getAddressFromLock(output.lock);
             if (allAddresses.includes(outputAddress)) {
                 amount += parseInt(output.capacity, 16) / 100000000;
                 if (output.type) {
                     outputIndex = index;
+                }
+            } else if (output.type) {
+                const outputScriptType = { args: output.type.args, codeHash: output.type.code_hash, hashType: output.type.hash_type };
+                if (TransactionService.isScriptTypeScript(outputScriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
+                    tokensDestinationsIndex.push(index);
                 }
             }
             if (inputAddresses.includes(outputAddress)) {
@@ -210,6 +228,11 @@ export class TransactionService {
             scriptType = outputType!;
             if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
                 type = !isReceive ? TransactionType.SEND_TOKEN : TransactionType.RECEIVE_TOKEN;
+                if (type === TransactionType.RECEIVE_TOKEN) {
+                    tokenAmount = data || 0;
+                } else {
+                    tokenAmount = tokensDestinationsIndex.reduce((acc, outputIndex) => (acc += outputs[outputIndex].data || 0), 0);
+                }
             } else if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.DAO!)) {
                 if (data === 0) {
                     type = TransactionType.DEPOSIT_DAO;
@@ -227,6 +250,9 @@ export class TransactionService {
             scriptType = inputType!;
             if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
                 type = !isReceive ? TransactionType.SEND_TOKEN : TransactionType.RECEIVE_TOKEN;
+                if (inputData) {
+                    tokenAmount = inputData;
+                }
             } else if (await this.nftService.isScriptNftScript(scriptType)) {
                 type = !isReceive ? TransactionType.SEND_NFT : TransactionType.RECEIVE_NFT;
             } else {
@@ -242,6 +268,7 @@ export class TransactionService {
             type: type!,
             scriptType: scriptType!,
             amount,
+            tokenAmount,
         };
         if (lumosTx.tx_status.block_hash) {
             const header = await this.connection.getBlockHeaderFromHash(lumosTx.tx_status.block_hash);
@@ -429,9 +456,19 @@ export class TransactionService {
         }
 
         if (changeCapacity > BigInt(0)) {
+            let splitFlag = false;
+
             changeCell.cell_output.capacity = "0x" + changeCapacity.toString(16);
             if (changeAmount > 0) {
                 changeCell.data = utils.toBigUInt128LE(changeAmount.toString());
+
+                const changeCellMin = helpers.minimalCellCapacityCompatible(changeCell).toBigInt();
+                const changeCellNoSudtMin = helpers.minimalCellCapacityCompatible(changeCellWithoutSudt).toBigInt();
+                if (changeCapacity >= changeCellMin + changeCellNoSudtMin) {
+                    changeCell.cell_output.capacity = "0x" + changeCellMin.toString(16);
+                    changeCellWithoutSudt.cell_output.capacity = "0x" + (changeCapacity - changeCellMin).toString(16);
+                    splitFlag = true;
+                }
             }
 
             txSkeleton = txSkeleton.update("outputs", (outputs) => outputs.push(changeCell));
@@ -442,6 +479,9 @@ export class TransactionService {
                         index: txSkeleton.get("outputs").size - 1,
                     });
                 });
+            }
+            if (splitFlag) {
+                txSkeleton = txSkeleton.update("outputs", (outputs) => outputs.push(changeCellWithoutSudt));
             }
         }
 
