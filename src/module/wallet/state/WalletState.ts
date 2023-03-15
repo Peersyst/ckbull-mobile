@@ -4,7 +4,16 @@ import { CKBSDKService } from "module/common/service/CkbSdkService";
 
 export const serviceInstancesMap = new Map<number, { testnet: CKBSDKService; mainnet: CKBSDKService }>();
 
-export type Wallet = Omit<StorageWallet, "mnemonic"> & { synchronizing?: boolean };
+export type Wallet = Omit<StorageWallet, "mnemonic"> & {
+    /**
+     * Main loading state. Apart from the cells, it also loads the transactions
+     */
+    synchronizing?: boolean;
+    /**
+     * Loading the cells to cpmpute the CKBalance, the DAOBalance, tokens
+     */
+    synchronizingCells?: boolean;
+};
 
 export interface WalletState {
     hasWallet: boolean;

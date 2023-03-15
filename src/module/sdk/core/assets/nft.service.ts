@@ -32,7 +32,7 @@ export interface MNft {
     total: number;
 }
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export enum NftTypes {
     nrc721 = "nrc721",
@@ -150,7 +150,6 @@ export class NftService {
                 nodeUrl: this.connection.getCKBUrl(),
                 indexerUrl: this.connection.getIndexerUrl(),
             });
-            this.logger.info("NftService initialized");
         } else if (!this.nftSdk) {
             while (!this.nftSdk) {
                 await sleep(100);

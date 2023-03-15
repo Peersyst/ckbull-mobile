@@ -10,7 +10,7 @@ const DAOCard = ({ wallet, style }: WalletComponentCardProps) => {
     const { data: { estimated_apc = "0.0000" } = {}, isLoading: loadingDao } = useGetDaoInfo();
     const { data: { freeBalance = 0 } = {}, isLoading: balanceLoading } = useGetBalance();
 
-    const loading = daoBalanceLoading || loadingDao || balanceLoading;
+    const loading = daoBalanceLoading || loadingDao || balanceLoading || wallet.synchronizingCells;
 
     return (
         <WalletCard wallet={wallet} style={style} nameVariant="body2Light">
