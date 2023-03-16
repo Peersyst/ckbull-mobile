@@ -1,6 +1,6 @@
 import useGetTransactions from "module/transaction/query/useGetTransactions";
-import MainList from "module/main/component/display/MainList/MainList";
 import TransactionCard from "module/transaction/component/display/TransactionCard/TransactionCard";
+import MainList from "module/main/component/display/MainList/MainList";
 import isSupportedTransaction from "./utils/isSupportedTransaction";
 import EmptyTransactionsList from "../../feedback/EmptyTransactionsList/EmptyTransactionsList";
 
