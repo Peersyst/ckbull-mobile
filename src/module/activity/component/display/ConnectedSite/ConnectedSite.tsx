@@ -1,32 +1,13 @@
-import { useTranslate } from "module/common/hook/useTranslate";
-import { ConnectedSiteRoot } from "module/activity/component/display/ConnectedSite/ConnectedSite.styles";
-import useGetConnectedSiteAction from "module/activity/hook/useGetConnectedSiteAction";
-import { ConnectedSiteDto } from "module/activity/dto/dtos";
+import { PartialDappDto } from "module/api/common";
+
+import ActivityCard from "module/activity/core/ActivityCard/ActivityCard";
 
 interface ConnectedSiteProps {
-    site: ConnectedSiteDto;
+    app: PartialDappDto;
 }
 
-const ConnectedSite = ({
-    site: {
-        app: { title, imageUrl = "" },
-        status,
-    },
-}: ConnectedSiteProps) => {
-    const translate = useTranslate();
-
-    const { actionElement, handleAction } = useGetConnectedSiteAction(status);
-
-    return (
-        <ConnectedSiteRoot
-            status={status}
-            imageUrl={imageUrl}
-            title={title}
-            description={translate(status)}
-            actionElement={actionElement}
-            onAction={handleAction}
-        />
-    );
+const ConnectedSite = ({ app: { image, name, description } }: ConnectedSiteProps) => {
+    return <ActivityCard imageUrl={image!} title={name} description={description} />;
 };
 
 export default ConnectedSite;

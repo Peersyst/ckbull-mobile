@@ -29,6 +29,8 @@ declare module "@peersyst/react-native-components" {
         defaultDecimals: number;
         miniUnits: string;
         enableSignerApp: boolean;
+        signerUrl: string;
+        defaultDAppImage: string;
     }
 
     export interface CreateConfig {
@@ -49,6 +51,8 @@ declare module "@peersyst/react-native-components" {
         defaultDecimals: number;
         miniUnits: string;
         enableSignerApp: boolean;
+        signerUrl: string;
+        defaultDAppImage: string;
     }
 
     export interface ExtraValidators {
