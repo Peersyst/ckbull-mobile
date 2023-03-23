@@ -6,6 +6,7 @@ enum Queries {
     GET_TRANSACTIONS = "transactions",
     GET_NFTS = "nfts",
     GET_TOKENS = "tokens",
+    GET_SIGN_IN_REQUEST = "sign_in_request",
 }
 
 export default Queries;

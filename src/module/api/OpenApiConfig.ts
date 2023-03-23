@@ -5,3 +5,4 @@ OpenAPI.TOKEN = "";
 OpenAPI.WITH_CREDENTIALS = true;
 OpenAPI.BASE = config.signerUrl;
 OpenAPI.CREDENTIALS = "omit";
+OpenAPI.ENCODE_PATH = encodeURIComponent;
