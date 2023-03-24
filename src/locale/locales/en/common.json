@@ -200,5 +200,7 @@
     "withdraw_explanation": "Remember that each deposit period is 180 epochs (~30 days) starting from the time of your deposit.",
     "epochs": "Epochs",
     "noConnectedSites": "No connected sites",
-    "rejectConnection": "Reject the connection"
+    "rejectConnection": "Reject the connection",
+    "confirmConnectionWith": "Confirm connection with",
+    "signWith": "Sign with"
 }

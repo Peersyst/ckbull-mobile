@@ -200,5 +200,7 @@
     "withdraw_explanation": "Lembre-se de que cada período de depósito é de 180 Epochs (~ 30 dias) a partir do momento do seu depósito.",
     "epochs": "Epochs",
     "noConnectedSites": "Nenhum site conectado",
-    "rejectConnection": "Reject the connection"
+    "rejectConnection": "Reject the connection",
+    "confirmConnectionWith": "Confirm connection with",
+    "signWith": "Sign with"
 }

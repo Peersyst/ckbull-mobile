@@ -200,5 +200,7 @@
     "withdraw_explanation": "Να θυμάστε ότι κάθε περίοδος κατάθεσης διαρκεί 180 Epochs (~30 ημέρες) από την ημερομηνία της κατάθεσής σας.",
     "epochs": "Εποχές",
     "noConnectedSites": "Δεν υπάρχουν συνδεδεμένες ιστοσελίδες",
-    "rejectConnection": "Reject the connection"
+    "rejectConnection": "Reject the connection",
+    "confirmConnectionWith": "Confirm connection with",
+    "signWith": "Sign with"
 }

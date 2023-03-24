@@ -28,5 +28,6 @@
     "no_nfts": "Não há NFTs ainda",
     "no_tokens": "Não há tokens ainda",
     "no_deposits": "Sem depósitos",
-    "no_withdrawals": "Sem retiradas"
+    "no_withdrawals": "Sem retiradas",
+    "SIGN_IN_REQUEST_ALREADY_SIGNED": "Sign In request already signed"
 }

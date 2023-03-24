@@ -1,12 +1,13 @@
 import SwipableModal from "module/common/component/navigation/SwipableModal/SwipableModal";
 import { createModal, Form, useModal } from "@peersyst/react-native-components";
 import { CardModalProps } from "module/common/component/navigation/CardModal/CardModal";
-import SignInRequestSummary from "module/activity/component/display/SignInRequestSummary/SignInRequestSummary";
+import SignInRequestDetails from "module/activity/component/display/SignInRequestDetails/SignInRequestDetails";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { useEffect, useState } from "react";
 import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/ConfirmPinModal";
 import useHandleSignInRequest from "module/activity/hook/useHandleSignInRequest";
 import { SignInRequestDto } from "module/api/service";
+import { useTranslate } from "module/common/hook/useTranslate";
 
 interface SignInRequestModalProps extends Omit<CardModalProps, "children"> {
     signInRequest: SignInRequestDto;
@@ -18,7 +19,7 @@ interface SignSignInRequestForm {
 
 const SignInRequestModal = createModal<SignInRequestModalProps>(({ signInRequest, ...modalProps }): JSX.Element => {
     const { name, description, image } = signInRequest.app;
-
+    const translate = useTranslate();
     const { hideModal } = useModal();
 
     const [formWallet, setFormWallet] = useState<number | undefined>(undefined);
@@ -32,7 +33,7 @@ const SignInRequestModal = createModal<SignInRequestModalProps>(({ signInRequest
         sign,
         decline,
         loading: requestLoading,
-    } = useHandleSignInRequest({ signInToken: signInRequest.signInToken, options: { onSuccess: handleClose } });
+    } = useHandleSignInRequest({ signInToken: signInRequest.signInToken, options: { onSuccess: handleClose, onError: handleClose } });
 
     const { serviceInstance, network } = useServiceInstance(formWallet);
 
@@ -61,8 +62,15 @@ const SignInRequestModal = createModal<SignInRequestModalProps>(({ signInRequest
     return (
         <>
             <Form onSubmit={handleSubmit}>
-                <SwipableModal title="Review Connection" dismissal="close" onReject={handleReject} loading={modalLoading} {...modalProps}>
-                    <SignInRequestSummary name={name} image={image} description={description} loading={modalLoading} />
+                <SwipableModal
+                    title="Review Connection"
+                    dismissal="close"
+                    onAltAction={handleReject}
+                    altActionMessage={translate("rejectConnection")}
+                    loading={modalLoading}
+                    {...modalProps}
+                >
+                    <SignInRequestDetails name={name} image={image} description={description} loading={modalLoading} />
                 </SwipableModal>
             </Form>
             <ConfirmPinModal open={showConfirmation} onClose={() => setShowConfirmation(false)} onConfirmedExited={onPinConfirmed} />

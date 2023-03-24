@@ -20,12 +20,10 @@ interface UseHandleSignInRequestProps {
 }
 
 export default function useHandleSignInRequest({ signInToken, options }: UseHandleSignInRequestProps): UseHandleSignInRequestReturn {
-    const { onSuccess } = options;
-
     const [loading, setLoading] = useState(false);
 
-    const { mutate: signRequest, isLoading: isSigning } = useSignSignInRequest(signInToken, { onSuccess });
-    const { mutate: declineRequest, isLoading: isDeclining } = useRejectSignInRequest(signInToken, { onSuccess });
+    const { mutate: signRequest, isLoading: isSigning } = useSignSignInRequest(signInToken, options);
+    const { mutate: declineRequest, isLoading: isDeclining } = useRejectSignInRequest(signInToken, options);
 
     useEffect(() => {
         setLoading(isSigning || isDeclining);

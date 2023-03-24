@@ -1,7 +1,8 @@
 import { Col, Typography } from "@peersyst/react-native-components";
-import { DAppImage } from "module/activity/component/display/SignInRequestSummary/SignInRequestSummary.styles";
+import { DAppImage } from "module/activity/component/display/SignInRequestDetails/SignInRequestDetails.styles";
 import config from "config/config";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
+import { useTranslate } from "module/common/hook/useTranslate";
 
 interface SignInRequestSummaryProps {
     name: string | undefined;
@@ -10,12 +11,14 @@ interface SignInRequestSummaryProps {
     loading?: boolean;
 }
 
-export default function SignInRequestSummary({ name, image, description, loading = false }: SignInRequestSummaryProps): JSX.Element {
+export default function SignInRequestDetails({ name, image, description, loading = false }: SignInRequestSummaryProps): JSX.Element {
+    const translate = useTranslate();
+
     return (
         <Col gap={24} flex={1}>
             <Col gap={24} alignItems="center">
                 <Typography variant="body1Strong" textAlign="center">
-                    Confirm connection with
+                    {translate("confirmConnectionWith")}
                 </Typography>
                 <DAppImage source={{ uri: image || config.defaultDAppImage }} />
                 <Col alignItems="center">
@@ -27,7 +30,7 @@ export default function SignInRequestSummary({ name, image, description, loading
                     </Typography>
                 </Col>
             </Col>
-            <WalletSelector label="Sign in with" required name="signer" disabled={loading} />
+            <WalletSelector label={translate("signWith")} required name="signer" disabled={loading} />
         </Col>
     );
 }

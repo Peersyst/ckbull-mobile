@@ -200,5 +200,7 @@
     "slideToAccept": "滑动以接受",
     "epochs": "Epochs",
     "noConnectedSites": "没有连接的站点",
-    "rejectConnection": "Reject the connection"
+    "rejectConnection": "Reject the connection",
+    "confirmConnectionWith": "Confirm connection with",
+    "signWith": "Sign with"
 }

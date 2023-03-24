@@ -5,10 +5,15 @@ import { UseHandleSignInRequestOptions } from "module/activity/hook/useHandleSig
 
 export default function useSignSignInRequest(signInToken: string, options?: UseHandleSignInRequestOptions) {
     const queryClient = useQueryClient();
+
     return useMutation((body: SignedSignInRequest) => SignInRequestsService.signIn(signInToken, body), {
         onSuccess: async ({ metadata: { address, network } }) => {
             await queryClient.invalidateQueries([Queries.SIGNER_APP_GET_CONNECTED_SITES, address, network]);
             options?.onSuccess?.();
+        },
+        onError: (...args) => {
+            queryClient.getDefaultOptions?.().mutations?.onError?.(...args);
+            options?.onError?.();
         },
     });
 }
