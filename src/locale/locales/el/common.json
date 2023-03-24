@@ -199,5 +199,6 @@
     "start_creating_deposits": "Για να δημιουργήσετε την πρώτη σας κατάθεση, στείλτε CKB στο DAO Nervos και αρχίστε να κερδίζετε ανταμοιβές.",
     "withdraw_explanation": "Να θυμάστε ότι κάθε περίοδος κατάθεσης διαρκεί 180 Epochs (~30 ημέρες) από την ημερομηνία της κατάθεσής σας.",
     "epochs": "Εποχές",
-    "noConnectedSites": "Δεν υπάρχουν συνδεδεμένες ιστοσελίδες"
+    "noConnectedSites": "Δεν υπάρχουν συνδεδεμένες ιστοσελίδες",
+    "rejectConnection": "Reject the connection"
 }

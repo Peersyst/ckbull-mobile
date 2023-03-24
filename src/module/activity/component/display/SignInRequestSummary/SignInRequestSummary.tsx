@@ -2,17 +2,15 @@ import { Col, Typography } from "@peersyst/react-native-components";
 import { DAppImage } from "module/activity/component/display/SignInRequestSummary/SignInRequestSummary.styles";
 import config from "config/config";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
-import { useTranslate } from "module/common/hook/useTranslate";
 
 interface SignInRequestSummaryProps {
     name: string | undefined;
     image: string | undefined;
     description: string | undefined;
+    loading?: boolean;
 }
 
-export default function SignInRequestSummary({ name, image, description }: SignInRequestSummaryProps): JSX.Element {
-    const translate = useTranslate();
-
+export default function SignInRequestSummary({ name, image, description, loading = false }: SignInRequestSummaryProps): JSX.Element {
     return (
         <Col gap={24} flex={1}>
             <Col gap={24} alignItems="center">
@@ -29,7 +27,7 @@ export default function SignInRequestSummary({ name, image, description }: SignI
                     </Typography>
                 </Col>
             </Col>
-            <WalletSelector label="Sign in with" required name="signer" />
+            <WalletSelector label="Sign in with" required name="signer" disabled={loading} />
         </Col>
     );
 }

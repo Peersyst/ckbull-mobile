@@ -199,5 +199,6 @@
     "start_creating_deposits": "Para crear tu primer depósito envía algunos CKB a la DAO de Nervos y empieza a recibir recompensas.",
     "withdraw_explanation": "Recuerde que cada periodo de depósito es de 180 epochs (~30 días) a partir del momento de su depósito.",
     "epochs": "Epochs",
-    "noConnectedSites": "No hay sitios conectados"
+    "noConnectedSites": "No hay sitios conectados",
+    "rejectConnection": "Rechaza la conexión"
 }

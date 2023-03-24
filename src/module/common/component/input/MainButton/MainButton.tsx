@@ -5,6 +5,8 @@ import { MainButtonRoot } from "./MainButton.styles";
 import DarkThemeProvider from "module/common/component/util/ThemeProvider/DarkThemeProvider";
 import QrScanner from "module/common/component/input/QrScanner/QrScanner";
 import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
+import useGetSignInRequest from "module/activity/queries/useGetSignInRequest";
+import { SignInRequestDto } from "module/api/common";
 
 export interface MainButtonProps extends Omit<ButtonProps, "children" | "rounded" | "leftIcon" | "rightIcon" | "variant" | "size"> {
     icon: ReactElement;
@@ -14,9 +16,14 @@ export interface MainButtonProps extends Omit<ButtonProps, "children" | "rounded
 const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Element => {
     const [scanQr, setScanQr] = useState(false);
     const { showModal } = useModal();
+
+    const handleSuccess = (request: SignInRequestDto) => showModal(SignInRequestModal, { signInRequest: request });
+
+    const { mutate: getSignInRequest } = useGetSignInRequest({ onSuccess: handleSuccess });
+
     const handleSignInRequest = (data: string) => {
         setScanQr(false);
-        showModal(SignInRequestModal, { signInToken: data });
+        getSignInRequest(data);
     };
 
     return (
