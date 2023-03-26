@@ -9,8 +9,8 @@ import darkTheme from "config/theme/darkTheme";
 import { ThemeProvider } from "@peersyst/react-native-styled";
 import { LoadingIcon, SuccessIcon } from "icons";
 
-const LoadingModal = ({ loading, successMessage, error, success, ...backdropProps }: LoadingModalProps): JSX.Element => {
-    const [open, setOpen] = useState(false);
+const LoadingModal = ({ open: openProp, loading, successMessage, error, success, ...backdropProps }: LoadingModalProps): JSX.Element => {
+    const [open, setOpen] = useState(openProp);
     const translate = useTranslate();
 
     useEffect(() => {

@@ -1,5 +1,5 @@
 import CardSelectModal, { CardSelectModalProps } from "module/common/component/feedback/CardSelectModal/CardSelectModal";
-import { Col, SwipeButton, Typography } from "@peersyst/react-native-components";
+import { Col, Typography } from "@peersyst/react-native-components";
 import Button from "module/common/component/input/Button/Button";
 import { useTranslate } from "module/common/hook/useTranslate";
 
@@ -36,9 +36,9 @@ const SwipableModal = ({
                             {translate("or")}
                         </Typography>
                     )}
-                    <SwipeButton type="submit" onSwipe={onSwipe} loading={loading} disabled={loading} fullWidth>
+                    <Button onPress={onSwipe} loading={loading} disabled={loading} fullWidth>
                         {translate("slideToAccept")}
-                    </SwipeButton>
+                    </Button>
                 </Col>
             </Col>
         </CardSelectModal>

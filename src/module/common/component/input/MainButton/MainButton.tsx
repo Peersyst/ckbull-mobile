@@ -4,9 +4,9 @@ import { ReactElement, useState } from "react";
 import { MainButtonRoot } from "./MainButton.styles";
 import DarkThemeProvider from "module/common/component/util/ThemeProvider/DarkThemeProvider";
 import QrScanner from "module/common/component/input/QrScanner/QrScanner";
-import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
 import useGetSignInRequest from "module/activity/queries/useGetSignInRequest";
 import { SignInRequestDto } from "module/api/common";
+import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
 
 export interface MainButtonProps extends Omit<ButtonProps, "children" | "rounded" | "leftIcon" | "rightIcon" | "variant" | "size"> {
     icon: ReactElement;
@@ -28,7 +28,14 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
 
     return (
         <DarkThemeProvider>
-            <MainButtonRoot variant="primary" size="lg" onPress={() => setScanQr(true)} {...buttonProps}>
+            <MainButtonRoot
+                variant="primary"
+                size="lg"
+                onPress={() =>
+                    handleSignInRequest("1qFmmargY9VtNjD/IF9BxYoFIBnMM0NwqxI3QEANtPWlfnRJSrigQcQJUE3NsBMurNk5CWCLS6IjZCgPo4wDYw==")
+                }
+                {...buttonProps}
+            >
                 <>
                     <Col alignItems={"center"} justifyContent="center">
                         <ElementStyler style={{ flex: 1 }}>{icon}</ElementStyler>
