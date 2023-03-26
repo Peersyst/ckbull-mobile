@@ -15,4 +15,5 @@ export interface SignRequestModalProps extends RequestStatus {
     onError?: () => unknown;
     onSuccess?: () => unknown;
     successMessage?: string;
+    onClose?: () => unknown;
 }

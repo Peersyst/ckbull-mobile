@@ -202,5 +202,6 @@
     "noConnectedSites": "No connected sites",
     "rejectConnection": "Reject the connection",
     "confirmConnectionWith": "Confirm connection with",
-    "signWith": "Sign with"
+    "signWith": "Sign with",
+    "signInRequestSuccess": "Sign in request signed successfully!"
 }

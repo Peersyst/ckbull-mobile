@@ -32,7 +32,7 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
                 variant="primary"
                 size="lg"
                 onPress={() =>
-                    handleSignInRequest("1qFmmargY9VtNjD/IF9BxYoFIBnMM0NwqxI3QEANtPWlfnRJSrigQcQJUE3NsBMurNk5CWCLS6IjZCgPo4wDYw==")
+                    handleSignInRequest("44JU7I0IcgeLfNLM+BsCHdO9qN8btMc80nquZOt5PK4M9zdV/BEU75M926mNEkJZVsn3Q7erWz0AzCZwmfk58A==")
                 }
                 {...buttonProps}
             >

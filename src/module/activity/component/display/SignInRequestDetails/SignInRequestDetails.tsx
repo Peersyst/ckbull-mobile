@@ -9,9 +9,18 @@ interface SignInRequestSummaryProps {
     image: string | undefined;
     description: string | undefined;
     loading?: boolean;
+    onWalletChange?: (walletId: number) => void;
+    selectedWallet?: number;
 }
 
-export default function SignInRequestDetails({ name, image, description, loading = false }: SignInRequestSummaryProps): JSX.Element {
+export default function SignInRequestDetails({
+    name,
+    image,
+    description,
+    loading = false,
+    selectedWallet,
+    onWalletChange,
+}: SignInRequestSummaryProps): JSX.Element {
     const translate = useTranslate();
 
     return (
@@ -30,7 +39,14 @@ export default function SignInRequestDetails({ name, image, description, loading
                     </Typography>
                 </Col>
             </Col>
-            <WalletSelector label={translate("signWith")} required name="signer" disabled={loading} />
+            <WalletSelector
+                label={translate("signWith")}
+                required
+                name="signer"
+                disabled={loading}
+                onChange={onWalletChange}
+                value={selectedWallet}
+            />
         </Col>
     );
 }

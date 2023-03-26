@@ -6,13 +6,14 @@ import { useEffect, useState } from "react";
 export default function SignRequestModal({
     onExited,
     signRequest,
-    onError,
     successMessage,
+    onError,
     onSuccess,
     children,
     isSuccess,
     isError,
     isLoading,
+    onClose,
 }: SignRequestModalProps): JSX.Element {
     const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -44,7 +45,8 @@ export default function SignRequestModal({
                 success={isSuccess}
                 loading={isLoading}
                 error={isError}
-                successMessage={"Sign in request signed successfully"}
+                successMessage={successMessage}
+                onClose={onClose}
                 onExited={onExited}
             />
         </>

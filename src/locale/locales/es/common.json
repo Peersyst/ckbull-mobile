@@ -202,5 +202,6 @@
     "noConnectedSites": "No hay sitios conectados",
     "rejectConnection": "Rechaza la conexión",
     "confirmConnectionWith": "Confirmar conexión con",
-    "signWith": "Firma con"
+    "signWith": "Firma con",
+    "signInRequestSuccess": "Petición de inicio de sessión firmada correctamente!"
 }
