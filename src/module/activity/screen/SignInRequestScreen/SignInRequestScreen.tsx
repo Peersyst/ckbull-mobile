@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { SignInRequestDto } from "module/api/service";
 import useSignSignInRequest from "module/activity/queries/useSignSignInRequest";
 import useRejectSignInRequest from "module/activity/queries/useRejectSignInRequest";
-import SignRequestModal from "module/common/component/feedback/SignTransactionModal/SignRequestModal";
+import SignRequestModal from "module/common/component/feedback/SignRequestModal/SignRequestModal";
 import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
 import SignRequestModalLayout from "module/activity/component/layout/SignRequestModalLayout/SignRequestModalLayout";
 import { useTranslate } from "module/common/hook/useTranslate";
