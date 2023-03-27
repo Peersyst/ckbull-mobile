@@ -3,6 +3,7 @@
 /* eslint-disable */
 import type { CompleteTransactionRequestDto } from '../models/CompleteTransactionRequestDto';
 import type { CreateTransactionRequestBody } from '../models/CreateTransactionRequestBody';
+import type { DeclineTransactionRequest } from '../models/DeclineTransactionRequest';
 import type { SignTransactionRequest } from '../models/SignTransactionRequest';
 import type { SimpleTransactionRequestDto } from '../models/SimpleTransactionRequestDto';
 import type { TransactionRequestStatusDto } from '../models/TransactionRequestStatusDto';
@@ -127,7 +128,7 @@ export class TransactionRequestService {
      */
     public static declineTransactionRequest(
         transactionToken: string,
-        requestBody: SignTransactionRequest,
+        requestBody: DeclineTransactionRequest,
     ): CancelablePromise<SimpleTransactionRequestDto> {
         return __request(OpenAPI, {
             method: 'POST',

@@ -1,6 +1,6 @@
-import { TransactionRequestDto } from "./dto/dtos";
+import { CompleteTransactionRequestDto } from "module/api/service";
 
 export interface ParsedPendingTransactions {
     title: string;
-    data: TransactionRequestDto[];
+    data: CompleteTransactionRequestDto[];
 }
