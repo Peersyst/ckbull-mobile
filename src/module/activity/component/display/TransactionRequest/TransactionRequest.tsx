@@ -2,39 +2,49 @@ import useGetTransactionRequestAction from "module/activity/hook/useGetTransacti
 import { getTimeFromSeconds } from "module/activity/utils/time";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TransactionRequestRoot } from "module/activity/component/display/TransactionRequest/TransactionRequest.styles";
-import transactionTypeToBalanceAction from "module/transaction/component/display/TransactionAmount/utils/transactionTypeToBalanceAction";
 import { useModal } from "@peersyst/react-native-components";
 import TransactionRequestModal from "../../navigation/TransactionRequestModal/TransactionRequestModal";
+import { CompleteTransactionRequestDto } from "module/api/common";
+import useGetTransactionRequest from "module/activity/queries/useGetTransactionRequest";
 
 interface TransactionRequestProps {
-    transaction: TransactionRequestDto;
+    transaction: CompleteTransactionRequestDto;
 }
 
 const TransactionRequest = ({
     transaction: {
-        app: { title, imageUrl = "" } = { title: "" },
-        transaction: { type, amount },
-        status,
+        signInRequest: {
+            app: { image, name },
+        },
+        transaction: { amount },
+        status = "pending",
         expiresAt,
         createdAt,
     },
 }: TransactionRequestProps): JSX.Element => {
     const translate = useTranslate();
     const { showModal } = useModal();
-    const { actionElement, handleAction } = useGetTransactionRequestAction(status);
+    const { actionElement } = useGetTransactionRequestAction(status);
+
+    const { data: transactionRequest } = useGetTransactionRequest(
+        "AlCsFFze9TrhdjQ3T7NXuilJIIaVlYd/OlJFanVBEzuVKyAU0S3beO6p6Q42bVkEuB7d6BNYwTXyz3QLO545MQ==",
+    );
+
+    const expirationDate = new Date(expiresAt);
+    const creationDate = new Date(createdAt);
 
     return (
         <TransactionRequestRoot
-            type={type}
             status={status}
-            imageUrl={imageUrl}
-            title={title}
+            imageUrl={image}
+            title={name}
             description={translate(status)}
-            details={expiresAt ? translate("expireDate", getTimeFromSeconds(expiresAt - createdAt)) : undefined}
+            details={
+                expiresAt ? translate("expireDate", getTimeFromSeconds(expirationDate.getSeconds() - creationDate.getSeconds())) : undefined
+            }
             amount={amount}
-            amountAction={transactionTypeToBalanceAction(type)}
             actionElement={actionElement}
-            onAction={() => showModal(TransactionRequestModal)}
+            onAction={() => showModal(TransactionRequestModal, { transactionRequest })}
         />
     );
 };

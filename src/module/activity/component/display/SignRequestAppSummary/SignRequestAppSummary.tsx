@@ -1,10 +1,10 @@
 import { Col, Typography } from "@peersyst/react-native-components";
-import { DAppImage } from "module/activity/component/display/SignInRequestDetails/SignInRequestDetails.styles";
+import { DAppImage } from "module/activity/component/display/SignRequestAppSummary/SignRequestAppSummary.styles";
 import config from "config/config";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
 import { useTranslate } from "module/common/hook/useTranslate";
 
-interface SignInRequestSummaryProps {
+interface SignRequestAppSummaryProps {
     name: string | undefined;
     image: string | undefined;
     description: string | undefined;
@@ -13,14 +13,14 @@ interface SignInRequestSummaryProps {
     selectedWallet?: number;
 }
 
-export default function SignInRequestDetails({
+export default function SignRequestAppSummary({
     name,
     image,
     description,
     loading = false,
     selectedWallet,
     onWalletChange,
-}: SignInRequestSummaryProps): JSX.Element {
+}: SignRequestAppSummaryProps): JSX.Element {
     const translate = useTranslate();
 
     return (

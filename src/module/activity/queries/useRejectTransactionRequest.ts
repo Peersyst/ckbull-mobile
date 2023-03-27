@@ -1,11 +1,10 @@
 import { useMutation } from "react-query";
 
-import { TransactionRequestService } from "module/api/service";
-import { SignTransactionRequest } from "../../api/service/models/SignTransactionRequest";
+import { DeclineTransactionRequest, TransactionRequestService } from "module/api/service";
 
 export interface TransactionRequestReject {
     transactionRequestToken: string;
-    requestBody: SignTransactionRequest;
+    requestBody: DeclineTransactionRequest;
 }
 
 export default function useRejectTransactionRequest() {

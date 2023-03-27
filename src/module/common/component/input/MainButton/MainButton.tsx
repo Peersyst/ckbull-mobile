@@ -31,7 +31,9 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
             <MainButtonRoot
                 variant="primary"
                 size="lg"
-                onPress={() => setScanQr(true)}
+                onPress={() =>
+                    handleSignInRequest("aW+HPL5ZuTrhmgBgYkPF7lW309LgrFqZqWpcHMJWBAzvfoJ09bWOADd+0X2NQU26LVHEP/t9DJRJBMq2MjqQTw==")
+                }
                 {...buttonProps}
             >
                 <>

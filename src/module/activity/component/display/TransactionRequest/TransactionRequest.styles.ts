@@ -1,12 +1,11 @@
 import styled from "@peersyst/react-native-styled";
 import ActivityCard from "module/activity/core/ActivityCard/ActivityCard";
 import { TransactionRequestRootProps } from "module/activity/component/display/TransactionRequest/TransactionRequest.types";
-import { TransactionRequestDto } from "module/activity/dto/dtos";
-import transactionTypeToBalanceAction from "module/transaction/component/display/TransactionAmount/utils/transactionTypeToBalanceAction";
+import { CompleteTransactionRequestDto } from "module/api/service";
 
-export const TransactionRequestRoot = styled(ActivityCard)<TransactionRequestRootProps>(({ theme, status, type }) => {
+export const TransactionRequestRoot = styled(ActivityCard)<TransactionRequestRootProps>(({ theme, status }) => {
     const canHandle = status === "signed" || status === "expired";
-    const handleStatusColor = (status: TransactionRequestDto["status"]): string | undefined => {
+    const handleStatusColor = (status: CompleteTransactionRequestDto["status"]): string | undefined => {
         switch (status) {
             case "signed":
                 return theme.palette.green[200];
@@ -17,7 +16,7 @@ export const TransactionRequestRoot = styled(ActivityCard)<TransactionRequestRoo
         }
     };
 
-    const action = transactionTypeToBalanceAction(type);
+    const action = "add";
     const isPrimary = action === "add";
 
     const amountStyle = {

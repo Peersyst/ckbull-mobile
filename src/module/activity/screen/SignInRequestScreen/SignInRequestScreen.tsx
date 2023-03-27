@@ -1,5 +1,5 @@
 import { useModal } from "@peersyst/react-native-components";
-import SignInRequestDetails from "module/activity/component/display/SignInRequestDetails/SignInRequestDetails";
+import SignRequestAppSummary from "module/activity/component/display/SignRequestAppSummary/SignRequestAppSummary";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { useEffect, useState } from "react";
 import { SignInRequestDto } from "module/api/service";
@@ -60,7 +60,7 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
         >
             {({ showModal, isSuccess }) => (
                 <SignRequestModalLayout onReject={handleReject} onSign={showModal} loading={modalLoading} disabled={isSuccess}>
-                    <SignInRequestDetails
+                    <SignRequestAppSummary
                         name={name}
                         image={image}
                         description={description}
