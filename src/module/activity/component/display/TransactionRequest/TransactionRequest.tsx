@@ -2,46 +2,38 @@ import useGetTransactionRequestAction from "module/activity/hook/useGetTransacti
 import { getTimeFromSeconds } from "module/activity/utils/time";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TransactionRequestRoot } from "module/activity/component/display/TransactionRequest/TransactionRequest.styles";
+import { CompleteTransactionRequestDto } from "module/api/service";
 import { useModal } from "@peersyst/react-native-components";
 import TransactionRequestModal from "../../navigation/TransactionRequestModal/TransactionRequestModal";
-import { CompleteTransactionRequestDto } from "module/api/common";
-import useGetTransactionRequest from "module/activity/queries/useGetTransactionRequest";
 
 interface TransactionRequestProps {
     transaction: CompleteTransactionRequestDto;
 }
 
-const TransactionRequest = ({
-    transaction: {
+const TransactionRequest = ({ transaction: transactionRequest }: TransactionRequestProps): JSX.Element => {
+    const {
         signInRequest: {
-            app: { image, name },
+            app: { name, image },
         },
         transaction: { amount },
-        status = "pending",
+        status,
         expiresAt,
-        createdAt,
-    },
-}: TransactionRequestProps): JSX.Element => {
+    } = transactionRequest;
+
     const translate = useTranslate();
     const { showModal } = useModal();
     const { actionElement } = useGetTransactionRequestAction(status);
 
-    const { data: transactionRequest } = useGetTransactionRequest(
-        "AlCsFFze9TrhdjQ3T7NXuilJIIaVlYd/OlJFanVBEzuVKyAU0S3beO6p6Q42bVkEuB7d6BNYwTXyz3QLO545MQ==",
-    );
-
-    const expirationDate = new Date(expiresAt);
-    const creationDate = new Date(createdAt);
+    const expirationTimestamp = new Date(expiresAt).getTime();
+    const currentTimestamp = new Date().getTime();
 
     return (
         <TransactionRequestRoot
             status={status}
             imageUrl={image}
             title={name}
-            description={translate(status)}
-            details={
-                expiresAt ? translate("expireDate", getTimeFromSeconds(expirationDate.getSeconds() - creationDate.getSeconds())) : undefined
-            }
+            description={status}
+            details={expiresAt ? translate("expireDate", getTimeFromSeconds(expirationTimestamp - currentTimestamp)) : undefined}
             amount={amount}
             actionElement={actionElement}
             onAction={() => showModal(TransactionRequestModal, { transactionRequest })}
