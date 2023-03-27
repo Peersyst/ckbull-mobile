@@ -2,8 +2,9 @@ import useGetTransactionRequestAction from "module/activity/hook/useGetTransacti
 import { getTimeFromSeconds } from "module/activity/utils/time";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TransactionRequestRoot } from "module/activity/component/display/TransactionRequest/TransactionRequest.styles";
-import { TransactionRequestDto } from "module/activity/dto/dtos";
 import transactionTypeToBalanceAction from "module/transaction/component/display/TransactionAmount/utils/transactionTypeToBalanceAction";
+import { useModal } from "@peersyst/react-native-components";
+import TransactionRequestModal from "../../navigation/TransactionRequestModal/TransactionRequestModal";
 
 interface TransactionRequestProps {
     transaction: TransactionRequestDto;
@@ -19,6 +20,7 @@ const TransactionRequest = ({
     },
 }: TransactionRequestProps): JSX.Element => {
     const translate = useTranslate();
+    const { showModal } = useModal();
     const { actionElement, handleAction } = useGetTransactionRequestAction(status);
 
     return (
@@ -32,7 +34,7 @@ const TransactionRequest = ({
             amount={amount}
             amountAction={transactionTypeToBalanceAction(type)}
             actionElement={actionElement}
-            onAction={handleAction}
+            onAction={() => showModal(TransactionRequestModal)}
         />
     );
 };
