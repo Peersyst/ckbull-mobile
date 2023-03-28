@@ -1,7 +1,7 @@
 import { render, translate } from "test-utils";
 import SignInRequestDetails from "module/activity/component/display/SignInRequestDetails/SignInRequestDetails";
 import { screen } from "@testing-library/react-native";
-import { UseServiceInstanceMock, UseWalletStateMock } from "mocks/common";
+import { UseServiceInstanceMock } from "mocks/common";
 
 describe("SignInRequestDetails tests", () => {
     const mockName = "name";
