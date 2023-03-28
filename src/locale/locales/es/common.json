@@ -208,5 +208,11 @@
     "transaction": "transacción",
     "seeInExplorer": "Ver en Explorer",
     "signTransactionRequest": "Firmar petición de transacción",
-    "signedSuccess": "Firmado!"
+    "signedSuccess": "Firmado!",
+    "rejectTransaction": "Rechazar transacción",
+    "rejectTransactionDescription": "Estás seguro de querer rechazar la transacción? Esta acción no puede deshacerse.",
+    "rejectConnectionDescription": "Estás seguro de querer rechazar la transacción? Esta acción no puede deshacerse.",
+    "reject": "Rechazar",
+    "rejectTransactionRequestSuccess": "Petición de transacción rechazada correctamente!",
+    "noPendingTransactionRequests": "No tienes transacciones pendientes"
 }

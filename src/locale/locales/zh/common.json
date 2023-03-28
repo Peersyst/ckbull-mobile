@@ -206,7 +206,13 @@
     "signInRequestSuccess": "Sign in request signed successfully!",
     "confirmTransaction": "Confirm transaction",
     "transaction": "transaction",
-    "seeInExplorer": "seeInExplorer",
+    "seeInExplorer": "See in Explorer",
     "signTransactionRequest": "Sign transaction request",
-    "signedSuccess": "Signed!"
+    "signedSuccess": "Signed!",
+    "rejectTransaction": "Reject transaction",
+    "rejectTransactionDescription": "Are you sure you want to reject this transaction? This action cannot be undone.",
+    "rejectConnectionDescription": "Are you sure you want to reject this connection? This action cannot be undone.",
+    "reject": "Reject",
+    "rejectTransactionRequestSuccess": "Transaction request rejected successfully!",
+    "noPendingTransactionRequests": "There are no pending transaction"
 }

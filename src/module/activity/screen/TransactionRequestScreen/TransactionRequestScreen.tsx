@@ -53,7 +53,14 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
             onExited={isSignSuccess || isSignError ? closeTransactionRequestModal : undefined}
         >
             {({ showModal, isSuccess }) => (
-                <SignRequestModalLayout onReject={handleReject} onSign={showModal} loading={isSigning || isRejecting} disabled={isSuccess}>
+                <SignRequestModalLayout
+                    rejectTitle={translate("rejectTransaction")}
+                    rejectMessage={translate("rejectTransactionDescription")}
+                    onReject={handleReject}
+                    onSign={showModal}
+                    loading={isSigning || isRejecting}
+                    disabled={isSuccess}
+                >
                     <Col justifyContent="center">
                         <SignRequestAppSummary
                             requestTitle={translate("confirmTransaction")}

@@ -59,7 +59,14 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
             successMessage={translate("signInRequestSuccess")}
         >
             {({ showModal, isSuccess }) => (
-                <SignRequestModalLayout onReject={handleReject} onSign={showModal} loading={modalLoading} disabled={isSuccess}>
+                <SignRequestModalLayout
+                    rejectTitle={translate("rejectConnection")}
+                    rejectMessage={translate("rejectConnectionDescription")}
+                    onReject={handleReject}
+                    onSign={showModal}
+                    loading={modalLoading}
+                    disabled={isSuccess}
+                >
                     <SignRequestAppSummary
                         requestTitle={translate("confirmConnectionWith")}
                         name={name}
