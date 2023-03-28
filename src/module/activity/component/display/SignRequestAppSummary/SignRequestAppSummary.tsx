@@ -5,6 +5,7 @@ import WalletSelector from "module/wallet/component/input/WalletSelector/WalletS
 import { useTranslate } from "module/common/hook/useTranslate";
 
 interface SignRequestAppSummaryProps {
+    requestTitle: string;
     name: string | undefined;
     image: string | undefined;
     description: string | undefined;
@@ -14,6 +15,7 @@ interface SignRequestAppSummaryProps {
 }
 
 export default function SignRequestAppSummary({
+    requestTitle,
     name,
     image,
     description,
@@ -26,27 +28,29 @@ export default function SignRequestAppSummary({
     return (
         <Col gap={24} flex={1}>
             <Col gap={24} alignItems="center">
-                <Typography variant="body1Strong" textAlign="center">
-                    {translate("confirmConnectionWith")}
+                <Typography variant="body2Strong" textAlign="center">
+                    {requestTitle}
                 </Typography>
                 <DAppImage source={{ uri: image || config.defaultDAppImage }} />
                 <Col alignItems="center">
-                    <Typography variant="body2Strong" textAlign="center">
+                    <Typography variant="body3Strong" textAlign="center">
                         {name}
                     </Typography>
-                    <Typography variant="body2Light" textAlign="center" light>
+                    <Typography variant="body3Light" textAlign="center" light numberOfLines={1}>
                         {description}
                     </Typography>
                 </Col>
             </Col>
-            <WalletSelector
-                label={translate("signWith")}
-                required
-                name="signer"
-                disabled={loading}
-                onChange={onWalletChange}
-                value={selectedWallet}
-            />
+            {selectedWallet && onWalletChange && (
+                <WalletSelector
+                    label={translate("signWith")}
+                    required
+                    name="signer"
+                    disabled={loading}
+                    onChange={onWalletChange}
+                    value={selectedWallet}
+                />
+            )}
         </Col>
     );
 }

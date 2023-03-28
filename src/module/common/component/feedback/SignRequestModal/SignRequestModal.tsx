@@ -7,6 +7,7 @@ export default function SignRequestModal({
     onExited,
     signRequest,
     successMessage,
+    successDetails,
     onError,
     onSuccess,
     children,
@@ -46,6 +47,7 @@ export default function SignRequestModal({
                 loading={isLoading}
                 error={isError}
                 successMessage={successMessage}
+                successDetails={successDetails}
                 onClose={onClose}
                 onExited={onExited}
             />

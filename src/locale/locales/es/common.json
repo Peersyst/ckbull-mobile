@@ -203,5 +203,10 @@
     "rejectConnection": "Rechaza la conexión",
     "confirmConnectionWith": "Confirmar conexión con",
     "signWith": "Firma con",
-    "signInRequestSuccess": "Petición de inicio de sessión firmada correctamente!"
+    "signInRequestSuccess": "Petición de inicio de sessión firmada correctamente!",
+    "confirmTransaction": "Confirma la transacción",
+    "transaction": "transacción",
+    "seeInExplorer": "Ver en Explorer",
+    "signTransactionRequest": "Firmar petición de transacción",
+    "signedSuccess": "Firmado!"
 }

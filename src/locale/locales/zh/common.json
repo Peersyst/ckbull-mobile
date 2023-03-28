@@ -203,5 +203,10 @@
     "rejectConnection": "Reject the connection",
     "confirmConnectionWith": "Confirm connection with",
     "signWith": "Sign with",
-    "signInRequestSuccess": "Sign in request signed successfully!"
+    "signInRequestSuccess": "Sign in request signed successfully!",
+    "confirmTransaction": "Confirm transaction",
+    "transaction": "transaction",
+    "seeInExplorer": "seeInExplorer",
+    "signTransactionRequest": "Sign transaction request",
+    "signedSuccess": "Signed!"
 }

@@ -1,5 +1,7 @@
 import { SignTransactionRequest, TransactionRequestService } from "module/api/service";
-import { useMutation } from "react-query";
+import useServiceInstance from "module/wallet/hook/useServiceInstance";
+import Queries from "../../../query/queries";
+import { useMutation, useQueryClient } from "react-query";
 
 export interface TransactionRequestSign {
     transactionRequestToken: string;
@@ -7,7 +9,15 @@ export interface TransactionRequestSign {
 }
 
 export default function useSignTransactionRequest() {
-    return useMutation(({ transactionRequestToken, transactionBody }: TransactionRequestSign) =>
-        TransactionRequestService.signTransactionRequest(transactionRequestToken, transactionBody),
+    const queryClient = useQueryClient();
+    const { index: usedIndex, network } = useServiceInstance();
+    return useMutation(
+        ({ transactionRequestToken, transactionBody }: TransactionRequestSign) =>
+            TransactionRequestService.signTransactionRequest(transactionRequestToken, transactionBody),
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries([Queries.SIGNER_APP_GET_PENDING_TRANSACTIONS, usedIndex, network]);
+            },
+        },
     );
 }

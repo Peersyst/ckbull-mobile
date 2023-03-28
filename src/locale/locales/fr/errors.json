@@ -29,5 +29,7 @@
     "no_tokens": "Il n'y a pas encore de jetons",
     "no_deposits": "Sans dépôts",
     "no_withdrawals": "Sans retraits",
-    "SIGN_IN_REQUEST_ALREADY_SIGNED": "Sign In request already signed"
+    "sign_in_request_already_signed": "Sign In request already signed",
+    "transaction_request_already_signed": "Transaction request already signed",
+    "transaction_request_already_declined": "Transaction request already declined"
 }

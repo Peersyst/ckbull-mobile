@@ -29,5 +29,7 @@
     "no_tokens": "还没有代币",
     "no_deposits": "没有存款",
     "no_withdrawals": "没有提款",
-    "SIGN_IN_REQUEST_ALREADY_SIGNED": "Sign In request already signed"
+    "sign_in_request_already_signed": "Sign In request already signed",
+    "transaction_request_already_signed": "Transaction request already signed",
+    "transaction_request_already_declined": "Transaction request already declined"
 }

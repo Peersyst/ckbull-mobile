@@ -55,6 +55,10 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
         text: {
             color: theme.palette.text,
         },
+        glass: {
+            backgroundColor: theme.palette.overlay[900]["32%"],
+            color: theme.palette.white,
+        },
 
         //State Styles
         pressed: {
@@ -74,6 +78,9 @@ export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }
             },
             outlined: {
                 backgroundColor: theme.palette.overlay[100]["8%"],
+            },
+            glass: {
+                backgroundColor: darken(theme.palette.overlay[900]["32%"], 0.1),
             },
         },
         disabled: {
