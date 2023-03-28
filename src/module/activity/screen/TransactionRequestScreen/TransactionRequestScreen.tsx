@@ -61,7 +61,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
                     loading={isSigning || isRejecting}
                     disabled={isSuccess}
                 >
-                    <Col justifyContent="center">
+                    <Col justifyContent="center" onStartShouldSetResponder={() => true}>
                         <SignRequestAppSummary
                             requestTitle={translate("confirmTransaction")}
                             name={name}

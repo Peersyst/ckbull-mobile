@@ -214,5 +214,6 @@
     "rejectConnectionDescription": "Are you sure you want to reject this connection? This action cannot be undone.",
     "reject": "Reject",
     "rejectTransactionRequestSuccess": "Transaction request rejected successfully!",
-    "noPendingTransactionRequests": "There are no pending transactions"
+    "noPendingTransactionRequests": "There are no pending transactions",
+    "copied": "Copied!"
 }

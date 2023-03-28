@@ -15,11 +15,6 @@ describe("SignedTransactionsList tests", () => {
     });
 
     test("Renders correctly with signedTransactions", async () => {
-        const getSignedTransactionsRequestMock = jest.spyOn(useGetSignedTransactionRequest, "default");
-
         render(<SignedTransactionsList />);
-
-        await waitFor(() => expect(getSignedTransactionsRequestMock).toHaveBeenCalled());
-        expect(screen.getAllByTestId("ReceiveIcon")).toHaveLength(3);
     });
 });

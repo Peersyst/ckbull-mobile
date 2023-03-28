@@ -43,6 +43,7 @@ export default function SignRequestModal({
             })}
             <ConfirmPinModal open={showConfirmation} onClose={() => setShowConfirmation(false)} onConfirmedExited={handleSignRequest} />
             <LoadingModal
+                open={false}
                 success={isSuccess}
                 loading={isLoading}
                 error={isError}

@@ -28,14 +28,7 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
 
     return (
         <DarkThemeProvider>
-            <MainButtonRoot
-                variant="primary"
-                size="lg"
-                onPress={() =>
-                    handleSignInRequest("aW+HPL5ZuTrhmgBgYkPF7lW309LgrFqZqWpcHMJWBAzvfoJ09bWOADd+0X2NQU26LVHEP/t9DJRJBMq2MjqQTw==")
-                }
-                {...buttonProps}
-            >
+            <MainButtonRoot variant="primary" size="lg" onPress={() => setScanQr(true)} {...buttonProps}>
                 <>
                     <Col alignItems={"center"} justifyContent="center">
                         <ElementStyler style={{ flex: 1 }}>{icon}</ElementStyler>
