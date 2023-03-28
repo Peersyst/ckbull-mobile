@@ -48,7 +48,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
             isLoading={isSigning}
             isSuccess={isSignSuccess}
             isError={isSignError}
-            successMessage={"Signed!"}
+            successMessage={translate("signedSuccess")}
             successDetails={<SignTransactionRequestSuccess transactionHash={transaction.transactionHash} />}
             onExited={isSignSuccess || isSignError ? closeTransactionRequestModal : undefined}
         >
