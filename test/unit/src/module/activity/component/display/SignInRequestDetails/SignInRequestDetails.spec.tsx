@@ -2,7 +2,6 @@ import { render, translate } from "test-utils";
 import SignInRequestDetails from "module/activity/component/display/SignInRequestDetails/SignInRequestDetails";
 import { screen } from "@testing-library/react-native";
 import { UseWalletStateMock } from "mocks/common";
-import { wallet } from "images";
 
 describe("SignInRequestDetails tests", () => {
     const mockName = "name";
