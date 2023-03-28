@@ -28,12 +28,7 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
 
     return (
         <DarkThemeProvider>
-            <MainButtonRoot
-                variant="primary"
-                size="lg"
-                onPress={() => setScanQr(true)}
-                {...buttonProps}
-            >
+            <MainButtonRoot variant="primary" size="lg" onPress={() => setScanQr(true)} {...buttonProps}>
                 <>
                     <Col alignItems={"center"} justifyContent="center">
                         <ElementStyler style={{ flex: 1 }}>{icon}</ElementStyler>

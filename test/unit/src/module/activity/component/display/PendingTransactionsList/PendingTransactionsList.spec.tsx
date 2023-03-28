@@ -1,10 +1,9 @@
 import { UseServiceInstanceMock } from "mocks/common";
-import PendingTransactionsList from "module/activity/component/display/PendingTransactionsList/PendingTransactionsList";
+import PendingTransactionsList from "module/activity/component/display/PendingTransactionRequestsList/PendingTransactionRequestsList";
 import { render } from "test-utils";
 import { screen, waitFor } from "@testing-library/react-native";
 import { CompleteTransactionRequestDtoMock } from "mocks/common/activity/complete-transaction-request-dto.mock";
 import { TransactionRequestService } from "module/api/service";
-import useFormatDate from "module/common/hook/useFormatDate";
 
 describe("PendingTransactionsList tests", () => {
     let serviceInstance: UseServiceInstanceMock;

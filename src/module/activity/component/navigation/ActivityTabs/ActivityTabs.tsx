@@ -2,7 +2,7 @@ import MainTabs from "module/main/component/navigation/MainTabs/MainTabs";
 import { TabItem } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 import { useTranslate } from "module/common/hook/useTranslate";
 import ConnectedSiteList from "module/activity/component/display/ConnectedSiteList/ConnectedSiteList";
-import PendingList from "module/activity/component/display/PendingTransactionsList/PendingTransactionsList";
+import PendingList from "module/activity/component/display/PendingTransactionRequestsList/PendingTransactionRequestsList";
 import SignedTransactionsList from "module/activity/component/display/SignedTransactionsList/SignedTransactionsList";
 
 const ActivityTabs = (): JSX.Element => {
