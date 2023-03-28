@@ -1,9 +1,7 @@
-import { Col, SwipeButton, Typography, useModal } from "@peersyst/react-native-components";
+import { Col, Dialog, SwipeButton, Typography } from "@peersyst/react-native-components";
 import Button from "module/common/component/input/Button/Button";
-import useCancelableDialog from "module/common/hook/useCancelableDialog";
 import { useTranslate } from "module/common/hook/useTranslate";
-import { ReactNode } from "react";
-import TransactionRequestModal from "../../navigation/TransactionRequestModal/TransactionRequestModal";
+import { ReactNode, useState } from "react";
 
 interface SignModalLayoutProps {
     rejectTitle: string;
@@ -25,44 +23,48 @@ export default function SignRequestModalLayout({
     disabled,
 }: SignModalLayoutProps): JSX.Element {
     const translate = useTranslate();
-    const { hideModal } = useModal();
-    const { showCancelableDialog, hideDialog } = useCancelableDialog();
+    const [open, setOpen] = useState(false);
+
+    const showDialog = () => setOpen(true);
+    const hideDialog = () => setOpen(false);
 
     const handleConfirmReject = () => {
         onReject();
         hideDialog();
     };
 
-    const handleReject = () => {
-        hideModal(TransactionRequestModal.id);
-        showCancelableDialog({
-            title: rejectTitle,
-            content: rejectMessage,
-            buttons: [
-                {
-                    text: translate("reject"),
-                    type: "destructive",
-                    action: handleConfirmReject,
-                    variant: "filled",
-                },
-            ],
-        });
-    };
+    const buttons = [
+        {
+            text: translate("reject"),
+            type: "destructive",
+            action: handleConfirmReject,
+            variant: "filled",
+        },
+        {
+            text: translate("cancel"),
+            type: "default",
+            action: () => setOpen(false),
+            variant: "text",
+        },
+    ];
 
     return (
-        <Col justifyContent="space-between" style={{ height: "100%" }}>
-            {children}
-            <Col gap={12} justifyContent="center" alignItems="center">
-                <Button variant="text" onPress={handleReject} fullWidth>
-                    {translate("rejectConnection")}
-                </Button>
-                <Typography variant="body2Light" textAlign="center" light>
-                    {translate("or")}
-                </Typography>
-                <SwipeButton onSwipe={onSign} loading={loading} disabled={disabled} fullWidth>
-                    {translate("slideToAccept")}
-                </SwipeButton>
+        <>
+            <Col justifyContent="space-between" style={{ height: "100%" }}>
+                {children}
+                <Col gap={12} justifyContent="center" alignItems="center">
+                    <Button variant="text" onPress={showDialog} fullWidth>
+                        {translate("rejectConnection")}
+                    </Button>
+                    <Typography variant="body2Light" textAlign="center" light>
+                        {translate("or")}
+                    </Typography>
+                    <SwipeButton onSwipe={onSign} loading={loading} disabled={disabled} fullWidth>
+                        {translate("slideToAccept")}
+                    </SwipeButton>
+                </Col>
             </Col>
-        </Col>
+            <Dialog open={open} onClose={() => setOpen(false)} title={rejectTitle} content={rejectMessage} buttons={buttons} />
+        </>
     );
 }
