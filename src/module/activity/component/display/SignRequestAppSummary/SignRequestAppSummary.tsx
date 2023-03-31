@@ -41,7 +41,7 @@ export default function SignRequestAppSummary({
                     </Typography>
                 </Col>
             </Col>
-            {selectedWallet && onWalletChange && (
+            {selectedWallet !== undefined && onWalletChange && (
                 <WalletSelector
                     label={translate("signWith")}
                     required

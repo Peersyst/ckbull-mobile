@@ -22,10 +22,12 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
     const { hideModal } = useModal();
     const translate = useTranslate();
 
-    const [formWallet, setFormWallet] = useState<number | undefined>(undefined);
+    const [formWallet, setFormWallet] = useState<number | undefined>();
     const [modalLoading, setModalLoading] = useState(false);
 
-    const { serviceInstance, network } = useServiceInstance(formWallet);
+    const { serviceInstance, index: usedIndex, network } = useServiceInstance(formWallet);
+
+    useEffect(() => setFormWallet(usedIndex));
 
     const closeSignInRequestModal = () => {
         hideModal(SignInRequestModal.id);
