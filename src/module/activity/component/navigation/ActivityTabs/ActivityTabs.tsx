@@ -1,7 +1,7 @@
 import MainTabs from "module/main/component/navigation/MainTabs/MainTabs";
 import { TabItem } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 import { useTranslate } from "module/common/hook/useTranslate";
-import ConnectedSiteList from "module/activity/component/display/ConnectedSiteList/ConnectedSiteList";
+import ConnectedDAppList from "module/activity/component/display/ConnectedSiteList/ConnectedDAppList";
 import PendingList from "module/activity/component/display/PendingTransactionsList/PendingTransactionsList";
 import SignedTransactionsList from "module/activity/component/display/SignedTransactionsList/SignedTransactionsList";
 
@@ -18,7 +18,7 @@ const ActivityTabs = (): JSX.Element => {
         },
         {
             title: translate("connected_sites"),
-            item: <ConnectedSiteList />,
+            item: <ConnectedDAppList />,
         },
     ];
 
