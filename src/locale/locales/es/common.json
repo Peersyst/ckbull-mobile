@@ -203,5 +203,6 @@
     "rejectConnection": "Rechaza la conexión",
     "confirmConnectionWith": "Confirmar conexión con",
     "signWith": "Firma con",
-    "signInRequestSuccess": "Petición de inicio de sessión firmada correctamente!"
+    "signInRequestSuccess": "Petición de inicio de sessión firmada correctamente!",
+    "reviewConnection": "Revisar conexión"
 }

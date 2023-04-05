@@ -5,8 +5,12 @@ import { MainButtonRoot } from "./MainButton.styles";
 import DarkThemeProvider from "module/common/component/util/ThemeProvider/DarkThemeProvider";
 import QrScanner from "module/common/component/input/QrScanner/QrScanner";
 import useGetSignInRequest from "module/activity/queries/useGetSignInRequest";
-import { SignInRequestDto } from "module/api/common";
 import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
+import { SignInRequestDto } from "module/api/service";
+import useAddressValidator from "module/common/hook/useAddressValidator";
+import { useRecoilState } from "recoil";
+import sendState from "module/transaction/state/SendState";
+import SendModal from "module/transaction/component/core/SendModal/SendModal";
 
 export interface MainButtonProps extends Omit<ButtonProps, "children" | "rounded" | "leftIcon" | "rightIcon" | "variant" | "size"> {
     icon: ReactElement;
@@ -17,13 +21,19 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
     const [scanQr, setScanQr] = useState(false);
     const { showModal } = useModal();
 
+    const validAddress = useAddressValidator();
+    const [, setSendState] = useRecoilState(sendState);
+
     const handleSuccess = (request: SignInRequestDto) => showModal(SignInRequestModal, { signInRequest: request });
 
     const { mutate: getSignInRequest } = useGetSignInRequest({ onSuccess: handleSuccess });
 
     const handleSignInRequest = (data: string) => {
+        if (validAddress(data)) {
+            setSendState((old) => ({ ...old, receiverAddress: data }));
+            showModal(SendModal);
+        } else getSignInRequest(data);
         setScanQr(false);
-        getSignInRequest(data);
     };
 
     return (

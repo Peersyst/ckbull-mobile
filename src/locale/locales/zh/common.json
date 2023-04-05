@@ -203,5 +203,6 @@
     "rejectConnection": "Reject the connection",
     "confirmConnectionWith": "Confirm connection with",
     "signWith": "Sign with",
-    "signInRequestSuccess": "Sign in request signed successfully!"
+    "signInRequestSuccess": "Sign in request signed successfully!",
+    "reviewConnection": "Review connection"
 }
