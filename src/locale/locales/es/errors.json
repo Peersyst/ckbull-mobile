@@ -29,5 +29,5 @@
     "no_tokens": "No hay tokens",
     "no_deposits": "Sin depósitos",
     "no_withdrawals": "Sin retiros",
-    "SIGN_IN_REQUEST_ALREADY_SIGNED": "La petición de inicio de sesión ya ha sido firmada"
+    "sign_in_request_already_signed": "La petición de inicio de sesión ya ha sido firmada"
 }

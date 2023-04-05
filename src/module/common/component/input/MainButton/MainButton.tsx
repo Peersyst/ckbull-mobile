@@ -20,21 +20,20 @@ export interface MainButtonProps extends Omit<ButtonProps, "children" | "rounded
 const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Element => {
     const [scanQr, setScanQr] = useState(false);
     const { showModal } = useModal();
-
     const validAddress = useAddressValidator();
     const [, setSendState] = useRecoilState(sendState);
 
     const handleSuccess = (request: SignInRequestDto) => showModal(SignInRequestModal, { signInRequest: request });
 
-    const { mutate: getSignInRequest } = useGetSignInRequest({ onSuccess: handleSuccess });
-
-    const handleSignInRequest = (data: string) => {
+    const handleOnScan = (data: string) => {
         if (validAddress(data)) {
             setSendState((old) => ({ ...old, receiverAddress: data }));
             showModal(SendModal);
         } else getSignInRequest(data);
         setScanQr(false);
     };
+
+    const { mutate: getSignInRequest } = useGetSignInRequest({ onSuccess: handleSuccess });
 
     return (
         <DarkThemeProvider>
@@ -46,9 +45,7 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
                             {label}
                         </Typography>
                     </Col>
-                    {scanQr && (
-                        <QrScanner open={scanQr} onClose={() => setScanQr(false)} onScan={({ data }) => handleSignInRequest(data)} />
-                    )}
+                    {scanQr && <QrScanner open={scanQr} onClose={() => setScanQr(false)} onScan={({ data }) => handleOnScan(data)} />}
                 </>
             </MainButtonRoot>
         </DarkThemeProvider>
