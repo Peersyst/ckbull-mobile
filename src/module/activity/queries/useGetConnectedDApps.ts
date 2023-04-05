@@ -1,8 +1,7 @@
 import { useQuery, UseQueryResult } from "react-query";
 import Queries from "../../../query/queries";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
-import { PartialDappDto } from "module/api/service";
-import { SignInRequestsService } from "module/api/service";
+import { PartialDappDto, SignInRequestsService } from "module/api/service";
 
 export enum SignInRequestStatus {
     PENDING = "pending",
