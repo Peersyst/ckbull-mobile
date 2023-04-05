@@ -1,8 +1,8 @@
-import useGetTransactionRequestAction from "module/activity/hook/useGetTransactionRequestAction";
 import { getTimeFromSeconds } from "module/activity/utils/time";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TransactionRequestRoot } from "module/activity/component/display/TransactionRequest/TransactionRequest.styles";
 import { CompleteTransactionRequestDto } from "module/api/service";
+import useFormatDate from "module/common/hook/useFormatDate";
 
 interface TransactionRequestProps {
     transaction: CompleteTransactionRequestDto;
@@ -19,11 +19,7 @@ const TransactionRequest = ({
     },
 }: TransactionRequestProps): JSX.Element => {
     const translate = useTranslate();
-
-    const { actionElement, handleAction } = useGetTransactionRequestAction(status);
-
-    const expirationTimestamp = new Date(expiresAt).getTime();
-    const currentTimestamp = new Date().getTime();
+    const formatDate = useFormatDate();
 
     return (
         <TransactionRequestRoot
@@ -31,10 +27,9 @@ const TransactionRequest = ({
             imageUrl={image}
             title={name}
             description={status}
-            details={expiresAt ? translate("expireDate", getTimeFromSeconds(expirationTimestamp - currentTimestamp)) : undefined}
+            details={translate("expiresAt", { date: formatDate(expiresAt) })}
             amount={amount}
-            actionElement={actionElement}
-            onAction={handleAction}
+            onAction={() => undefined}
         />
     );
 };
