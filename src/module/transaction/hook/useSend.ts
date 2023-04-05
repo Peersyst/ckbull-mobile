@@ -3,7 +3,6 @@ import { useInvalidateServiceInstanceQueries } from "module/wallet/query/useInva
 import { convertCKBToShannons } from "module/wallet/utils/convertCKBToShannons";
 import { AssetType } from "module/wallet/wallet.types";
 import { useRecoilValue } from "recoil";
-import { TransactionStatus } from "../component/feedback/SendTransactionModal/SendTransactionModal.types";
 import useSendCKB from "../query/useSendCKB";
 import useSendNFT from "../query/useSendNFTs";
 import useSendTokens from "../query/useSendTokens";
@@ -12,8 +11,9 @@ import Queries from "../../../query/queries";
 import { useModal } from "@peersyst/react-native-components";
 import SendModal from "../component/core/SendModal/SendModal";
 import { numberToBN } from "module/common/utils/BalanceOperations/utils/numberToBN";
+import { CallbackStatus } from "../../common/component/feedback/CallbackModal/CallbackModal.types";
 
-export interface UseSendTransactionReturn extends TransactionStatus {
+export interface UseSendTransactionReturn extends CallbackStatus {
     sendTransaction: () => void | Promise<unknown>;
 }
 

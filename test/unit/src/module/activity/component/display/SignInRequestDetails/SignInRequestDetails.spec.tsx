@@ -1,42 +1,40 @@
 import { render, translate } from "test-utils";
-import SignRequestAppSummary from "module/activity/component/display/SignRequestAppSummary/SignRequestAppSummary";
 import { screen } from "@testing-library/react-native";
-import { UseWalletStateMock } from "mocks/common";
+import { UseServiceInstanceMock, UseWalletStateMock } from "mocks/common";
+import { SignInRequestDtoMock } from "mocks/common/activity/sign-in-request-dto.mock";
+import SignInRequestDetails from "module/activity/component/display/SignRequestAppSummary/SignRequestAppSummary";
 
 describe("SignInRequestDetails tests", () => {
-    const mockName = "name";
-    const mockImage = "image";
-    const mockDescription = "description";
-    const mockRequestTitle = "requestTitle";
+    let useServiceInstanceMock: UseServiceInstanceMock;
 
-    beforeEach(() => jest.restoreAllMocks());
+    beforeEach(() => {
+        useServiceInstanceMock = new UseServiceInstanceMock();
+    });
+
+    afterEach(() => useServiceInstanceMock.restore());
 
     test("Renders correctly without a selectedWallet", () => {
-        render(<SignRequestAppSummary requestTitle={mockRequestTitle} name={mockName} image={mockImage} description={mockDescription} />);
+        const signInRequestMock = new SignInRequestDtoMock();
+        render(<SignInRequestDetails requestTitle="requestTitle" signInRequest={signInRequestMock} />);
+        const { name, description } = signInRequestMock.app;
 
-        expect(screen.getByText(mockRequestTitle)).toBeDefined();
-        expect(screen.getByText(mockName)).toBeDefined();
-        expect(screen.getByText(mockDescription)).toBeDefined();
+        expect(screen.getByText("requestTitle")).toBeDefined();
+        expect(screen.getByText(name)).toBeDefined();
+        expect(screen.getByText(description)).toBeDefined();
         expect(screen.queryByText(translate("signWith"))).toBeNull();
     });
 
     test("Renders correctly if there is a selectedWallet", () => {
         const walletState = new UseWalletStateMock();
+        const signInRequestMock = new SignInRequestDtoMock();
 
-        render(
-            <SignRequestAppSummary
-                requestTitle={mockRequestTitle}
-                name={mockName}
-                image={mockImage}
-                description={mockDescription}
-                selectedWallet={1}
-                onWalletChange={jest.fn}
-            />,
-        );
+        render(<SignInRequestDetails requestTitle="requestTitle" signInRequest={signInRequestMock} selectedWallet={0} />);
 
-        expect(screen.getByText(mockRequestTitle)).toBeDefined();
-        expect(screen.getByText(mockName)).toBeDefined();
-        expect(screen.getByText(mockDescription)).toBeDefined();
+        const { name, description } = signInRequestMock.app;
+
+        expect(screen.getByText("requestTitle")).toBeDefined();
+        expect(screen.getByText(name)).toBeDefined();
+        expect(screen.getByText(description)).toBeDefined();
         expect(screen.getByText(translate("signWith"))).not.toBeDisabled();
         expect(walletState.mock).toHaveBeenCalled();
     });

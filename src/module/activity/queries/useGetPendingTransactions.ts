@@ -3,15 +3,8 @@ import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { useQuery } from "react-query";
 import Queries from "../../../query/queries";
 import useParsePendingTransactions from "../hook/useParsePendingTransactions";
-import { ParsedPendingTransactions } from "../types";
+import { ParsedPendingTransactions, TransactionRequestStatus } from "../types";
 import { TransactionRequestService } from "module/api/service";
-
-export enum TransactionRequestStatus {
-    PENDING = "pending",
-    SIGNED = "signed",
-    DECLINED = "declined",
-    EXPIRED = "expired",
-}
 
 export default function (): QueryResult<ParsedPendingTransactions[]> {
     const parsePendingTransactions = useParsePendingTransactions();

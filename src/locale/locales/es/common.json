@@ -135,7 +135,6 @@
     "pending": "Pendiente",
     "signed": "Firmada",
     "expired": "Expirada",
-    "expireDate": "Expira en {{hours}}h {{minutes}}min {{seconds}}s",
     "connected": "Conectado",
     "failed": "Fallado",
     "proposed": "Propuesta",
@@ -203,7 +202,6 @@
     "rejectConnection": "Rechaza la conexión",
     "confirmConnectionWith": "Confirmar conexión con",
     "signWith": "Firma con",
-    "signInRequestSuccess": "Petición de inicio de sessión firmada correctamente!",
     "confirmTransaction": "Confirma la transacción",
     "transaction": "transacción",
     "seeInExplorer": "Ver en Explorer",
@@ -215,5 +213,8 @@
     "reject": "Rechazar",
     "rejectTransactionRequestSuccess": "Petición de transacción rechazada correctamente!",
     "noPendingTransactionRequests": "No tienes transacciones pendientes",
-    "copied": "Copiado!"
+    "copied": "Copiado!",
+    "signInRequestSuccess": "Inicio de sessión satisfactorio!",
+    "reviewConnection": "Revisar conexión",
+    "expiresAt": "Expira {{date}}"
 }

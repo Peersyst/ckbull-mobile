@@ -8,9 +8,11 @@ interface SignModalLayoutProps {
     rejectMessage: string;
     onReject: () => void;
     onSign: () => void;
-    loading: boolean;
-    disabled: boolean;
+    signing: boolean;
+    rejecting: boolean;
     children: ReactNode;
+    signingDisabled: boolean;
+    rejectingDisabled: boolean;
 }
 
 export default function SignRequestModalLayout({
@@ -19,8 +21,10 @@ export default function SignRequestModalLayout({
     onReject,
     onSign,
     children,
-    loading,
-    disabled,
+    signing,
+    rejecting,
+    signingDisabled,
+    rejectingDisabled,
 }: SignModalLayoutProps): JSX.Element {
     const translate = useTranslate();
     const [open, setOpen] = useState(false);
@@ -53,13 +57,13 @@ export default function SignRequestModalLayout({
             <Col justifyContent="space-between" style={{ height: "100%" }}>
                 {children}
                 <Col gap={12} justifyContent="center" alignItems="center">
-                    <Button variant="text" onPress={showDialog} fullWidth>
+                    <Button variant="text" onPress={onReject} fullWidth loading={rejecting} disabled={rejectingDisabled}>
                         {translate("rejectConnection")}
                     </Button>
                     <Typography variant="body2Light" textAlign="center" light>
                         {translate("or")}
                     </Typography>
-                    <SwipeButton onSwipe={onSign} loading={loading} disabled={disabled} fullWidth>
+                    <SwipeButton onSwipe={onSign} loading={signing} disabled={signingDisabled} fullWidth>
                         {translate("slideToAccept")}
                     </SwipeButton>
                 </Col>

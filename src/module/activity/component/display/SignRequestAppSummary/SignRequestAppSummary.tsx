@@ -3,26 +3,25 @@ import { DAppImage } from "module/activity/component/display/SignRequestAppSumma
 import config from "config/config";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
 import { useTranslate } from "module/common/hook/useTranslate";
+import { SignInRequestDto } from "module/api/service";
 
-interface SignRequestAppSummaryProps {
+interface SignInRequestSummaryProps {
+    signInRequest: SignInRequestDto;
     requestTitle: string;
-    name: string | undefined;
-    image: string | undefined;
-    description: string | undefined;
     loading?: boolean;
     onWalletChange?: (walletId: number) => void;
     selectedWallet?: number;
 }
 
-export default function SignRequestAppSummary({
+export default function SignInRequestDetails({
     requestTitle,
-    name,
-    image,
-    description,
+    signInRequest,
     loading = false,
     selectedWallet,
     onWalletChange,
-}: SignRequestAppSummaryProps): JSX.Element {
+}: SignInRequestSummaryProps): JSX.Element {
+    const { name, description, image } = signInRequest.app;
+
     const translate = useTranslate();
 
     return (
