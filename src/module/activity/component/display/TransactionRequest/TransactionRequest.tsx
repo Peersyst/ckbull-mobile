@@ -1,4 +1,3 @@
-import { getTimeFromSeconds } from "module/activity/utils/time";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TransactionRequestRoot } from "module/activity/component/display/TransactionRequest/TransactionRequest.styles";
 import { CompleteTransactionRequestDto } from "module/api/service";
