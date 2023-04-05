@@ -1,4 +1,4 @@
-import { SignRequestModalProps } from "module/common/component/feedback/SignTransactionModal/SignRequestModal.types";
+import { SignRequestModalProps } from "module/common/component/feedback/SignRequestModal/SignRequestModal.types";
 import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/ConfirmPinModal";
 import LoadingModal from "module/common/component/feedback/LoadingModal/LoadingModal";
 import { useEffect, useState } from "react";

@@ -29,5 +29,5 @@
     "no_tokens": "There's no tokens yet",
     "no_deposits": "Without deposits",
     "no_withdrawals": "Without withdrawals",
-    "SIGN_IN_REQUEST_ALREADY_SIGNED": "Sign In request already signed"
+    "sign_in_request_already_signed": "Sign In request already signed"
 }

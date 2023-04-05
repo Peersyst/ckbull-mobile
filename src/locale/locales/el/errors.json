@@ -29,5 +29,5 @@
     "no_tokens": "Δεν υπάρχουν token",
     "no_deposits": "Δεν υπάρχουν καταθέσεις",
     "no_withdrawals": "Δεν υπάρχουν αναλήψεις",
-    "SIGN_IN_REQUEST_ALREADY_SIGNED": "Sign In request already signed"
+    "sign_in_request_already_signed": "Sign In request already signed"
 }

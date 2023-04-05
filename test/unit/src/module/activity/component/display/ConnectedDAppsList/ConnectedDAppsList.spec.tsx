@@ -1,11 +1,12 @@
 import { render } from "test-utils";
-import ConnectedSiteList from "module/activity/component/display/ConnectedSiteList/ConnectedSiteList";
+
 import { screen, waitFor } from "@testing-library/react-native";
 import { UseServiceInstanceMock } from "mocks/common";
 import { PartialDappDtoMock } from "mocks/common/activity/partial-dapp-dto.mock";
 import { SignInRequestsService } from "module/api/service";
+import ConnectedDAppsList from "module/activity/component/display/ConnectedSiteList/ConnectedDAppList";
 
-describe("ConnectedSiteList tests", () => {
+describe("ConnectedDAppsList tests", () => {
     let serviceInstance: UseServiceInstanceMock;
 
     beforeEach(() => {
@@ -21,7 +22,7 @@ describe("ConnectedSiteList tests", () => {
             .spyOn(SignInRequestsService, "getSignInRequests")
             .mockResolvedValue([new PartialDappDtoMock(), new PartialDappDtoMock()]);
 
-        render(<ConnectedSiteList />);
+        render(<ConnectedDAppsList />);
 
         await waitFor(() => expect(getConnectedSitesMock).toHaveBeenCalled());
         expect(screen.getAllByText("name")).toHaveLength(2);

@@ -7,7 +7,6 @@ export interface SignInRequestModalProps extends SignInRequestScreenProps, Omit<
 
 const SignInRequestModal = createBackdrop(({ signInRequest, ...modalProps }: SignInRequestModalProps): JSX.Element => {
     const translate = useTranslate();
-
     return (
         <CardSelectModal title={translate("reviewConnection")} dismissal="close" style={{ height: "95%" }} {...modalProps}>
             <SignInRequestScreen signInRequest={signInRequest} />

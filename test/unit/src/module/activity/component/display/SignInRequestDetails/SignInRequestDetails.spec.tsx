@@ -1,13 +1,10 @@
 import { render, translate } from "test-utils";
 import SignInRequestDetails from "module/activity/component/display/SignInRequestDetails/SignInRequestDetails";
 import { screen } from "@testing-library/react-native";
-import { UseServiceInstanceMock } from "mocks/common";
+import { UseServiceInstanceMock, UseWalletStateMock } from "mocks/common";
+import { SignInRequestDtoMock } from "mocks/common/activity/sign-in-request-dto.mock";
 
 describe("SignInRequestDetails tests", () => {
-    const mockName = "name";
-    const mockImage = "image";
-    const mockDescription = "description";
-
     let useServiceInstanceMock: UseServiceInstanceMock;
 
     beforeEach(() => {
@@ -17,10 +14,16 @@ describe("SignInRequestDetails tests", () => {
     afterEach(() => useServiceInstanceMock.restore());
 
     test("Renders correctly without loading", () => {
-        render(<SignInRequestDetails name={mockName} image={mockImage} description={mockDescription} />);
+        const walletState = new UseWalletStateMock();
+        const signInRequestMock = new SignInRequestDtoMock();
 
-        expect(screen.getByText(mockName)).toBeDefined();
-        expect(screen.getByText(mockDescription)).toBeDefined();
+        render(<SignInRequestDetails signInRequest={signInRequestMock} />);
+
+        const { name, description } = signInRequestMock.app;
+
+        expect(screen.getByText(name)).toBeDefined();
+        expect(screen.getByText(description)).toBeDefined();
         expect(screen.getByText(translate("signWith"))).not.toBeDisabled();
+        expect(walletState.mock).toHaveBeenCalled();
     });
 });
