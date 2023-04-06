@@ -198,5 +198,6 @@
     "start_making_transactions": "Para começar a usar a CKBull, envie CKBs, tokens ou NFTs para o endereço da sua carteira e libere o poder da rede Nervos.",
     "start_creating_deposits": "Para criar seu primeiro depósito, envie algum CKB para a DAO Nervos e comece a ganhar recompensas.",
     "withdraw_explanation": "Lembre-se de que cada período de depósito é de 180 Epochs (~ 30 dias) a partir do momento do seu depósito.",
-    "epochs": "Epochs"
+    "epochs": "Epochs",
+    "noConnectedSites": "Nenhum site conectado"
 }

@@ -198,5 +198,6 @@
     "start_creating_deposits": "为了创造你的第一笔存款，向Nervos DAO发送一些CKB，并开始获取奖励。",
     "withdraw_explanation": "请记住，每个存款期是180个epochs（约30天），从你存款的时间开始。",
     "slideToAccept": "滑动以接受",
-    "epochs": "Epochs"
+    "epochs": "Epochs",
+    "noConnectedSites": "没有连接的站点"
 }

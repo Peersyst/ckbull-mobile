@@ -1,8 +1,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ApiException } from '../models/ApiException';
 import type { CreateUserRequest } from '../models/CreateUserRequest';
+import type { CreateVerificationTokenRequest } from '../models/CreateVerificationTokenRequest';
+import type { PrivateUserDto } from '../models/PrivateUserDto';
+import type { UpdateUserRequest } from '../models/UpdateUserRequest';
 import type { UserDto } from '../models/UserDto';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -12,46 +14,77 @@ import { request as __request } from '../core/request';
 export class UserService {
 
     /**
-     * Create user
-     * @param requestBody
-     * @returns ApiException Error
+     * Get user info
      * @returns UserDto
      * @throws ApiError
      */
-    public static userControllerCreate(
+    public static info(): CancelablePromise<UserDto> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/user',
+        });
+    }
+
+    /**
+     * Register a new user
+     * @param requestBody
+     * @returns PrivateUserDto
+     * @throws ApiError
+     */
+    public static register(
         requestBody: CreateUserRequest,
-    ): CancelablePromise<ApiException | UserDto> {
+    ): CancelablePromise<PrivateUserDto> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/users/create',
+            url: '/api/user',
             body: requestBody,
             mediaType: 'application/json',
         });
     }
 
     /**
-     * Show user info
-     * @returns UserDto
-     * @returns ApiException Error
+     * Update user
+     * @param requestBody
+     * @returns any
      * @throws ApiError
      */
-    public static userControllerInfo(): CancelablePromise<UserDto | ApiException> {
+    public static update(
+        requestBody: UpdateUserRequest,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/users/info',
+            method: 'PATCH',
+            url: '/api/user',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 
     /**
-     * Find all users
-     * @returns UserDto
-     * @returns ApiException Error
+     * Delete user
+     * @returns any
      * @throws ApiError
      */
-    public static userControllerFindAll(): CancelablePromise<Array<UserDto> | ApiException> {
+    public static delete(): CancelablePromise<any> {
         return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/users/all',
+            method: 'DELETE',
+            url: '/api/user',
+        });
+    }
+
+    /**
+     * Resends an verification email
+     * @param requestBody
+     * @returns any
+     * @throws ApiError
+     */
+    public static verificationToken(
+        requestBody: CreateVerificationTokenRequest,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/user/verificationToken',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 

@@ -1,4 +1,5 @@
 {
     "enableMainnet": true,
-    "enableSignerApp": true
+    "enableSignerApp": true,
+    "signerUrl": "http://192.168.1.55:3001"
 }
