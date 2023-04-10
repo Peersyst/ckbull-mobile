@@ -7,7 +7,7 @@ import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { useSend } from "module/transaction/hook/useSend";
 import SendModal from "module/transaction/component/core/SendModal/SendModal";
-import CallbackModal from "module/common/component/feedback/CallbackModal/CallbackModal";
+import CallbackModal from "module/common/component/feedback/SignModal/SignModal";
 
 const SendConfirmationScreen = (): JSX.Element => {
     const translate = useTranslate();

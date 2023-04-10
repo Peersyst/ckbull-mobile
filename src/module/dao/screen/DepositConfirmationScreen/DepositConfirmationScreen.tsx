@@ -9,7 +9,7 @@ import { convertCKBToShannons } from "module/wallet/utils/convertCKBToShannons";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { useSettings } from "module/settings/hook/useSettings";
-import CallbackModal from "module/common/component/feedback/CallbackModal/CallbackModal";
+import CallbackModal from "module/common/component/feedback/SignModal/SignModal";
 
 const DepositConfirmationScreen = (): JSX.Element => {
     const translate = useTranslate();

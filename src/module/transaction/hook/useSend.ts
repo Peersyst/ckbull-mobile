@@ -11,7 +11,7 @@ import Queries from "../../../query/queries";
 import { useModal } from "@peersyst/react-native-components";
 import SendModal from "../component/core/SendModal/SendModal";
 import { numberToBN } from "module/common/utils/BalanceOperations/utils/numberToBN";
-import { CallbackStatus } from "../../common/component/feedback/CallbackModal/CallbackModal.types";
+import { CallbackStatus } from "../../common/component/feedback/SignModal/SignModal.types";
 
 export interface UseSendTransactionReturn extends CallbackStatus {
     sendTransaction: () => void | Promise<unknown>;
