@@ -7,7 +7,7 @@ import useRejectSignInRequest from "module/activity/queries/useRejectSignInReque
 import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
 import SignRequestModalLayout from "module/activity/component/layout/SignRequestModalLayout/SignRequestModalLayout";
 import { useTranslate } from "module/common/hook/useTranslate";
-import CallbackModal from "module/common/component/feedback/SignModal/SignModal";
+import SignModal from "module/common/component/feedback/SignModal/SignModal";
 import SignInRequestDetails from "module/activity/component/display/SignRequestAppSummary/SignRequestAppSummary";
 
 export interface SignInRequestScreenProps {
@@ -16,7 +16,7 @@ export interface SignInRequestScreenProps {
 }
 
 const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.Element => {
-    const { signInToken } = signInRequest;
+    const { signInToken, app } = signInRequest;
 
     const { hideModal } = useModal();
     const translate = useTranslate();
@@ -25,7 +25,7 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
 
     const { serviceInstance, network } = useServiceInstance(formWallet);
     const { mutate: sign, isLoading: isSigning, isError: isSignError, isSuccess: isSignSuccess } = useSignSignInRequest(signInToken);
-    const { mutate: decline, isLoading: isRejecting, isSuccess: isRejectSuccess } = useRejectSignInRequest(signInToken);
+    const { mutate: decline, isLoading: isRejecting } = useRejectSignInRequest(signInToken);
     const modalLoading = isSigning || isRejecting;
 
     const closeSignInRequestModal = () => {
@@ -44,8 +44,8 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
     };
 
     return (
-        <CallbackModal
-            callback={handleOnPinConfirmed}
+        <SignModal
+            onSign={handleOnPinConfirmed}
             isLoading={isSigning}
             isError={isSignError}
             isSuccess={isSignSuccess}
@@ -64,14 +64,14 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
                 >
                     <SignInRequestDetails
                         requestTitle={translate("signInRequest")}
-                        signInRequest={signInRequest}
+                        app={app}
                         loading={modalLoading}
                         selectedWallet={formWallet}
                         onWalletChange={setFormWallet}
                     />
                 </SignRequestModalLayout>
             )}
-        </CallbackModal>
+        </SignModal>
     );
 };
 

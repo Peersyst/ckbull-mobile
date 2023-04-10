@@ -27,6 +27,7 @@ export default function SignRequestModalLayout({
     const translate = useTranslate();
     const [open, setOpen] = useState(false);
 
+    const showDialog = () => setOpen(true);
     const hideDialog = () => setOpen(false);
 
     const handleConfirmReject = () => {
@@ -53,7 +54,7 @@ export default function SignRequestModalLayout({
         <Col justifyContent="space-between" style={{ height: "100%" }}>
             {children}
             <Col gap={12} justifyContent="center" alignItems="center">
-                <Button variant="text" onPress={onReject} fullWidth loading={rejecting} disabled={disabled}>
+                <Button variant="text" onPress={showDialog} fullWidth loading={rejecting} disabled={disabled}>
                     {translate("rejectConnection")}
                 </Button>
                 <Typography variant="body2Light" textAlign="center" light>

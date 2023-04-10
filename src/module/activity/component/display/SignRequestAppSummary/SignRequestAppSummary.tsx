@@ -3,25 +3,23 @@ import { DAppImage } from "module/activity/component/display/SignRequestAppSumma
 import config from "config/config";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
 import { useTranslate } from "module/common/hook/useTranslate";
-import { SignInRequestDto } from "module/api/service";
+import { PartialDappDto } from "module/api/service";
 
 interface SignInRequestSummaryProps {
-    signInRequest: SignInRequestDto;
+    app: PartialDappDto;
     requestTitle: string;
     loading?: boolean;
     onWalletChange?: (walletId: number) => void;
     selectedWallet?: number;
 }
 
-export default function SignInRequestDetails({
+export default function SignInRequestSummaryProps({
     requestTitle,
-    signInRequest,
+    app: { name, description, image },
     loading = false,
     selectedWallet,
     onWalletChange,
 }: SignInRequestSummaryProps): JSX.Element {
-    const { name, description, image } = signInRequest.app;
-
     const translate = useTranslate();
 
     return (
@@ -32,7 +30,7 @@ export default function SignInRequestDetails({
                 </Typography>
                 <DAppImage source={{ uri: image || config.defaultDAppImage }} />
                 <Col alignItems="center">
-                    <Typography variant="body3Strong" textAlign="center">
+                    <Typography variant="body3Strong" textAlign="center" numberOfLines={1}>
                         {name}
                     </Typography>
                     <Typography variant="body3Light" textAlign="center" light numberOfLines={1}>

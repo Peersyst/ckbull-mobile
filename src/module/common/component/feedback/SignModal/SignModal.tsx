@@ -4,16 +4,27 @@ import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/Con
 import { useEffect, useState } from "react";
 import { SignModalProps } from "./SignModal.types";
 
-function SignModal({ onExited, children, callback, isLoading, isSuccess, isError, onError, onSuccess, successMessage }: SignModalProps) {
+function SignModal({
+    onExited,
+    children,
+    onSign,
+    isLoading,
+    isSuccess,
+    isError,
+    onError,
+    onSuccess,
+    successMessage,
+    successDetails,
+}: SignModalProps) {
     const translate = useTranslate();
     const [showConfirmation, setShowConfirmation] = useState(false);
 
-    const handleCallback = async () => {
+    const handleOnSign = async () => {
         try {
-            if (callback["then" as keyof typeof SignModal] === "function") {
-                await callback();
+            if (onSign["then" as keyof typeof SignModal] === "function") {
+                await onSign();
             } else {
-                callback();
+                onSign();
             }
         } catch (e) {}
     };
@@ -26,14 +37,14 @@ function SignModal({ onExited, children, callback, isLoading, isSuccess, isError
     return (
         <>
             {children({ showModal: () => setShowConfirmation(true), isError, isSuccess, isLoading: isLoading || showConfirmation })}
-            <ConfirmPinModal open={showConfirmation} onClose={() => setShowConfirmation(false)} onConfirmedExited={handleCallback} />
+            <ConfirmPinModal open={showConfirmation} onClose={() => setShowConfirmation(false)} onConfirmedExited={handleOnSign} />
             <LoadingModal
-                open={false}
                 loading={isLoading}
                 success={isSuccess}
                 error={isError}
                 onExited={onExited}
                 successMessage={successMessage || translate("transaction_completed")}
+                successDetails={successDetails}
             />
         </>
     );

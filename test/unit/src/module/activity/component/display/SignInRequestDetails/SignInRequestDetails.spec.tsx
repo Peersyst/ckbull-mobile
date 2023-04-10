@@ -15,7 +15,7 @@ describe("SignInRequestDetails tests", () => {
 
     test("Renders correctly without a selectedWallet", () => {
         const signInRequestMock = new SignInRequestDtoMock();
-        render(<SignInRequestDetails requestTitle="requestTitle" signInRequest={signInRequestMock} />);
+        render(<SignInRequestDetails requestTitle="requestTitle" app={signInRequestMock.app} />);
         const { name, description } = signInRequestMock.app;
 
         expect(screen.getByText("requestTitle")).toBeDefined();
@@ -28,7 +28,9 @@ describe("SignInRequestDetails tests", () => {
         const walletState = new UseWalletStateMock();
         const signInRequestMock = new SignInRequestDtoMock();
 
-        render(<SignInRequestDetails requestTitle="requestTitle" signInRequest={signInRequestMock} selectedWallet={0} />);
+        render(
+            <SignInRequestDetails requestTitle="requestTitle" app={signInRequestMock.app} selectedWallet={1} onWalletChange={jest.fn} />,
+        );
 
         expect(screen.getByText(signInRequestMock.app.name)).toBeDefined();
         expect(screen.getByText(signInRequestMock.app.description)).toBeDefined();
