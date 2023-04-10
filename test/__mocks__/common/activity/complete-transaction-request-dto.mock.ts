@@ -1,7 +1,7 @@
 import { CompleteTransactionRequestDto } from "module/api/service";
 import { SignInRequestDto } from "../../../../src/module/api/service/models/SignInRequestDto";
 import { TransactionDto } from "../../../../src/module/api/service/models/TransactionDto";
-import { TransactionDtoMock } from "../transaction-dto.mock";
+import { TransactionDtoMock } from "./transaction-dto.mock";
 import { SignInRequestDtoMock } from "./sign-in-request-dto.mock";
 
 export class CompleteTransactionRequestDtoMock implements CompleteTransactionRequestDto {
