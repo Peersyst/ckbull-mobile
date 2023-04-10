@@ -7,7 +7,7 @@ import useRejectSignInRequest from "module/activity/queries/useRejectSignInReque
 import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
 import SignRequestModalLayout from "module/activity/component/layout/SignRequestModalLayout/SignRequestModalLayout";
 import { useTranslate } from "module/common/hook/useTranslate";
-import CallbackModal from "module/common/component/feedback/CallbackModal/CallbackModal";
+import CallbackModal from "module/common/component/feedback/SignModal/SignModal";
 import SignInRequestDetails from "module/activity/component/display/SignRequestAppSummary/SignRequestAppSummary";
 
 export interface SignInRequestScreenProps {
@@ -49,7 +49,7 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
             isLoading={isSigning}
             isError={isSignError}
             isSuccess={isSignSuccess}
-            onExited={isSignSuccess || isSignError ? closeSignInRequestModal : undefined}
+            onExited={closeSignInRequestModal}
             successMessage={translate("signInRequestSuccess")}
         >
             {({ showModal, isSuccess }) => (
@@ -60,8 +60,7 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
                     onSign={showModal}
                     signing={isSigning}
                     rejecting={isRejecting}
-                    signingDisabled={isSuccess || isSignSuccess}
-                    rejectingDisabled={isSuccess || isRejectSuccess}
+                    disabled={isSuccess || isSigning || isRejecting}
                 >
                     <SignInRequestDetails
                         requestTitle={translate("signInRequest")}

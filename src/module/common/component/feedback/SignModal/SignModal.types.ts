@@ -1,17 +1,17 @@
 import { UseModalStateReturn } from "module/common/hook/useModalState";
 
-export type CallbackModalChildrenProps = Pick<UseModalStateReturn, "showModal"> & CallbackStatus;
+export type SignModalChildrenProps = Pick<UseModalStateReturn, "showModal"> & SignStatus;
 
-export interface CallbackStatus {
+export interface SignStatus {
     isLoading: boolean;
     isError: boolean;
     isSuccess: boolean;
 }
 
-export interface SendTransactionModalProps extends CallbackStatus {
+export interface SignModalProps extends SignStatus {
     onExited?: () => unknown;
     onClose?: () => unknown;
-    children: (props: CallbackModalChildrenProps) => JSX.Element;
+    children: (props: SignModalChildrenProps) => JSX.Element;
     callback: () => void | Promise<unknown>;
     onError?: () => unknown;
     onSuccess?: () => unknown;

@@ -8,7 +8,7 @@ import useGetSignInRequest from "module/activity/queries/useGetSignInRequest";
 import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
 import { SignInRequestDto } from "module/api/service";
 import useAddressValidator from "module/common/hook/useAddressValidator";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import sendState from "module/transaction/state/SendState";
 import SendModal from "module/transaction/component/core/SendModal/SendModal";
 
@@ -21,7 +21,7 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
     const [scanQr, setScanQr] = useState(false);
     const { showModal } = useModal();
     const validAddress = useAddressValidator();
-    const [, setSendState] = useRecoilState(sendState);
+    const setSendState = useSetRecoilState(sendState);
 
     const handleSuccess = (request: SignInRequestDto) => showModal(SignInRequestModal, { signInRequest: request });
 

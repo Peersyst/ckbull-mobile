@@ -2,25 +2,15 @@ import LoadingModal from "module/common/component/feedback/LoadingModal/LoadingM
 import { useTranslate } from "module/common/hook/useTranslate";
 import ConfirmPinModal from "module/settings/components/core/ConfirmPinModal/ConfirmPinModal";
 import { useEffect, useState } from "react";
-import { SendTransactionModalProps } from "./CallbackModal.types";
+import { SignModalProps } from "./SignModal.types";
 
-function CallbackModal({
-    onExited,
-    children,
-    callback,
-    isLoading,
-    isSuccess,
-    isError,
-    onError,
-    onSuccess,
-    successMessage,
-}: SendTransactionModalProps) {
+function SignModal({ onExited, children, callback, isLoading, isSuccess, isError, onError, onSuccess, successMessage }: SignModalProps) {
     const translate = useTranslate();
     const [showConfirmation, setShowConfirmation] = useState(false);
 
     const handleCallback = async () => {
         try {
-            if (callback["then" as keyof typeof CallbackModal] === "function") {
+            if (callback["then" as keyof typeof SignModal] === "function") {
                 await callback();
             } else {
                 callback();
@@ -49,4 +39,4 @@ function CallbackModal({
     );
 }
 
-export default CallbackModal;
+export default SignModal;

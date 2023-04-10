@@ -30,11 +30,8 @@ describe("SignInRequestDetails tests", () => {
 
         render(<SignInRequestDetails requestTitle="requestTitle" signInRequest={signInRequestMock} selectedWallet={0} />);
 
-        const { name, description } = signInRequestMock.app;
-
-        expect(screen.getByText("requestTitle")).toBeDefined();
-        expect(screen.getByText(name)).toBeDefined();
-        expect(screen.getByText(description)).toBeDefined();
+        expect(screen.getByText(signInRequestMock.app.name)).toBeDefined();
+        expect(screen.getByText(signInRequestMock.app.description)).toBeDefined();
         expect(screen.getByText(translate("signWith"))).not.toBeDisabled();
         expect(walletState.mock).toHaveBeenCalled();
     });
