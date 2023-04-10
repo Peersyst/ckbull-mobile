@@ -29,7 +29,6 @@ export default function SignRequestModalLayout({
     const translate = useTranslate();
     const [open, setOpen] = useState(false);
 
-    const showDialog = () => setOpen(true);
     const hideDialog = () => setOpen(false);
 
     const handleConfirmReject = () => {
