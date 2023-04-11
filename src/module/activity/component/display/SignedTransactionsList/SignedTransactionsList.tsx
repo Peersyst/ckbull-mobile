@@ -1,17 +1,18 @@
 import EmptyListComponent from "module/common/component/display/EmptyListComponent/EmptyListComponent";
 import MainList from "module/main/component/display/MainList/MainList";
-import useGetSignedTransactionRequest from "module/activity/queries/useGetSignedTransactions";
 import TransactionCard from "module/transaction/component/display/TransactionCard/TransactionCard";
+import useGetSignedFullTransactions from "module/activity/hook/useGetSignedFullTransactions";
 
 const SignedTransactionsList = (): JSX.Element => {
-    const { data: signedTransactions, isLoading, refetch } = useGetSignedTransactionRequest();
+    const { fullTransactions, refetch, isLoading } = useGetSignedFullTransactions();
 
     return (
         <MainList
-            data={signedTransactions}
+            data={fullTransactions}
             onRefresh={refetch}
-            renderItem={({ item: signedTransaction }) => <TransactionCard transaction={signedTransaction} />}
+            renderItem={({ item: signedFullTransaction }) => <TransactionCard transaction={signedFullTransaction} />}
             ListEmptyComponent={isLoading ? undefined : <EmptyListComponent />}
+            loading={isLoading}
             keyExtractor={(_, index) => index.toString()}
         />
     );

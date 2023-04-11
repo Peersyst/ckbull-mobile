@@ -38,7 +38,10 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
     const handleSign = () => {
         signTransaction({
             transactionRequestToken: transactionToken,
-            transactionBody: { signInToken, transaction, signedTransaction: "temporalString" },
+            transactionBody: {
+                signInToken,
+                transaction: { ...transaction, transactionHash: "0x09bfd20315951280db4412eb8baead64a9ff092fc9c16a8e0005f2f58ad56ac7" },
+            },
         });
     };
 
@@ -49,7 +52,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
             isSuccess={isSignSuccess}
             isError={isSignError}
             successMessage={translate("signedSuccess")}
-            successDetails={<SignTransactionRequestSuccess transactionHash={transaction.transactionHash} />}
+            successDetails={<SignTransactionRequestSuccess transactionHash={transaction.transactionHash!} />}
             onExited={isSignSuccess || isSignError ? closeTransactionRequestModal : undefined}
         >
             {({ showModal, isSuccess }) => (

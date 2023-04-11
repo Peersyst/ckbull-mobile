@@ -1,13 +1,25 @@
-import { QueryResult } from "query-utils";
+import { QueryResult, useQuery } from "query-utils";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
-import { useQuery } from "react-query";
 import Queries from "../../../query/queries";
-import { FullTransaction } from "module/common/service/CkbSdkService.types";
+import { TransactionRequestService } from "module/api/service";
+import { CompleteTransactionRequestDto } from "../../api/service/models/CompleteTransactionRequestDto";
 
-export default function (): QueryResult<FullTransaction[]> {
-    const { index: usedIndex, network, queryEnabled } = useServiceInstance();
+export enum TransactionRequestStatus {
+    PENDING = "pending",
+    SIGNED = "signed",
+    EXPIRED = "expired",
+    DECLINED = "declined",
+}
 
-    return useQuery([Queries.SIGNER_APP_GET_SIGNED_TRANSACTIONS, usedIndex, network], () => undefined, {
-        enabled: queryEnabled,
-    });
+export default function (): QueryResult<CompleteTransactionRequestDto[]> {
+    const { index: usedIndex, network, queryEnabled, serviceInstance } = useServiceInstance();
+
+    return useQuery(
+        [Queries.SIGNER_APP_GET_SIGNED_TRANSACTIONS, usedIndex, network],
+        () => TransactionRequestService.getTransactionRequests(TransactionRequestStatus.SIGNED, network, serviceInstance?.getAddress()),
+        {
+            refetchInterval: 2000,
+            enabled: queryEnabled,
+        },
+    );
 }

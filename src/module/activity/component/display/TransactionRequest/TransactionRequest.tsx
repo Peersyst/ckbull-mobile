@@ -5,6 +5,7 @@ import { TransactionRequestRoot } from "module/activity/component/display/Transa
 import { CompleteTransactionRequestDto } from "module/api/service";
 import { useModal } from "@peersyst/react-native-components";
 import TransactionRequestModal from "../../navigation/TransactionRequestModal/TransactionRequestModal";
+import { capitalize } from "@peersyst/react-utils";
 
 interface TransactionRequestProps {
     transaction: CompleteTransactionRequestDto;
@@ -15,7 +16,6 @@ const TransactionRequest = ({ transaction: transactionRequest }: TransactionRequ
         signInRequest: {
             app: { name, image },
         },
-        transaction: { amount },
         status,
         expiresAt,
     } = transactionRequest;
@@ -32,9 +32,8 @@ const TransactionRequest = ({ transaction: transactionRequest }: TransactionRequ
             status={status}
             imageUrl={image}
             title={name}
-            description={status}
+            description={capitalize(status)}
             details={expiresAt ? translate("expireDate", getTimeFromSeconds(expirationTimestamp - currentTimestamp)) : undefined}
-            amount={amount}
             actionElement={actionElement}
             onAction={() => showModal(TransactionRequestModal, { transactionRequest })}
         />
