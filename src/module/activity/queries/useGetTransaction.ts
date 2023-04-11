@@ -1,7 +1,7 @@
 import Queries from "../../../query/queries";
 import { useQuery } from "react-query";
 
-export default function useGetTransaction() {
+export default function useGetTransaction(id: number) {
     const mockCKBSdkTransaction = () => {
         return {
             senders: [

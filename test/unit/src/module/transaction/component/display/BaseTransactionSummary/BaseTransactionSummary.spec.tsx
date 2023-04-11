@@ -1,15 +1,15 @@
-import BaseSendSummary from "module/transaction/component/display/BaseTransactionSummary/BaseTransactionSummary";
+import BaseTransactionSummary from "module/transaction/component/display/BaseTransactionSummary/BaseTransactionSummary";
 import { Typography } from "@peersyst/react-native-components";
 import { render } from "test-utils";
 import { NftTokenMock, TokenAmountMock } from "test-mocks";
 import { config } from "config";
 
-describe("Test for the BaseSendSummary", () => {
+describe("Test for the BaseTransactionSummary", () => {
     test("Renders correctly with ckbs", () => {
         const screen = render(
-            <BaseSendSummary amount={1000} showTotal>
+            <BaseTransactionSummary amount={1000} showTotal>
                 <Typography variant="body1">Children</Typography>
-            </BaseSendSummary>,
+            </BaseTransactionSummary>,
         );
         expect(screen.getByText("1,000 " + config.tokenName)).toBeDefined();
         //Fee
@@ -22,9 +22,9 @@ describe("Test for the BaseSendSummary", () => {
     test("Renders correctly with tokens", () => {
         const token = new TokenAmountMock();
         const screen = render(
-            <BaseSendSummary amount={20} token={token}>
+            <BaseTransactionSummary amount={20} token={token}>
                 <Typography variant="body1">Children</Typography>
-            </BaseSendSummary>,
+            </BaseTransactionSummary>,
         );
         screen.debug();
         expect(screen.getByText("20 " + token.type.tokenName)).toBeDefined();
@@ -34,9 +34,9 @@ describe("Test for the BaseSendSummary", () => {
     test("Renders correctly with nfts", () => {
         const nft = new NftTokenMock();
         const screen = render(
-            <BaseSendSummary amount={1} nft={nft}>
+            <BaseTransactionSummary amount={1} nft={nft}>
                 <Typography variant="body1">Children</Typography>
-            </BaseSendSummary>,
+            </BaseTransactionSummary>,
         );
         expect(screen.getByText(nft.nftName)).toBeDefined();
         expect(screen.getByText("Children")).toBeDefined();

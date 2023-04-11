@@ -8,7 +8,8 @@ import { CompleteTransactionRequestDto } from "module/api/service";
 import SignRequestModal from "module/common/component/feedback/SignRequestModal/SignRequestModal";
 import { useTranslate } from "module/common/hook/useTranslate";
 import SignTransactionRequestSuccess from "../../component/display/SignTransactionRequestSuccess/SignTransactionRequestSuccess";
-import TransactionSummary from "module/activity/component/display/TransactionSummary/TransactionSummary";
+import SignerTransactionSummary from "module/activity/component/display/SignerTransactionSummary/SignerTransactionSummary";
+import useGetTransaction from "module/activity/queries/useGetTransaction";
 
 export interface TransactionRequestScreenProps {
     transactionRequest: CompleteTransactionRequestDto;
@@ -27,6 +28,10 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
     const { hideModal } = useModal();
 
     const closeTransactionRequestModal = () => hideModal(TransactionRequestModal.id);
+
+    const { data: { senders, receivers, amount } = { senders: [], receivers: [], amount: 0 } } = useGetTransaction(
+        transactionRequest.transaction.id,
+    );
 
     const { mutate: signTransaction, isLoading: isSigning, isSuccess: isSignSuccess, isError: isSignError } = useSignTransactionRequest();
     const { mutate: rejectTransaction, isLoading: isRejecting } = useRejectTransactionRequest();
@@ -69,7 +74,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
                             description={description}
                             image={image}
                         />
-                        <TransactionSummary showTotal />
+                        <SignerTransactionSummary senders={senders} receivers={receivers} amount={amount} showTotal />
                     </Col>
                 </SignRequestModalLayout>
             )}

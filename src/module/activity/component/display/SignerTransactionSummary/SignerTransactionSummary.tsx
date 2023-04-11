@@ -1,21 +1,21 @@
 import { Col, Typography } from "@peersyst/react-native-components";
 import { formatHash } from "@peersyst/react-utils";
-import useGetTransaction from "module/activity/queries/useGetTransaction";
 import { useTranslate } from "module/common/hook/useTranslate";
 import BaseTransactionSummary, {
     BaseTransactionSummaryProps,
 } from "module/transaction/component/display/BaseTransactionSummary/BaseTransactionSummary";
 import SummaryField from "module/transaction/component/display/SummaryField/SummaryField";
 
-type TransactionSummaryProps = Omit<BaseTransactionSummaryProps, "amount">;
+interface SignerTransactionSummaryProps extends BaseTransactionSummaryProps {
+    senders: string[];
+    receivers: string[];
+}
 
-const TransactionSummary = ({ ...rest }: TransactionSummaryProps): JSX.Element => {
+const SignerTransactionSummary = ({ senders, receivers, ...rest }: SignerTransactionSummaryProps): JSX.Element => {
     const translate = useTranslate();
 
-    const { data: { senders, receivers, amount } = { senders: [], receivers: [], amount: 0 } } = useGetTransaction();
-
     return (
-        <BaseTransactionSummary amount={amount} {...rest}>
+        <BaseTransactionSummary {...rest}>
             <Col gap="7%" style={{ alignSelf: "flex-start" }}>
                 {senders.length && (
                     <SummaryField label={translate("from")}>
@@ -40,4 +40,4 @@ const TransactionSummary = ({ ...rest }: TransactionSummaryProps): JSX.Element =
     );
 };
 
-export default TransactionSummary;
+export default SignerTransactionSummary;
