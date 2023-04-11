@@ -12,7 +12,7 @@ import { TokenAmount } from "module/token/types";
 import { Nft } from "ckb-peersyst-sdk";
 import { useSettings } from "module/settings/hook/useSettings";
 
-export interface BaseSendSummaryFullProps {
+export interface BaseTransactionSummaryFullProps {
     amount: BalanceProps["balance"];
     children: ReactElement;
     showTotal?: boolean;
@@ -20,9 +20,9 @@ export interface BaseSendSummaryFullProps {
     token?: TokenAmount;
 }
 
-export type BaseSendSummaryProps = Omit<BaseSendSummaryFullProps, "children">;
+export type BaseTransactionSummaryProps = Omit<BaseTransactionSummaryFullProps, "children">;
 
-const BaseSendSummary = ({ amount, token, children, showTotal, nft }: BaseSendSummaryFullProps): JSX.Element => {
+const BaseTransactionSummary = ({ amount, token, children, showTotal, nft }: BaseTransactionSummaryFullProps): JSX.Element => {
     const translate = useTranslate();
     const { fee } = useSettings();
     const feeValue = convertShannonsToCKB(fee);
@@ -63,4 +63,4 @@ const BaseSendSummary = ({ amount, token, children, showTotal, nft }: BaseSendSu
     );
 };
 
-export default BaseSendSummary;
+export default BaseTransactionSummary;

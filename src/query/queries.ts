@@ -1,6 +1,7 @@
 enum Queries {
     GET_BALANCE = "balance",
     GET_TRANSACTIONS = "transactions",
+    GET_TRANSACTION = "transaction",
     GET_NFTS = "nfts",
     GET_TOKENS = "tokens",
     SIGNER_APP_GET_SIGN_IN_REQUEST = "sign_in_request",

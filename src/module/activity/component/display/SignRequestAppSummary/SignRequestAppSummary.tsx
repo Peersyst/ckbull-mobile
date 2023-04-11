@@ -1,4 +1,4 @@
-import { Col, Typography } from "@peersyst/react-native-components";
+import { Col, Row, Typography } from "@peersyst/react-native-components";
 import { DAppImage } from "module/activity/component/display/SignRequestAppSummary/SignRequestAppSummary.styles";
 import config from "config/config";
 import WalletSelector from "module/wallet/component/input/WalletSelector/WalletSelector";
@@ -26,17 +26,14 @@ export default function SignRequestAppSummary({
     const translate = useTranslate();
 
     return (
-        <Col gap={24} flex={1}>
+        <Col gap={24} flex={1} style={{ marginHorizontal: 20 }}>
             <Col gap={24} alignItems="center">
-                <Typography variant="body2Strong" textAlign="center">
-                    {requestTitle}
-                </Typography>
                 <DAppImage source={{ uri: image || config.defaultDAppImage }} />
-                <Col alignItems="center">
+                <Col>
                     <Typography variant="body3Strong" textAlign="center">
                         {name}
                     </Typography>
-                    <Typography variant="body3Light" textAlign="center" light numberOfLines={1}>
+                    <Typography variant="body3Light" textAlign="center" light numberOfLines={2}>
                         {description}
                     </Typography>
                 </Col>

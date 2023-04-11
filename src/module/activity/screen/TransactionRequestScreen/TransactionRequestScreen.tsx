@@ -8,6 +8,7 @@ import { CompleteTransactionRequestDto } from "module/api/service";
 import SignRequestModal from "module/common/component/feedback/SignRequestModal/SignRequestModal";
 import { useTranslate } from "module/common/hook/useTranslate";
 import SignTransactionRequestSuccess from "../../component/display/SignTransactionRequestSuccess/SignTransactionRequestSuccess";
+import TransactionSummary from "module/activity/component/display/TransactionSummary/TransactionSummary";
 
 export interface TransactionRequestScreenProps {
     transactionRequest: CompleteTransactionRequestDto;
@@ -38,7 +39,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
     const handleSign = () => {
         signTransaction({
             transactionRequestToken: transactionToken,
-            transactionBody: { signInToken, transaction, signedTransaction: "temporalString" },
+            transactionBody: { signInToken, transaction },
         });
     };
 
@@ -49,7 +50,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
             isSuccess={isSignSuccess}
             isError={isSignError}
             successMessage={translate("signedSuccess")}
-            successDetails={<SignTransactionRequestSuccess transactionHash={transaction.transactionHash} />}
+            successDetails={<SignTransactionRequestSuccess transactionHash={transaction.transactionHash!} />}
             onExited={isSignSuccess || isSignError ? closeTransactionRequestModal : undefined}
         >
             {({ showModal, isSuccess }) => (
@@ -61,13 +62,14 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
                     loading={isSigning || isRejecting}
                     disabled={isSuccess}
                 >
-                    <Col justifyContent="center" onStartShouldSetResponder={() => true}>
+                    <Col gap={20} justifyContent="center">
                         <SignRequestAppSummary
                             requestTitle={translate("confirmTransaction")}
                             name={name}
                             description={description}
                             image={image}
                         />
+                        <TransactionSummary showTotal />
                     </Col>
                 </SignRequestModalLayout>
             )}

@@ -1,4 +1,4 @@
-import BaseSendSummary from "module/transaction/component/display/BaseSendSummary/BaseSendSummary";
+import BaseSendSummary from "module/transaction/component/display/BaseTransactionSummary/BaseTransactionSummary";
 import { Typography } from "@peersyst/react-native-components";
 import { render } from "test-utils";
 import { NftTokenMock, TokenAmountMock } from "test-mocks";

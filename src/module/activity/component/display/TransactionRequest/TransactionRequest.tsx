@@ -15,7 +15,6 @@ const TransactionRequest = ({ transaction: transactionRequest }: TransactionRequ
         signInRequest: {
             app: { name, image },
         },
-        transaction: { amount },
         status,
         expiresAt,
     } = transactionRequest;
@@ -34,7 +33,6 @@ const TransactionRequest = ({ transaction: transactionRequest }: TransactionRequ
             title={name}
             description={status}
             details={expiresAt ? translate("expireDate", getTimeFromSeconds(expirationTimestamp - currentTimestamp)) : undefined}
-            amount={amount}
             actionElement={actionElement}
             onAction={() => showModal(TransactionRequestModal, { transactionRequest })}
         />
