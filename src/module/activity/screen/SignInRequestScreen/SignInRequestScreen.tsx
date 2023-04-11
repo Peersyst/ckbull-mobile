@@ -8,7 +8,7 @@ import useRejectSignInRequest from "module/activity/queries/useRejectSignInReque
 import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
 import SignRequestModalLayout from "module/activity/component/layout/SignRequestModalLayout/SignRequestModalLayout";
 import { useTranslate } from "module/common/hook/useTranslate";
-import CallbackModal from "module/common/component/feedback/SignModal/SignModal";
+import SignModal from "module/common/component/feedback/SignModal/SignModal";
 
 export interface SignInRequestScreenProps {
     signInRequest: SignInRequestDto;
@@ -43,7 +43,7 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
     };
 
     return (
-        <CallbackModal
+        <SignModal
             callback={handleOnPinConfirmed}
             isLoading={isSigning}
             isError={isSignError}
@@ -67,7 +67,7 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
                     />
                 </SignRequestModalLayout>
             )}
-        </CallbackModal>
+        </SignModal>
     );
 };
 
