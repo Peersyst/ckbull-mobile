@@ -28,5 +28,6 @@
     "no_nfts": "目前还没有NFTs",
     "no_tokens": "还没有代币",
     "no_deposits": "没有存款",
-    "no_withdrawals": "没有提款"
+    "no_withdrawals": "没有提款",
+    "sign_in_request_already_signed": "Sign In request already signed"
 }

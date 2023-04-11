@@ -5,9 +5,9 @@ import useWalletState from "module/wallet/hook/useWalletState";
 import SendSummary from "./SendSummary";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
-import SendTransactionModal from "module/transaction/component/feedback/SendTransactionModal/SendTransactionModal";
 import { useSend } from "module/transaction/hook/useSend";
 import SendModal from "module/transaction/component/core/SendModal/SendModal";
+import CallbackModal from "module/common/component/feedback/SignModal/SignModal";
 
 const SendConfirmationScreen = (): JSX.Element => {
     const translate = useTranslate();
@@ -18,7 +18,7 @@ const SendConfirmationScreen = (): JSX.Element => {
     const senderWallet = wallets[senderWalletIndex!];
     const { name: senderName, index } = senderWallet;
     const { serviceInstance } = useServiceInstance(index);
-    const sendTransactionWithStatus = useSend();
+    const { sendTransaction, ...restSendTransactionWithStatus } = useSend();
     const { hideModal } = useModal();
 
     function closeSendModal() {
@@ -26,7 +26,7 @@ const SendConfirmationScreen = (): JSX.Element => {
     }
 
     return (
-        <SendTransactionModal {...sendTransactionWithStatus} onError={closeSendModal} onExited={closeSendModal}>
+        <CallbackModal callback={sendTransaction} {...restSendTransactionWithStatus} onError={closeSendModal} onExited={closeSendModal}>
             {({ showModal, isSuccess, isLoading }) => (
                 <Col gap={24} onStartShouldSetResponder={() => true}>
                     <SendSummary
@@ -47,7 +47,7 @@ const SendConfirmationScreen = (): JSX.Element => {
                     </SwipeButton>
                 </Col>
             )}
-        </SendTransactionModal>
+        </CallbackModal>
     );
 };
 

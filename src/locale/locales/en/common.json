@@ -199,5 +199,10 @@
     "start_creating_deposits": "To create your first deposit send some CKB to the Nervos DAO and start eraning rewards.",
     "withdraw_explanation": "Remember that each deposit period is 180 epochs (~30 days) starting from the time of your deposit.",
     "epochs": "Epochs",
-    "noConnectedSites": "No connected sites"
+    "noConnectedSites": "No connected sites",
+    "rejectConnection": "Reject the connection",
+    "confirmConnectionWith": "Confirm connection with",
+    "signWith": "Sign with",
+    "signInRequestSuccess": "Sign in request signed successfully!",
+    "reviewConnection": "Review connection"
 }

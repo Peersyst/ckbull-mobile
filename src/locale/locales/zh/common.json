@@ -199,5 +199,10 @@
     "withdraw_explanation": "请记住，每个存款期是180个epochs（约30天），从你存款的时间开始。",
     "slideToAccept": "滑动以接受",
     "epochs": "Epochs",
-    "noConnectedSites": "没有连接的站点"
+    "noConnectedSites": "没有连接的站点",
+    "rejectConnection": "Reject the connection",
+    "confirmConnectionWith": "Confirm connection with",
+    "signWith": "Sign with",
+    "signInRequestSuccess": "Sign in request signed successfully!",
+    "reviewConnection": "Review connection"
 }
