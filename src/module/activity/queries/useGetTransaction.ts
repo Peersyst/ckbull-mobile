@@ -14,6 +14,12 @@ const mockCKBSdkTransaction = (id: number) => {
     };
 };
 
+/**
+ * This is a mock function, it will be replaced by the real function when SDK calls are ready
+ * @param id The Transaction id
+ * @returns the sendes, receivers, amount, type and id of the transaction with id = id
+ */
+
 export default function useGetTransaction(id: number) {
     return useQuery([Queries.GET_TRANSACTION], () => mockCKBSdkTransaction(id));
 }
