@@ -216,5 +216,6 @@
     "copied": "Copied!",
     "signInRequestSuccess": "Logged in successfully!",
     "reviewConnection": "Review connection",
-    "expiresAt": "Expires at {{date}}"
+    "expiresAt": "Expires at {{date}}",
+    "signInRequest": "Sign in request"
 }

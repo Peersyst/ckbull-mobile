@@ -216,5 +216,6 @@
     "copied": "Copiado!",
     "signInRequestSuccess": "Inicio de sessión satisfactorio!",
     "reviewConnection": "Revisar conexión",
-    "expiresAt": "Expira {{date}}"
+    "expiresAt": "Expira {{date}}",
+    "signInRequest": "Petición de inicio de sessión"
 }
