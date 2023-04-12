@@ -24,7 +24,7 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
 
     const { serviceInstance, network } = useServiceInstance(formWallet);
     const { mutate: sign, isLoading: isSigning, isError: isSignError, isSuccess: isSignSuccess } = useSignSignInRequest(signInToken);
-    const { mutate: decline, isLoading: isRejecting, isSuccess: isRejectSuccess } = useRejectSignInRequest(signInToken);
+    const { mutate: decline, isLoading: isRejecting } = useRejectSignInRequest(signInToken);
     const modalLoading = isSigning || isRejecting;
 
     const closeSignInRequestModal = () => {
