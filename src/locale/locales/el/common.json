@@ -215,5 +215,6 @@
     "reject": "Reject",
     "rejectTransactionRequestSuccess": "Transaction request rejected successfully!",
     "noPendingTransactionRequests": "There are no pending transactions",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "noSignedTransactions": "There are no signed transactions"
 }

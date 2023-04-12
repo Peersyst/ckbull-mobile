@@ -18,7 +18,7 @@ export default function (): QueryResult<CompleteTransactionRequestDto[]> {
         [Queries.SIGNER_APP_GET_SIGNED_TRANSACTIONS, usedIndex, network],
         () => TransactionRequestService.getTransactionRequests(TransactionRequestStatus.SIGNED, network, serviceInstance?.getAddress()),
         {
-            refetchInterval: 2000,
+            refetchInterval: 3000,
             enabled: queryEnabled,
         },
     );

@@ -215,5 +215,6 @@
     "reject": "Rechazar",
     "rejectTransactionRequestSuccess": "Petición de transacción rechazada correctamente!",
     "noPendingTransactionRequests": "No tienes transacciones pendientes",
-    "copied": "Copiado!"
+    "copied": "Copiado!",
+    "noSignedTransactions": "No tienes transacciones firmadas"
 }
