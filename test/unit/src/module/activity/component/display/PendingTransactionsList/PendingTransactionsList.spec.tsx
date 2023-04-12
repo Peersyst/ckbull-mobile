@@ -25,6 +25,6 @@ describe("PendingTransactionsList tests", () => {
         render(<PendingTransactionsList />);
         await waitFor(() => expect(getPendingTransactionsRequestMock).toHaveBeenCalled());
         expect(screen.getAllByText("name")).toHaveLength(2);
-        expect(screen.getAllByText("pending")).toHaveLength(2);
+        expect(screen.getAllByText("Pending")).toHaveLength(2);
     });
 });
