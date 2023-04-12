@@ -535,9 +535,32 @@ export class WalletService {
     // -- Partial transaction functions --
     // -----------------------------------
     async getPartialTransactionTypeFromOutput(tx: TransactionSkeletonType): Promise<TransactionType> {
+        if (tx.get("inputs").size === 1) {
+            // It's either unlock or withdraw
+            const input = tx.get("inputs").get(0)!;
+            if (!input.cell_output.type) {
+                throw new Error("Invalid inputs kind");
+            }
+
+            const scriptType: ScriptType = {
+                codeHash: input.cell_output.type.code_hash,
+                hashType: input.cell_output.type.hash_type as HashType,
+                args: input.cell_output.type.args,
+            };
+            if (!TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.DAO!)) {
+                throw new Error("Invalid inputs kind");
+            }
+
+            if (input.data.length === 18 && Number(utils.readBigUInt64LE(input.data)) === 0) {
+                // Cell is deposit type, so we are withdrawing
+                return TransactionType.WITHDRAW_DAO;
+            }
+            return TransactionType.UNLOCK_DAO;
+        }
+
         // TODO: Define how they send us unlock and withdraw DAO transactions
         if (tx.get("outputs").size !== 1) {
-            throw new Error("Invalid outputs length");
+            throw new Error("Invalid outputs or inputs length");
         }
 
         const output = tx.get("outputs").get(0)!;
@@ -559,8 +582,6 @@ export class WalletService {
             if (output.data.length === 18 && Number(utils.readBigUInt64LE(output.data)) === 0) {
                 return TransactionType.DEPOSIT_DAO;
             }
-            // TODO: Withdraw, like unlock should be defined by input not output
-            // return TransactionType.WITHDRAW_DAO;
         }
 
         if (await this.nftService.isScriptNftScript(scriptType)) {
