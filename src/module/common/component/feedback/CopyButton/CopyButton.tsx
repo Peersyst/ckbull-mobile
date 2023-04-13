@@ -4,8 +4,7 @@ import { useTranslate } from "module/common/hook/useTranslate";
 import { useState } from "react";
 import Button from "../../input/Button/Button";
 import { ButtonProps } from "../../input/Button/Button.types";
-import { useCopyToClipboard, useToast } from "@peersyst/react-native-components";
-import * as Clipboard from "expo-clipboard";
+import { useCopyToClipboard } from "@peersyst/react-native-components";
 
 export interface CopyButtonProps extends Omit<ButtonProps, "children" | "leftIcon" | "onPress" | "loading"> {
     copyText: string;
