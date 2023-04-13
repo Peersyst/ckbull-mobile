@@ -5,8 +5,12 @@ import { MainButtonRoot } from "./MainButton.styles";
 import DarkThemeProvider from "module/common/component/util/ThemeProvider/DarkThemeProvider";
 import QrScanner from "module/common/component/input/QrScanner/QrScanner";
 import useGetSignInRequest from "module/activity/queries/useGetSignInRequest";
-import { SignInRequestDto } from "module/api/common";
 import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
+import { SignInRequestDto } from "module/api/service";
+import useAddressValidator from "module/common/hook/useAddressValidator";
+import { useSetRecoilState } from "recoil";
+import sendState from "module/transaction/state/SendState";
+import SendModal from "module/transaction/component/core/SendModal/SendModal";
 
 export interface MainButtonProps extends Omit<ButtonProps, "children" | "rounded" | "leftIcon" | "rightIcon" | "variant" | "size"> {
     icon: ReactElement;
@@ -16,15 +20,20 @@ export interface MainButtonProps extends Omit<ButtonProps, "children" | "rounded
 const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Element => {
     const [scanQr, setScanQr] = useState(false);
     const { showModal } = useModal();
+    const validAddress = useAddressValidator();
+    const setSendState = useSetRecoilState(sendState);
 
     const handleSuccess = (request: SignInRequestDto) => showModal(SignInRequestModal, { signInRequest: request });
 
-    const { mutate: getSignInRequest } = useGetSignInRequest({ onSuccess: handleSuccess });
-
-    const handleSignInRequest = (data: string) => {
+    const handleOnScan = (data: string) => {
+        if (validAddress(data)) {
+            setSendState((old) => ({ ...old, receiverAddress: data }));
+            showModal(SendModal);
+        } else getSignInRequest(data);
         setScanQr(false);
-        getSignInRequest(data);
     };
+
+    const { mutate: getSignInRequest } = useGetSignInRequest({ onSuccess: handleSuccess });
 
     return (
         <DarkThemeProvider>
@@ -36,9 +45,7 @@ const MainButton = ({ icon, label, ...buttonProps }: MainButtonProps): JSX.Eleme
                             {label}
                         </Typography>
                     </Col>
-                    {scanQr && (
-                        <QrScanner open={scanQr} onClose={() => setScanQr(false)} onScan={({ data }) => handleSignInRequest(data)} />
-                    )}
+                    {scanQr && <QrScanner open={scanQr} onClose={() => setScanQr(false)} onScan={({ data }) => handleOnScan(data)} />}
                 </>
             </MainButtonRoot>
         </DarkThemeProvider>

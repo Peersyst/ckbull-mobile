@@ -6,13 +6,16 @@ import { UseServiceInstanceMock } from "../../../../../../../__mocks__/common/wa
 
 describe("SignTransactionRequestSuccess tests", () => {
     const mockTransactionHash = "transactionHash";
+    let serviceInstance: UseServiceInstanceMock;
 
     beforeEach(() => {
-        jest.restoreAllMocks();
+        serviceInstance = new UseServiceInstanceMock();
     });
 
+    afterEach(() => serviceInstance.restore());
+
     test("Renders correctly", () => {
-        new UseServiceInstanceMock();
+        serviceInstance = new UseServiceInstanceMock();
         render(<SignTransactionRequestSuccess transactionHash={mockTransactionHash} />);
 
         expect(screen.getByText(capitalize(translate("transaction")))).toBeDefined();
@@ -22,7 +25,7 @@ describe("SignTransactionRequestSuccess tests", () => {
     });
 
     test("Calls openURL with mainnet explorer", () => {
-        new UseServiceInstanceMock({ network: "mainnet" });
+        serviceInstance = new UseServiceInstanceMock({ network: "mainnet" });
         const openUrl = jest.spyOn(Linking, "openURL");
 
         render(<SignTransactionRequestSuccess transactionHash={mockTransactionHash} />);
@@ -36,7 +39,7 @@ describe("SignTransactionRequestSuccess tests", () => {
     });
 
     test("Calls openURL with testnet explorer", () => {
-        new UseServiceInstanceMock({ network: "testnet" });
+        serviceInstance = new UseServiceInstanceMock({ network: "testnet" });
         const openUrl = jest.spyOn(Linking, "openURL");
 
         render(<SignTransactionRequestSuccess transactionHash={mockTransactionHash} />);

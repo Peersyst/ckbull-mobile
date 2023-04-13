@@ -1,6 +1,6 @@
-import { SignInRequestDto } from "module/api/service";
 import { PartialDappDtoMock } from "./partial-dapp-dto.mock";
 import { AccountMetadataDtoMock } from "./account-metadata-dto.mock";
+import { SignInRequestDto } from "module/api/service";
 
 export class SignInRequestDtoMock implements SignInRequestDto {
     id: number;

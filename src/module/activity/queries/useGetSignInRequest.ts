@@ -1,15 +1,7 @@
 import { useMutation } from "react-query";
 import { SignInRequestDto, SignInRequestsService } from "module/api/service";
+import { UseCustomMutationOptions } from "query-utils";
 
-interface UseGetSignInRequestOptions {
-    onSuccess?: (signInRequest: SignInRequestDto) => void;
-    onError?: () => void;
-}
-
-export default function useGetSignInRequest({ onSuccess }: UseGetSignInRequestOptions) {
-    return useMutation((signInToken: string) => SignInRequestsService.getSignInRequest(signInToken), {
-        onSuccess: (data) => {
-            onSuccess?.(data);
-        },
-    });
+export default function useGetSignInRequest(options: UseCustomMutationOptions<SignInRequestDto, unknown, string> = {}) {
+    return useMutation((signInToken: string) => SignInRequestsService.getSignInRequest(signInToken), options);
 }

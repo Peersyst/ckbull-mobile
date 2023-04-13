@@ -10,7 +10,7 @@ import { serviceInstancesMap } from "module/wallet/state/WalletState";
 import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
 import useSelectedNetwork from "module/settings/hook/useSelectedNetwork";
 import { useTranslate } from "module/common/hook/useTranslate";
-import SendTransactionModal from "module/transaction/component/feedback/SendTransactionModal/SendTransactionModal";
+import CallbackModal from "module/common/component/feedback/SignModal/SignModal";
 
 interface WithdrawConfirmationScreenProps {
     withdrawInfo: WithdrawSummaryType;
@@ -44,11 +44,11 @@ const WithdrawConfirmationScreen = ({ withdrawInfo: { receiverIndex, depositInde
     }
 
     return (
-        <SendTransactionModal
+        <CallbackModal
             successMessage={translate("withdraw_completed")}
             onError={closeModal}
             onExited={closeModal}
-            sendTransaction={handleConfirmation}
+            callback={handleConfirmation}
             isError={isError}
             isLoading={isLoading}
             isSuccess={isSuccess}
@@ -70,7 +70,7 @@ const WithdrawConfirmationScreen = ({ withdrawInfo: { receiverIndex, depositInde
                     </SwipeButton>
                 </Col>
             )}
-        </SendTransactionModal>
+        </CallbackModal>
     );
 };
 

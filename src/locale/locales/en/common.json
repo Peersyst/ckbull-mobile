@@ -135,7 +135,6 @@
     "pending": "Pending",
     "signed": "Signed",
     "expired": "Expired",
-    "expireDate": "Expires in {{hours}}h {{minutes}}min {{seconds}}s",
     "connected": "Connected",
     "failed": "Failed",
     "proposed": "Proposed",
@@ -203,7 +202,6 @@
     "rejectConnection": "Reject the connection",
     "confirmConnectionWith": "Confirm connection with",
     "signWith": "Sign with",
-    "signInRequestSuccess": "Sign in request signed successfully!",
     "confirmTransaction": "Confirm transaction",
     "transaction": "transaction",
     "seeInExplorer": "See in Explorer",
@@ -215,5 +213,9 @@
     "reject": "Reject",
     "rejectTransactionRequestSuccess": "Transaction request rejected successfully!",
     "noPendingTransactionRequests": "There are no pending transactions",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "signInRequestSuccess": "Logged in successfully!",
+    "reviewConnection": "Review connection",
+    "expiresAt": "Expires at {{date}}",
+    "signInRequest": "Sign in request"
 }

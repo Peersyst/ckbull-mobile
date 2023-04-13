@@ -1,18 +1,18 @@
 import MainList from "module/main/component/display/MainList/MainList";
-import ConnectedSite from "module/activity/component/display/ConnectedSite/ConnectedSite";
+import ConnectedDApp from "module/activity/component/display/ConnectedDApp/ConnectedDApp";
 import EmptyListComponent from "module/common/component/display/EmptyListComponent/EmptyListComponent";
-import useGetConnectedSites from "module/activity/queries/useGetConnectedSites";
+import useGetConnectedSites from "module/activity/queries/useGetConnectedDApps";
 import { useTranslate } from "module/common/hook/useTranslate";
 
-const ConnectedSiteList = (): JSX.Element => {
+const ConnectedDAppsList = (): JSX.Element => {
     const translate = useTranslate();
-    const { data: connectedSites, isLoading, refetch } = useGetConnectedSites();
+    const { data: connectedDApps, isLoading, refetch } = useGetConnectedSites();
 
     return (
         <MainList
-            data={connectedSites}
+            data={connectedDApps}
             onRefresh={refetch}
-            renderItem={({ item: connectedSite }) => <ConnectedSite app={connectedSite} />}
+            renderItem={({ item: connectedSite }) => <ConnectedDApp dApp={connectedSite} />}
             ListEmptyComponent={<EmptyListComponent title={translate("noConnectedSites")} />}
             contentContainerStyle={{ paddingHorizontal: 20 }}
             loading={isLoading}
@@ -20,4 +20,4 @@ const ConnectedSiteList = (): JSX.Element => {
     );
 };
 
-export default ConnectedSiteList;
+export default ConnectedDAppsList;
