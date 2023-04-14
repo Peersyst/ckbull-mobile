@@ -46,10 +46,10 @@ export const TX_ICON: Partial<Record<TransactionType, TxIcon>> = {
     },
     [TransactionType.UNLOCK_DAO]: {
         Icon: ReceiveIcon,
-        active: false,
+        active: true,
     },
     [TransactionType.WITHDRAW_DAO]: {
         Icon: ReceiveIcon,
-        active: true,
+        active: false,
     },
 };
