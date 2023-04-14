@@ -2,15 +2,15 @@ import MainTabs from "module/main/component/navigation/MainTabs/MainTabs";
 import { TabItem } from "module/common/component/navigation/BaseTabs/BaseTabs.types";
 import { useTranslate } from "module/common/hook/useTranslate";
 import ConnectedDAppList from "module/activity/component/display/ConnectedSiteList/ConnectedDAppList";
-import PendingList from "module/activity/component/display/PendingTransactionsList/PendingTransactionsList";
 import SignedTransactionsList from "module/activity/component/display/SignedTransactionsList/SignedTransactionsList";
+import PendingTransactionRequestList from "../../display/PendingTransactionRequestsList/PendingTransactionRequestsList";
 
 const ActivityTabs = (): JSX.Element => {
     const translate = useTranslate();
     const activityTabs: TabItem[] = [
         {
             title: translate("pending"),
-            item: <PendingList />,
+            item: <PendingTransactionRequestList />,
         },
         {
             title: translate("signed"),

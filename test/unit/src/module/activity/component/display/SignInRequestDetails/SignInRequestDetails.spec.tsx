@@ -1,11 +1,17 @@
 import { render, translate } from "test-utils";
 import SignInRequestDetails from "module/activity/component/display/SignInRequestDetails/SignInRequestDetails";
 import { screen } from "@testing-library/react-native";
-import { UseWalletStateMock } from "mocks/common";
+import { UseServiceInstanceMock, UseWalletStateMock } from "mocks/common";
 import { SignInRequestDtoMock } from "mocks/common/activity/sign-in-request-dto.mock";
 
 describe("SignInRequestDetails tests", () => {
-    beforeEach(() => jest.restoreAllMocks());
+    let useServiceInstanceMock: UseServiceInstanceMock;
+
+    beforeEach(() => {
+        useServiceInstanceMock = new UseServiceInstanceMock();
+    });
+
+    afterEach(() => useServiceInstanceMock.restore());
 
     test("Renders correctly without loading", () => {
         const walletState = new UseWalletStateMock();

@@ -135,7 +135,6 @@
     "pending": "Pendente",
     "signed": "Assinado",
     "expired": "Expirado",
-    "expireDate": "Expira em {{hours}}h {{minutes}}min {{seconds}}s",
     "connected": "Conectado",
     "failed": "Falhou",
     "proposed": "Proposto",
@@ -203,6 +202,7 @@
     "rejectConnection": "Reject the connection",
     "confirmConnectionWith": "Confirm connection with",
     "signWith": "Sign with",
-    "signInRequestSuccess": "Sign in request signed successfully!",
-    "reviewConnection": "Review connection"
+    "signInRequestSuccess": "Logged in successfully!",
+    "reviewConnection": "Review connection",
+    "expiresAt": "Expires at {{date}}"
 }

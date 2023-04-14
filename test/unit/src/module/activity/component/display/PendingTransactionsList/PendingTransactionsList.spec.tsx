@@ -1,8 +1,9 @@
 import { UseServiceInstanceMock } from "mocks/common";
-import * as useGetPendingTransactionRequest from "module/activity/queries/useGetPendingTransactions";
-import PendingTransactionsList from "module/activity/component/display/PendingTransactionsList/PendingTransactionsList";
+import PendingTransactionsList from "module/activity/component/display/PendingTransactionRequestsList/PendingTransactionRequestsList";
 import { render } from "test-utils";
 import { screen, waitFor } from "@testing-library/react-native";
+import { CompleteTransactionRequestDtoMock } from "mocks/common/activity/complete-transaction-request-dto.mock";
+import { TransactionRequestService } from "module/api/service";
 
 describe("PendingTransactionsList tests", () => {
     let serviceInstance: UseServiceInstanceMock;
@@ -16,11 +17,14 @@ describe("PendingTransactionsList tests", () => {
     });
 
     test("Renders correctly with pendingTransactions", async () => {
-        const getPendingTransactionsRequestMock = jest.spyOn(useGetPendingTransactionRequest, "default");
+        const mockCompleteTransactionRequestDtoMock = new CompleteTransactionRequestDtoMock();
+
+        const getPendingTransactionsRequestMock = jest
+            .spyOn(TransactionRequestService, "getTransactionRequests")
+            .mockResolvedValueOnce([mockCompleteTransactionRequestDtoMock, mockCompleteTransactionRequestDtoMock]);
         render(<PendingTransactionsList />);
         await waitFor(() => expect(getPendingTransactionsRequestMock).toHaveBeenCalled());
-        expect(screen.getByText("Tue 07 Feb, 2023")).toBeDefined();
-        expect(screen.getByText("Thu 05 Apr, 2007")).toBeDefined();
-        expect(screen.getAllByText("Figma")).toHaveLength(7);
+        expect(screen.getAllByText("name")).toHaveLength(2);
+        expect(screen.getAllByText("pending")).toHaveLength(2);
     });
 });
