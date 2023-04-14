@@ -1,14 +1,14 @@
 import { useModal } from "@peersyst/react-native-components";
-import SignRequestAppSummary from "module/activity/component/display/SignRequestAppSummary/SignRequestAppSummary";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SignInRequestDto } from "module/api/service";
 import useSignSignInRequest from "module/activity/queries/useSignSignInRequest";
 import useRejectSignInRequest from "module/activity/queries/useRejectSignInRequest";
-import SignRequestModal from "module/common/component/feedback/SignRequestModal/SignRequestModal";
 import SignInRequestModal from "module/activity/component/navigation/SignInRequestModal/SignInRequestModal";
 import SignRequestModalLayout from "module/activity/component/layout/SignRequestModalLayout/SignRequestModalLayout";
 import { useTranslate } from "module/common/hook/useTranslate";
+import SignModal from "module/common/component/feedback/SignModal/SignModal";
+import SignInRequestDetails from "module/activity/component/display/SignRequestAppSummary/SignRequestAppSummary";
 
 export interface SignInRequestScreenProps {
     signInRequest: SignInRequestDto;
@@ -16,46 +16,40 @@ export interface SignInRequestScreenProps {
 }
 
 const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.Element => {
-    const { name, description, image } = signInRequest.app;
-    const { signInToken } = signInRequest;
+    const { signInToken, app } = signInRequest;
 
     const { hideModal } = useModal();
     const translate = useTranslate();
 
     const [formWallet, setFormWallet] = useState<number | undefined>(undefined);
-    const [modalLoading, setModalLoading] = useState(false);
 
     const { serviceInstance, network } = useServiceInstance(formWallet);
+    const { mutate: sign, isLoading: isSigning, isError: isSignError, isSuccess: isSignSuccess } = useSignSignInRequest(signInToken);
+    const { mutate: decline, isLoading: isRejecting } = useRejectSignInRequest(signInToken);
+    const modalLoading = isSigning || isRejecting;
 
     const closeSignInRequestModal = () => {
         hideModal(SignInRequestModal.id);
     };
-
-    const { mutate: sign, isLoading: isSigning, isError: isSignError, isSuccess: isSignSuccess } = useSignSignInRequest(signInToken);
-    const { mutate: decline, isLoading: isDeclining } = useRejectSignInRequest(signInToken);
 
     const handleReject = () => {
         decline();
         closeSignInRequestModal();
     };
 
-    const onPinConfirmed = () => {
+    const handleOnPinConfirmed = () => {
         const address = serviceInstance?.getAddress();
         const metadata = { address: address!, network };
         sign({ metadata });
     };
 
-    useEffect(() => {
-        setModalLoading(isSigning || isDeclining);
-    }, [isSigning, isDeclining]);
-
     return (
-        <SignRequestModal
-            signRequest={onPinConfirmed}
+        <SignModal
+            onSign={handleOnPinConfirmed}
             isLoading={isSigning}
             isError={isSignError}
             isSuccess={isSignSuccess}
-            onExited={isSignSuccess || isSignError ? closeSignInRequestModal : undefined}
+            onExited={closeSignInRequestModal}
             successMessage={translate("signInRequestSuccess")}
         >
             {({ showModal, isSuccess }) => (
@@ -64,21 +58,20 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
                     rejectMessage={translate("rejectConnectionDescription")}
                     onReject={handleReject}
                     onSign={showModal}
-                    loading={modalLoading}
-                    disabled={isSuccess}
+                    signing={isSigning}
+                    rejecting={isRejecting}
+                    disabled={isSuccess || isSigning || isRejecting}
                 >
-                    <SignRequestAppSummary
-                        requestTitle={translate("confirmConnectionWith")}
-                        name={name}
-                        image={image}
-                        description={description}
+                    <SignInRequestDetails
+                        requestTitle={translate("signInRequest")}
+                        app={app}
                         loading={modalLoading}
                         selectedWallet={formWallet}
                         onWalletChange={setFormWallet}
                     />
                 </SignRequestModalLayout>
             )}
-        </SignRequestModal>
+        </SignModal>
     );
 };
 

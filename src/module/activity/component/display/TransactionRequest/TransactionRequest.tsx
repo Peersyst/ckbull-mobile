@@ -1,10 +1,9 @@
-import useGetTransactionRequestAction from "module/activity/hook/useGetTransactionRequestAction";
-import { getTimeFromSeconds } from "module/activity/utils/time";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TransactionRequestRoot } from "module/activity/component/display/TransactionRequest/TransactionRequest.styles";
 import { CompleteTransactionRequestDto } from "module/api/service";
 import { useModal } from "@peersyst/react-native-components";
 import TransactionRequestModal from "../../navigation/TransactionRequestModal/TransactionRequestModal";
+import useFormatDate from "module/common/hook/useFormatDate";
 
 interface TransactionRequestProps {
     transaction: CompleteTransactionRequestDto;
@@ -21,10 +20,7 @@ const TransactionRequest = ({ transaction: transactionRequest }: TransactionRequ
 
     const translate = useTranslate();
     const { showModal } = useModal();
-    const { actionElement } = useGetTransactionRequestAction(status);
-
-    const expirationTimestamp = new Date(expiresAt).getTime();
-    const currentTimestamp = new Date().getTime();
+    const formatDate = useFormatDate();
 
     return (
         <TransactionRequestRoot
@@ -32,8 +28,7 @@ const TransactionRequest = ({ transaction: transactionRequest }: TransactionRequ
             imageUrl={image}
             title={name}
             description={status}
-            details={expiresAt ? translate("expireDate", getTimeFromSeconds(expirationTimestamp - currentTimestamp)) : undefined}
-            actionElement={actionElement}
+            details={translate("expiresAt", { date: formatDate(expiresAt) })}
             onAction={() => showModal(TransactionRequestModal, { transactionRequest })}
         />
     );

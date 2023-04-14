@@ -8,7 +8,7 @@ export interface TransactionRequestSign {
     transactionBody: SignTransactionRequest;
 }
 
-export default function useSignTransactionRequest() {
+export default function useSendSignedTransactionRequest() {
     const queryClient = useQueryClient();
     const { index: usedIndex, network } = useServiceInstance();
     return useMutation(

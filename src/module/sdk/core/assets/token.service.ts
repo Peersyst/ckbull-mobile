@@ -48,7 +48,7 @@ export class TokenService {
         txSkeleton = await sudt.issueToken(txSkeleton, address, amount, undefined, undefined, this.connection.getConfigAsObject());
         txSkeleton = await common.payFeeByFeeRate(txSkeleton, [address], feeRate, undefined, this.connection.getConfigAsObject());
 
-        return this.transactionService.signTransaction(txSkeleton, [privateKey]);
+        return this.transactionService.signAndSendTransaction(txSkeleton, [privateKey]);
     }
 
     async transfer(
@@ -65,7 +65,7 @@ export class TokenService {
         });
         txSkeleton = await common.payFeeByFeeRate(txSkeleton, [from], feeRate, undefined, this.connection.getConfigAsObject());
 
-        return this.transactionService.signTransaction(txSkeleton, [privateKey]);
+        return this.transactionService.signAndSendTransaction(txSkeleton, [privateKey]);
     }
 
     async transferFromCells(
@@ -110,7 +110,7 @@ export class TokenService {
         // Get signing private keys
         const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, fromAddresses, privateKeys);
 
-        return this.transactionService.signTransaction(txSkeleton, signingPrivKeys);
+        return this.transactionService.signAndSendTransaction(txSkeleton, signingPrivKeys);
     }
 
     async getBalance(address: string): Promise<TokenAmount[]> {

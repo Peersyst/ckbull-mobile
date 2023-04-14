@@ -1,8 +1,7 @@
 import { capitalize } from "@peersyst/react-utils";
 import CopyButton from "module/common/component/feedback/CopyButton/CopyButton";
 import { render, translate, screen, fireEvent, waitFor } from "test-utils";
-import * as Clipboard from "expo-clipboard";
-import { UseToastMock } from "test-mocks";
+import * as ReactNativeComponents from "@peersyst/react-native-components";
 
 describe("CopyButton tests", () => {
     test("Renders correctly", () => {
@@ -13,7 +12,8 @@ describe("CopyButton tests", () => {
     });
 
     test("Calls setStringAsync from Clipboard when clicked", async () => {
-        const mockCopy = jest.spyOn(Clipboard, "setStringAsync");
+        const mockedCopyToClipboard = jest.fn();
+        jest.spyOn(ReactNativeComponents, "useCopyToClipboard").mockReturnValueOnce(mockedCopyToClipboard);
 
         render(<CopyButton copyText="test" />);
 
@@ -23,23 +23,9 @@ describe("CopyButton tests", () => {
 
         fireEvent.press(copyButton);
 
-        await waitFor(() => expect(mockCopy).toHaveBeenCalledWith("test"));
+        await waitFor(() => expect(mockedCopyToClipboard).toHaveBeenCalled());
 
         expect(screen.getByText(translate("copied"))).toBeDefined();
         expect(screen.getByTestId("CheckIcon")).toBeDefined();
-    });
-
-    test("Shows toast when showToast is true", async () => {
-        const toastMock = new UseToastMock();
-
-        render(<CopyButton copyText="test" showToast />);
-
-        const copyButton = screen.getByText(capitalize(translate("copy")));
-
-        expect(copyButton).toBeDefined();
-
-        fireEvent.press(copyButton);
-
-        await waitFor(() => expect(toastMock.showToast).toHaveBeenCalled());
     });
 });

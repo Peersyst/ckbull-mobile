@@ -11,7 +11,7 @@ export const BUTTON_SIZES: Record<ButtonSize, number> = {
 
 export const ButtonRoot = styled(Button)<ButtonProps>(({ theme, rounded = true }) => {
     return {
-        borderRadius: rounded ? 10000 : undefined,
+        borderRadius: rounded ? 10000 : theme.borderRadiusSm,
         //Size Styles
         lg: {
             ...theme.typography.body2Regular,
