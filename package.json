@@ -126,6 +126,7 @@
         "react-native-pager-view": "6.0.0",
         "react-native-svg": "13.4.0",
         "react-native-gesture-handler": "2.9.0",
-        "react-native-reanimated": "~2.12.0"
+        "react-native-reanimated": "~2.12.0",
+        "immutable": "4.0.0-rc.12"
     }
 }

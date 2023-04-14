@@ -1,6 +1,6 @@
 import { mnemonic, ExtendedPrivateKey, AccountExtendedPublicKey, AddressType } from "@ckb-lumos/hd";
 import { TransactionSkeletonType, TransactionSkeleton } from "@ckb-lumos/helpers";
-import { HashType, utils, Transaction as LumosTx } from "@ckb-lumos/lumos";
+import { HashType, utils } from "@ckb-lumos/lumos";
 import { TransactionWithStatus } from "@ckb-lumos/base";
 import { common, dao } from "@ckb-lumos/common-scripts";
 import { ConnectionService } from "./connection.service";
@@ -591,18 +591,15 @@ export class WalletService {
         throw new Error("Type not supported");
     }
 
-    async fillAndSignPartialTransaction(
-        tx: TransactionSkeletonType,
-        cells: Cell[],
-        mnemonic: string,
-        feeRate: FeeRate = FeeRate.NORMAL,
-    ): Promise<LumosTx> {
+    async fillAndSignPartialTransaction(tx: TransactionSkeletonType, mnemonic: string, feeRate: FeeRate = FeeRate.NORMAL): Promise<string> {
         const addresses = this.getAllAddresses();
         const type = await this.getPartialTransactionTypeFromOutput(tx);
         const output = tx.get("outputs").get(0);
         const input = tx.get("inputs").get(0);
         const privateKeys = this.getAllPrivateKeys(mnemonic);
-        let txSkeleton = tx;
+        const cells = this.getCells();
+
+        let txSkeleton = tx.set("cellProvider", this.connection.getEmptyCellProvider());
 
         if (type === TransactionType.SEND_NATIVE_TOKEN || type === TransactionType.DEPOSIT_DAO) {
             const capacity = BigInt(output!.cell_output.capacity);
@@ -634,11 +631,11 @@ export class WalletService {
 
             const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, addresses, privateKeys);
             const sortedSignPKeys = [privateKey, ...signingPrivKeys.filter((pkey) => pkey !== privateKey)];
-            return this.transactionService.signTransaction(txSkeleton, sortedSignPKeys);
+            return this.transactionService.signAndSendTransaction(txSkeleton, sortedSignPKeys);
         }
 
         txSkeleton = await common.payFeeByFeeRate(txSkeleton, addresses, feeRate, undefined, this.connection.getConfigAsObject());
         const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, addresses, privateKeys);
-        return this.transactionService.signTransaction(txSkeleton, signingPrivKeys);
+        return this.transactionService.signAndSendTransaction(txSkeleton, signingPrivKeys);
     }
 }

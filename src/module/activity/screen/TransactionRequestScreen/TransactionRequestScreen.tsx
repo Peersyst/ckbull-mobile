@@ -3,11 +3,13 @@ import SignRequestAppSummary from "module/activity/component/display/SignRequest
 import SignRequestModalLayout from "module/activity/component/layout/SignRequestModalLayout/SignRequestModalLayout";
 import TransactionRequestModal from "module/activity/component/navigation/TransactionRequestModal/TransactionRequestModal";
 import useRejectTransactionRequest from "module/activity/queries/useRejectTransactionRequest";
-import useSignTransactionRequest from "module/activity/queries/useSignTransactionRequest";
 import { CompleteTransactionRequestDto } from "module/api/service";
 import { useTranslate } from "module/common/hook/useTranslate";
 import SignTransactionRequestSuccess from "../../component/display/SignTransactionRequestSuccess/SignTransactionRequestSuccess";
 import SignModal from "module/common/component/feedback/SignModal/SignModal";
+import useSendSignedTransactionRequest from "module/activity/queries/useSendSignedTransactionRequest";
+import useSignTransaction from "module/activity/queries/useSignTransaction";
+import { jsonToTransactionSkeletonInterface } from "../../../sdk/utils/parser";
 
 export interface TransactionRequestScreenProps {
     transactionRequest: CompleteTransactionRequestDto;
@@ -17,7 +19,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
     const {
         transactionToken,
         signInRequest: { signInToken, app },
-        transaction,
+        transaction: { transaction: transactionBody, ...restTransaction },
     } = transactionRequest;
 
     const translate = useTranslate();
@@ -25,7 +27,13 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
 
     const closeTransactionRequestModal = () => hideModal(TransactionRequestModal.id);
 
-    const { mutate: signTransaction, isLoading: isSigning, isSuccess: isSignSuccess, isError: isSignError } = useSignTransactionRequest();
+    const { mutate: sign, data: hash, isLoading: isSigning, isError: isSignError } = useSignTransaction();
+    const {
+        mutate: sendSignedTransaction,
+        isLoading: isSending,
+        isSuccess: isSendSuccess,
+        isError: isSendError,
+    } = useSendSignedTransactionRequest();
     const { mutate: rejectTransaction, isLoading: isRejecting } = useRejectTransactionRequest();
 
     const handleReject = () => {
@@ -33,21 +41,28 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
         closeTransactionRequestModal();
     };
 
-    const handleSign = () => {
-        signTransaction({
-            transactionRequestToken: transactionToken,
-            transactionBody: { signInToken, transaction, signedTransaction: "temporalString" },
+    const handleSign = async () => {
+        const txSkeleton = jsonToTransactionSkeletonInterface(transactionBody);
+        sign(txSkeleton, {
+            onSuccess: () =>
+                sendSignedTransaction({
+                    transactionRequestToken: transactionToken,
+                    transactionBody: {
+                        signInToken,
+                        transaction: { ...restTransaction, transaction: transactionBody, transactionHash: hash },
+                    },
+                }),
         });
     };
 
     return (
         <SignModal
             onSign={handleSign}
-            isLoading={isSigning}
-            isSuccess={isSignSuccess}
-            isError={isSignError}
+            isLoading={isSigning || isSending}
+            isSuccess={isSendSuccess}
+            isError={isSignError || isSendError}
             successMessage={translate("signedSuccess")}
-            successDetails={<SignTransactionRequestSuccess transactionHash={transaction.transactionHash} />}
+            successDetails={<SignTransactionRequestSuccess transactionHash={hash || ""} />}
             onExited={closeTransactionRequestModal}
         >
             {({ showModal, isSuccess }) => (
