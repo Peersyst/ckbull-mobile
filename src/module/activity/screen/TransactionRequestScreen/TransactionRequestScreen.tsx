@@ -52,6 +52,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
                         transaction: { ...restTransaction, transaction: transactionBody, transactionHash: hash },
                     },
                 }),
+            onError: handleReject,
         });
     };
 
