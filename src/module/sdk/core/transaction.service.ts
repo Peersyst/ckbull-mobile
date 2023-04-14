@@ -1,5 +1,5 @@
 import { ScriptConfig } from "@ckb-lumos/config-manager";
-import { Cell, commons, hd, helpers, Script, utils, HashType } from "@ckb-lumos/lumos";
+import { Cell, commons, hd, helpers, Script, utils, HashType, Transaction as LumosTx } from "@ckb-lumos/lumos";
 import { sealTransaction, TransactionSkeletonType } from "@ckb-lumos/helpers";
 import { TransactionWithStatus, values, core, WitnessArgs } from "@ckb-lumos/base";
 import { TransactionCollector as TxCollector } from "@ckb-lumos/ckb-indexer";
@@ -7,7 +7,7 @@ import { Reader, normalizers } from "@ckb-lumos/toolkit";
 import { CKBIndexerQueryOptions } from "@ckb-lumos/ckb-indexer/src/type";
 import { ConnectionService } from "./connection.service";
 import { Logger } from "../utils/logger";
-import { Nft, NftService } from "./assets/nft.service";
+import { NftService } from "./assets/nft.service";
 
 const { ScriptValue } = values;
 
@@ -488,34 +488,18 @@ export class TransactionService {
         return txSkeleton;
     }
 
-    injectNftCapacity(txSkeleton: TransactionSkeletonType, nft: Nft, cells: Cell[], to: string): TransactionSkeletonType {
-        const nftCells = cells.filter((cell) => TransactionService.cellIsScriptType(cell, nft.script) && cell.data === nft.rawData);
+    injectNftCapacity(txSkeleton: TransactionSkeletonType, nftScript: ScriptType, nftData: string, cells: Cell[]): TransactionSkeletonType {
+        const nftCells = cells.filter((cell) => TransactionService.cellIsScriptType(cell, nftScript) && cell.data === nftData);
         if (nftCells.length === 0) {
             throw new Error("Nft not found");
         }
         const [cell] = nftCells;
 
         // Add output
-        const toScript = this.connection.getLockFromAddress(to);
         txSkeleton = txSkeleton.update("outputs", (outputs) => {
-            return outputs.push({
-                cell_output: {
-                    capacity: cell.cell_output.capacity,
-                    lock: toScript,
-                    type: {
-                        code_hash: nft.script.codeHash,
-                        hash_type: nft.script.hashType,
-                        args: nft.script.args,
-                    },
-                },
-                data: nft.rawData,
-            });
-        });
-        txSkeleton = txSkeleton.update("fixedEntries", (fixedEntries) => {
-            return fixedEntries.push({
-                field: "outputs",
-                index: txSkeleton.get("outputs").size - 1,
-            });
+            const output = outputs.get(0)!;
+            output.cell_output.capacity = cell.cell_output.capacity;
+            return outputs.set(0, output);
         });
 
         txSkeleton = txSkeleton.update("inputs", (inputs) => inputs.push(cell));
@@ -624,7 +608,7 @@ export class TransactionService {
         return this.getTransactionFromLumosTx(transaction, addresses[addresses.length - 1], addresses);
     }
 
-    async signTransaction(txSkeleton: TransactionSkeletonType, privateKeys: string[]): Promise<string> {
+    signTransaction(txSkeleton: TransactionSkeletonType, privateKeys: string[]): LumosTx {
         const txSkeletonWEntries = commons.common.prepareSigningEntries(txSkeleton, this.connection.getConfigAsObject());
         if (privateKeys.length !== txSkeletonWEntries.get("signingEntries").count()) {
             this.logger.error("Invalid private keys length");
@@ -636,8 +620,12 @@ export class TransactionService {
             const entry = txSkeletonWEntries.get("signingEntries").get(i);
             signatures.push(hd.key.signRecoverable(entry!.message, privateKeys[i]));
         }
-        const tx = sealTransaction(txSkeletonWEntries, signatures);
-        const hash = await this.connection.getRPC().send_transaction(tx, "passthrough");
+        return sealTransaction(txSkeletonWEntries, signatures);
+    }
+
+    async signAndSendTransaction(txSkeleton: TransactionSkeletonType, privateKeys: string[]): Promise<string> {
+        const signedTx = this.signTransaction(txSkeleton, privateKeys);
+        const hash = await this.connection.getRPC().send_transaction(signedTx, "passthrough");
 
         return hash;
     }

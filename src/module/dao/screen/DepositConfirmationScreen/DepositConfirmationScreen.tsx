@@ -37,7 +37,7 @@ const DepositConfirmationScreen = (): JSX.Element => {
     return (
         <CallbackModal
             successMessage={translate("deposit_completed")}
-            callback={handleConfirmation}
+            onSign={handleConfirmation}
             onExited={closeModal}
             onError={closeModal}
             isLoading={isLoading}

@@ -1,5 +1,4 @@
 import { useModal } from "@peersyst/react-native-components";
-import SignInRequestDetails from "module/activity/component/display/SignInRequestDetails/SignInRequestDetails";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { useState } from "react";
 import { SignInRequestDto } from "module/api/service";
@@ -9,6 +8,7 @@ import SignInRequestModal from "module/activity/component/navigation/SignInReque
 import SignRequestModalLayout from "module/activity/component/layout/SignRequestModalLayout/SignRequestModalLayout";
 import { useTranslate } from "module/common/hook/useTranslate";
 import SignModal from "module/common/component/feedback/SignModal/SignModal";
+import SignInRequestDetails from "module/activity/component/display/SignRequestAppSummary/SignRequestAppSummary";
 
 export interface SignInRequestScreenProps {
     signInRequest: SignInRequestDto;
@@ -16,10 +16,11 @@ export interface SignInRequestScreenProps {
 }
 
 const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.Element => {
-    const { signInToken } = signInRequest;
+    const { signInToken, app } = signInRequest;
 
     const { hideModal } = useModal();
     const translate = useTranslate();
+
     const [formWallet, setFormWallet] = useState<number | undefined>(undefined);
 
     const { serviceInstance, network } = useServiceInstance(formWallet);
@@ -44,7 +45,7 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
 
     return (
         <SignModal
-            callback={handleOnPinConfirmed}
+            onSign={handleOnPinConfirmed}
             isLoading={isSigning}
             isError={isSignError}
             isSuccess={isSignSuccess}
@@ -53,6 +54,8 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
         >
             {({ showModal, isSuccess }) => (
                 <SignRequestModalLayout
+                    rejectTitle={translate("rejectConnection")}
+                    rejectMessage={translate("rejectConnectionDescription")}
                     onReject={handleReject}
                     onSign={showModal}
                     signing={isSigning}
@@ -60,7 +63,8 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
                     disabled={isSuccess || isSigning || isRejecting}
                 >
                     <SignInRequestDetails
-                        signInRequest={signInRequest}
+                        requestTitle={translate("signInRequest")}
+                        app={app}
                         loading={modalLoading}
                         selectedWallet={formWallet}
                         onWalletChange={setFormWallet}

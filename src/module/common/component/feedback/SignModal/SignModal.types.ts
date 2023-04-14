@@ -1,4 +1,5 @@
 import { UseModalStateReturn } from "module/common/hook/useModalState";
+import { ReactElement } from "react";
 
 export type SignModalChildrenProps = Pick<UseModalStateReturn, "showModal"> & SignStatus;
 
@@ -12,8 +13,9 @@ export interface SignModalProps extends SignStatus {
     onExited?: () => unknown;
     onClose?: () => unknown;
     children: (props: SignModalChildrenProps) => JSX.Element;
-    callback: () => void | Promise<unknown>;
+    onSign: () => void | Promise<unknown>;
     onError?: () => unknown;
     onSuccess?: () => unknown;
     successMessage?: string;
+    successDetails?: ReactElement;
 }

@@ -1,5 +1,5 @@
 import { LoadingModalProps } from "./LoadingModal.types";
-import { LoadingModalButton, LoadingModalRoot } from "./LoadingModal.styles";
+import { LoadingModalButton, LoadingModalRoot, LoadingModalContent } from "./LoadingModal.styles";
 import { useEffect, useState } from "react";
 import { notificationAsync, NotificationFeedbackType } from "expo-haptics";
 import { useTranslate } from "module/common/hook/useTranslate";
@@ -9,7 +9,15 @@ import darkTheme from "config/theme/darkTheme";
 import { ThemeProvider } from "@peersyst/react-native-styled";
 import { LoadingIcon, SuccessIcon } from "icons";
 
-const LoadingModal = ({ open: openProp, loading, successMessage, error, success, ...backdropProps }: LoadingModalProps): JSX.Element => {
+const LoadingModal = ({
+    open: openProp = false,
+    loading,
+    successMessage,
+    successDetails,
+    error,
+    success,
+    ...backdropProps
+}: LoadingModalProps): JSX.Element => {
     const [open, setOpen] = useState(openProp);
     const translate = useTranslate();
 
@@ -42,17 +50,20 @@ const LoadingModal = ({ open: openProp, loading, successMessage, error, success,
             <LoadingModalRoot start={{ x: 0, y: 0.5 }} end={{ x: 0.5, y: 1 }}>
                 <ThemeProvider theme={darkTheme}>
                     {success ? (
-                        <>
-                            <Col alignItems="center" justifyContent="center" gap={14} flex={1}>
-                                <SuccessIcon style={{ fontSize: 80, color: "white" }} />
-                                <Typography textAlign="center" color="white" variant="body2Strong">
-                                    {successMessage}
-                                </Typography>
+                        <LoadingModalContent>
+                            <Col flex={1} gap={32} justifyContent="center">
+                                <Col alignItems="center" justifyContent="center" gap={14}>
+                                    <SuccessIcon style={{ fontSize: 80, color: "white" }} />
+                                    <Typography textAlign="center" color="white" variant="body2Strong">
+                                        {successMessage}
+                                    </Typography>
+                                </Col>
+                                {successDetails}
                             </Col>
                             <LoadingModalButton fullWidth onPress={handleClose}>
                                 {translate("continue")}
                             </LoadingModalButton>
-                        </>
+                        </LoadingModalContent>
                     ) : (
                         <ImageBackgroundPage>
                             <Col alignItems="center" justifyContent="center" gap={14} flex={1}>

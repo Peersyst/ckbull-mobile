@@ -9,11 +9,9 @@ export const $CreateTransactionRequestBody = {
             isRequired: true,
         },
         transaction: {
-            type: 'all-of',
             description: `The transaction request content`,
-            contains: [{
-                type: 'CreateTransactionDto',
-            }],
+            properties: {
+            },
             isRequired: true,
         },
     },

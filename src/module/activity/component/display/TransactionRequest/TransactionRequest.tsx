@@ -1,23 +1,25 @@
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TransactionRequestRoot } from "module/activity/component/display/TransactionRequest/TransactionRequest.styles";
 import { CompleteTransactionRequestDto } from "module/api/service";
+import { useModal } from "@peersyst/react-native-components";
+import TransactionRequestModal from "../../navigation/TransactionRequestModal/TransactionRequestModal";
 import useFormatDate from "module/common/hook/useFormatDate";
 
 interface TransactionRequestProps {
     transaction: CompleteTransactionRequestDto;
 }
 
-const TransactionRequest = ({
-    transaction: {
+const TransactionRequest = ({ transaction: transactionRequest }: TransactionRequestProps): JSX.Element => {
+    const {
         signInRequest: {
             app: { name, image },
         },
-        transaction: { amount },
         status,
         expiresAt,
-    },
-}: TransactionRequestProps): JSX.Element => {
+    } = transactionRequest;
+
     const translate = useTranslate();
+    const { showModal } = useModal();
     const formatDate = useFormatDate();
 
     return (
@@ -27,8 +29,7 @@ const TransactionRequest = ({
             title={name}
             description={status}
             details={translate("expiresAt", { date: formatDate(expiresAt) })}
-            amount={amount}
-            onAction={() => undefined}
+            onAction={() => showModal(TransactionRequestModal, { transactionRequest })}
         />
     );
 };

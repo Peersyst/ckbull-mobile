@@ -3,19 +3,18 @@
 /* eslint-disable */
 export const $TransactionDto = {
     properties: {
-        transactionHash: {
-            type: 'string',
-            isRequired: true,
-        },
-        amount: {
+        id: {
             type: 'number',
             isRequired: true,
         },
-        status: {
-            type: 'Enum',
-        },
-        to: {
+        transactionHash: {
             type: 'string',
+            isRequired: true,
+            isNullable: true,
+        },
+        transaction: {
+            properties: {
+            },
             isRequired: true,
         },
     },

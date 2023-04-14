@@ -17,6 +17,7 @@ import {
     DepositInDAOParams,
     FullTransaction,
     SendTransactionParams,
+    SignPartialTransactionParams,
     TransferNftParams,
     TransferTokensParams,
     WithdrawOrUnlockParams,
@@ -148,5 +149,9 @@ export class CKBSDKService {
 
     async withdrawOrUnlock({ unlockableAmount, mnemonic }: WithdrawOrUnlockParams): Promise<string> {
         return this.wallet.withdrawOrUnlock(unlockableAmount, mnemonic.join(" "));
+    }
+
+    async fillAndSignPartialTransaction({ transaction, mnemonic, feeRate }: SignPartialTransactionParams): Promise<string> {
+        return await this.wallet.fillAndSignPartialTransaction(transaction, mnemonic.join(" "), feeRate);
     }
 }

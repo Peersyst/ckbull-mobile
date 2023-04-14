@@ -1,4 +1,5 @@
 import { UseModalStateReturn } from "module/common/hook/useModalState";
+import { ReactElement } from "react";
 
 export type SignRequestModalChildrenProps = Pick<UseModalStateReturn, "showModal"> & RequestStatus;
 
@@ -15,5 +16,6 @@ export interface SignRequestModalProps extends RequestStatus {
     onError?: () => unknown;
     onSuccess?: () => unknown;
     successMessage?: string;
+    successDetails?: ReactElement;
     onClose?: () => unknown;
 }

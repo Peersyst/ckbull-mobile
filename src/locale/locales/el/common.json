@@ -202,7 +202,20 @@
     "rejectConnection": "Reject the connection",
     "confirmConnectionWith": "Confirm connection with",
     "signWith": "Sign with",
+    "confirmTransaction": "Confirm transaction",
+    "transaction": "transaction",
+    "seeInExplorer": "See in Explorer",
+    "signTransactionRequest": "Sign transaction request",
+    "signedSuccess": "Signed!",
+    "rejectTransaction": "Reject transaction",
+    "rejectTransactionDescription": "Are you sure you want to reject this transaction? This action cannot be undone.",
+    "rejectConnectionDescription": "Are you sure you want to reject this connection? This action cannot be undone.",
+    "reject": "Reject",
+    "rejectTransactionRequestSuccess": "Transaction request rejected successfully!",
+    "noPendingTransactionRequests": "There are no pending transactions",
+    "copied": "Copied!",
     "signInRequestSuccess": "Logged in successfully!",
     "reviewConnection": "Review connection",
-    "expiresAt": "Expires at {{date}}"
+    "expiresAt": "Expires at {{date}}",
+    "signInRequest": "Sign in request"
 }
