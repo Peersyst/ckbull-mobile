@@ -1,15 +1,17 @@
 import { TransactionDto } from "module/api/service";
 
+const mockedTransaction = {
+    outputs: [],
+};
+
 export class TransactionDtoMock implements TransactionDto {
     transactionHash: string;
-    amount: number;
-    status?: "pending" | "proposed" | "committed" | "rejected";
-    to: string;
+    id: number;
+    transaction: object;
 
     constructor() {
         this.transactionHash = "";
-        this.amount = 0;
-        this.status = "pending";
-        this.to = "";
+        this.id = 0;
+        this.transaction = mockedTransaction;
     }
 }

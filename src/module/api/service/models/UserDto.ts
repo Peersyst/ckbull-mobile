@@ -6,6 +6,6 @@ export type UserDto = {
     id: number;
     name: string;
     email: string;
-    type: 'admin' | 'user';
+    type: any;
     googleAuth: boolean;
 };

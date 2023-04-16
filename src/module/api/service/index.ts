@@ -16,6 +16,7 @@ export type { CreateTransactionRequestBody } from './models/CreateTransactionReq
 export type { CreateUserRequest } from './models/CreateUserRequest';
 export type { CreateVerificationTokenRequest } from './models/CreateVerificationTokenRequest';
 export type { DeclineTransactionRequest } from './models/DeclineTransactionRequest';
+export type { GenerateTransactionSkeleton } from './models/GenerateTransactionSkeleton';
 export type { LoginRequest } from './models/LoginRequest';
 export type { PartialDappDto } from './models/PartialDappDto';
 export type { PrivateUserDto } from './models/PrivateUserDto';
@@ -45,6 +46,7 @@ export { $CreateTransactionRequestBody } from './schemas/$CreateTransactionReque
 export { $CreateUserRequest } from './schemas/$CreateUserRequest';
 export { $CreateVerificationTokenRequest } from './schemas/$CreateVerificationTokenRequest';
 export { $DeclineTransactionRequest } from './schemas/$DeclineTransactionRequest';
+export { $GenerateTransactionSkeleton } from './schemas/$GenerateTransactionSkeleton';
 export { $LoginRequest } from './schemas/$LoginRequest';
 export { $PartialDappDto } from './schemas/$PartialDappDto';
 export { $PrivateUserDto } from './schemas/$PrivateUserDto';

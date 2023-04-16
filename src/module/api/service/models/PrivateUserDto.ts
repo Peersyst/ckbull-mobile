@@ -6,7 +6,7 @@ export type PrivateUserDto = {
     id: number;
     name: string;
     email: string;
-    type: 'admin' | 'user';
+    type: any;
     googleAuth: boolean;
     emailVerified: boolean;
 };

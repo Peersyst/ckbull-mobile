@@ -4,6 +4,7 @@
 import type { CompleteTransactionRequestDto } from '../models/CompleteTransactionRequestDto';
 import type { CreateTransactionRequestBody } from '../models/CreateTransactionRequestBody';
 import type { DeclineTransactionRequest } from '../models/DeclineTransactionRequest';
+import type { GenerateTransactionSkeleton } from '../models/GenerateTransactionSkeleton';
 import type { SignTransactionRequest } from '../models/SignTransactionRequest';
 import type { SimpleTransactionRequestDto } from '../models/SimpleTransactionRequestDto';
 import type { TransactionRequestStatusDto } from '../models/TransactionRequestStatusDto';
@@ -66,6 +67,23 @@ export class TransactionRequestService {
     }
 
     /**
+     * @param apiKey
+     * @returns CompleteTransactionRequestDto
+     * @throws ApiError
+     */
+    public static getTransactionRequestsByDApp(
+        apiKey: string,
+    ): CancelablePromise<Array<CompleteTransactionRequestDto>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/transaction-request/dapp/{apiKey}',
+            path: {
+                'apiKey': apiKey,
+            },
+        });
+    }
+
+    /**
      * @param transactionToken
      * @returns SimpleTransactionRequestDto
      * @throws ApiError
@@ -96,6 +114,23 @@ export class TransactionRequestService {
             path: {
                 'transactionToken': transactionToken,
             },
+        });
+    }
+
+    /**
+     * Generates a new TransactionSkeleton Object
+     * @param requestBody
+     * @returns any
+     * @throws ApiError
+     */
+    public static generateTransactionSkeleton(
+        requestBody: GenerateTransactionSkeleton,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/transaction-request/generate-transaction',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 
