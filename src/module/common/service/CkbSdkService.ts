@@ -154,4 +154,8 @@ export class CKBSDKService {
     async fillAndSignPartialTransaction({ transaction, mnemonic, feeRate }: SignPartialTransactionParams): Promise<string> {
         return await this.wallet.fillAndSignPartialTransaction(transaction, mnemonic.join(" "), feeRate);
     }
+
+    getAmountFromTransaction(transaction: Transaction): bigint {
+        return this.wallet.getAmountFromTransaction(transaction);
+    }
 }

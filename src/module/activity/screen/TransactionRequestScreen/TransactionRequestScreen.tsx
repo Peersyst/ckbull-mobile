@@ -11,7 +11,7 @@ import SignModal from "module/common/component/feedback/SignModal/SignModal";
 import useSendSignedTransactionRequest from "module/activity/queries/useSendSignedTransactionRequest";
 import useSignTransaction from "module/activity/queries/useSignTransaction";
 import { jsonToTransactionSkeletonInterface } from "../../../sdk/utils/parser";
-import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
+import useGetAmountFromTransaction from "module/activity/hook/useGetAmountFromTransaction";
 
 export interface TransactionRequestScreenProps {
     transactionRequest: CompleteTransactionRequestDto;
@@ -26,6 +26,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
 
     const translate = useTranslate();
     const { hideModal } = useModal();
+    const obtainAmount = useGetAmountFromTransaction();
 
     const closeTransactionRequestModal = () => hideModal(TransactionRequestModal.id);
 
@@ -58,24 +59,9 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
         });
     };
 
-    const extractOutputFromHexValue = (hexValue: string) => convertShannonsToCKB(parseInt(hexValue, 16));
-
-    const getAmountFromTransaction = (transaction: any) => {
-        const outputs = transaction["outputs"] as any[];
-        return outputs.reduce((acc, output) => acc + extractOutputFromHexValue(output["cell_output"]["capacity"]), 0);
-    };
-
     // TODO: Pending to ask Joan about how to get the senders and receivers from the transaction
-    const getReceiversFromTransaction = (transaction: any) => {
-        const outputs = transaction["outputs"] as any[];
-        return outputs.map((output) => output["cell_output"]["lock"]["args"]);
-    };
 
     // TODI: Pending to ask Joan about how to get the senders and receivers from the transaction
-    const getSendersFromTransaction = (transaction: any) => {
-        const inputs = transaction["inputs"] as any[];
-        return inputs.map((input) => input["previous_output"]["tx_hash"]);
-    };
 
     return (
         <SignModal
@@ -99,13 +85,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
                 >
                     <Col gap={20} justifyContent="center">
                         <SignRequestAppSummary requestTitle={translate("confirmTransaction")} app={app} />
-                        <SignerTransactionSummary
-                            // TODO: Pending to ask Joan about how to get the senders and receivers from the transaction
-                            senders={[]}
-                            receivers={[]}
-                            amount={getAmountFromTransaction(transactionBody)}
-                            showTotal
-                        />
+                        <SignerTransactionSummary senders={[]} receivers={[]} amount={obtainAmount(transactionBody)} showTotal />
                     </Col>
                 </SignRequestModalLayout>
             )}

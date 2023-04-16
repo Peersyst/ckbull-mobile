@@ -12,6 +12,7 @@ import { Cell, Script } from "@ckb-lumos/lumos";
 import { QueryOptions } from "@ckb-lumos/base";
 import { Nft, NftService } from "./assets/nft.service";
 import { Logger } from "../utils/logger";
+import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
 
 export enum AddressScriptType {
     SECP256K1_BLAKE160 = "SECP256K1_BLAKE160",
@@ -638,4 +639,12 @@ export class WalletService {
         const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, addresses, privateKeys);
         return this.transactionService.signAndSendTransaction(txSkeleton, signingPrivKeys);
     }
+
+    getAmountFromTransaction = (transaction: TransactionSkeletonType): bigint => {
+        const outputs = transaction.get("outputs").toArray();
+        return outputs.reduce(
+            (acc: any, output: Cell) => acc + BigInt(convertShannonsToCKB(parseInt(output["cell_output"]["capacity"], 16))),
+            BigInt(0),
+        );
+    };
 }
