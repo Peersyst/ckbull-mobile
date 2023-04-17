@@ -159,4 +159,14 @@ export class CKBSDKService {
     getAmountFromTransaction({ transaction }: AmountFromTransactionParams): bigint {
         return this.wallet.getAmountFromTransaction(transaction);
     }
+
+    getOutputAddressesFromTransaction({ transaction }: AmountFromTransactionParams): string[] {
+        const outputs = transaction.get("outputs");
+        return outputs.map((output) => this.connectionService.getAddressFromLock(output.cell_output.lock)).toArray();
+    }
+
+    getInputAddressesFromTransaction({ transaction }: AmountFromTransactionParams): string[] {
+        const inputs = transaction.get("inputs");
+        return inputs.map((input) => this.connectionService.getAddressFromLock(input.cell_output.lock)).toArray();
+    }
 }

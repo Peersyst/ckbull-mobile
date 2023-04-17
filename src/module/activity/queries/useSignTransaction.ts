@@ -5,7 +5,12 @@ import { WalletStorage } from "module/wallet/WalletStorage";
 import { useSettings } from "module/settings/hook/useSettings";
 import Queries from "../../../query/queries";
 
-export default function useSignTransaction() {
+export interface UseSignTransactionProps {
+    onSuccess?: () => void;
+    onError?: () => void;
+}
+
+export default function useSignTransaction({ onSuccess, onError }: UseSignTransactionProps = {}) {
     const { serviceInstance, index: usedIndex } = useServiceInstance();
     const { fee } = useSettings();
     const baseQueries = [Queries.GET_BALANCE, Queries.GET_TRANSACTIONS];
@@ -19,6 +24,8 @@ export default function useSignTransaction() {
     return useMutation((transaction: TransactionSkeletonType) => handleSign(transaction), {
         onSuccess: () => {
             queryClient.invalidateQueries(baseQueries);
+            onSuccess?.();
         },
+        onError,
     });
 }
