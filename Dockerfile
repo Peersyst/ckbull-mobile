@@ -3,8 +3,6 @@ FROM node:14.18.3 as base
 WORKDIR /app
 
 COPY package.json yarn.lock  /app/
-COPY playground/package.json /app/playground/package.json
-COPY playground/yarn.lock /app/playground/yarn.lock
 
 RUN yarn install
 
