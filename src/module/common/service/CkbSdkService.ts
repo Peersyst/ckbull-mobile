@@ -13,6 +13,7 @@ import {
 } from "ckb-peersyst-sdk";
 import { tokensList, UknownToken } from "module/token/mock/token";
 import {
+    AmountFromTransactionParams,
     Chain,
     DepositInDAOParams,
     FullTransaction,
@@ -155,7 +156,7 @@ export class CKBSDKService {
         return await this.wallet.fillAndSignPartialTransaction(transaction, mnemonic.join(" "), feeRate);
     }
 
-    getAmountFromTransaction(transaction: Transaction): bigint {
+    getAmountFromTransaction({ transaction }: AmountFromTransactionParams): bigint {
         return this.wallet.getAmountFromTransaction(transaction);
     }
 }

@@ -48,3 +48,7 @@ export interface SignPartialTransactionParams {
     mnemonic: string[];
     feeRate?: FeeRate;
 }
+
+export interface AmountFromTransactionParams {
+    transaction: TransactionSkeletonType;
+}

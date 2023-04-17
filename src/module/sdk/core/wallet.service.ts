@@ -642,9 +642,6 @@ export class WalletService {
 
     getAmountFromTransaction = (transaction: TransactionSkeletonType): bigint => {
         const outputs = transaction.get("outputs").toArray();
-        return outputs.reduce(
-            (acc: any, output: Cell) => acc + BigInt(convertShannonsToCKB(parseInt(output["cell_output"]["capacity"], 16))),
-            BigInt(0),
-        );
+        return outputs.reduce((acc: any, output: Cell) => acc + BigInt(parseInt(output["cell_output"]["capacity"], 16)), BigInt(0));
     };
 }
