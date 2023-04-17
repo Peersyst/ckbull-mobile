@@ -8,7 +8,7 @@ RUN yarn install
 
 RUN yarn lint
 
-RUN yarn test:ci
+RUN yarn test:unit:ci
 
 FROM node:14.18.3 as build
 
