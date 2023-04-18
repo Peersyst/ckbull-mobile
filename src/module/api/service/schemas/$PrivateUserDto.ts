@@ -16,8 +16,7 @@ export const $PrivateUserDto = {
             isRequired: true,
         },
         type: {
-            properties: {
-            },
+            type: 'Enum',
             isRequired: true,
         },
         googleAuth: {

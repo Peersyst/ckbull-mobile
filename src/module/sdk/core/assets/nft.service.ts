@@ -187,7 +187,7 @@ export class NftService {
         };
     }
 
-    private async getNftFromCell(cell: Cell): Promise<Nft | null> {
+    async getNftFromCell(cell: Cell): Promise<Nft | null> {
         const cellTypeScript = this.cellToNftScript(cell);
         if (!cellTypeScript) {
             return null;
@@ -294,12 +294,14 @@ export class NftService {
                 data: nft.rawData,
             });
         });
+
         txSkeleton = txSkeleton.update("fixedEntries", (fixedEntries) => {
             return fixedEntries.push({
                 field: "outputs",
                 index: txSkeleton.get("outputs").size - 1,
             });
         });
+
         txSkeleton = this.transactionService.injectNftCapacity(txSkeleton, nft.script, nft.rawData, cells);
 
         // Pay fee
@@ -335,6 +337,7 @@ export class NftService {
         const nfts: Nft[] = [];
         for await (const cell of cells) {
             const nft = await this.getNftFromCell(cell);
+
             if (nft) {
                 nfts.push(nft);
             }

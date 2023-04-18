@@ -12,7 +12,6 @@ import { Cell, Script } from "@ckb-lumos/lumos";
 import { QueryOptions } from "@ckb-lumos/base";
 import { Nft, NftService } from "./assets/nft.service";
 import { Logger } from "../utils/logger";
-import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
 
 export enum AddressScriptType {
     SECP256K1_BLAKE160 = "SECP256K1_BLAKE160",
@@ -535,6 +534,10 @@ export class WalletService {
     // -----------------------------------
     // -- Partial transaction functions --
     // -----------------------------------
+    async getNftFromPartialTransaction(tx: TransactionSkeletonType): Promise<Nft | null> {
+        return await this.nftService.getNftFromCell(tx.get("outputs").get(0)!);
+    }
+
     async getPartialTransactionTypeFromOutput(tx: TransactionSkeletonType): Promise<TransactionType> {
         if (tx.get("inputs").size === 1) {
             // It's either unlock or withdraw

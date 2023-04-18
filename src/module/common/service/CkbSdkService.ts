@@ -17,6 +17,8 @@ import {
     Chain,
     DepositInDAOParams,
     FullTransaction,
+    GetNftFromPartialTransactionParams,
+    GetTransactionTypeParams,
     SendTransactionParams,
     SignPartialTransactionParams,
     TransferNftParams,
@@ -150,6 +152,14 @@ export class CKBSDKService {
 
     async withdrawOrUnlock({ unlockableAmount, mnemonic }: WithdrawOrUnlockParams): Promise<string> {
         return this.wallet.withdrawOrUnlock(unlockableAmount, mnemonic.join(" "));
+    }
+
+    async getTransactionSkeletonType({ transaction }: GetTransactionTypeParams) {
+        return await this.wallet.getPartialTransactionTypeFromOutput(transaction);
+    }
+
+    async getNftFromPartialTransaction({ transaction }: GetNftFromPartialTransactionParams): Promise<Nft | null> {
+        return await this.wallet.getNftFromPartialTransaction(transaction);
     }
 
     async fillAndSignPartialTransaction({ transaction, mnemonic, feeRate }: SignPartialTransactionParams): Promise<string> {

@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GenerateTransactionSkeleton = {
+export type GenerateNativeTokenTransactionSkeleton = {
     /**
      * The amount to send
      */

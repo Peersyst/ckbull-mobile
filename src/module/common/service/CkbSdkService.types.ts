@@ -52,3 +52,15 @@ export interface SignPartialTransactionParams {
 export interface AmountFromTransactionParams {
     transaction: TransactionSkeletonType;
 }
+
+export interface GetAddressParams {
+    transaction: TransactionSkeletonType;
+}
+
+export interface GetTransactionTypeParams {
+    transaction: TransactionSkeletonType;
+}
+
+export interface GetNftFromPartialTransactionParams {
+    transaction: TransactionSkeletonType;
+}

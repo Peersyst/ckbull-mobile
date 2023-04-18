@@ -16,8 +16,7 @@ export const $UserDto = {
             isRequired: true,
         },
         type: {
-            properties: {
-            },
+            type: 'Enum',
             isRequired: true,
         },
         googleAuth: {

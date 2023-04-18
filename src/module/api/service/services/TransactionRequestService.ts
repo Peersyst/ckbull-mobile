@@ -4,7 +4,8 @@
 import type { CompleteTransactionRequestDto } from '../models/CompleteTransactionRequestDto';
 import type { CreateTransactionRequestBody } from '../models/CreateTransactionRequestBody';
 import type { DeclineTransactionRequest } from '../models/DeclineTransactionRequest';
-import type { GenerateTransactionSkeleton } from '../models/GenerateTransactionSkeleton';
+import type { GenerateNativeTokenTransactionSkeleton } from '../models/GenerateNativeTokenTransactionSkeleton';
+import type { GenerateNftTransactionSkeleton } from '../models/GenerateNftTransactionSkeleton';
 import type { SignTransactionRequest } from '../models/SignTransactionRequest';
 import type { SimpleTransactionRequestDto } from '../models/SimpleTransactionRequestDto';
 import type { TransactionRequestStatusDto } from '../models/TransactionRequestStatusDto';
@@ -124,11 +125,28 @@ export class TransactionRequestService {
      * @throws ApiError
      */
     public static generateTransactionSkeleton(
-        requestBody: GenerateTransactionSkeleton,
+        requestBody: GenerateNativeTokenTransactionSkeleton,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/transaction-request/generate-transaction',
+            url: '/api/transaction-request/generate-native-token-transaction',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * Generates a new TransactionSkeleton Object
+     * @param requestBody
+     * @returns any
+     * @throws ApiError
+     */
+    public static generateNftTransactionSkeleton(
+        requestBody: GenerateNftTransactionSkeleton,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/transaction-request/generate-nft-transaction',
             body: requestBody,
             mediaType: 'application/json',
         });

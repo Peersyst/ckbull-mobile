@@ -1,16 +1,16 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export const $GenerateTransactionSkeleton = {
+export const $GenerateNftTransactionSkeleton = {
     properties: {
-        amount: {
-            type: 'string',
-            description: `The amount to send`,
-            isRequired: true,
-        },
         to: {
             type: 'string',
             description: `The address of the sender`,
+            isRequired: true,
+        },
+        nft: {
+            type: 'string',
+            description: `The nft to send`,
             isRequired: true,
         },
     },
