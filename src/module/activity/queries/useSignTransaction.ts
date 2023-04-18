@@ -6,7 +6,7 @@ import { useSettings } from "module/settings/hook/useSettings";
 import Queries from "../../../query/queries";
 
 export interface UseSignTransactionProps {
-    onSuccess?: () => void;
+    onSuccess?: (hash: string | undefined) => void;
     onError?: () => void;
 }
 
@@ -22,9 +22,9 @@ export default function useSignTransaction({ onSuccess, onError }: UseSignTransa
     };
 
     return useMutation((transaction: TransactionSkeletonType) => handleSign(transaction), {
-        onSuccess: () => {
+        onSuccess: (hash) => {
             queryClient.invalidateQueries(baseQueries);
-            onSuccess?.();
+            onSuccess?.(hash);
         },
         onError,
     });

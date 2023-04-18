@@ -36,12 +36,12 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
     } = useSendSignedTransactionRequest();
     const { mutate: rejectTransaction, isLoading: isRejecting } = useRejectTransactionRequest();
 
-    const onSignSuccess = () => {
+    const onSignSuccess = (transactionHash: string | undefined) => {
         sendSignedTransaction({
             transactionRequestToken: transactionToken,
             transactionBody: {
                 signInToken,
-                transaction: { ...restTransaction, transaction: transactionBody, transactionHash: hash },
+                transaction: { ...restTransaction, transaction: transactionBody, transactionHash },
             },
         });
     };
