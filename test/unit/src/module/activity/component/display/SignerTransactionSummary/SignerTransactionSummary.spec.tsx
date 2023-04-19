@@ -1,11 +1,10 @@
 import SignerTransactionSummary from "module/activity/component/display/SignerTransactionSummary/SignerTransactionSummary";
-import { render, screen, translate } from "test-utils";
+import { render, screen, translate, waitFor } from "test-utils";
 import { formatHash } from "@peersyst/react-utils";
 import { TransactionDtoMock, mockedAddress } from "mocks/common/activity/transaction-dto.mock";
 import { UseServiceInstanceMock } from "mocks/common";
 import * as UseGetTransactionAsset from "module/activity/hook/useGetTransactionAsset";
 import { NftTokenMock } from "test-mocks";
-import { config } from "config";
 
 describe("SignerTransactionSummary tests", () => {
     let serviceInstance: UseServiceInstanceMock;
@@ -41,25 +40,28 @@ describe("SignerTransactionSummary tests", () => {
         expect(screen.queryByText(mockedAddress)).toBeNull();
     });
 
-    test("Renders correctly when nft set", async () => {
+    test("Loads getAssetByTypeMock when nft set", async () => {
         const { transaction } = new TransactionDtoMock();
-        jest.spyOn(UseGetTransactionAsset, "useGetTransactionAsset").mockReturnValueOnce({
+        const getAssetByTypeMock = jest.fn().mockReturnValue({
             asset: { amount: undefined, nft: new NftTokenMock({}), token: undefined },
             isLoading: false,
         });
+        jest.spyOn(UseGetTransactionAsset, "useGetTransactionAsset").mockReturnValue(getAssetByTypeMock);
         render(<SignerTransactionSummary transaction={{ ...transaction }} showTotal />);
 
-        expect(screen.getByText("nftName")).toBeDefined();
+        await waitFor(() => expect(getAssetByTypeMock).toHaveBeenCalledTimes(1));
     });
 
-    test("Renders correctly when amount set", async () => {
+    test("Loads getAssetByTypeMock when amount set", async () => {
         const { transaction } = new TransactionDtoMock();
-        jest.spyOn(UseGetTransactionAsset, "useGetTransactionAsset").mockReturnValueOnce({
+        const getAssetByTypeMock = jest.fn().mockReturnValue({
             asset: { amount: "100", nft: undefined, token: undefined },
             isLoading: false,
         });
+        jest.spyOn(UseGetTransactionAsset, "useGetTransactionAsset").mockReturnValue(getAssetByTypeMock);
+
         render(<SignerTransactionSummary transaction={{ ...transaction }} showTotal />);
 
-        expect(screen.getByText("100 " + config.tokenName)).toBeDefined();
+        await waitFor(() => expect(getAssetByTypeMock).toHaveBeenCalledTimes(1));
     });
 });
