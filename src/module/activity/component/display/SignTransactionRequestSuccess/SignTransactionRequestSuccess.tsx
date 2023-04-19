@@ -1,11 +1,13 @@
 import { Col, Typography, useConfig } from "@peersyst/react-native-components";
 import DarkThemeProvider from "module/common/component/util/ThemeProvider/DarkThemeProvider";
 import { useTranslate } from "module/common/hook/useTranslate";
-import { TransactionHash, SuccessCopyButton, ExplorerButton } from "./SignTransactionRequestSuccess.styles";
 import { ExternalLinkIcon } from "icons";
 import { capitalize } from "@peersyst/react-utils";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { Linking } from "react-native";
+import Button from "module/common/component/input/Button/Button";
+import CopyButton from "module/common/component/feedback/CopyButton/CopyButton";
+import { TransactionHash } from "./SignTransactionRequestSuccess.styles";
 
 interface SignTransactionRequestSuccessProps {
     transactionHash: string;
@@ -32,14 +34,14 @@ export default function SignTransactionRequestSuccess({ transactionHash }: SignT
                         <Typography variant="body2Strong" textAlign="center">
                             {capitalize(translate("transaction"))}
                         </Typography>
-                        <TransactionHash>{transactionHash}</TransactionHash>
+                        <TransactionHash variant="body3Strong" address={transactionHash} type="tx" />
                     </Col>
                 </Col>
                 <Col gap={12}>
-                    <SuccessCopyButton copyText={transactionHash} variant="glass" fullWidth />
-                    <ExplorerButton leftIcon={<ExternalLinkIcon />} variant="glass" fullWidth onPress={handleExplorer}>
+                    <CopyButton copyText={transactionHash} variant="glass" fullWidth rounded={false} />
+                    <Button leftIcon={<ExternalLinkIcon />} variant="glass" fullWidth onPress={handleExplorer} rounded={false}>
                         {translate("seeInExplorer")}
-                    </ExplorerButton>
+                    </Button>
                 </Col>
             </Col>
         </DarkThemeProvider>

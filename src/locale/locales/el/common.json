@@ -135,7 +135,6 @@
     "pending": "Εν εξελίξει",
     "signed": "Υπογεγραμμένο",
     "expired": "Ληγμένο",
-    "expireDate": "Ληγει σε {{hours}}h {{minutes}}min {{seconds}}s",
     "connected": "Συνδεδεμένο",
     "failed": "Αποτυχημένη",
     "proposed": "Προτεινόμενη",
@@ -203,7 +202,6 @@
     "rejectConnection": "Reject the connection",
     "confirmConnectionWith": "Confirm connection with",
     "signWith": "Sign with",
-    "signInRequestSuccess": "Sign in request signed successfully!",
     "confirmTransaction": "Confirm transaction",
     "transaction": "transaction",
     "seeInExplorer": "See in Explorer",
@@ -216,5 +214,9 @@
     "rejectTransactionRequestSuccess": "Transaction request rejected successfully!",
     "noPendingTransactionRequests": "There are no pending transactions",
     "copied": "Copied!",
-    "noSignedTransactions": "There are no signed transactions"
+    "noSignedTransactions": "There are no signed transactions",
+    "signInRequestSuccess": "Logged in successfully!",
+    "reviewConnection": "Review connection",
+    "expiresAt": "Expires at {{date}}",
+    "signInRequest": "Sign in request"
 }

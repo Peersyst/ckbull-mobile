@@ -1,7 +1,10 @@
 import { mnemonic, ExtendedPrivateKey, AccountExtendedPublicKey, AddressType } from "@ckb-lumos/hd";
+import { TransactionSkeletonType, TransactionSkeleton } from "@ckb-lumos/helpers";
+import { HashType, utils } from "@ckb-lumos/lumos";
 import { TransactionWithStatus } from "@ckb-lumos/base";
+import { common, dao } from "@ckb-lumos/common-scripts";
 import { ConnectionService } from "./connection.service";
-import { TransactionService, Transaction, FeeRate } from "./transaction.service";
+import { TransactionService, Transaction, FeeRate, TransactionType, ScriptType } from "./transaction.service";
 import { TokenService, TokenAmount } from "./assets/token.service";
 import { CKBBalance, CKBService } from "./assets/ckb.service";
 import { DAOBalance, DAOService, DAOStatistics, DAOUnlockableAmount } from "./dao/dao.service";
@@ -527,4 +530,121 @@ export class WalletService {
     async getDAOUnlockableAmounts(): Promise<DAOUnlockableAmount[]> {
         return this.daoService.getUnlockableAmountsFromCells(this.getCells());
     }
+
+    // -----------------------------------
+    // -- Partial transaction functions --
+    // -----------------------------------
+    async getNftFromPartialTransaction(tx: TransactionSkeletonType): Promise<Nft | null> {
+        return await this.nftService.getNftFromCell(tx.get("outputs").get(0)!);
+    }
+
+    async getPartialTransactionTypeFromOutput(tx: TransactionSkeletonType): Promise<TransactionType> {
+        if (tx.get("inputs").size === 1) {
+            // It's either unlock or withdraw
+            const input = tx.get("inputs").get(0)!;
+            if (!input.cell_output.type) {
+                throw new Error("Invalid inputs kind");
+            }
+
+            const scriptType: ScriptType = {
+                codeHash: input.cell_output.type.code_hash,
+                hashType: input.cell_output.type.hash_type as HashType,
+                args: input.cell_output.type.args,
+            };
+            if (!TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.DAO!)) {
+                throw new Error("Invalid inputs kind");
+            }
+
+            if (input.data.length === 18 && Number(utils.readBigUInt64LE(input.data)) === 0) {
+                // Cell is deposit type, so we are withdrawing
+                return TransactionType.WITHDRAW_DAO;
+            }
+            return TransactionType.UNLOCK_DAO;
+        }
+
+        // TODO: Define how they send us unlock and withdraw DAO transactions
+        if (tx.get("outputs").size !== 1) {
+            throw new Error("Invalid outputs or inputs length");
+        }
+
+        const output = tx.get("outputs").get(0)!;
+        if (!output.cell_output.type) {
+            return TransactionType.SEND_NATIVE_TOKEN;
+        }
+
+        const scriptType: ScriptType = {
+            codeHash: output.cell_output.type.code_hash,
+            hashType: output.cell_output.type.hash_type as HashType,
+            args: output.cell_output.type.args,
+        };
+
+        if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
+            return TransactionType.SEND_TOKEN;
+        }
+
+        if (TransactionService.isScriptTypeScript(scriptType, this.connection.getConfig().SCRIPTS.DAO!)) {
+            if (output.data.length === 18 && Number(utils.readBigUInt64LE(output.data)) === 0) {
+                return TransactionType.DEPOSIT_DAO;
+            }
+        }
+
+        if (await this.nftService.isScriptNftScript(scriptType)) {
+            return TransactionType.SEND_NFT;
+        }
+
+        throw new Error("Type not supported");
+    }
+
+    async fillAndSignPartialTransaction(tx: TransactionSkeletonType, mnemonic: string, feeRate: FeeRate = FeeRate.NORMAL): Promise<string> {
+        const addresses = this.getAllAddresses();
+        const type = await this.getPartialTransactionTypeFromOutput(tx);
+        const output = tx.get("outputs").get(0);
+        const input = tx.get("inputs").get(0);
+        const privateKeys = this.getAllPrivateKeys(mnemonic);
+        const cells = this.getCells();
+
+        let txSkeleton = tx.set("cellProvider", this.connection.getEmptyCellProvider());
+
+        if (type === TransactionType.SEND_NATIVE_TOKEN || type === TransactionType.DEPOSIT_DAO) {
+            const capacity = BigInt(output!.cell_output.capacity);
+            txSkeleton = this.transactionService.injectCapacity(txSkeleton, capacity, cells);
+        } else if (type === TransactionType.SEND_TOKEN) {
+            const capacity = BigInt(output!.cell_output.capacity);
+            const token = output!.cell_output.type!.args;
+            const amount = utils.readBigUInt128LE(output!.data);
+            txSkeleton = this.transactionService.injectTokenCapacity(txSkeleton, token, amount, capacity, cells);
+        } else if (type === TransactionType.SEND_NFT) {
+            const nftScript: ScriptType = {
+                args: output!.cell_output.type!.args,
+                codeHash: output!.cell_output.type!.code_hash,
+                hashType: output!.cell_output.type!.hash_type,
+            };
+            txSkeleton = this.transactionService.injectNftCapacity(txSkeleton, nftScript, output!.data, cells);
+        } else if (type === TransactionType.WITHDRAW_DAO) {
+            txSkeleton = TransactionSkeleton({ cellProvider: this.connection.getEmptyCellProvider() });
+            txSkeleton = await dao.withdraw(txSkeleton, input!, undefined, this.connection.getConfigAsObject());
+        } else if (type === TransactionType.UNLOCK_DAO) {
+            const { address, privateKey } = this.getAddressAndPrivKeyFromLock(mnemonic, input!.cell_output.lock);
+            const to = this.getNextAddress();
+
+            txSkeleton = TransactionSkeleton({ cellProvider: this.connection.getEmptyCellProvider() });
+            const depositCell = await this.daoService.getDepositCellFromWithdrawCell(input!);
+
+            txSkeleton = await dao.unlock(txSkeleton, depositCell, input!, to, address, this.connection.getConfigAsObject());
+            txSkeleton = await common.payFeeByFeeRate(txSkeleton, addresses, feeRate, undefined, this.connection.getConfigAsObject());
+
+            const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, addresses, privateKeys);
+            const sortedSignPKeys = [privateKey, ...signingPrivKeys.filter((pkey) => pkey !== privateKey)];
+            return this.transactionService.signAndSendTransaction(txSkeleton, sortedSignPKeys);
+        }
+
+        txSkeleton = await common.payFeeByFeeRate(txSkeleton, addresses, feeRate, undefined, this.connection.getConfigAsObject());
+        const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, addresses, privateKeys);
+        return this.transactionService.signAndSendTransaction(txSkeleton, signingPrivKeys);
+    }
+
+    getAmountFromTransaction = (transaction: TransactionSkeletonType): bigint => {
+        const outputs = transaction.get("outputs").toArray();
+        return outputs.reduce((acc: any, output: Cell) => acc + BigInt(parseInt(output["cell_output"]["capacity"], 16)), BigInt(0));
+    };
 }

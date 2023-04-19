@@ -8,9 +8,10 @@ interface SignModalLayoutProps {
     rejectMessage: string;
     onReject: () => void;
     onSign: () => void;
-    loading: boolean;
-    disabled: boolean;
+    signing: boolean;
+    rejecting: boolean;
     children: ReactNode;
+    disabled: boolean;
 }
 
 export default function SignRequestModalLayout({
@@ -19,7 +20,8 @@ export default function SignRequestModalLayout({
     onReject,
     onSign,
     children,
-    loading,
+    signing,
+    rejecting,
     disabled,
 }: SignModalLayoutProps): JSX.Element {
     const translate = useTranslate();
@@ -49,22 +51,20 @@ export default function SignRequestModalLayout({
     ];
 
     return (
-        <>
-            <Col justifyContent="space-between" style={{ height: "100%" }}>
-                {children}
-                <Col gap={12} justifyContent="center" alignItems="center">
-                    <Button variant="text" onPress={showDialog} fullWidth>
-                        {translate("rejectConnection")}
-                    </Button>
-                    <Typography variant="body2Light" textAlign="center" light>
-                        {translate("or")}
-                    </Typography>
-                    <SwipeButton onSwipe={onSign} loading={loading} disabled={disabled} fullWidth>
-                        {translate("slideToAccept")}
-                    </SwipeButton>
-                </Col>
+        <Col justifyContent="space-between" style={{ height: "100%" }}>
+            {children}
+            <Col gap={12} justifyContent="center" alignItems="center">
+                <Button variant="text" onPress={showDialog} fullWidth loading={rejecting} disabled={disabled}>
+                    {translate("rejectConnection")}
+                </Button>
+                <Typography variant="body2Light" textAlign="center" light>
+                    {translate("or")}
+                </Typography>
+                <SwipeButton onSwipe={onSign} loading={signing} disabled={disabled} fullWidth>
+                    {translate("slideToAccept")}
+                </SwipeButton>
             </Col>
             <Dialog open={open} onClose={() => setOpen(false)} title={rejectTitle} content={rejectMessage} buttons={buttons} />
-        </>
+        </Col>
     );
 }

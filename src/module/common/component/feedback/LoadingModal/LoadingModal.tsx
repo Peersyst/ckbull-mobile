@@ -10,7 +10,7 @@ import { ThemeProvider } from "@peersyst/react-native-styled";
 import { LoadingIcon, SuccessIcon } from "icons";
 
 const LoadingModal = ({
-    open: openProp,
+    open: openProp = false,
     loading,
     successMessage,
     successDetails,

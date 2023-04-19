@@ -12,10 +12,10 @@ describe("SignTransactionRequestSuccess tests", () => {
         serviceInstance = new UseServiceInstanceMock();
     });
 
-    afterEach(() => {
-        serviceInstance.restore();
-    });
+    afterEach(() => serviceInstance.restore());
+
     test("Renders correctly", () => {
+        serviceInstance = new UseServiceInstanceMock();
         render(<SignTransactionRequestSuccess transactionHash={mockTransactionHash} />);
 
         expect(screen.getByText(capitalize(translate("transaction")))).toBeDefined();
