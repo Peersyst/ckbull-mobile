@@ -60,6 +60,23 @@ export class SignInRequestsService {
     }
 
     /**
+     * @param apiKey
+     * @returns SignInRequestDto
+     * @throws ApiError
+     */
+    public static getSignInRequestsByDApp(
+        apiKey: string,
+    ): CancelablePromise<Array<SignInRequestDto>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/sign-in-requests/dapp/{apiKey}',
+            path: {
+                'apiKey': apiKey,
+            },
+        });
+    }
+
+    /**
      * @param token
      * @returns SignInRequestDto
      * @throws ApiError

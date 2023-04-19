@@ -135,7 +135,6 @@
     "pending": "等待中",
     "signed": "簽",
     "expired": "已到期",
-    "expireDate": "%hours%小時%minutes%分%seconds%秒後到期",
     "connected": "连接的",
     "failed": "失败的",
     "proposed": "已提交",
@@ -203,7 +202,6 @@
     "rejectConnection": "Reject the connection",
     "confirmConnectionWith": "Confirm connection with",
     "signWith": "Sign with",
-    "signInRequestSuccess": "Sign in request signed successfully!",
     "confirmTransaction": "Confirm transaction",
     "transaction": "transaction",
     "seeInExplorer": "See in Explorer",
@@ -216,6 +214,8 @@
     "rejectTransactionRequestSuccess": "Transaction request rejected successfully!",
     "noPendingTransactionRequests": "There are no pending transaction",
     "copied": "Copied!",
-    "noSignedRequests": "There are no signed requests",
-    "noSignedRequestsDescription": "Each time you sign a request it will be listed here."
+    "signInRequestSuccess": "Logged in successfully!",
+    "reviewConnection": "Review connection",
+    "expiresAt": "Expires at {{date}}",
+    "signInRequest": "Sign in request"
 }

@@ -6,6 +6,7 @@ import {
     QueryKey,
     UseInfiniteQueryOptions,
     UseInfiniteQueryResult,
+    UseMutationOptions,
 } from "react-query";
 
 export interface PaginatedData<TData = unknown> {
@@ -13,6 +14,11 @@ export interface PaginatedData<TData = unknown> {
     pages: number;
     items: TData;
 }
+
+export type UseCustomMutationOptions<TData = unknown, TError = unknown, TVariables = unknown, TContext = unknown> = Omit<
+    UseMutationOptions<TData, TError, TVariables, TContext>,
+    "mutationFn"
+>;
 
 type UseCustomInfiniteQuery = <
     TQueryFnData extends PaginatedData = PaginatedData,

@@ -2,8 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { TransactionDto } from './TransactionDto';
-
 export type SignTransactionRequest = {
     /**
      * The signInToken of the signInRequest that made the transactionRequest
@@ -12,9 +10,5 @@ export type SignTransactionRequest = {
     /**
      * The transaction to sign
      */
-    transaction: TransactionDto;
-    /**
-     * The signature of the transaction
-     */
-    signedTransaction: string;
+    transaction: any;
 };

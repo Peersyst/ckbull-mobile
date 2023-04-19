@@ -28,5 +28,8 @@
     "no_nfts": "There's no NFTs yet",
     "no_tokens": "There's no tokens yet",
     "no_deposits": "Without deposits",
-    "no_withdrawals": "Without withdrawals"
+    "no_withdrawals": "Without withdrawals",
+    "sign_in_request_already_signed": "Sign In request already signed",
+    "transaction_request_already_signed": "Transaction request already signed",
+    "transaction_request_already_declined": "Transaction request already declined"
 }

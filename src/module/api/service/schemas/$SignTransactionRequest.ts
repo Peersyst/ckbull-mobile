@@ -9,16 +9,9 @@ export const $SignTransactionRequest = {
             isRequired: true,
         },
         transaction: {
-            type: 'all-of',
             description: `The transaction to sign`,
-            contains: [{
-                type: 'TransactionDto',
-            }],
-            isRequired: true,
-        },
-        signedTransaction: {
-            type: 'string',
-            description: `The signature of the transaction`,
+            properties: {
+            },
             isRequired: true,
         },
     },
