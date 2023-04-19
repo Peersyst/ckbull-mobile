@@ -31,8 +31,6 @@ const SignerTransactionSummary = ({ transaction, ...rest }: SignerTransactionSum
 
     const asset = getAssetByType(type, nft);
 
-    console.log(asset);
-
     const hasSenders = senders.length > 0;
     const hasReceivers = receivers.length > 0;
 
