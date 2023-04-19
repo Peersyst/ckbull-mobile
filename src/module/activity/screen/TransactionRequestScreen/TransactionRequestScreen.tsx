@@ -84,7 +84,7 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
                     disabled={isSuccess}
                 >
                     <Col gap={20} justifyContent="center">
-                        <SignRequestAppSummary requestTitle={translate("confirmTransaction")} app={app} />
+                        <SignRequestAppSummary requestTitle={translate("confirmTransaction")} app={app} style={{ marginHorizontal: 20 }} />
                         <SignerTransactionSummary transaction={transactionBody} showTotal />
                     </Col>
                 </SignRequestModalLayout>
