@@ -214,6 +214,7 @@
     "rejectTransactionRequestSuccess": "Petición de transacción rechazada correctamente!",
     "noPendingTransactionRequests": "No tienes transacciones pendientes",
     "copied": "Copiado!",
+    "noSignedTransactions": "No tienes transacciones firmadas",
     "signInRequestSuccess": "Inicio de sessión satisfactorio!",
     "reviewConnection": "Revisar conexión",
     "expiresAt": "Expira {{date}}",
