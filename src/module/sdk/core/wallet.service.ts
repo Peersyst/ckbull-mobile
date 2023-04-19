@@ -534,6 +534,10 @@ export class WalletService {
     // -----------------------------------
     // -- Partial transaction functions --
     // -----------------------------------
+    async getNftFromPartialTransaction(tx: TransactionSkeletonType): Promise<Nft | null> {
+        return await this.nftService.getNftFromCell(tx.get("outputs").get(0)!);
+    }
+
     async getPartialTransactionTypeFromOutput(tx: TransactionSkeletonType): Promise<TransactionType> {
         if (tx.get("inputs").size === 1) {
             // It's either unlock or withdraw
@@ -638,4 +642,9 @@ export class WalletService {
         const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, addresses, privateKeys);
         return this.transactionService.signAndSendTransaction(txSkeleton, signingPrivKeys);
     }
+
+    getAmountFromTransaction = (transaction: TransactionSkeletonType): bigint => {
+        const outputs = transaction.get("outputs").toArray();
+        return outputs.reduce((acc: any, output: Cell) => acc + BigInt(parseInt(output["cell_output"]["capacity"], 16)), BigInt(0));
+    };
 }

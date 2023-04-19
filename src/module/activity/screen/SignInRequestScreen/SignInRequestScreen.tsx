@@ -68,6 +68,7 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
                         loading={modalLoading}
                         selectedWallet={formWallet}
                         onWalletChange={setFormWallet}
+                        style={{ marginHorizontal: 20 }}
                     />
                 </SignRequestModalLayout>
             )}

@@ -1,6 +1,8 @@
 import { formatHash } from "@peersyst/react-utils";
 import { Col, Typography } from "@peersyst/react-native-components";
-import BaseSendSummary, { BaseSendSummaryProps } from "../../../transaction/component/display/BaseSendSummary/BaseSendSummary";
+import BaseSendSummary, {
+    BaseSendSummaryProps,
+} from "../../../transaction/component/display/BaseTransactionSummary/BaseTransactionSummary";
 import SummaryField from "../../../transaction/component/display/SummaryField/SummaryField";
 import useGetDaoInfo from "module/dao/query/useGetDaoInfo";
 import { useTranslate } from "module/common/hook/useTranslate";
