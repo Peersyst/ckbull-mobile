@@ -21,12 +21,17 @@ const SignInRequestScreen = ({ signInRequest }: SignInRequestScreenProps): JSX.E
     const { hideModal } = useModal();
     const translate = useTranslate();
 
-    const [formWallet, setFormWallet] = useState<number | undefined>(undefined);
+    const [formWallet, setFormWallet] = useState<number>(0);
 
-    const { serviceInstance, network } = useServiceInstance(formWallet);
-    const { mutate: sign, isLoading: isSigning, isError: isSignError, isSuccess: isSignSuccess } = useSignSignInRequest(signInToken);
+    const {
+        mutate: sign,
+        isLoading: isSigning,
+        isError: isSignError,
+        isSuccess: isSignSuccess,
+    } = useSignSignInRequest(signInToken, formWallet);
     const { mutate: decline, isLoading: isRejecting } = useRejectSignInRequest(signInToken);
     const modalLoading = isSigning || isRejecting;
+    const { serviceInstance, network } = useServiceInstance(formWallet);
 
     const closeSignInRequestModal = () => {
         hideModal(SignInRequestModal.id);

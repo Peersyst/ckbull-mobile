@@ -4,6 +4,7 @@ import { CompleteTransactionRequestDto } from "module/api/service";
 import { useModal } from "@peersyst/react-native-components";
 import TransactionRequestModal from "../../navigation/TransactionRequestModal/TransactionRequestModal";
 import useFormatDate from "module/common/hook/useFormatDate";
+import { capitalize } from "@peersyst/react-utils";
 
 interface TransactionRequestProps {
     transaction: CompleteTransactionRequestDto;
@@ -27,7 +28,7 @@ const TransactionRequest = ({ transaction: transactionRequest }: TransactionRequ
             status={status}
             imageUrl={image}
             title={name}
-            description={status}
+            description={capitalize(status)}
             details={translate("expiresAt", { date: formatDate(expiresAt) })}
             onAction={() => showModal(TransactionRequestModal, { transactionRequest })}
         />

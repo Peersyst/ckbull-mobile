@@ -204,7 +204,7 @@
     "signWith": "Sign with",
     "confirmTransaction": "Confirm transaction",
     "transaction": "transaction",
-    "seeInExplorer": "See in Explorer",
+    "seeInExplorer": "See in explorer",
     "signTransactionRequest": "Sign transaction request",
     "signedSuccess": "Signed!",
     "rejectTransaction": "Reject transaction",

@@ -17,6 +17,7 @@ export default function useSendSignedTransactionRequest() {
         {
             onSuccess: () => {
                 queryClient.invalidateQueries([Queries.SIGNER_APP_GET_PENDING_TRANSACTIONS, usedIndex, network]);
+                queryClient.invalidateQueries([Queries.SIGNER_APP_GET_SIGNED_TRANSACTIONS, usedIndex, network]);
             },
         },
     );

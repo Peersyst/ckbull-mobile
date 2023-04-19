@@ -15,6 +15,7 @@ export default function (): QueryResult<ParsedPendingTransactions[]> {
         [Queries.SIGNER_APP_GET_PENDING_TRANSACTIONS, usedIndex, network],
         () => TransactionRequestService.getTransactionRequests(TransactionRequestStatus.PENDING, network, serviceInstance?.getAddress()),
         {
+            refetchInterval: 10000,
             select: (data) => parsePendingTransactions(data),
             enabled: queryEnabled,
         },
