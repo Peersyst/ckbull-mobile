@@ -1,3 +1,4 @@
+import { TransactionSkeletonType } from "@ckb-lumos/helpers";
 import { DAOUnlockableAmount, FeeRate, Nft, Transaction } from "ckb-peersyst-sdk";
 import { TokenType } from "module/token/types";
 
@@ -40,4 +41,26 @@ export interface WithdrawOrUnlockParams {
 export interface FullTransaction extends Transaction {
     token?: string; //CKB or tokenName
     tokenType?: TokenType;
+}
+
+export interface SignPartialTransactionParams {
+    transaction: TransactionSkeletonType;
+    mnemonic: string[];
+    feeRate?: FeeRate;
+}
+
+export interface AmountFromTransactionParams {
+    transaction: TransactionSkeletonType;
+}
+
+export interface GetAddressParams {
+    transaction: TransactionSkeletonType;
+}
+
+export interface GetTransactionTypeParams {
+    transaction: TransactionSkeletonType;
+}
+
+export interface GetNftFromPartialTransactionParams {
+    transaction: TransactionSkeletonType;
 }

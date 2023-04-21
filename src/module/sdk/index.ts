@@ -7,3 +7,4 @@ export * from "./core/assets/nft.service";
 export * from "./core/assets/nft.types";
 export * from "./core/dao/dao.service";
 export * from "./utils/logger";
+export * from "./utils/parser";

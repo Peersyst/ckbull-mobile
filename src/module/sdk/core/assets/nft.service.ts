@@ -187,7 +187,7 @@ export class NftService {
         };
     }
 
-    private async getNftFromCell(cell: Cell): Promise<Nft | null> {
+    async getNftFromCell(cell: Cell): Promise<Nft | null> {
         const cellTypeScript = this.cellToNftScript(cell);
         if (!cellTypeScript) {
             return null;
@@ -268,7 +268,7 @@ export class NftService {
         }
         let txSkeleton = TransactionSkeleton({ cellProvider: this.connection.getCellProvider() });
 
-        // Inject token capacity
+        // Add token deps
         txSkeleton = this.transactionService.addSecp256CellDep(txSkeleton);
         if (nft.script.codeHash === this.getMNftConfig().codeHash) {
             // Add mnft code deps
@@ -277,7 +277,32 @@ export class NftService {
             // Add nrc-721 code deps
             txSkeleton = this.addCellDepFromNftConfig(txSkeleton, this.getNrc721Config());
         }
-        txSkeleton = this.transactionService.injectNftCapacity(txSkeleton, nft, cells, to);
+
+        // Inject tokens
+        const toScript = this.connection.getLockFromAddress(to);
+        txSkeleton = txSkeleton.update("outputs", (outputs) => {
+            return outputs.push({
+                cell_output: {
+                    capacity: "0x" + this.nftCellSize.toString(16),
+                    lock: toScript,
+                    type: {
+                        code_hash: nft.script.codeHash,
+                        hash_type: nft.script.hashType,
+                        args: nft.script.args,
+                    },
+                },
+                data: nft.rawData,
+            });
+        });
+
+        txSkeleton = txSkeleton.update("fixedEntries", (fixedEntries) => {
+            return fixedEntries.push({
+                field: "outputs",
+                index: txSkeleton.get("outputs").size - 1,
+            });
+        });
+
+        txSkeleton = this.transactionService.injectNftCapacity(txSkeleton, nft.script, nft.rawData, cells);
 
         // Pay fee
         txSkeleton = await common.payFeeByFeeRate(txSkeleton, fromAddresses, feeRate, undefined, this.connection.getConfigAsObject());
@@ -285,7 +310,7 @@ export class NftService {
         // Get signing private keys
         const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, fromAddresses, privateKeys);
 
-        return this.transactionService.signTransaction(txSkeleton, signingPrivKeys);
+        return this.transactionService.signAndSendTransaction(txSkeleton, signingPrivKeys);
     }
 
     async getBalance(address: string): Promise<Nft[]> {
@@ -312,6 +337,7 @@ export class NftService {
         const nfts: Nft[] = [];
         for await (const cell of cells) {
             const nft = await this.getNftFromCell(cell);
+
             if (nft) {
                 nfts.push(nft);
             }

@@ -29,6 +29,9 @@ declare module "@peersyst/react-native-components" {
         defaultDecimals: number;
         miniUnits: string;
         enableSignerApp: boolean;
+        /* signerUrl: url of CKBull Developer Console, if you're running this in a local envirorment add your IP as host. p.e. http://192.168.1.2:3001 */
+        signerUrl: string;
+        defaultDAppImage: string;
     }
 
     export interface CreateConfig {
@@ -49,6 +52,8 @@ declare module "@peersyst/react-native-components" {
         defaultDecimals: number;
         miniUnits: string;
         enableSignerApp: boolean;
+        signerUrl: string;
+        defaultDAppImage: string;
     }
 
     export interface ExtraValidators {

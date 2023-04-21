@@ -2,9 +2,9 @@ import { Col, Row, Typography } from "@peersyst/react-native-components";
 import { ReactElement } from "react";
 import { ActivityCardRoot, ActivityDisplay, DefaultActivityAction, Details } from "module/activity/core/ActivityCard/ActivityCard.styles";
 import { Pressable, TextStyle, ViewStyle } from "react-native";
-import { placeholder_image } from "images";
 import Balance from "module/wallet/component/display/Balance/Balance";
 import { BalanceAction } from "module/wallet/component/display/Balance/Balance.types";
+import config from "config/config";
 
 interface ActivityCardProps {
     imageUrl: string;
@@ -38,7 +38,7 @@ const ActivityCard = ({
     return (
         <ActivityCardRoot style={rotStyle}>
             <Row gap={16}>
-                <ActivityDisplay source={imageUrl ? { uri: imageUrl } : placeholder_image} />
+                <ActivityDisplay source={{ uri: imageUrl || config.defaultDAppImage }} />
                 <Col gap={4} justifyContent="center">
                     <Typography variant="body3Regular" style={titleStyle}>
                         {title}
@@ -46,9 +46,11 @@ const ActivityCard = ({
                     <Typography variant="body4Light" style={descriptionStyle} light={!descriptionStyle.color}>
                         {description}
                     </Typography>
-                    <Details variant="body4Strong" style={detailsStyle}>
-                        {details}
-                    </Details>
+                    {details && (
+                        <Details variant="body4Strong" style={detailsStyle}>
+                            {details}
+                        </Details>
+                    )}
                 </Col>
             </Row>
             {amount && <Balance balance={amount} action={amountAction} variant="body3Strong" units="token" style={amountStyle} />}

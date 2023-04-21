@@ -1,5 +1,5 @@
 import BaseMock from "mocks/common/base.mock";
-import { Nft } from "ckb-peersyst-sdk";
+import { Nft, NftScript } from "ckb-peersyst-sdk";
 
 export interface NftTokenMetadata {
     description: string;
@@ -13,17 +13,21 @@ export class NftTokenMetadataMock extends BaseMock {
     }
 }
 
-export class NftTokenMock extends BaseMock {
+export class NftTokenMock extends BaseMock implements Nft {
     tokenId: string;
     data: any;
     nftName: string;
     tokenUri: string;
-    constructor({ tokenId, data, nftName, tokenUri }: Nft = { tokenId: "0", tokenUri: "tokenUri", data: {}, nftName: "nftName" }) {
+    rawData: string;
+    script: NftScript;
+    constructor({ tokenId, data, nftName, tokenUri, rawData, script }: Partial<Nft> = {}) {
         super();
         this.tokenId = tokenId || "tokenId";
         this.data = data || new NftTokenMetadataMock();
         this.nftName = nftName || "nftName";
         this.tokenUri = tokenUri || "tokenUri";
+        this.rawData = rawData || "rawData";
+        this.script = script || { args: "args", codeHash: "codeHash", hashType: "data" };
     }
 }
 

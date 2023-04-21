@@ -1,38 +1,36 @@
-import useGetTransactionRequestAction from "module/activity/hook/useGetTransactionRequestAction";
-import { getTimeFromSeconds } from "module/activity/utils/time";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { TransactionRequestRoot } from "module/activity/component/display/TransactionRequest/TransactionRequest.styles";
-import { TransactionRequestDto } from "module/activity/dto/dtos";
-import transactionTypeToBalanceAction from "module/transaction/component/display/TransactionAmount/utils/transactionTypeToBalanceAction";
+import { CompleteTransactionRequestDto } from "module/api/service";
+import { useModal } from "@peersyst/react-native-components";
+import TransactionRequestModal from "../../navigation/TransactionRequestModal/TransactionRequestModal";
+import useFormatDate from "module/common/hook/useFormatDate";
+import { capitalize } from "@peersyst/react-utils";
 
 interface TransactionRequestProps {
-    transaction: TransactionRequestDto;
+    transaction: CompleteTransactionRequestDto;
 }
 
-const TransactionRequest = ({
-    transaction: {
-        app: { title, imageUrl = "" } = { title: "" },
-        transaction: { type, amount },
+const TransactionRequest = ({ transaction: transactionRequest }: TransactionRequestProps): JSX.Element => {
+    const {
+        signInRequest: {
+            app: { name, image },
+        },
         status,
         expiresAt,
-        createdAt,
-    },
-}: TransactionRequestProps): JSX.Element => {
+    } = transactionRequest;
+
     const translate = useTranslate();
-    const { actionElement, handleAction } = useGetTransactionRequestAction(status);
+    const { showModal } = useModal();
+    const formatDate = useFormatDate();
 
     return (
         <TransactionRequestRoot
-            type={type}
             status={status}
-            imageUrl={imageUrl}
-            title={title}
-            description={translate(status)}
-            details={expiresAt ? translate("expireDate", getTimeFromSeconds(expiresAt - createdAt)) : undefined}
-            amount={amount}
-            amountAction={transactionTypeToBalanceAction(type)}
-            actionElement={actionElement}
-            onAction={handleAction}
+            imageUrl={image}
+            title={name}
+            description={capitalize(status)}
+            details={translate("expiresAt", { date: formatDate(expiresAt) })}
+            onAction={() => showModal(TransactionRequestModal, { transactionRequest })}
         />
     );
 };

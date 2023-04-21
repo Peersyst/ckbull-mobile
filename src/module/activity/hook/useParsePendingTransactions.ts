@@ -1,15 +1,15 @@
 import useFormatDate from "module/common/hook/useFormatDate";
-import { TransactionRequestDto } from "../dto/dtos";
 import { ParsedPendingTransactions } from "../types";
+import { CompleteTransactionRequestDto } from "module/api/service";
 
-export default function (): (data: TransactionRequestDto[]) => ParsedPendingTransactions[] {
+export default function (): (data: CompleteTransactionRequestDto[]) => ParsedPendingTransactions[] {
     const formatDate = useFormatDate();
 
-    return (data: TransactionRequestDto[]): ParsedPendingTransactions[] => {
+    return (data: CompleteTransactionRequestDto[]): ParsedPendingTransactions[] => {
         const transactionsByTimestamp = data.reduce((prev, transaction) => {
             const formattedDate = formatDate(transaction.createdAt);
             return { ...prev, [formattedDate]: [...(prev[formattedDate] || []), transaction] };
-        }, {} as Record<string, TransactionRequestDto[]>);
+        }, {} as Record<string, CompleteTransactionRequestDto[]>);
 
         return Object.entries(transactionsByTimestamp).map(([title, data]) => ({ title, data }));
     };

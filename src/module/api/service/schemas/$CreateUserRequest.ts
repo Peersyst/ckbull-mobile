@@ -3,6 +3,10 @@
 /* eslint-disable */
 export const $CreateUserRequest = {
     properties: {
+        name: {
+            type: 'string',
+            isRequired: true,
+        },
         email: {
             type: 'string',
             isRequired: true,

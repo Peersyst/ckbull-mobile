@@ -13,10 +13,14 @@ import {
 } from "ckb-peersyst-sdk";
 import { tokensList, UknownToken } from "module/token/mock/token";
 import {
+    AmountFromTransactionParams,
     Chain,
     DepositInDAOParams,
     FullTransaction,
+    GetNftFromPartialTransactionParams,
+    GetTransactionTypeParams,
     SendTransactionParams,
+    SignPartialTransactionParams,
     TransferNftParams,
     TransferTokensParams,
     WithdrawOrUnlockParams,
@@ -148,5 +152,31 @@ export class CKBSDKService {
 
     async withdrawOrUnlock({ unlockableAmount, mnemonic }: WithdrawOrUnlockParams): Promise<string> {
         return this.wallet.withdrawOrUnlock(unlockableAmount, mnemonic.join(" "));
+    }
+
+    async getTransactionSkeletonType({ transaction }: GetTransactionTypeParams) {
+        return await this.wallet.getPartialTransactionTypeFromOutput(transaction);
+    }
+
+    async getNftFromPartialTransaction({ transaction }: GetNftFromPartialTransactionParams): Promise<Nft | null> {
+        return await this.wallet.getNftFromPartialTransaction(transaction);
+    }
+
+    async fillAndSignPartialTransaction({ transaction, mnemonic, feeRate }: SignPartialTransactionParams): Promise<string> {
+        return await this.wallet.fillAndSignPartialTransaction(transaction, mnemonic.join(" "), feeRate);
+    }
+
+    getAmountFromTransaction({ transaction }: AmountFromTransactionParams): bigint {
+        return this.wallet.getAmountFromTransaction(transaction);
+    }
+
+    getOutputAddressesFromTransaction({ transaction }: AmountFromTransactionParams): string[] {
+        const outputs = transaction.get("outputs");
+        return outputs.map((output) => this.connectionService.getAddressFromLock(output.cell_output.lock)).toArray();
+    }
+
+    getInputAddressesFromTransaction({ transaction }: AmountFromTransactionParams): string[] {
+        const inputs = transaction.get("inputs");
+        return inputs.map((input) => this.connectionService.getAddressFromLock(input.cell_output.lock)).toArray();
     }
 }
