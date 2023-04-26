@@ -57,9 +57,4 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     web: {
         favicon: "./assets/images/favicon.png",
     },
-    extra: {
-        eas: {
-            projectId: "b1dac2fd-013a-4e87-a82e-de40c714f416",
-        },
-    },
 });
