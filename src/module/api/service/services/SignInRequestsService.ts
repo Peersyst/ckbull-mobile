@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { DisconnectRequest } from '../models/DisconnectRequest';
 import type { PartialDappDto } from '../models/PartialDappDto';
 import type { SignedSignInRequest } from '../models/SignedSignInRequest';
 import type { SignInRequestDto } from '../models/SignInRequestDto';
@@ -145,6 +146,22 @@ export class SignInRequestsService {
             path: {
                 'token': token,
             },
+        });
+    }
+
+    /**
+     * @param requestBody
+     * @returns any
+     * @throws ApiError
+     */
+    public static disconnect(
+        requestBody: DisconnectRequest,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/sign-in-requests/disconnect',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 
