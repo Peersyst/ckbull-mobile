@@ -19,7 +19,7 @@ const ConnectedDApp = ({ dApp: { id, image, name, description } }: ConnectedDApp
     const handleDisconnectDApp = () => {
         showCancelableDialog({
             title: translate("disconnect"),
-            content: "By disconnecting your account, you will no longer be able to use this dApp.",
+            content: translate("disconnectDAppConfirmation"),
             buttons: [
                 {
                     text: translate("disconnect"),

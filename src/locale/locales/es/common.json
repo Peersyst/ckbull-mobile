@@ -218,5 +218,7 @@
     "signInRequestSuccess": "Inicio de sessión satisfactorio!",
     "reviewConnection": "Revisar conexión",
     "expiresAt": "Expira {{date}}",
-    "signInRequest": "Petición de inicio de sessión"
+    "signInRequest": "Petición de inicio de sessión",
+    "disconnectDAppConfirmation": "Al desconectar tu cuenta, no podrás usarla para interactuar con esta DApp. ¿Estás seguro de que quieres desconectarla?",
+    "dAppDisconnected": "DApp desconectada!"
 }
