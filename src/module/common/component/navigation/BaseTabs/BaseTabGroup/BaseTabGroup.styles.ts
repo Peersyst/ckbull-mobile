@@ -6,6 +6,7 @@ export const BaseTabsRoot = styled(Paper)(() => ({
     flex: 1,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
+    marginTop: 20,
 }));
 
 export const BaseIndicator = styled(View)(({ theme }) => ({
