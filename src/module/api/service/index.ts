@@ -16,6 +16,7 @@ export type { CreateTransactionRequestBody } from './models/CreateTransactionReq
 export type { CreateUserRequest } from './models/CreateUserRequest';
 export type { CreateVerificationTokenRequest } from './models/CreateVerificationTokenRequest';
 export type { DeclineTransactionRequest } from './models/DeclineTransactionRequest';
+export type { DisconnectRequest } from './models/DisconnectRequest';
 export type { GenerateNativeTokenTransactionSkeleton } from './models/GenerateNativeTokenTransactionSkeleton';
 export type { GenerateNftTransactionSkeleton } from './models/GenerateNftTransactionSkeleton';
 export type { LoginRequest } from './models/LoginRequest';
@@ -47,6 +48,7 @@ export { $CreateTransactionRequestBody } from './schemas/$CreateTransactionReque
 export { $CreateUserRequest } from './schemas/$CreateUserRequest';
 export { $CreateVerificationTokenRequest } from './schemas/$CreateVerificationTokenRequest';
 export { $DeclineTransactionRequest } from './schemas/$DeclineTransactionRequest';
+export { $DisconnectRequest } from './schemas/$DisconnectRequest';
 export { $GenerateNativeTokenTransactionSkeleton } from './schemas/$GenerateNativeTokenTransactionSkeleton';
 export { $GenerateNftTransactionSkeleton } from './schemas/$GenerateNftTransactionSkeleton';
 export { $LoginRequest } from './schemas/$LoginRequest';

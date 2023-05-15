@@ -218,5 +218,7 @@
     "signInRequestSuccess": "Logged in successfully!",
     "reviewConnection": "Review connection",
     "expiresAt": "Expires at {{date}}",
-    "signInRequest": "Sign in request"
+    "signInRequest": "Sign in request",
+    "disconnectDAppConfirmation": "By disconnecting your account, you will no longer be able to use this dApp.",
+    "dAppDisconnected": "dApp disconnected!"
 }
