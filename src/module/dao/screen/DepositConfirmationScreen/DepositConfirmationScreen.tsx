@@ -9,7 +9,7 @@ import { convertCKBToShannons } from "module/wallet/utils/convertCKBToShannons";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { useSettings } from "module/settings/hook/useSettings";
-import SendTransactionModal from "module/transaction/component/feedback/SendTransactionModal/SendTransactionModal";
+import CallbackModal from "module/common/component/feedback/SignModal/SignModal";
 
 const DepositConfirmationScreen = (): JSX.Element => {
     const translate = useTranslate();
@@ -35,9 +35,9 @@ const DepositConfirmationScreen = (): JSX.Element => {
     }
 
     return (
-        <SendTransactionModal
+        <CallbackModal
             successMessage={translate("deposit_completed")}
-            sendTransaction={handleConfirmation}
+            onSign={handleConfirmation}
             onExited={closeModal}
             onError={closeModal}
             isLoading={isLoading}
@@ -60,7 +60,7 @@ const DepositConfirmationScreen = (): JSX.Element => {
                     </SwipeButton>
                 </Col>
             )}
-        </SendTransactionModal>
+        </CallbackModal>
     );
 };
 

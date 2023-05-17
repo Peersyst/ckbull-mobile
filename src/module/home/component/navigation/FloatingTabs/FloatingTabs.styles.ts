@@ -8,7 +8,7 @@ export const FloatingTabsGroup = styled(BaseTabGroup)(() => ({
 
 export const FloatingTabsNavigatorRoot = styled(Col)(({ theme }) => ({
     alignSelf: "center",
-    marginVertical: 20,
+    marginTop: 20,
     borderWidth: 1,
     borderRadius: theme.borderRadiusSm,
     borderColor: theme.palette.overlay[900]["16%"],

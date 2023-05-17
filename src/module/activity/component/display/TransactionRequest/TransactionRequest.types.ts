@@ -1,6 +1,5 @@
-import { TransactionRequestDto } from "module/activity/dto/dtos";
+import { CompleteTransactionRequestDto } from "module/api/service";
 
 export interface TransactionRequestRootProps {
-    type: TransactionRequestDto["transaction"]["type"];
-    status: TransactionRequestDto["status"];
+    status: CompleteTransactionRequestDto["status"];
 }

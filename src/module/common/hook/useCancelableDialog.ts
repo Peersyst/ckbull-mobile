@@ -3,6 +3,8 @@ import { useTranslate } from "module/common/hook/useTranslate";
 
 interface UseCancelableDialogReturn {
     showCancelableDialog: (props: DialogProps) => void;
+    hideDialog: () => void;
+    isDialogOpen: () => boolean;
 }
 
 export default function (): UseCancelableDialogReturn {

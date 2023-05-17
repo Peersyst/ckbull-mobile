@@ -20,8 +20,7 @@ const envConfigs: Record<string, CreateConfig> = {
     staging: { ...baseConfig, ...stagingConfig },
 };
 
-const environment = process.env;
-const envKey = environment.REACT_APP_ENV_CONFIG || environment.NODE_ENV!;
+const envKey = process.env.CONFIG_ENV || process.env.NODE_ENV!;
 
 if (!(envKey in envConfigs)) throw new Error(`${envKey} is not a valid env config`);
 

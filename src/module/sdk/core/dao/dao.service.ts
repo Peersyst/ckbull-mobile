@@ -200,7 +200,7 @@ export class DAOService {
         txSkeleton = await dao.deposit(txSkeleton, from, to, amount, this.connection.getConfigAsObject());
         txSkeleton = await common.payFeeByFeeRate(txSkeleton, [from], feeRate, undefined, this.connection.getConfigAsObject());
 
-        return this.transactionService.signTransaction(txSkeleton, [privateKey]);
+        return this.transactionService.signAndSendTransaction(txSkeleton, [privateKey]);
     }
 
     async depositMultiAccount(
@@ -250,7 +250,7 @@ export class DAOService {
         // Get signing private keys
         const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, fromAddresses, privateKeys);
 
-        return this.transactionService.signTransaction(txSkeleton, signingPrivKeys);
+        return this.transactionService.signAndSendTransaction(txSkeleton, signingPrivKeys);
     }
 
     async withdraw(
@@ -266,7 +266,7 @@ export class DAOService {
         const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, feeAddresses, privateKeys);
         const sortedSignPKeys = [privateKey, ...signingPrivKeys.filter((pkey) => pkey !== privateKey)];
 
-        return this.transactionService.signTransaction(txSkeleton, sortedSignPKeys);
+        return this.transactionService.signAndSendTransaction(txSkeleton, sortedSignPKeys);
     }
 
     async unlock(
@@ -289,7 +289,7 @@ export class DAOService {
         const signingPrivKeys = this.transactionService.extractPrivateKeys(txSkeleton, feeAddresses, privateKeys);
         const sortedSignPKeys = [privateKey, ...signingPrivKeys.filter((pkey) => pkey !== privateKey)];
 
-        return this.transactionService.signTransaction(txSkeleton, sortedSignPKeys);
+        return this.transactionService.signAndSendTransaction(txSkeleton, sortedSignPKeys);
     }
 
     async findCorrectInputFromWithdrawCell(withdrawCell: Cell): Promise<{ index: string; txHash: string }> {

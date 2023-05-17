@@ -28,5 +28,8 @@
     "no_nfts": "No hay NFTs",
     "no_tokens": "No hay tokens",
     "no_deposits": "Sin depósitos",
-    "no_withdrawals": "Sin retiros"
+    "no_withdrawals": "Sin retiros",
+    "sign_in_request_already_signed": "Petición de inicio de sesión ya firmada",
+    "transaction_request_already_signed": "Petición de transacción ya firmada",
+    "transaction_request_already_declined": "Petición de transacción ya rechazada"
 }
