@@ -39,13 +39,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         },
     },
     get android(): ExpoConfig["android"] {
+        const versionString = (this.version || "").replace(/\./g, "");
+        const versionCodeString = `${versionString}${process.env.BUILD_NUMBER}`.padEnd(8, "0");
         return {
             package: "com.peersyst.ckbull",
             adaptiveIcon: {
                 foregroundImage: "./assets/images/adaptive-icon.png",
                 backgroundColor: "#141414",
             },
-            versionCode: Number((this.version || "").replace(/\./g, "") + process.env.BUILD_NUMBER) || 0,
+            versionCode: Number(versionCodeString) || 0,
             softwareKeyboardLayoutMode: "resize",
             splash: {
                 image: "./assets/images/splash.png",
