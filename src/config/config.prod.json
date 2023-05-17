@@ -1,3 +1,5 @@
 {
-    "enableMainnet": true
+    "enableMainnet": true,
+    "enableSignerApp": true,
+    "signerUrl": "https://console.ckbull.app"
 }
