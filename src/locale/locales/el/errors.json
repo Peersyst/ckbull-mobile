@@ -28,5 +28,8 @@
     "no_nfts": "Δεν υπάρχουν ακόμη NFT",
     "no_tokens": "Δεν υπάρχουν token",
     "no_deposits": "Δεν υπάρχουν καταθέσεις",
-    "no_withdrawals": "Δεν υπάρχουν αναλήψεις"
+    "no_withdrawals": "Δεν υπάρχουν αναλήψεις",
+    "sign_in_request_already_signed": "Sign In request already signed",
+    "transaction_request_already_signed": "Transaction request already signed",
+    "transaction_request_already_declined": "Transaction request already declined"
 }

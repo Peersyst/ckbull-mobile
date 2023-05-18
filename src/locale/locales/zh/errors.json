@@ -8,11 +8,11 @@
     "invalid_email": "您输入的电子邮箱无效",
     "invalid_password": "密码至少要包含8个字符，包含大小写字母和特殊字符",
     "invalid_equal": "您输入的不一致",
-    "invalid_number_gt": "该值必须大于%n%",
-    "invalid_number_gte": "该值必须大于或等于%n%",
-    "invalid_number_eq": "该字必须等于%n%",
-    "invalid_number_lt": "该值必须低于%n%",
-    "invalid_number_lte": "该值必须低于或等于%n%",
+    "invalid_number_gt": "该值必须大于{{n}}",
+    "invalid_number_gte": "该值必须大于或等于{{n}}",
+    "invalid_number_eq": "该字必须等于{{n}}",
+    "invalid_number_lt": "该值必须低于{{n}}",
+    "invalid_number_lte": "该值必须低于或等于{{n}}",
     "invalid_required": "该领域是强制性的",
     "insufficient_chars": "至少需要包含{{chars}}个字符",
     "too_many_chars": "不得超过{{chars}}个字符",
@@ -28,5 +28,8 @@
     "no_nfts": "目前还没有NFTs",
     "no_tokens": "还没有代币",
     "no_deposits": "没有存款",
-    "no_withdrawals": "没有提款"
+    "no_withdrawals": "没有提款",
+    "sign_in_request_already_signed": "Sign In request already signed",
+    "transaction_request_already_signed": "Transaction request already signed",
+    "transaction_request_already_declined": "Transaction request already declined"
 }

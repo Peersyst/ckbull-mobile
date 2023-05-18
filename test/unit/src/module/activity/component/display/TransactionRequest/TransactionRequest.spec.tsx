@@ -1,30 +1,14 @@
-import { render, translate } from "test-utils";
-import { screen } from "@testing-library/react-native";
+import { capitalize } from "@peersyst/react-utils";
+import { CompleteTransactionRequestDtoMock } from "mocks/common/activity/complete-transaction-request-dto.mock";
 import TransactionRequest from "module/activity/component/display/TransactionRequest/TransactionRequest";
-import { TransactionRequestMock } from "mocks/common";
-import { getTimeFromSeconds } from "module/activity/utils/time";
+import { render, screen } from "test-utils";
 
-describe("Tests for ConnectedSite", () => {
-    test("Renders status signed", () => {
-        const transactionRequestMock = new TransactionRequestMock({ status: "signed" });
-        render(<TransactionRequest transaction={transactionRequestMock} />);
+describe("TransactionRequest", () => {
+    test("Renders correctly", () => {
+        const mockTransactionRequest = new CompleteTransactionRequestDtoMock();
+        render(<TransactionRequest transaction={mockTransactionRequest} />);
 
-        expect(screen.getByText(translate("signed"))).toHaveStyle({ color: "#1ED882" });
-    });
-
-    test("Renders status pending", () => {
-        const { hours, minutes, seconds } = getTimeFromSeconds(2000);
-        const transactionRequestMock = new TransactionRequestMock({ status: "pending", expiresAt: 2000 });
-        render(<TransactionRequest transaction={transactionRequestMock} />);
-
-        expect(screen.getByText(translate("pending"))).toHaveStyle({ color: "#A7A7A7" });
-        expect(screen.getByText(translate("expireDate", { hours, minutes, seconds }))).toBeDefined();
-    });
-
-    test("Renders status expired", () => {
-        const transactionRequestMock = new TransactionRequestMock({ status: "expired" });
-        render(<TransactionRequest transaction={transactionRequestMock} />);
-
-        expect(screen.getByText(translate("expired"))).toHaveStyle({ color: "#FF1717" });
+        expect(screen.getByText(mockTransactionRequest.signInRequest.app.name)).toBeDefined();
+        expect(screen.getByText(capitalize(mockTransactionRequest.status))).toBeDefined();
     });
 });

@@ -1,0 +1,31 @@
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+export const $PrivateUserDto = {
+    properties: {
+        id: {
+            type: 'number',
+            isRequired: true,
+        },
+        name: {
+            type: 'string',
+            isRequired: true,
+        },
+        email: {
+            type: 'string',
+            isRequired: true,
+        },
+        type: {
+            type: 'Enum',
+            isRequired: true,
+        },
+        googleAuth: {
+            type: 'boolean',
+            isRequired: true,
+        },
+        emailVerified: {
+            type: 'boolean',
+            isRequired: true,
+        },
+    },
+} as const;

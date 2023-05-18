@@ -148,6 +148,16 @@ declare module "@peersyst/react-native-components" {
         body4Regular: true;
         body4Light: true;
     }
+
+    export interface ButtonVariantOverrides {
+        primary: true;
+        secondary: true;
+        tertiary: true;
+        outlined: true;
+        text: true;
+        glass: true;
+        filled: false;
+    }
 }
 
 // Type styled components theme with our components theme

@@ -7,12 +7,20 @@ export const $UserDto = {
             type: 'number',
             isRequired: true,
         },
+        name: {
+            type: 'string',
+            isRequired: true,
+        },
         email: {
             type: 'string',
             isRequired: true,
         },
         type: {
             type: 'Enum',
+            isRequired: true,
+        },
+        googleAuth: {
+            type: 'boolean',
             isRequired: true,
         },
     },
