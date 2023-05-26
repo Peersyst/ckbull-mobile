@@ -20,7 +20,8 @@ const envConfigs: Record<string, CreateConfig> = {
     staging: { ...baseConfig, ...stagingConfig },
 };
 
-const envKey = process.env.CONFIG_ENV || process.env.NODE_ENV!;
+const enviroment = process.env;
+const envKey = enviroment.CONFIG_ENV || enviroment.NODE_ENV;
 
 if (!(envKey in envConfigs)) throw new Error(`${envKey} is not a valid env config`);
 
