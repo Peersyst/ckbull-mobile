@@ -21,7 +21,7 @@ const envConfigs: Record<string, CreateConfig> = {
 };
 
 const enviroment = process.env;
-const envKey = enviroment.CONFIG_ENV || enviroment.NODE_ENV;
+const envKey = enviroment.CONFIG_ENV || enviroment.NODE_ENV!;
 
 if (!(envKey in envConfigs)) throw new Error(`${envKey} is not a valid env config`);
 
