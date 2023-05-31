@@ -1,5 +1,5 @@
 {
     "enableMainnet": true,
     "enableSignerApp": true,
-    "signerUrl": "https://ckbull-developer-panel.peersyst.tech"
+    "signerUrl": "https://console.ckbull.app"
 }

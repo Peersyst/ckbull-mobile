@@ -4,6 +4,7 @@ import { Col, Row, Typography, withSkeleton } from "@peersyst/react-native-compo
 import { formatNews } from "module/news/utils/formatNews";
 import { NewsDto } from "module/news/types";
 import useFormatDate from "module/common/hook/useFormatDate";
+import { placeholder_image } from "images";
 
 export interface SimpleNewsCardProps {
     news: NewsDto;
@@ -18,7 +19,7 @@ const NewsCard = ({ news, style }: SimpleNewsCardProps): JSX.Element => {
         <TouchableWithoutFeedback onPress={() => Linking.openURL(uri)}>
             <NewsCardRoot elevation={0} style={style}>
                 <Row gap={12} alignItems="center">
-                    <NewsImage source={{ uri: imageUri }} />
+                    <NewsImage source={imageUri ? { uri: imageUri } : placeholder_image} />
                     <Col gap={4} flex={1} style={{ paddingRight: 16 }}>
                         <Typography variant="body3Light" light>
                             {formattedDate(date)}
