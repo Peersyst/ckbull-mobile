@@ -13,7 +13,7 @@
     "mainnetExplorerApi": "https://mainnet-api.explorer.nervos.org/api/v1/",
     "enableMainnet": true,
     "tokenName": "CKB",
-    "newsRSSUrl": "https://fetchrss.com/rss/6239aa2ceb62c371b8448ee26239aa120841546894777912.xml",
+    "newsRSSUrl": "https://rss.app/feeds/_utYL3ITIAwy4voCk.xml",
     "defaultDecimals": 8,
     "miniUnits": "CKS",
     "enableSignerApp": false,
