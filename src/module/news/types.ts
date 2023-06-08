@@ -2,7 +2,7 @@ export interface NewsType {
     uri: string;
     title: string;
     date: string;
-    imageUri: string;
+    imageUri?: string;
 }
 
 export interface NewsDto {
