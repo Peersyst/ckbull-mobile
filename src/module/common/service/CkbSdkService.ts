@@ -172,11 +172,18 @@ export class CKBSDKService {
 
     getOutputAddressesFromTransaction({ transaction }: AmountFromTransactionParams): string[] {
         const outputs = transaction.get("outputs");
-        return outputs.map((output) => this.connectionService.getAddressFromLock(output.cell_output.lock)).toArray();
+        console.log(JSON.stringify(outputs, null, 2));
+
+        try {
+            return outputs.map((output) => this.connectionService.getAddressFromLock(output.cellOutput.lock)).toArray();
+        } catch (e) {
+            console.log(e);
+        }
+        return [];
     }
 
     getInputAddressesFromTransaction({ transaction }: AmountFromTransactionParams): string[] {
         const inputs = transaction.get("inputs");
-        return inputs.map((input) => this.connectionService.getAddressFromLock(input.cell_output.lock)).toArray();
+        return inputs.map((input) => this.connectionService.getAddressFromLock(input.cellOutput.lock)).toArray();
     }
 }

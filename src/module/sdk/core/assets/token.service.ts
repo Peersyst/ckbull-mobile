@@ -30,15 +30,15 @@ export class TokenService {
         }
 
         const sudtScript = this.connection.getConfig().SCRIPTS.SUDT;
-        return script.code_hash === sudtScript!.CODE_HASH && script.hash_type === sudtScript!.HASH_TYPE;
+        return script.codeHash === sudtScript!.CODE_HASH && script.hashType === sudtScript!.HASH_TYPE;
     }
 
     private getScriptTypeFromToken(hash: string): Script {
         const sudtScript = this.connection.getConfig().SCRIPTS.SUDT;
 
         return {
-            code_hash: sudtScript!.CODE_HASH,
-            hash_type: sudtScript!.HASH_TYPE,
+            codeHash: sudtScript!.CODE_HASH,
+            hashType: sudtScript!.HASH_TYPE,
             args: hash,
         };
     }
@@ -83,7 +83,7 @@ export class TokenService {
         const toScript = this.connection.getLockFromAddress(to);
         txSkeleton = txSkeleton.update("outputs", (outputs) => {
             return outputs.push({
-                cell_output: {
+                cellOutput: {
                     capacity: "0x" + this.sudtCellSize.toString(16),
                     lock: toScript,
                     type: this.getScriptTypeFromToken(token),
@@ -129,8 +129,8 @@ export class TokenService {
     getBalanceFromCells(cells: Cell[]): TokenAmount[] {
         const tokenMap = new Map<string, number>();
         for (const cell of cells) {
-            if (this.isTokenScriptType(cell.cell_output.type!)) {
-                const key = cell.cell_output.type!.args;
+            if (this.isTokenScriptType(cell.cellOutput.type!)) {
+                const key = cell.cellOutput.type!.args;
 
                 if (!tokenMap.has(key)) {
                     tokenMap.set(key, Number(utils.readBigUInt128LE(cell.data)));

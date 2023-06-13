@@ -130,11 +130,11 @@ export class NftService {
     private addCellDepFromNftConfig(txSkeleton: TransactionSkeletonType, nftCfg: NftConfigType): TransactionSkeletonType {
         return txSkeleton.update("cellDeps", (cellDeps) => {
             return cellDeps.push({
-                out_point: {
-                    tx_hash: nftCfg.txHash,
+                outPoint: {
+                    txHash: nftCfg.txHash,
                     index: nftCfg.index,
                 },
-                dep_type: nftCfg.depType,
+                depType: nftCfg.depType,
             });
         });
     }
@@ -176,14 +176,14 @@ export class NftService {
     }
 
     private cellToNftScript(cell: Cell): NftScript | null {
-        if (!cell.cell_output.type) {
+        if (!cell.cellOutput.type) {
             return null;
         }
 
         return {
-            codeHash: cell.cell_output.type.code_hash,
-            args: cell.cell_output.type.args,
-            hashType: cell.cell_output.type.hash_type,
+            codeHash: cell.cellOutput.type.codeHash,
+            args: cell.cellOutput.type.args,
+            hashType: cell.cellOutput.type.hashType,
         };
     }
 
@@ -219,9 +219,9 @@ export class NftService {
         if (cellTypeScript.codeHash === mNftCfg.codeHash) {
             const cellProvider = this.connection.getCellProvider({
                 type: {
-                    code_hash: mNftCfg.classCodeHash!,
+                    codeHash: mNftCfg.classCodeHash!,
                     args: cellTypeScript.args.slice(0, -8),
-                    hash_type: "type",
+                    hashType: "type",
                 },
             });
 
@@ -282,12 +282,12 @@ export class NftService {
         const toScript = this.connection.getLockFromAddress(to);
         txSkeleton = txSkeleton.update("outputs", (outputs) => {
             return outputs.push({
-                cell_output: {
+                cellOutput: {
                     capacity: "0x" + this.nftCellSize.toString(16),
                     lock: toScript,
                     type: {
-                        code_hash: nft.script.codeHash,
-                        hash_type: nft.script.hashType,
+                        codeHash: nft.script.codeHash,
+                        hashType: nft.script.hashType,
                         args: nft.script.args,
                     },
                 },

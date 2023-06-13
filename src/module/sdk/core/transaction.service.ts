@@ -1,13 +1,13 @@
 import { ScriptConfig } from "@ckb-lumos/config-manager";
-import { Cell, commons, hd, helpers, Script, utils, HashType, Transaction as LumosTx } from "@ckb-lumos/lumos";
+import { Cell, commons, hd, helpers, Script, utils, HashType, Transaction as LumosTx, WitnessArgs } from "@ckb-lumos/lumos";
 import { sealTransaction, TransactionSkeletonType } from "@ckb-lumos/helpers";
-import { TransactionWithStatus, values, core, WitnessArgs } from "@ckb-lumos/base";
+import { TransactionWithStatus, values, blockchain } from "@ckb-lumos/base";
 import { TransactionCollector as TxCollector } from "@ckb-lumos/ckb-indexer";
-import { Reader, normalizers } from "@ckb-lumos/toolkit";
 import { CKBIndexerQueryOptions } from "@ckb-lumos/ckb-indexer/src/type";
 import { ConnectionService } from "./connection.service";
 import { Logger } from "../utils/logger";
 import { NftService } from "./assets/nft.service";
+import { bytes } from "@ckb-lumos/codec";
 
 const { ScriptValue } = values;
 
@@ -84,11 +84,11 @@ export class TransactionService {
     static addCellDep(txSkeleton: TransactionSkeletonType, scriptConfig: ScriptConfig): TransactionSkeletonType {
         return txSkeleton.update("cellDeps", (cellDeps) => {
             return cellDeps.push({
-                out_point: {
-                    tx_hash: scriptConfig.TX_HASH,
+                outPoint: {
+                    txHash: scriptConfig.TX_HASH,
                     index: scriptConfig.INDEX,
                 },
-                dep_type: scriptConfig.DEP_TYPE,
+                depType: scriptConfig.DEP_TYPE,
             });
         });
     }
@@ -98,14 +98,14 @@ export class TransactionService {
     }
 
     static cellIsScriptType(cell: Cell, scriptType: ScriptType): boolean {
-        const { type } = cell.cell_output;
-        return !!type && type.args === scriptType.args && type.code_hash === scriptType.codeHash && type.hash_type === scriptType.hashType;
+        const { type } = cell.cellOutput;
+        return !!type && type.args === scriptType.args && type.codeHash === scriptType.codeHash && type.hashType === scriptType.hashType;
     }
 
     private cellIsTokenType(cell: Cell, tokenHash: string): boolean {
         const sudt = this.connection.getConfig().SCRIPTS.SUDT!;
-        const { type } = cell.cell_output;
-        return !!type && type.code_hash === sudt.CODE_HASH && type.hash_type === sudt.HASH_TYPE && type.args === tokenHash;
+        const { type } = cell.cellOutput;
+        return !!type && type.codeHash === sudt.CODE_HASH && type.hashType === sudt.HASH_TYPE && type.args === tokenHash;
     }
 
     private getTransactionCollector(address: string, includeStatus = false, toBlock?: string, fromBlock?: string): any {
@@ -132,8 +132,8 @@ export class TransactionService {
         let isRealSender = false;
         for (let i = 0; i < lumosTx.transaction.inputs.length; i += 1) {
             const input = lumosTx.transaction.inputs[i];
-            const inputTx = await this.connection.getTransactionFromHash(input.previous_output.tx_hash);
-            const outputIdx = parseInt(input.previous_output.index, 16);
+            const inputTx = await this.connection.getTransactionFromHash(input.previousOutput.txHash);
+            const outputIdx = parseInt(input.previousOutput.index, 16);
             const output = inputTx.transaction.outputs[outputIdx];
             const inputAddress = this.connection.getAddressFromLock(output.lock);
             inputs.push({
@@ -148,10 +148,10 @@ export class TransactionService {
                 if (output.type) {
                     inputType = {
                         args: output.type.args,
-                        codeHash: output.type.code_hash,
-                        hashType: output.type.hash_type,
+                        codeHash: output.type.codeHash,
+                        hashType: output.type.hashType,
                     };
-                    const data = inputTx.transaction.outputs_data[outputIdx];
+                    const data = inputTx.transaction.outputsData[outputIdx];
                     if (data && data !== "0x") {
                         if (data.length === 34) {
                             inputData = Number(utils.readBigUInt128LE(data));
@@ -178,7 +178,7 @@ export class TransactionService {
                     outputIndex = index;
                 }
             } else if (output.type) {
-                const outputScriptType = { args: output.type.args, codeHash: output.type.code_hash, hashType: output.type.hash_type };
+                const outputScriptType = { args: output.type.args, codeHash: output.type.codeHash, hashType: output.type.hashType };
                 if (TransactionService.isScriptTypeScript(outputScriptType, this.connection.getConfig().SCRIPTS.SUDT!)) {
                     tokensDestinationsIndex.push(index);
                 }
@@ -192,12 +192,10 @@ export class TransactionService {
             return {
                 quantity: parseInt(output.capacity, 16) / 100000000,
                 address: this.connection.getAddressFromLock(output.lock),
-                type: output.type
-                    ? { args: output.type.args, codeHash: output.type.code_hash, hashType: output.type.hash_type }
-                    : undefined,
+                type: output.type ? { args: output.type.args, codeHash: output.type.codeHash, hashType: output.type.hashType } : undefined,
             };
         });
-        lumosTx.transaction.outputs_data.map((data, index) => {
+        lumosTx.transaction.outputsData.map((data, index) => {
             if (data !== "0x") {
                 if (data.length === 34) {
                     outputs[index].data = Number(utils.readBigUInt128LE(data));
@@ -261,7 +259,7 @@ export class TransactionService {
         }
 
         const transaction: Transaction = {
-            status: lumosTx.tx_status.status as TransactionStatus,
+            status: lumosTx.txStatus.status as TransactionStatus,
             transactionHash: lumosTx.transaction.hash!,
             inputs,
             outputs,
@@ -270,9 +268,9 @@ export class TransactionService {
             amount,
             tokenAmount,
         };
-        if (lumosTx.tx_status.block_hash) {
-            const header = await this.connection.getBlockHeaderFromHash(lumosTx.tx_status.block_hash);
-            transaction.blockHash = lumosTx.tx_status.block_hash;
+        if (lumosTx.txStatus.blockHash) {
+            const header = await this.connection.getBlockHeaderFromHash(lumosTx.txStatus.blockHash);
+            transaction.blockHash = lumosTx.txStatus.blockHash;
             transaction.blockNumber = parseInt(header.number, 16);
             transaction.timestamp = new Date(parseInt(header.timestamp, 16));
         }
@@ -296,11 +294,11 @@ export class TransactionService {
 
         for (const cell of cells) {
             // Cell is empty
-            if (!cell.cell_output.type) {
+            if (!cell.cellOutput.type) {
                 txSkeleton = txSkeleton.update("inputs", (inputs) => inputs.push(cell));
                 txSkeleton = txSkeleton.update("witnesses", (witnesses) => witnesses.push("0x"));
 
-                const inputCapacity = BigInt(cell.cell_output.capacity);
+                const inputCapacity = BigInt(cell.cellOutput.capacity);
                 let deductCapacity = inputCapacity;
                 if (deductCapacity > currentCapacity) {
                     deductCapacity = currentCapacity;
@@ -308,12 +306,12 @@ export class TransactionService {
                 currentCapacity -= deductCapacity;
                 changeCapacity += inputCapacity - deductCapacity;
 
-                const lockScript = cell.cell_output.lock;
+                const lockScript = cell.cellOutput.lock;
                 if (
                     !lastScript ||
                     lastScript.args !== lockScript.args ||
-                    lastScript.code_hash !== lockScript.code_hash ||
-                    lastScript.hash_type !== lockScript.hash_type
+                    lastScript.codeHash !== lockScript.codeHash ||
+                    lastScript.hashType !== lockScript.hashType
                 ) {
                     txSkeleton = this.addWitnesses(txSkeleton, lockScript);
                     lastScript = lockScript;
@@ -322,14 +320,14 @@ export class TransactionService {
                 // Got enough capacity
                 if (currentCapacity.toString() === BigInt(0).toString() && changeCapacity > BigInt(0)) {
                     changeCell = {
-                        cell_output: {
+                        cellOutput: {
                             capacity: "0x" + changeCapacity.toString(16),
-                            lock: cell.cell_output.lock,
+                            lock: cell.cellOutput.lock,
                             type: undefined,
                         },
                         data: "0x",
-                        out_point: undefined,
-                        block_hash: undefined,
+                        outPoint: undefined,
+                        blockHash: undefined,
                     };
                     break;
                 }
@@ -351,36 +349,36 @@ export class TransactionService {
         cells: Cell[],
     ): TransactionSkeletonType {
         const sudt = this.connection.getConfig().SCRIPTS.SUDT!;
-        const tokenType = {
-            code_hash: sudt.CODE_HASH,
-            hash_type: sudt.HASH_TYPE,
+        const tokenType: Script = {
+            codeHash: sudt.CODE_HASH,
+            hashType: sudt.HASH_TYPE,
             args: token,
         };
         const tokenCells = cells.filter((cell) => this.cellIsTokenType(cell, token));
-        const noTypeCells = cells.filter((cell) => !cell.cell_output.type);
+        const noTypeCells = cells.filter((cell) => !cell.cellOutput.type);
         if (tokenCells.length === 0) {
             throw new Error("Insufficient tokens amount");
         }
 
         const changeCell: Cell = {
-            cell_output: {
+            cellOutput: {
                 capacity: "0x0",
-                lock: tokenCells[0].cell_output.lock,
+                lock: tokenCells[0].cellOutput.lock,
                 type: tokenType,
             },
             data: utils.toBigUInt128LE(BigInt(0).valueOf()),
-            out_point: undefined,
-            block_hash: undefined,
+            outPoint: undefined,
+            blockHash: undefined,
         };
         const changeCellWithoutSudt: Cell = {
-            cell_output: {
+            cellOutput: {
                 capacity: "0x0",
-                lock: tokenCells[0].cell_output.lock,
+                lock: tokenCells[0].cellOutput.lock,
                 type: undefined,
             },
             data: "0x",
-            out_point: undefined,
-            block_hash: undefined,
+            outPoint: undefined,
+            blockHash: undefined,
         };
         let lastScript: Script | undefined;
         let changeCapacity = BigInt(0);
@@ -392,7 +390,7 @@ export class TransactionService {
             txSkeleton = txSkeleton.update("inputs", (inputs) => inputs.push(cell));
             txSkeleton = txSkeleton.update("witnesses", (witnesses) => witnesses.push("0x"));
 
-            const inputCapacity = BigInt(cell.cell_output.capacity);
+            const inputCapacity = BigInt(cell.cellOutput.capacity);
             let deductCapacity = inputCapacity;
             if (deductCapacity > currentCapacity) {
                 deductCapacity = currentCapacity;
@@ -400,7 +398,7 @@ export class TransactionService {
             currentCapacity -= deductCapacity;
             changeCapacity += inputCapacity - deductCapacity;
 
-            if (cell.cell_output.type) {
+            if (cell.cellOutput.type) {
                 const inputAmount = utils.readBigUInt128LECompatible(cell.data).toBigInt();
                 let deductAmount = inputAmount;
                 if (deductAmount > currentAmount) {
@@ -410,12 +408,12 @@ export class TransactionService {
                 changeAmount += inputAmount - deductAmount;
             }
 
-            const lockScript = cell.cell_output.lock;
+            const lockScript = cell.cellOutput.lock;
             if (
                 !lastScript ||
                 lastScript.args !== lockScript.args ||
-                lastScript.code_hash !== lockScript.code_hash ||
-                lastScript.hash_type !== lockScript.hash_type
+                lastScript.codeHash !== lockScript.codeHash ||
+                lastScript.hashType !== lockScript.hashType
             ) {
                 txSkeleton = this.addWitnesses(txSkeleton, lockScript);
                 lastScript = lockScript;
@@ -429,7 +427,7 @@ export class TransactionService {
                 (changeCapacity.toString() === BigInt(0).toString() ||
                     changeCapacity >= helpers.minimalCellCapacityCompatible(changeCellWithoutSudt).toBigInt())
             ) {
-                changeCell.cell_output.type = undefined;
+                changeCell.cellOutput.type = undefined;
                 changeCell.data = "0x";
                 break;
             }
@@ -458,15 +456,15 @@ export class TransactionService {
         if (changeCapacity > BigInt(0)) {
             let splitFlag = false;
 
-            changeCell.cell_output.capacity = "0x" + changeCapacity.toString(16);
+            changeCell.cellOutput.capacity = "0x" + changeCapacity.toString(16);
             if (changeAmount > 0) {
                 changeCell.data = utils.toBigUInt128LE(changeAmount.toString());
 
                 const changeCellMin = helpers.minimalCellCapacityCompatible(changeCell).toBigInt();
                 const changeCellNoSudtMin = helpers.minimalCellCapacityCompatible(changeCellWithoutSudt).toBigInt();
                 if (changeCapacity >= changeCellMin + changeCellNoSudtMin) {
-                    changeCell.cell_output.capacity = "0x" + changeCellMin.toString(16);
-                    changeCellWithoutSudt.cell_output.capacity = "0x" + (changeCapacity - changeCellMin).toString(16);
+                    changeCell.cellOutput.capacity = "0x" + changeCellMin.toString(16);
+                    changeCellWithoutSudt.cellOutput.capacity = "0x" + (changeCapacity - changeCellMin).toString(16);
                     splitFlag = true;
                 }
             }
@@ -498,13 +496,13 @@ export class TransactionService {
         // Add output
         txSkeleton = txSkeleton.update("outputs", (outputs) => {
             const output = outputs.get(0)!;
-            output.cell_output.capacity = cell.cell_output.capacity;
+            output.cellOutput.capacity = cell.cellOutput.capacity;
             return outputs.set(0, output);
         });
 
         txSkeleton = txSkeleton.update("inputs", (inputs) => inputs.push(cell));
         txSkeleton = txSkeleton.update("witnesses", (witnesses) => witnesses.push("0x"));
-        txSkeleton = this.addWitnesses(txSkeleton, cell.cell_output.lock);
+        txSkeleton = this.addWitnesses(txSkeleton, cell.cellOutput.lock);
 
         return txSkeleton;
     }
@@ -513,7 +511,7 @@ export class TransactionService {
         return txSkeleton
             .get("inputs")
             .findIndex((input) =>
-                new ScriptValue(input.cell_output.lock, { validate: false }).equals(new ScriptValue(fromScript, { validate: false })),
+                new ScriptValue(input.cellOutput.lock, { validate: false }).equals(new ScriptValue(fromScript, { validate: false })),
             );
     }
 
@@ -529,22 +527,22 @@ export class TransactionService {
             let witness: string = txSkeleton.get("witnesses").get(firstIndex)!;
             const newWitnessArgs: WitnessArgs = { lock: this.secpSignaturePlaceholder };
             if (witness !== "0x") {
-                const witnessArgs = new core.WitnessArgs(new Reader(witness));
-                const lock = witnessArgs.getLock();
-                if (lock.hasValue() && new Reader(lock.value().raw()).serializeJson() !== newWitnessArgs.lock) {
+                const witnessArgs = blockchain.WitnessArgs.unpack(bytes.bytify(witness));
+                const lock = witnessArgs.lock;
+                if (!!lock && !!newWitnessArgs.lock && !bytes.equal(lock, newWitnessArgs.lock)) {
                     throw new Error("Lock field in first witness is set aside for signature!");
                 }
 
-                const inputType = witnessArgs.getInputType();
-                if (inputType.hasValue()) {
-                    newWitnessArgs.input_type = new Reader(inputType.value().raw()).serializeJson();
+                const inputType = witnessArgs.inputType;
+                if (inputType) {
+                    newWitnessArgs.inputType = inputType;
                 }
-                const outputType = witnessArgs.getOutputType();
-                if (outputType.hasValue()) {
-                    newWitnessArgs.output_type = new Reader(outputType.value().raw()).serializeJson();
+                const outputType = witnessArgs.outputType;
+                if (outputType) {
+                    newWitnessArgs.outputType = outputType;
                 }
             }
-            witness = new Reader(core.SerializeWitnessArgs(normalizers.NormalizeWitnessArgs(newWitnessArgs))).serializeJson();
+            witness = bytes.hexify(blockchain.WitnessArgs.pack(newWitnessArgs));
             txSkeleton = txSkeleton.update("witnesses", (witnesses) => witnesses.set(firstIndex, witness));
         }
 
@@ -625,7 +623,7 @@ export class TransactionService {
 
     async signAndSendTransaction(txSkeleton: TransactionSkeletonType, privateKeys: string[]): Promise<string> {
         const signedTx = this.signTransaction(txSkeleton, privateKeys);
-        const hash = await this.connection.getRPC().send_transaction(signedTx, "passthrough");
+        const hash = await this.connection.getRPC().sendTransaction(signedTx, "passthrough");
 
         return hash;
     }

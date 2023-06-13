@@ -51,7 +51,7 @@ export class CKBService {
         const toScript = this.connection.getLockFromAddress(to);
         txSkeleton = txSkeleton.update("outputs", (outputs) => {
             return outputs.push({
-                cell_output: {
+                cellOutput: {
                     capacity: "0x" + amount.toString(16),
                     lock: toScript,
                 },
@@ -90,9 +90,9 @@ export class CKBService {
         let occupiedBalanceBI = BigInt(0);
 
         for (const cell of cells) {
-            totalBalanceBI += BigInt(cell.cell_output.capacity);
-            if (cell.cell_output.type) {
-                occupiedBalanceBI += BigInt(cell.cell_output.capacity);
+            totalBalanceBI += BigInt(cell.cellOutput.capacity);
+            if (cell.cellOutput.type) {
+                occupiedBalanceBI += BigInt(cell.cellOutput.capacity);
             }
         }
         const freeBalance = Number(totalBalanceBI - occupiedBalanceBI) / 10 ** 8;

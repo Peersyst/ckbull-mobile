@@ -56,20 +56,20 @@ export class DAOService {
         const daoConfig = this.connection.getConfig().SCRIPTS.DAO;
 
         return {
-            code_hash: daoConfig!.CODE_HASH,
-            hash_type: daoConfig!.HASH_TYPE,
+            codeHash: daoConfig!.CODE_HASH,
+            hashType: daoConfig!.HASH_TYPE,
             args: this.daoScriptArgs,
         };
     }
 
     private isCellDAO(cell: Cell): boolean {
         const daoScript = this.getDAOScript();
-        if (!cell.cell_output.type) {
+        if (!cell.cellOutput.type) {
             return false;
         }
-        const { code_hash, hash_type, args } = cell.cell_output.type;
+        const { codeHash, hashType, args } = cell.cellOutput.type;
 
-        return code_hash === daoScript.code_hash && hash_type === daoScript.hash_type && args === daoScript.args;
+        return codeHash === daoScript.codeHash && hashType === daoScript.hashType && args === daoScript.args;
     }
 
     private addDAOCellDep(txSkeleton: TransactionSkeletonType): TransactionSkeletonType {
@@ -115,8 +115,8 @@ export class DAOService {
                 continue;
             }
 
-            if (!inputCell.block_hash && inputCell.block_number) {
-                const header = await this.connection.getBlockHeaderFromNumber(inputCell.block_number);
+            if (!inputCell.blockHash && inputCell.blockNumber) {
+                const header = await this.connection.getBlockHeaderFromNumber(inputCell.blockNumber);
                 cells.push({ ...inputCell, block_hash: header.hash });
             } else {
                 cells.push(inputCell);
@@ -137,9 +137,9 @@ export class DAOService {
                     continue;
                 }
 
-                if (!cell.block_hash && cell.block_number) {
-                    const header = await this.connection.getBlockHeaderFromNumber(cell.block_number);
-                    filteredCells.push({ ...cell, block_hash: header.hash });
+                if (!cell.blockHash && cell.blockNumber) {
+                    const header = await this.connection.getBlockHeaderFromNumber(cell.blockNumber);
+                    filteredCells.push({ ...cell, blockHash: header.hash });
                 } else {
                     filteredCells.push(cell);
                 }
@@ -156,7 +156,7 @@ export class DAOService {
 
         for (let i = 0; i < cells.length; i += 1) {
             let maxWithdraw = BigInt(0);
-            daoDeposit += BigInt(cells[i].cell_output.capacity);
+            daoDeposit += BigInt(cells[i].cellOutput.capacity);
 
             if (this.isCellDeposit(cells[i])) {
                 maxWithdraw = await this.getDepositCellMaximumWithdraw(cells[i]);
@@ -164,7 +164,7 @@ export class DAOService {
                 maxWithdraw = await this.getWithdrawCellMaximumWithdraw(cells[i]);
             }
 
-            daoCompensation += maxWithdraw - BigInt(cells[i].cell_output.capacity);
+            daoCompensation += maxWithdraw - BigInt(cells[i].cellOutput.capacity);
         }
 
         return { daoDeposit: Number(daoDeposit) / 10 ** 8, daoCompensation: Number(daoCompensation) / 10 ** 8 };
@@ -177,7 +177,7 @@ export class DAOService {
 
         for (let i = 0; i < daoCells.length; i += 1) {
             let maxWithdraw = BigInt(0);
-            daoDeposit += BigInt(daoCells[i].cell_output.capacity);
+            daoDeposit += BigInt(daoCells[i].cellOutput.capacity);
 
             if (this.isCellDeposit(daoCells[i])) {
                 maxWithdraw = await this.getDepositCellMaximumWithdraw(daoCells[i]);
@@ -185,7 +185,7 @@ export class DAOService {
                 maxWithdraw = await this.getWithdrawCellMaximumWithdraw(daoCells[i]);
             }
 
-            daoCompensation += maxWithdraw - BigInt(daoCells[i].cell_output.capacity);
+            daoCompensation += maxWithdraw - BigInt(daoCells[i].cellOutput.capacity);
         }
 
         return { daoDeposit: Number(daoDeposit) / 10 ** 8, daoCompensation: Number(daoCompensation) / 10 ** 8 };
@@ -222,7 +222,7 @@ export class DAOService {
         const toScript = this.connection.getLockFromAddress(to);
         txSkeleton = txSkeleton.update("outputs", (outputs) => {
             return outputs.push({
-                cell_output: {
+                cellOutput: {
                     capacity: "0x" + amount.toString(16),
                     lock: toScript,
                     type: this.getDAOScript(),
@@ -293,27 +293,27 @@ export class DAOService {
     }
 
     async findCorrectInputFromWithdrawCell(withdrawCell: Cell): Promise<{ index: string; txHash: string }> {
-        const transaction = await this.connection.getTransactionFromHash(withdrawCell.out_point!.tx_hash);
+        const transaction = await this.connection.getTransactionFromHash(withdrawCell.outPoint!.txHash);
 
         let index: string | undefined;
         let txHash: string;
         for (let i = 0; i < transaction.transaction.inputs.length && !index; i += 1) {
-            const prevOut = transaction.transaction.inputs[i].previous_output;
+            const prevOut = transaction.transaction.inputs[i].previousOutput;
 
-            const possibleTx = await this.connection.getTransactionFromHash(prevOut.tx_hash);
+            const possibleTx = await this.connection.getTransactionFromHash(prevOut.txHash);
             const output = possibleTx.transaction.outputs[parseInt(prevOut.index, 16)];
             if (
                 output.type &&
-                output.capacity === withdrawCell.cell_output.capacity &&
-                output.lock.args === withdrawCell.cell_output.lock.args &&
-                output.lock.hash_type === withdrawCell.cell_output.lock.hash_type &&
-                output.lock.code_hash === withdrawCell.cell_output.lock.code_hash &&
-                output.type.args === withdrawCell.cell_output.type!.args &&
-                output.type.hash_type === withdrawCell.cell_output.type!.hash_type &&
-                output.type.code_hash === withdrawCell.cell_output.type!.code_hash
+                output.capacity === withdrawCell.cellOutput.capacity &&
+                output.lock.args === withdrawCell.cellOutput.lock.args &&
+                output.lock.hashType === withdrawCell.cellOutput.lock.hashType &&
+                output.lock.codeHash === withdrawCell.cellOutput.lock.codeHash &&
+                output.type.args === withdrawCell.cellOutput.type!.args &&
+                output.type.hashType === withdrawCell.cellOutput.type!.hashType &&
+                output.type.codeHash === withdrawCell.cellOutput.type!.codeHash
             ) {
                 index = prevOut.index;
-                txHash = prevOut.tx_hash;
+                txHash = prevOut.txHash;
             }
         }
 
@@ -330,7 +330,7 @@ export class DAOService {
         const capacity = `0x${unlockableAmount.amount.toString(16)}`;
 
         for (let i = 0; i < filtCells.length; i += 1) {
-            if (filtCells[i].cell_output.capacity === capacity && filtCells[i].out_point!.tx_hash === unlockableAmount.txHash) {
+            if (filtCells[i].cellOutput.capacity === capacity && filtCells[i].outPoint!.txHash === unlockableAmount.txHash) {
                 return filtCells[i];
             }
         }
@@ -341,21 +341,21 @@ export class DAOService {
     async getDepositCellFromWithdrawCell(withdrawCell: Cell): Promise<Cell> {
         const { index, txHash } = await this.findCorrectInputFromWithdrawCell(withdrawCell);
         const depositTransaction = await this.connection.getTransactionFromHash(txHash);
-        const depositBlockHeader = await this.connection.getBlockHeaderFromHash(depositTransaction.tx_status.block_hash!);
+        const depositBlockHeader = await this.connection.getBlockHeaderFromHash(depositTransaction.txStatus.blockHash!);
 
         return {
-            cell_output: {
-                capacity: withdrawCell.cell_output.capacity,
-                lock: { ...withdrawCell.cell_output.lock },
-                type: { ...withdrawCell.cell_output.type! },
+            cellOutput: {
+                capacity: withdrawCell.cellOutput.capacity,
+                lock: { ...withdrawCell.cellOutput.lock },
+                type: { ...withdrawCell.cellOutput.type! },
             },
-            out_point: {
-                tx_hash: txHash,
+            outPoint: {
+                txHash: txHash,
                 index,
             },
             data: this.depositDaoData,
-            block_hash: depositBlockHeader.hash,
-            block_number: depositBlockHeader.number,
+            blockHash: depositBlockHeader.hash,
+            blockNumber: depositBlockHeader.number,
         };
     }
 
@@ -365,7 +365,7 @@ export class DAOService {
 
         for (let i = 0; i < cells.length; i += 1) {
             this.logger.info(cells[i]);
-            if (cells[i].cell_output.capacity === capacity && cells[i].out_point!.tx_hash === txHash) {
+            if (cells[i].cellOutput.capacity === capacity && cells[i].outPoint!.txHash === txHash) {
                 return cells[i];
             }
         }
@@ -406,33 +406,33 @@ export class DAOService {
     }
 
     async getDepositCellMaximumWithdraw(depositCell: Cell): Promise<bigint> {
-        const depositBlockHeader = await this.connection.getBlockHeaderFromHash(depositCell.block_hash!);
+        const depositBlockHeader = await this.connection.getBlockHeaderFromHash(depositCell.blockHash!);
         const withdrawBlockHeader = await this.connection.getCurrentBlockHeader();
 
         return dao.calculateMaximumWithdraw(depositCell, depositBlockHeader.dao, withdrawBlockHeader.dao);
     }
 
     async getWithdrawCellMaximumWithdraw(withdrawCell: Cell): Promise<bigint> {
-        const withdrawBlockHeader = await this.connection.getBlockHeaderFromHash(withdrawCell.block_hash!);
+        const withdrawBlockHeader = await this.connection.getBlockHeaderFromHash(withdrawCell.blockHash!);
         const { txHash } = await this.findCorrectInputFromWithdrawCell(withdrawCell);
         const depositTransaction = await this.connection.getTransactionFromHash(txHash);
-        const depositBlockHeader = await this.connection.getBlockHeaderFromHash(depositTransaction.tx_status.block_hash!);
+        const depositBlockHeader = await this.connection.getBlockHeaderFromHash(depositTransaction.txStatus.blockHash!);
 
         return dao.calculateMaximumWithdraw(withdrawCell, depositBlockHeader.dao, withdrawBlockHeader.dao);
     }
 
     async getDepositDaoEarliestSince(depositCell: Cell): Promise<bigint> {
-        const depositBlockHeader = await this.connection.getBlockHeaderFromHash(depositCell.block_hash!);
+        const depositBlockHeader = await this.connection.getBlockHeaderFromHash(depositCell.blockHash!);
         const withdrawBlockHeader = await this.connection.getCurrentBlockHeader();
 
         return dao.calculateDaoEarliestSince(depositBlockHeader.epoch, withdrawBlockHeader.epoch);
     }
 
     async getWithdrawDaoEarliestSince(withdrawCell: Cell): Promise<bigint> {
-        const withdrawBlockHeader = await this.connection.getBlockHeaderFromHash(withdrawCell.block_hash!);
+        const withdrawBlockHeader = await this.connection.getBlockHeaderFromHash(withdrawCell.blockHash!);
         const { txHash } = await this.findCorrectInputFromWithdrawCell(withdrawCell);
         const depositTransaction = await this.connection.getTransactionFromHash(txHash);
-        const depositBlockHeader = await this.connection.getBlockHeaderFromHash(depositTransaction.tx_status.block_hash!);
+        const depositBlockHeader = await this.connection.getBlockHeaderFromHash(depositTransaction.txStatus.blockHash!);
 
         return dao.calculateDaoEarliestSince(depositBlockHeader.epoch, withdrawBlockHeader.epoch);
     }
@@ -450,12 +450,12 @@ export class DAOService {
 
         for (let i = 0; i < filtCells.length; i += 1) {
             const unlockableAmount: DAOUnlockableAmount = {
-                amount: BigInt(filtCells[i].cell_output.capacity),
+                amount: BigInt(filtCells[i].cellOutput.capacity),
                 compensation: BigInt(0),
                 unlockable: true,
                 remainingCycleMinutes: 0,
                 type: "withdraw",
-                txHash: filtCells[i].out_point!.tx_hash,
+                txHash: filtCells[i].outPoint!.txHash,
                 remainingEpochs: 0,
             };
             let maxWithdraw = BigInt(0);
