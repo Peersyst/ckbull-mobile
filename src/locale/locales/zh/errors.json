@@ -13,7 +13,7 @@
     "invalid_number_eq": "该字必须等于{{n}}",
     "invalid_number_lt": "该值必须低于{{n}}",
     "invalid_number_lte": "该值必须低于或等于{{n}}",
-    "invalid_required": "该领域是强制性的",
+    "invalid_required": "这是必填项",
     "insufficient_chars": "至少需要包含{{chars}}个字符",
     "too_many_chars": "不得超过{{chars}}个字符",
     "too_many_decimals": "必须包含{{decimals}}减去小数",
@@ -25,11 +25,11 @@
     "incorrect_mnemonic": "您输入的助记词不正确",
     "invalid_account_without_balance": "该账户应至少有{{minAmount}}个{{units}}",
     "no_transactions": "还没有交易",
-    "no_nfts": "目前还没有NFTs",
+    "no_nfts": "目前还没有NFT",
     "no_tokens": "还没有代币",
     "no_deposits": "没有存款",
     "no_withdrawals": "没有提款",
-    "sign_in_request_already_signed": "Sign In request already signed",
-    "transaction_request_already_signed": "Transaction request already signed",
-    "transaction_request_already_declined": "Transaction request already declined"
+    "sign_in_request_already_signed": "登录请求已签署",
+    "transaction_request_already_signed": "交易请求已签署",
+    "transaction_request_already_declined": "交易请求已被拒绝"
 }
