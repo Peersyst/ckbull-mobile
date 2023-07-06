@@ -31,5 +31,6 @@
     "no_withdrawals": "没有提款",
     "sign_in_request_already_signed": "Sign In request already signed",
     "transaction_request_already_signed": "Transaction request already signed",
-    "transaction_request_already_declined": "Transaction request already declined"
+    "transaction_request_already_declined": "Transaction request already declined",
+    "invalid_transaction": "Invalid transaction"
 }
