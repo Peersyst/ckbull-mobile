@@ -4,6 +4,7 @@ import { TransactionSkeletonType } from "@ckb-lumos/helpers";
 import { WalletStorage } from "module/wallet/WalletStorage";
 import { useSettings } from "module/settings/hook/useSettings";
 import Queries from "../../../query/queries";
+import useCkbSync from "module/wallet/hook/useCkbSync";
 
 export interface UseSignTransactionProps {
     onSuccess?: (hash: string | undefined) => void;
@@ -15,10 +16,13 @@ export default function useSignTransaction({ onSuccess, onError }: UseSignTransa
     const { fee } = useSettings();
     const baseQueries = [Queries.GET_BALANCE, Queries.GET_TRANSACTIONS];
     const queryClient = useQueryClient();
+    const { synchronize } = useCkbSync();
 
     const handleSign = async (transaction: TransactionSkeletonType) => {
         const mnemonic = await WalletStorage.getMnemonic(usedIndex!);
-        return await serviceInstance?.fillAndSignPartialTransaction({ transaction, mnemonic: mnemonic!, feeRate: fee });
+        const txHash = await serviceInstance?.fillAndSignPartialTransaction({ transaction, mnemonic: mnemonic!, feeRate: fee });
+        await synchronize();
+        return txHash;
     };
 
     return useMutation((transaction: TransactionSkeletonType) => handleSign(transaction), {
