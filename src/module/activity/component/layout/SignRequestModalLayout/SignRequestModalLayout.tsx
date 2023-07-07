@@ -12,6 +12,7 @@ interface SignModalLayoutProps {
     rejecting: boolean;
     children: ReactNode;
     disabled: boolean;
+    disabledMessage?: string;
 }
 
 export default function SignRequestModalLayout({
@@ -23,6 +24,7 @@ export default function SignRequestModalLayout({
     signing,
     rejecting,
     disabled,
+    disabledMessage,
 }: SignModalLayoutProps): JSX.Element {
     const translate = useTranslate();
     const [open, setOpen] = useState(false);
@@ -63,6 +65,11 @@ export default function SignRequestModalLayout({
                 <SwipeButton onSwipe={onSign} loading={signing} disabled={disabled} fullWidth>
                     {translate("slideToAccept")}
                 </SwipeButton>
+                {disabled && disabledMessage && (
+                    <Typography variant="body2" textAlign="center">
+                        {disabledMessage}
+                    </Typography>
+                )}
             </Col>
             <Dialog open={open} onClose={() => setOpen(false)} title={rejectTitle} content={rejectMessage} buttons={buttons} />
         </Col>
