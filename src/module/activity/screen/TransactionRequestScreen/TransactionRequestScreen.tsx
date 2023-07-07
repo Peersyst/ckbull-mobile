@@ -11,6 +11,7 @@ import SignModal from "module/common/component/feedback/SignModal/SignModal";
 import useSendSignedTransactionRequest from "module/activity/queries/useSendSignedTransactionRequest";
 import useSignTransaction from "module/activity/queries/useSignTransaction";
 import { jsonToTransactionSkeletonInterface } from "../../../sdk/utils/parser";
+import useUncommittedTransaction from "module/transaction/hook/useUncommittedTransaction";
 
 export interface TransactionRequestScreenProps {
     transactionRequest: CompleteTransactionRequestDto;
@@ -75,6 +76,8 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
         sign(txSkeleton);
     };
 
+    const uncommittedTransaction = useUncommittedTransaction();
+
     return (
         <SignModal
             onSign={handleSign}
@@ -93,7 +96,8 @@ export default function TransactionRequestScreen({ transactionRequest }: Transac
                     onSign={showModal}
                     signing={isSigning}
                     rejecting={isRejecting}
-                    disabled={isSuccess}
+                    disabled={isSuccess || uncommittedTransaction}
+                    disabledMessage={translate("pending_transaction_text")}
                 >
                     <Col gap={20} justifyContent="center">
                         <SignRequestAppSummary requestTitle={translate("confirmTransaction")} app={app} style={{ marginHorizontal: 20 }} />
