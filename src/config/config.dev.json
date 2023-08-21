@@ -1,5 +1,5 @@
 {
     "enableMainnet": true,
     "enableSignerApp": true,
-    "signerUrl": "http://172.20.10.10:3001"
+    "signerUrl": "http://localhost:3001"
 }
