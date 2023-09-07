@@ -9,10 +9,12 @@ describe("SignRequestModalLayout", () => {
             <SignRequestModalLayout
                 onReject={jest.fn}
                 onSign={jest.fn}
-                loading={false}
+                signing={false}
+                rejecting={false}
                 disabled={false}
                 rejectTitle="rejectTitle"
                 rejectMessage="rejectMessage"
+                disabledMessage="disabledMessage"
             >
                 <Typography variant="body2Light">ModalBody</Typography>
             </SignRequestModalLayout>,
@@ -30,10 +32,12 @@ describe("SignRequestModalLayout", () => {
             <SignRequestModalLayout
                 onReject={mockOnReject}
                 onSign={jest.fn}
-                loading={false}
+                signing={false}
+                rejecting
                 disabled={false}
                 rejectTitle="rejectTitle"
                 rejectMessage="rejectMessage"
+                disabledMessage="disabledMessage"
             >
                 <Typography variant="body2Light">ModalBody</Typography>
             </SignRequestModalLayout>,
@@ -51,5 +55,27 @@ describe("SignRequestModalLayout", () => {
         fireEvent.press(rejectConfirmButton);
 
         expect(mockOnReject).toHaveBeenCalledTimes(1);
+    });
+
+    test("Renders correctly when disabed and disabledMessage exists", () => {
+        render(
+            <SignRequestModalLayout
+                onReject={jest.fn}
+                onSign={jest.fn}
+                signing={false}
+                rejecting={false}
+                disabled={true}
+                rejectTitle="rejectTitle"
+                rejectMessage="rejectMessage"
+                disabledMessage="disabledMessage"
+            >
+                <Typography variant="body2Light">ModalBody</Typography>
+            </SignRequestModalLayout>,
+        );
+
+        expect(screen.getByText(translate("rejectConnection"))).toBeDefined();
+        expect(screen.getByText(translate("or"))).toBeDefined();
+        expect(screen.getByText(translate("slideToAccept"))).toBeDefined();
+        expect(screen.getByText("disabledMessage")).toBeDefined();
     });
 });

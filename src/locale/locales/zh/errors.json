@@ -31,5 +31,6 @@
     "no_withdrawals": "没有提款",
     "sign_in_request_already_signed": "登录请求已签署",
     "transaction_request_already_signed": "交易请求已签署",
-    "transaction_request_already_declined": "交易请求已被拒绝"
+    "transaction_request_already_declined": "交易请求已被拒绝",
+    "invalid_transaction": "无效交易"
 }
