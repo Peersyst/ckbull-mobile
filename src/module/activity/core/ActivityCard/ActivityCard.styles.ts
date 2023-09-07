@@ -4,7 +4,6 @@ import { ChevronRightIcon } from "icons";
 
 export const ActivityCardRoot = styled(Row)(() => ({
     height: 92,
-    justifyContent: "space-between",
     alignItems: "center",
 }));
 
