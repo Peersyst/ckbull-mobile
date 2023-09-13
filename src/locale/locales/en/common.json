@@ -195,7 +195,7 @@
     "start_receiving_nfts": "To start seeing NFTs, send NFTs to your wallet's address.",
     "start_receiving_tokens": "To start seeing tokens, send tokens to your wallet's address.",
     "start_making_transactions": "To start using CKBull, send CKBs, tokens or NFTs to your wallet address and unleash the power of the Nervos network.",
-    "start_creating_deposits": "To create your first deposit send some CKB to the Nervos DAO and start eraning rewards.",
+    "start_creating_deposits": "To create your first deposit send some CKB to the Nervos DAO and start earning rewards.",
     "withdraw_explanation": "Remember that each deposit period is 180 epochs (~30 days) starting from the time of your deposit.",
     "epochs": "Epochs",
     "noConnectedSites": "No connected sites",
