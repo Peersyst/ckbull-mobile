@@ -1,3 +1,4 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -6,13 +7,10 @@ import type { CreateDappRequest } from '../models/CreateDappRequest';
 import type { PartialDappDto } from '../models/PartialDappDto';
 import type { SecretDto } from '../models/SecretDto';
 import type { UpdateDappRequest } from '../models/UpdateDappRequest';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class DappsService {
-
     /**
      * Create a new dApp
      * @param requestBody
@@ -29,7 +27,6 @@ export class DappsService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Get all dApp
      * @returns PartialDappDto
@@ -41,7 +38,6 @@ export class DappsService {
             url: '/api/dapps',
         });
     }
-
     /**
      * Get a single dApp
      * @param id
@@ -59,7 +55,6 @@ export class DappsService {
             },
         });
     }
-
     /**
      * Updates a  dApp
      * @param id
@@ -81,7 +76,6 @@ export class DappsService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Deletes a dApp
      * @param id
@@ -99,7 +93,6 @@ export class DappsService {
             },
         });
     }
-
     /**
      * Generate new API secret for a dApp
      * @param id
@@ -117,5 +110,4 @@ export class DappsService {
             },
         });
     }
-
 }

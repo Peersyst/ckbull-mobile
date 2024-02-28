@@ -1,3 +1,4 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -9,8 +10,10 @@ export const $CreateTransactionRequestBody = {
             isRequired: true,
         },
         transaction: {
-            description: `The transaction request content`,
-            properties: {
+            type: 'dictionary',
+            contains: {
+                properties: {
+                },
             },
             isRequired: true,
         },

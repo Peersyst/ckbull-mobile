@@ -1,3 +1,4 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -6,13 +7,10 @@ import type { CreateVerificationTokenRequest } from '../models/CreateVerificatio
 import type { PrivateUserDto } from '../models/PrivateUserDto';
 import type { UpdateUserRequest } from '../models/UpdateUserRequest';
 import type { UserDto } from '../models/UserDto';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class UserService {
-
     /**
      * Get user info
      * @returns UserDto
@@ -24,7 +22,6 @@ export class UserService {
             url: '/api/user',
         });
     }
-
     /**
      * Register a new user
      * @param requestBody
@@ -41,7 +38,6 @@ export class UserService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Update user
      * @param requestBody
@@ -58,7 +54,6 @@ export class UserService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Delete user
      * @returns any
@@ -70,7 +65,6 @@ export class UserService {
             url: '/api/user',
         });
     }
-
     /**
      * Resends an verification email
      * @param requestBody
@@ -87,5 +81,4 @@ export class UserService {
             mediaType: 'application/json',
         });
     }
-
 }

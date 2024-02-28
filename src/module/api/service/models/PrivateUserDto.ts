@@ -1,7 +1,7 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type PrivateUserDto = {
     id: number;
     name: string;
@@ -10,3 +10,4 @@ export type PrivateUserDto = {
     googleAuth: boolean;
     emailVerified: boolean;
 };
+

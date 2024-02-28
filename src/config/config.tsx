@@ -13,7 +13,7 @@ import { MinAmountValidator } from "./validators/MinAmountValidator";
 import { MinAmountFromDecimalsValidator } from "./validators/MinAmountFromDecimalsValidator";
 import { MaxAmountValidator } from "./validators/MaxAmountValidator";
 
-const envConfigs: Record<string, CreateConfig> = {
+export const envConfigs: Record<string, CreateConfig> = {
     test: { ...baseConfig, ...devConfig },
     development: { ...baseConfig, ...devConfig },
     production: { ...baseConfig, ...prodConfig },
@@ -37,9 +37,6 @@ const config = createConfig({
                 testnetAddress: envConfig.testnetExplorerLink + "address/",
                 testnetTx: envConfig.testnetExplorerLink + "transaction/",
             },
-            defaultProps: {
-                copy: true,
-            },
         },
         Button: {
             defaultProps: {
@@ -57,7 +54,7 @@ const config = createConfig({
                 },
             },
             actions: {
-                variant: "filled",
+                variant: "primary",
                 component: Button,
                 fullWidth: true,
             },

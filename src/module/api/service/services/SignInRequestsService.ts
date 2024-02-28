@@ -1,3 +1,4 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -6,13 +7,10 @@ import type { PartialDappDto } from '../models/PartialDappDto';
 import type { SignedSignInRequest } from '../models/SignedSignInRequest';
 import type { SignInRequestDto } from '../models/SignInRequestDto';
 import type { SignInRequestStatusDto } from '../models/SignInRequestStatusDto';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class SignInRequestsService {
-
     /**
      * @param status
      * @param network
@@ -35,7 +33,6 @@ export class SignInRequestsService {
             },
         });
     }
-
     /**
      * Create a new sign-in-request
      * @param xTimestamp The timestamp of the request
@@ -59,7 +56,6 @@ export class SignInRequestsService {
             },
         });
     }
-
     /**
      * @param apiKey
      * @returns SignInRequestDto
@@ -76,7 +72,6 @@ export class SignInRequestsService {
             },
         });
     }
-
     /**
      * @param token
      * @returns SignInRequestDto
@@ -93,7 +88,6 @@ export class SignInRequestsService {
             },
         });
     }
-
     /**
      * @param token
      * @returns SignInRequestStatusDto
@@ -110,7 +104,6 @@ export class SignInRequestsService {
             },
         });
     }
-
     /**
      * @param token
      * @param requestBody
@@ -131,7 +124,6 @@ export class SignInRequestsService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * @param token
      * @returns SignInRequestDto
@@ -148,7 +140,6 @@ export class SignInRequestsService {
             },
         });
     }
-
     /**
      * @param requestBody
      * @returns any
@@ -164,5 +155,4 @@ export class SignInRequestsService {
             mediaType: 'application/json',
         });
     }
-
 }

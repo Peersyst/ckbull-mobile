@@ -1,3 +1,4 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -13,7 +14,10 @@ export const $TransactionDto = {
             isNullable: true,
         },
         transaction: {
-            properties: {
+            type: 'dictionary',
+            contains: {
+                properties: {
+                },
             },
             isRequired: true,
         },

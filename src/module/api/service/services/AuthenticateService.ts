@@ -1,3 +1,4 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -6,13 +7,10 @@ import type { LoginRequest } from '../models/LoginRequest';
 import type { RecoverPasswordRequest } from '../models/RecoverPasswordRequest';
 import type { ResetPasswordRequest } from '../models/ResetPasswordRequest';
 import type { ValidateEmailRequest } from '../models/ValidateEmailRequest';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class AuthenticateService {
-
     /**
      * Authenticate user with email
      * @param requestBody
@@ -29,7 +27,6 @@ export class AuthenticateService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Authenticate user with Google
      * @returns any
@@ -41,7 +38,6 @@ export class AuthenticateService {
             url: '/api/auth/google',
         });
     }
-
     /**
      * Google auth callback
      * @returns any
@@ -53,7 +49,6 @@ export class AuthenticateService {
             url: '/api/auth/google/callback',
         });
     }
-
     /**
      * Verify user email
      * @param requestBody
@@ -70,7 +65,6 @@ export class AuthenticateService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Request Password Reset
      * @param requestBody
@@ -87,7 +81,6 @@ export class AuthenticateService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Password Reset
      * @param requestBody
@@ -104,5 +97,4 @@ export class AuthenticateService {
             mediaType: 'application/json',
         });
     }
-
 }

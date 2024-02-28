@@ -1,7 +1,7 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type UpdateDappRequest = {
     name?: string;
     description?: string;
@@ -12,3 +12,4 @@ export type UpdateDappRequest = {
     privacyPolicyUrl?: string;
     image?: string;
 };
+

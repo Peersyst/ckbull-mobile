@@ -1,6 +1,7 @@
 import Root from "./src";
 import useCachedResources from "./src/module/common/hook/useCachedResources";
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import React from "react";
 //Explanation link :https://github.com/facebook/react-native/issues/12981#issuecomment-652745831
 import { LogBox } from "react-native";
 
