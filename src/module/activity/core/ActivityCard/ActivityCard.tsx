@@ -1,4 +1,4 @@
-import { Col, Row, Typography } from "@peersyst/react-native-components";
+import { Col, Typography } from "@peersyst/react-native-components";
 import { ReactElement } from "react";
 import { ActivityCardRoot, ActivityDisplay, DefaultActivityAction, Details } from "module/activity/core/ActivityCard/ActivityCard.styles";
 import { Pressable, TextStyle, ViewStyle } from "react-native";
@@ -36,23 +36,22 @@ const ActivityCard = ({
     } = {},
 }: ActivityCardProps): JSX.Element => {
     return (
-        <ActivityCardRoot style={rotStyle}>
-            <Row gap={16}>
-                <ActivityDisplay source={{ uri: imageUrl || config.defaultDAppImage }} />
-                <Col gap={4} justifyContent="center">
-                    <Typography variant="body3Regular" style={titleStyle}>
-                        {title}
-                    </Typography>
-                    <Typography variant="body4Light" style={descriptionStyle} light={!descriptionStyle.color}>
-                        {description}
-                    </Typography>
-                    {details && (
-                        <Details variant="body4Strong" style={detailsStyle}>
-                            {details}
-                        </Details>
-                    )}
-                </Col>
-            </Row>
+        <ActivityCardRoot style={rotStyle} gap={16}>
+            <ActivityDisplay source={{ uri: imageUrl || config.defaultDAppImage }} />
+            <Col gap={4} justifyContent="center" flex={1}>
+                <Typography variant="body3Regular" style={titleStyle}>
+                    {title}
+                </Typography>
+                <Typography variant="body4Light" style={descriptionStyle} light={!descriptionStyle.color} numberOfLines={2}>
+                    {description}
+                </Typography>
+                {details && (
+                    <Details variant="body4Strong" style={detailsStyle}>
+                        {details}
+                    </Details>
+                )}
+            </Col>
+
             {amount && <Balance balance={amount} action={amountAction} variant="body3Strong" units="token" style={amountStyle} />}
             {onAction && (
                 <Col justifyContent="center" alignItems="center">
