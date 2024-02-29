@@ -12,7 +12,11 @@ export interface ConfigProviderProps {
 const ConfigProvider = ({ children }: ConfigProviderProps): JSX.Element => {
     const translate = useTranslate("error");
     const { locale = "en" } = useRecoilValue(settingsState);
-    return <GenesysConfigProvider config={{ ...config, translate, locale }}>{children}</GenesysConfigProvider>;
+    return (
+        <GenesysConfigProvider config={{ ...config, translate, locale }} storeTheme>
+            {children}
+        </GenesysConfigProvider>
+    );
 };
 
 export default ConfigProvider;
