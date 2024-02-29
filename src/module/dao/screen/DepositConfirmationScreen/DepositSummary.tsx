@@ -7,7 +7,7 @@ import SummaryField from "../../../transaction/component/display/SummaryField/Su
 import useGetDaoInfo from "module/dao/query/useGetDaoInfo";
 import { useTranslate } from "module/common/hook/useTranslate";
 
-export interface DepositSummaryProps extends Omit<BaseTransactionSummaryFullProps, "token" | "nft"> {
+export interface DepositSummaryProps extends Omit<BaseTransactionSummaryFullProps, "token" | "nft" | "children"> {
     senderName: string;
     senderAddress: string;
 }

@@ -6,7 +6,7 @@ import { handleErrorMessage } from "./handleErrorMessage";
 
 const QueryClientProvider: FC<{ children?: ReactNode }> = ({ children }): JSX.Element => {
     const { showToast } = useToast();
-    const translate = useTranslate("error");
+    const translate = useTranslate();
     const queryClient = useRef(
         new QueryClient({
             defaultOptions: {

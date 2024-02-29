@@ -12,7 +12,7 @@ describe("AdviseGroup", () => {
     // Swipe events cannot be tested with jest, so we can't test that all pages are being rendered here. Nevertheless, that is mostly guaranteed by the PagerView component
     test("Renders correctly", () => {
         const screen = render(<AdviseGroup advises={advises} />);
-        expect(screen.getByText(advises[0].title)).toBeDefined();
+        expect(screen.getByText(advises[0].title!)).toBeDefined();
         expect(screen.getByText(advises[0].text!)).toBeDefined();
     });
 });

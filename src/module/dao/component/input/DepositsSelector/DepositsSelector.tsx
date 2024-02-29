@@ -1,12 +1,11 @@
 import { DAOUnlockableAmount } from "ckb-peersyst-sdk";
-import Balance from "module/wallet/component/display/Balance/Balance";
 import DepositItem from "./DepositItem/DepositItem";
 import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
 import Select, { SelectProps } from "module/common/component/input/Select/Select";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { config } from "config";
 import EmptyDepositsComponent from "./EmptyDepositsComponent/EmptyDepositsComponent";
-import { DepositItemText } from "./DepositItem/DepositItem.styles";
+import { DepositItemBalance } from "./DepositItem/DepositItem.styles";
 import { useDepositsSelect } from "./hooks/useDepositsSelector";
 
 interface DepositsSelectorProps
@@ -29,26 +28,23 @@ const DepositsSelector = ({
     const depositAmount = convertShannonsToCKB(currentDeposit?.amount || 0);
     const showEmptyDeposits = deposits.length === 0;
 
-    return (
+    return showEmptyDeposits ? (
+        <EmptyDepositsComponent loading={loading} />
+    ) : (
         <Select
             value={selectedIndex}
             onChange={onChangeDeposit}
             disabled={disabledProp || disabled}
-            renderValue={() => {
-                return showEmptyDeposits ? (
-                    <EmptyDepositsComponent loading={loading} />
-                ) : (
-                    <DepositItemText
-                        as={Balance}
-                        units={config.tokenName}
-                        balance={depositAmount}
-                        variant="body2Light"
-                        unlockable={currentDeposit.unlockable}
-                        selected={false}
-                        type={currentDeposit.type}
-                    />
-                );
-            }}
+            renderValue={() => (
+                <DepositItemBalance
+                    units={config.tokenName}
+                    balance={depositAmount}
+                    variant="body2Light"
+                    unlockable={currentDeposit.unlockable}
+                    selected={false}
+                    type={currentDeposit.type}
+                />
+            )}
             title={translate("select_deposit")}
             hint={hintProp || hint}
             {...rest}

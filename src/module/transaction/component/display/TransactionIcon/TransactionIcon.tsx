@@ -6,7 +6,7 @@ const TransactionIcon = ({ type }: TransactionIconProps): JSX.Element => {
     const { Icon, active } = TX_ICON[type] || {};
     return (
         <TransactionIconRoot active={active} alignItems="center" justifyContent="center">
-            <TxIcon as={Icon} active={active} />
+            <TxIcon active={active}>{Icon && <Icon />}</TxIcon>
         </TransactionIconRoot>
     );
 };
