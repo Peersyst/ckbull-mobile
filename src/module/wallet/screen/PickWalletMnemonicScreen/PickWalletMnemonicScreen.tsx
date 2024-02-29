@@ -15,13 +15,14 @@ const PickWalletMnemonicScreen = ({ onSubmit }: PickWalletMnemonicScreenProps): 
     } = useCreateWallet();
     const { showToast } = useToast();
     const translate = useTranslate();
+    const translateError = useTranslate("error");
     return (
         <PickWalletMnemonicScreenRoot>
             <Advise title={translate("select_in_order")} />
             <MnemonicPicker
                 mnemonic={mnemonic!}
                 onSuccess={onSubmit}
-                onError={() => showToast(translate("incorrect_mnemonic"), { type: "error" })}
+                onError={() => showToast(translateError("incorrect_mnemonic"), { type: "error" })}
             />
         </PickWalletMnemonicScreenRoot>
     );

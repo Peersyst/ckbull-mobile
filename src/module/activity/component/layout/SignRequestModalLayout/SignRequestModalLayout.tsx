@@ -1,4 +1,4 @@
-import { Col, Dialog, SwipeButton, Typography } from "@peersyst/react-native-components";
+import { ButtonProps, Col, Dialog, DialogButton, SwipeButton, Typography } from "@peersyst/react-native-components";
 import Button from "module/common/component/input/Button/Button";
 import { useTranslate } from "module/common/hook/useTranslate";
 import { ReactNode, useState } from "react";
@@ -37,12 +37,12 @@ export default function SignRequestModalLayout({
         hideDialog();
     };
 
-    const buttons = [
+    const buttons: DialogButton<ButtonProps>[] = [
         {
             text: translate("reject"),
             type: "destructive",
             action: handleConfirmReject,
-            variant: "filled",
+            variant: "primary",
         },
         {
             text: translate("cancel"),

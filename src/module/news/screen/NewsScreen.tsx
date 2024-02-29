@@ -3,12 +3,13 @@ import BaseMainScreen from "module/main/component/layout/BaseMainScreen/BaseMain
 import useGetNews from "module/news/query/useGetNews";
 import NewsCard from "../component/display/SimpleNewsCard/NewsCard";
 import { NewsList, NewsSpacer } from "./NewsScreen.styles";
+import { NewsDto } from "../types";
 
 const NewsScreen = (): JSX.Element => {
     const { data = [], refetch, isLoading } = useGetNews();
     return (
         <BaseMainScreen>
-            <NewsList
+            <NewsList<NewsDto>
                 renderItem={({ item, index }) => {
                     return <NewsCard loading={isLoading} news={item} key={index} />;
                 }}

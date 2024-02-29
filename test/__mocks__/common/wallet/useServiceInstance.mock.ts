@@ -8,15 +8,18 @@ export class UseServiceInstanceMock extends BaseMock implements useServiceInstan
     network: Chain;
     serviceInstance: CKBSDKService;
     index: number;
+    queryEnabled: boolean;
     constructor({
         network = "testnet",
         serviceInstance = new CKBSDKService("testnet", MnemonicMocked),
         index = 0,
+        queryEnabled = true,
     }: Partial<useServiceInstance.useServiceInstanceReturn> = {}) {
         super();
         this.network = network;
         this.serviceInstance = serviceInstance;
         this.index = index;
+        this.queryEnabled = queryEnabled;
         this.mock = jest.spyOn(useServiceInstance, "default").mockReturnValue(this);
     }
 }

@@ -42,7 +42,6 @@ const DeleteData = () => {
                             text: translate("delete"),
                             type: "destructive",
                             action: handleDelete,
-                            variant: "filled",
                         },
                     ],
                 })

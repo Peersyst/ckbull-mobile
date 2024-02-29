@@ -10,7 +10,7 @@ export interface NftSelectItemProps {
 }
 
 export const NftSelectItem = ({ nft }: NftSelectItemProps) => {
-    const { nftName, tokenUri, tokenId } = nft;
+    const { nftName, tokenUri } = nft;
     const { setSelectedAsset } = useAssetSelect();
 
     const handleOnPress = () => {
@@ -22,7 +22,7 @@ export const NftSelectItem = ({ nft }: NftSelectItemProps) => {
 
     return (
         <SelectItemCard onPress={handleOnPress}>
-            <NftSelectItemImage uri={tokenUri} tokenId={tokenId} />
+            <NftSelectItemImage uri={tokenUri} />
             <Typography variant="body2Regular" numberOfLines={1}>
                 {nftName}
             </Typography>
