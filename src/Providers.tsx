@@ -6,7 +6,7 @@ import QueryClientProvider from "./query/QueryClientProvider";
 import { ConfigProvider } from "./config";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./locale/i18n";
-import { StylesheetProvider } from "stylesheets/StylesheetProvider";
+import { StylesheetProvider } from "./stylesheets/StylesheetProvider";
 
 const Providers = ({ children }: PropsWithChildren<unknown>): JSX.Element => (
     <RecoilRoot>
