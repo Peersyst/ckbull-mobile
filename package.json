@@ -66,7 +66,6 @@
         "expo-web-browser": "~12.3.2",
         "fast-xml-parser": "^4.3.5",
         "i18next": "^23.10.0",
-        "intl": "^1.2.5",
         "path-browserify": "^1.0.1",
         "process": "^0.11.10",
         "react": "18.2.0",
