@@ -5,7 +5,6 @@ import devConfig from "./config.dev.json";
 import stagingConfig from "./config.staging.json";
 import baseConfig from "./config.base.json";
 import { CkbAddressValidator } from "config/validators/CkbAddressValidator";
-import globalStyles from "config/globalStyles";
 import { ChevronDownIcon, ToTheRightIcon } from "icons";
 import darkTheme from "config/theme/darkTheme";
 import Button from "module/common/component/input/Button/Button";
@@ -108,7 +107,6 @@ const config = createConfig({
         minAmountFromDecimals: MinAmountFromDecimalsValidator,
         maxAmount: MaxAmountValidator,
     },
-    globalStyles,
 });
 
 export default config;
