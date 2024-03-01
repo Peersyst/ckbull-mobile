@@ -3,6 +3,7 @@ import { DrukTextWide_Heavy, AktivGrotesk_Medium, AktivGrotesk_Regular, AktivGro
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
+import { i18nexInitializationPromise } from "locale";
 
 export default function useCachedResources() {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -14,13 +15,16 @@ export default function useCachedResources() {
                 SplashScreen.preventAutoHideAsync();
 
                 // Load fonts
-                await Font.loadAsync({
-                    ...FontAwesome.font,
-                    DrukTextWide_Heavy,
-                    AktivGrotesk_Regular,
-                    AktivGrotesk_Medium,
-                    AktivGrotesk_Bold,
-                });
+                await Promise.all([
+                    Font.loadAsync({
+                        ...FontAwesome.font,
+                        DrukTextWide_Heavy,
+                        AktivGrotesk_Regular,
+                        AktivGrotesk_Medium,
+                        AktivGrotesk_Bold,
+                    }),
+                    i18nexInitializationPromise,
+                ]);
             } catch (e) {
                 // We might want to provide this error information to an error reporting service
                 // eslint-disable-next-line no-console
