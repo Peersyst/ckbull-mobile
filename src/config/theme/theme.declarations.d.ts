@@ -156,7 +156,7 @@ declare module "@peersyst/react-native-components" {
         outlined: true;
         text: true;
         glass: true;
-        filled: false;
+        filled: true;
     }
 }
 
