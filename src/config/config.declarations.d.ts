@@ -5,6 +5,12 @@ import { TFunction } from "react-i18next";
 import { MaxAmountValidatorOptions } from "./validators/MaxAmountValidator";
 import { MinAmountFromDecimalsValidatorOptions } from "./validators/MinAmountFromDecimalsValidator";
 import { MinAmountValidatorOptions } from "./validators/MinAmountValidator";
+import { TransakOnRampQueryParams } from "@peersyst/react-native-transak";
+
+export interface TransakConfig extends Omit<TransakOnRampQueryParams, "environment"> {
+    environment: string;
+    enableTransak: boolean;
+}
 
 declare module "@peersyst/react-native-components" {
     export interface ConfigTypes {
@@ -32,6 +38,7 @@ declare module "@peersyst/react-native-components" {
         /* signerUrl: url of CKBull Developer Console, if you're running this in a local envirorment add your IP as host. p.e. http://192.168.1.2:3001 */
         signerUrl: string;
         defaultDAppImage: string;
+        transak: TransakConfig;
     }
 
     export interface CreateConfig {
@@ -54,6 +61,7 @@ declare module "@peersyst/react-native-components" {
         enableSignerApp: boolean;
         signerUrl: string;
         defaultDAppImage: string;
+        transak: TransakConfig;
     }
 
     export interface ExtraValidators {
