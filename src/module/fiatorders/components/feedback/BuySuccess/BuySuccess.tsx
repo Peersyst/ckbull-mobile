@@ -3,7 +3,7 @@ import OrderCompleted from "../OrderCompleted/OrderCompleted";
 import { useModal } from "@peersyst/react-native-components";
 import BuyModal from "../BuyModal/BuyModal";
 
-export default function BuySuccess() {
+export default function BuySuccess(): JSX.Element {
     const translate = useTranslate();
     const { hideModal } = useModal();
 

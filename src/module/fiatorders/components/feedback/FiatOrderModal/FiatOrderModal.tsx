@@ -4,7 +4,7 @@ import LightThemeProvider from "module/common/component/util/ThemeProvider/Light
 import { FiatOrderModalProps, FiatOrderModalTabs } from "./FiatOrderModal.types";
 import useFiatOrderModal from "./hook/useFiatOrderModal";
 
-function FiatOrderModal({ title, success, order, ...props }: FiatOrderModalProps) {
+function FiatOrderModal({ title, success, order, ...props }: FiatOrderModalProps): JSX.Element {
     const { tab, setTab, modalProps } = useFiatOrderModal(title);
 
     return (

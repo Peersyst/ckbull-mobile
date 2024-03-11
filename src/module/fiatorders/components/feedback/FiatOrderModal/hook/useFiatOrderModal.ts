@@ -1,6 +1,13 @@
+import { CardNavigatorModalProps } from "module/common/component/navigation/CardNavigatorModal/CardNavigatorModal";
 import { useState } from "react";
 
-export default function useFiatOrderModal(title: string) {
+export interface UseFiatOrderModalReturn {
+    tab: number;
+    setTab: (index: number) => void;
+    modalProps: Partial<CardNavigatorModalProps>;
+}
+
+export default function useFiatOrderModal(title: string): UseFiatOrderModalReturn {
     const [tab, setTab] = useState(0);
 
     function handleOnTabChange(index: number) {

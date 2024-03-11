@@ -4,14 +4,16 @@ import { useTranslate } from "module/common/hook/useTranslate";
 import { OrderCompletedIcon, OrderCompletedRoot } from "./OrderCompleted.styles";
 import { OrderCompletedProps } from "./OrderCompleted.types";
 
-export default function OrderCompleted({ title, onClose }: OrderCompletedProps) {
+export default function OrderCompleted({ title, onClose }: OrderCompletedProps): JSX.Element {
     const translate = useTranslate();
 
     return (
         <OrderCompletedRoot>
             <Col flex={1} gap={24} alignItems="center" justifyContent="center">
                 <OrderCompletedIcon />
-                <Typography variant="title3Regular">{title}</Typography>
+                <Typography variant="title3Regular" textAlign="center">
+                    {title}
+                </Typography>
                 <Typography variant="body3Regular" textAlign="center" light>
                     {translate("orderCompletedText")}
                 </Typography>
