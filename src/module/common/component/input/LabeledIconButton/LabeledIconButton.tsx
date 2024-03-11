@@ -7,7 +7,6 @@ export default function LabeledIconButton({ label, labelColor, onPress, ...iconB
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <Col alignItems="center">
-                {/*@needsaudit Workaround: IconButton does not take into account the alignItems style :( */}
                 <View style={{ marginHorizontal: "auto" }}>
                     <IconButton onPress={onPress} {...iconButtonProps} />
                 </View>
