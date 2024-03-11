@@ -4,13 +4,12 @@ import QRCode from "module/transaction/component/display/QRCode/QRCode";
 import Button from "module/common/component/input/Button/Button";
 import * as Clipboard from "expo-clipboard";
 import Container from "module/common/component/display/Container/Container";
-import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import { useTranslate } from "module/common/hook/useTranslate";
+import useWalletAddress from "module/wallet/hook/useWalletAddress";
 
 const ReceiveModal = createBackdrop<ExposedBackdropProps>(({ close, ...rest }) => {
     const translate = useTranslate();
-    const { serviceInstance } = useServiceInstance();
-    const address = serviceInstance?.getAddress();
+    const address = useWalletAddress();
     const { showToast } = useToast();
 
     const copyToClipboard = () => {
