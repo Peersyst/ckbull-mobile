@@ -1,4 +1,3 @@
-import { ExposedBackdropProps } from "@peersyst/react-native-components";
 import Navbar from "module/common/component/navigation/Navbar/Navbar";
 import { NavbarProps } from "module/common/component/navigation/Navbar/Navbar.types";
 import { ReactNode } from "react";
