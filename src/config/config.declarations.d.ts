@@ -9,6 +9,7 @@ import { TransakOnRampQueryParams } from "@peersyst/react-native-transak";
 
 export interface TransakConfig extends Omit<TransakOnRampQueryParams, "environment"> {
     environment: string;
+    enableTransak: boolean;
 }
 
 declare module "@peersyst/react-native-components" {
