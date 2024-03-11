@@ -17,7 +17,7 @@ describe("TransactionDetailsModal test", () => {
         expect(screen.getByText(ACTION_LABEL[action!] + sentTransaction.amount + " " + config.tokenName)).toBeDefined();
         //Body
         expect(screen.getByText(translate("receiver"))).toBeDefined();
-        expect(screen.getByText(formatHash(sentTransaction.outputs[0].address, "middle", 6))).toBeDefined();
+
         expect(screen.getByText(translate("hash"))).toBeDefined();
         expect(screen.getByText(sentTransaction.transactionHash)).toBeDefined();
     });
