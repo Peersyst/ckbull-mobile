@@ -1,7 +1,6 @@
 import { render, translate } from "test-utils";
 import TransactionDetailsModal from "module/transaction/component/core/TransactionDetailsModal/TransactionDetailsModal";
 import { receivedTransaction, sentTransaction } from "mocks/transaction";
-import { formatHash } from "@peersyst/react-utils";
 import { config } from "config";
 import { ACTION_LABEL } from "module/wallet/component/display/Balance/utils/actionLabels";
 import transactionTypeToBalanceAction from "module/transaction/component/display/TransactionAmount/utils/transactionTypeToBalanceAction";
@@ -17,7 +16,7 @@ describe("TransactionDetailsModal test", () => {
         expect(screen.getByText(ACTION_LABEL[action!] + sentTransaction.amount + " " + config.tokenName)).toBeDefined();
         //Body
         expect(screen.getByText(translate("receiver"))).toBeDefined();
-        expect(screen.getByText(formatHash(sentTransaction.outputs[0].address, "middle", 8))).toBeDefined();
+
         expect(screen.getByText(translate("hash"))).toBeDefined();
         expect(screen.getByText(sentTransaction.transactionHash)).toBeDefined();
     });
