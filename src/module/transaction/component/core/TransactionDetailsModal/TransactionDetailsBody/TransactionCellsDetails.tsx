@@ -16,11 +16,11 @@ export default function TransactionCellDetails({ data, title }: TransactionCellD
 
     const cellMap = useMemo(() => {
         const _cellMap = new Map<string, number>();
-        data.forEach((input) => {
-            if (_cellMap.has(input.address)) {
-                _cellMap.set(input.address, (_cellMap.get(input.address) || 0) + input.quantity);
+        data.forEach((cell) => {
+            if (_cellMap.has(cell.address)) {
+                _cellMap.set(cell.address, (_cellMap.get(cell.address) || 0) + cell.quantity);
             } else {
-                _cellMap.set(input.address, input.quantity);
+                _cellMap.set(cell.address, cell.quantity);
             }
         });
         return _cellMap;

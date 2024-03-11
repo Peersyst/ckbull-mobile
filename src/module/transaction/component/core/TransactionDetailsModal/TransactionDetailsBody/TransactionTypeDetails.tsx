@@ -14,7 +14,7 @@ const TransactionTypeDetails = ({ transaction: { type, outputs, inputs } }: Tran
         return (
             <Col gap={10}>
                 <TransactionCellDetails title={translate("senders")} data={inputs} />
-                <TransactionCellDetails title={translate("receiver")} data={[outputs[0]]} />
+                <TransactionCellDetails title={translate("receiver")} data={outputs[0] ? [outputs[0]] : []} />
             </Col>
         );
     else return <></>;
