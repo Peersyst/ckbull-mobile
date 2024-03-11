@@ -16,25 +16,31 @@ export default function TransactionCellDetails({ data, title }: TransactionCellD
 
     const cellMap = useMemo(() => {
         const _cellMap = new Map<string, number>();
-        data.forEach((cell) => {
-            if (_cellMap.has(cell.address)) {
-                _cellMap.set(cell.address, (_cellMap.get(cell.address) || 0) + cell.quantity);
+        for (const cell of data) {
+            const currentValue = _cellMap.get(cell.address);
+            if (currentValue !== undefined) {
+                _cellMap.set(cell.address, currentValue + cell.quantity);
             } else {
                 _cellMap.set(cell.address, cell.quantity);
             }
-        });
+        }
         return _cellMap;
     }, [data]);
 
-    const cells = Array.from(cellMap.entries());
+    const cells = Object.keys(cellMap);
 
     return (
         <TransactionDetail title={title}>
             {cells.length ? (
-                cells.map(([address, quantity], key) => (
+                cells.map((address, key) => (
                     <Row key={key} flex={1} justifyContent="space-between" alignItems="center">
                         <BlockchainAddress address={address} type="address" variant="body3Regular" length={6} showCopyIcon />
-                        <Balance options={{ maximumFractionDigits: 2 }} balance={quantity} units="token" variant="body3Regular" />
+                        <Balance
+                            options={{ maximumFractionDigits: 2 }}
+                            balance={cellMap.get(address) || 0}
+                            units="token"
+                            variant="body3Regular"
+                        />
                     </Row>
                 ))
             ) : (

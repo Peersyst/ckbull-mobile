@@ -6,8 +6,7 @@ import { useRecoilValue } from "recoil";
 import Balance from "../Balance/Balance";
 import { impactAsync, ImpactFeedbackStyle } from "expo-haptics";
 import { GestureResponderEvent } from "react-native";
-
-export type FiatCKBBalanceProps = Omit<BalanceProps, "units" | "unitsPosition">;
+import { FiatCKBBalanceDynamicProps } from "./FiatCKBBalance.types";
 
 export default function FiatCKBBalance({ balance: ckbBalance, onPress, ...props }: BalanceProps): JSX.Element {
     const [showFiat, setCurrencyMode] = useState<boolean>(false);
@@ -20,13 +19,17 @@ export default function FiatCKBBalance({ balance: ckbBalance, onPress, ...props 
         onPress?.(e);
     };
 
-    return (
-        <Balance
-            onPress={changeCurrencyMode}
-            balance={showFiat ? balanceInFiat : ckbBalance}
-            units={showFiat ? fiat : "token"}
-            unitsPosition={showFiat ? "left" : "right"}
-            {...props}
-        />
-    );
+    const balanceProps: FiatCKBBalanceDynamicProps = showFiat
+        ? {
+              balance: balanceInFiat,
+              units: fiat,
+              unitsPosition: "left",
+          }
+        : {
+              balance: ckbBalance,
+              units: "token",
+              unitsPosition: "right",
+          };
+
+    return <Balance onPress={changeCurrencyMode} {...balanceProps} {...props} />;
 }
