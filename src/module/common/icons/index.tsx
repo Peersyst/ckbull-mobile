@@ -13,6 +13,7 @@ export * from "./CircleErrorIcon";
 export * from "./CopyIcon";
 export * from "./CrossIcon";
 export * from "./DaoIcon";
+export * from "./DatabaseIcon";
 export * from "./EditIcon";
 export * from "./ExternalLinkIcon";
 export * from "./FaceIdIcon";

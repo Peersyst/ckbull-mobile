@@ -220,5 +220,10 @@
     "expiresAt": "将于 {{date}} 到期",
     "signInRequest": "登录请求",
     "disconnectDAppConfirmation": "断开您的账户后，您将无法使用此dApp。",
-    "dAppDisconnected": "dApp已断开连接！"
+    "dAppDisconnected": "dApp已断开连接！",
+    "buyCKB": "购买 CKB",
+    "purchase": "购买",
+    "edit": "编辑",
+    "purchaseCompleted": "购买完成!",
+    "orderCompletedText": "请记住，您的账户余额将需要几分钟才能反映出新的金额。"
 }

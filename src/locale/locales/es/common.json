@@ -220,5 +220,10 @@
     "expiresAt": "Expira {{date}}",
     "signInRequest": "Petición de inicio de sessión",
     "disconnectDAppConfirmation": "Al desconectar tu cuenta, no podrás usarla para interactuar con esta DApp. ¿Estás seguro de que quieres desconectarla?",
-    "dAppDisconnected": "DApp desconectada!"
+    "dAppDisconnected": "DApp desconectada!",
+    "buyCKB": "Comprar CKB",
+    "purchase": "Comprar",
+    "edit": "Editar",
+    "purchaseCompleted": "Compra completada!",
+    "orderCompletedText": "Recuerda que tomará unos minutos para que el saldo de tu cuenta refleje tu nuevo balance."
 }
