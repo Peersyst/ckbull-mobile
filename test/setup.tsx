@@ -45,10 +45,24 @@ jest.mock("expo-localization", () => ({
     locale: "en-US",
 }));
 
+jest.mock("react-native-webview", () => {
+    return {
+        WebView: <></>,
+    };
+});
+
 jest.mock("@peersyst/react-native-components", () => {
     return {
         __esModule: true,
         ...jest.requireActual("@peersyst/react-native-components"),
+    };
+});
+
+jest.mock("@peersyst/react-native-transak", () => {
+    return {
+        __esModule: true,
+        ...jest.requireActual("@peersyst/react-native-transak"),
+        TransakOnRampWebView: () => <></>,
     };
 });
 

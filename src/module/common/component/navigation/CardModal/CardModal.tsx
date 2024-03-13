@@ -12,10 +12,11 @@ export interface CardModalChildren {
 
 export type CardModalProps = ExposedBackdropProps & {
     style?: ViewStyle;
+    containerStyle?: ViewStyle;
     children: ((open: boolean, setOpen: (value: boolean) => unknown) => CardModalChildren) | CardModalChildren;
 };
 
-const CardModal = ({ children, style, open, closable = true, onClose, ...backdropProps }: CardModalProps): JSX.Element => {
+const CardModal = ({ children, style, open, closable = true, onClose, containerStyle, ...backdropProps }: CardModalProps): JSX.Element => {
     const [keyboardPaddingEnabled, setKeyboardPaddingEnabled] = useState(false);
     const {
         screen: { height },
@@ -46,7 +47,9 @@ const CardModal = ({ children, style, open, closable = true, onClose, ...backdro
                                 alwaysBounceVertical={false}
                                 enableAutomaticScroll={!keyboardPaddingEnabled}
                             >
-                                <CardModalBodyWrapper flex={1}>{body}</CardModalBodyWrapper>
+                                <CardModalBodyWrapper style={containerStyle} flex={1}>
+                                    {body}
+                                </CardModalBodyWrapper>
                             </KeyboardAwareScrollView>
                         </CardModalWrapper>
                     </CardModalContent>
