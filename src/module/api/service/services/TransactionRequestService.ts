@@ -1,3 +1,4 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -9,13 +10,10 @@ import type { GenerateNftTransactionSkeleton } from '../models/GenerateNftTransa
 import type { SignTransactionRequest } from '../models/SignTransactionRequest';
 import type { SimpleTransactionRequestDto } from '../models/SimpleTransactionRequestDto';
 import type { TransactionRequestStatusDto } from '../models/TransactionRequestStatusDto';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class TransactionRequestService {
-
     /**
      * @param status
      * @param network
@@ -38,7 +36,6 @@ export class TransactionRequestService {
             },
         });
     }
-
     /**
      * Create a new sign-in-request
      * @param requestBody
@@ -66,7 +63,6 @@ export class TransactionRequestService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * @param apiKey
      * @returns CompleteTransactionRequestDto
@@ -83,7 +79,6 @@ export class TransactionRequestService {
             },
         });
     }
-
     /**
      * @param transactionToken
      * @returns SimpleTransactionRequestDto
@@ -100,7 +95,6 @@ export class TransactionRequestService {
             },
         });
     }
-
     /**
      * @param transactionToken
      * @returns TransactionRequestStatusDto
@@ -117,7 +111,6 @@ export class TransactionRequestService {
             },
         });
     }
-
     /**
      * Generates a new TransactionSkeleton Object
      * @param requestBody
@@ -126,7 +119,7 @@ export class TransactionRequestService {
      */
     public static generateTransactionSkeleton(
         requestBody: GenerateNativeTokenTransactionSkeleton,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/transaction-request/generate-native-token-transaction',
@@ -134,7 +127,6 @@ export class TransactionRequestService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Generates a new TransactionSkeleton Object
      * @param requestBody
@@ -143,7 +135,7 @@ export class TransactionRequestService {
      */
     public static generateNftTransactionSkeleton(
         requestBody: GenerateNftTransactionSkeleton,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/transaction-request/generate-nft-transaction',
@@ -151,7 +143,6 @@ export class TransactionRequestService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * @param transactionToken
      * @param requestBody
@@ -172,7 +163,6 @@ export class TransactionRequestService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * @param transactionToken
      * @param requestBody
@@ -193,5 +183,4 @@ export class TransactionRequestService {
             mediaType: 'application/json',
         });
     }
-
 }

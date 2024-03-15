@@ -74,7 +74,10 @@ const PwlockK1AcplConfig: { [key in Environments]: ScriptConfig } = {
 class CustomCellProvider implements CellProvider {
     public readonly uri: string;
 
-    constructor(private readonly indexer: IndexerType, private readonly myQueryOptions: QueryOptions) {
+    constructor(
+        private readonly indexer: IndexerType,
+        private readonly myQueryOptions: QueryOptions,
+    ) {
         this.uri = indexer.uri;
     }
 

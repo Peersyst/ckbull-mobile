@@ -1,10 +1,9 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { AccountMetadataDto } from './AccountMetadataDto';
 import type { PartialDappDto } from './PartialDappDto';
-
 export type SignInRequestDto = {
     id: number;
     signInToken: string;
@@ -15,3 +14,4 @@ export type SignInRequestDto = {
     metadata: AccountMetadataDto;
     app: PartialDappDto;
 };
+

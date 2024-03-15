@@ -1,7 +1,7 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type CreateUserRequest = {
     name: string;
     email: string;
@@ -10,3 +10,4 @@ export type CreateUserRequest = {
      */
     password: string;
 };
+

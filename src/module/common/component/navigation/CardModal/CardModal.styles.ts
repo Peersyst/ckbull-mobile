@@ -1,10 +1,11 @@
 import styled from "@peersyst/react-native-styled";
 import { Col } from "@peersyst/react-native-components";
-import { KeyboardAvoidingView } from "react-native";
+import { KeyboardAvoidingView, Platform, View } from "react-native";
+import { ComponentType } from "react";
 
 const CARD_MODAL_PADDING = 20;
 
-export const CardModalContent = styled(KeyboardAvoidingView)(({ theme, dimensions }) => ({
+export const CardModalContent = styled(Platform.OS === "ios" ? KeyboardAvoidingView : View)(({ theme, dimensions }) => ({
     position: "absolute",
     bottom: 0,
     width: "100%",
@@ -12,7 +13,7 @@ export const CardModalContent = styled(KeyboardAvoidingView)(({ theme, dimension
     borderTopStartRadius: theme.borderRadius,
     borderTopEndRadius: theme.borderRadius,
     backgroundColor: theme.palette.component.paper,
-}));
+})) as ComponentType<any>;
 
 export const CardModalWrapper = styled(Col)(() => ({
     height: "100%",

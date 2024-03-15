@@ -1,5 +1,11 @@
 import "core-js";
 
+import "@testing-library/jest-native";
+
+import "@testing-library/jest-native/extend-expect";
+
+jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
+
 // Mock AsyncStorage
 jest.mock("@react-native-async-storage/async-storage", () => require("@react-native-async-storage/async-storage/jest/async-storage-mock"));
 
@@ -13,21 +19,8 @@ setLogger({
     error: () => {},
 });
 
-/* eslint-enable @typescript-eslint/no-empty-function */
-/* eslint-enable no-console */
-
-/*
-jest.mock("react-native-reanimated", () => {
-    const Reanimated = require("react-native-reanimated/mock");
-
-    // The mock for `call` immediately calls the callback which is incorrect
-    // So we override it with a no-op
-    Reanimated.default.call = () => undefined;
-
-    return Reanimated;
-});*/
-
 import "react-native-gesture-handler/jestSetup";
+import { BackdropProps } from "@peersyst/react-native-components";
 
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
@@ -45,6 +38,14 @@ jest.mock("expo-localization", () => ({
     locale: "en-US",
 }));
 
+jest.mock("react-native/Libraries/LogBox/LogBox", () => ({
+    __esModule: true,
+    default: {
+        ignoreLogs: jest.fn(),
+        ignoreAllLogs: jest.fn(),
+    },
+}));
+
 jest.mock("react-native-webview", () => {
     return {
         WebView: <></>,
@@ -52,9 +53,27 @@ jest.mock("react-native-webview", () => {
 });
 
 jest.mock("@peersyst/react-native-components", () => {
+    const MockBackdrop = ({ children, onOpen, onClose, onExited, onEntered }: BackdropProps) => {
+        const handleClose = () => {
+            onClose?.();
+            onExited?.();
+        };
+        onOpen?.();
+        onEntered?.();
+        return <>{typeof children === "function" ? children(true, jest.fn(handleClose)) : children}</>;
+    };
     return {
         __esModule: true,
         ...jest.requireActual("@peersyst/react-native-components"),
+        Backdrop: MockBackdrop,
+    };
+});
+
+jest.mock("@peersyst/react-native-transak", () => {
+    return {
+        __esModule: true,
+        ...jest.requireActual("@peersyst/react-native-transak"),
+        TransakOnRampWebView: () => <></>,
     };
 });
 
@@ -69,3 +88,8 @@ jest.mock("@peersyst/react-native-transak", () => {
 jest.mock("module/settings/hook/useSelectedNetwork", () => {
     return () => "testnet";
 });
+
+// react-native-reanimated mock
+(global as any).ReanimatedDataMock = {
+    now: () => 0,
+};

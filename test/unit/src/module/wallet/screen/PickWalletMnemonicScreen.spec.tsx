@@ -48,6 +48,6 @@ describe("PickWalletMnemonicScreen tests", () => {
         fireEvent.press(screen.getByText("lemon"));
         fireEvent.press(screen.getByText("watermelon"));
 
-        expect(showToast).toHaveBeenCalledWith(translate("incorrect_mnemonic"), { type: "error" });
+        expect(showToast).toHaveBeenCalledWith(translate("incorrect_mnemonic", { ns: "error" }), { type: "error" });
     });
 });

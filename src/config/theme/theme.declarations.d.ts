@@ -24,25 +24,25 @@ export interface ThemeOverlays {
 }
 
 export interface ThemeGreen {
-    200: string;
-    400: string;
-    600: string;
-    800: string;
+    "200": string;
+    "400": string;
+    "600": string;
+    "800": string;
 }
 
 export interface ThemeGray {
-    0: string;
-    50: string;
-    100: string;
-    200: string;
-    300: string;
-    400: string;
-    450: string;
-    500: string;
-    600: string;
-    700: string;
-    800: string;
-    900: string;
+    "0": string;
+    "50": string;
+    "100": string;
+    "200": string;
+    "300": string;
+    "400": string;
+    "450": string;
+    "500": string;
+    "600": string;
+    "700": string;
+    "800": string;
+    "900": string;
 }
 
 export type ThemeGradient = [string, string];
@@ -156,7 +156,7 @@ declare module "@peersyst/react-native-components" {
         outlined: true;
         text: true;
         glass: true;
-        filled: false;
+        filled: true;
     }
 }
 

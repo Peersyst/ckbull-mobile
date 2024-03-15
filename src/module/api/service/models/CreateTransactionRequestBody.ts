@@ -1,7 +1,7 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type CreateTransactionRequestBody = {
     /**
      * The signIn token that was used to create the transaction request
@@ -10,5 +10,6 @@ export type CreateTransactionRequestBody = {
     /**
      * The transaction request content
      */
-    transaction: any;
+    transaction: Record<string, any>;
 };
+

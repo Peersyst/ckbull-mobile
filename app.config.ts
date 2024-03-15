@@ -59,4 +59,5 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     web: {
         favicon: "./assets/images/favicon.png",
     },
+    plugins: ["expo-localization"],
 });

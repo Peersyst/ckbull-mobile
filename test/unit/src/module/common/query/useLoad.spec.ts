@@ -22,7 +22,7 @@ describe("useLoad tests", () => {
     });
 
     test("Loads without wallets", async () => {
-        const getWallets = jest.spyOn(WalletStorage, "getWallets").mockImplementation().mockResolvedValue();
+        const getWallets = jest.spyOn(WalletStorage, "getWallets").mockImplementation();
         const { result } = renderUseLoad();
         expect(result.current.loading).toBe(true);
         expect(getWallets).toHaveBeenCalled();

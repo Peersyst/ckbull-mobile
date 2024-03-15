@@ -85,7 +85,6 @@ const DeleteOneWallet = () => {
                             text: translate("delete_wallet", { walletName: walletToDelete.name }),
                             type: "destructive",
                             action: () => handleDelete(index),
-                            variant: "filled",
                         },
                     ],
                 });

@@ -1,7 +1,7 @@
-import { Animated } from "react-native";
+import { Animated, useWindowDimensions } from "react-native";
 import { GradientPageProps } from "module/common/component/layout/GradientPage/GradientPage.types";
 import { useTheme } from "@peersyst/react-native-styled";
-import { useDimensions } from "@react-native-community/hooks";
+
 import { useEffect, useRef } from "react";
 import { GradientPageGradient, GradientPageRoot } from "module/common/component/layout/GradientPage/GradientPage.styles";
 
@@ -15,9 +15,7 @@ const GradientPage = ({
 }: GradientPageProps): JSX.Element => {
     const { palette } = useTheme();
 
-    const {
-        screen: { width },
-    } = useDimensions();
+    const { width } = useWindowDimensions();
 
     const gradientAnim = useRef(new Animated.Value(1)).current;
 

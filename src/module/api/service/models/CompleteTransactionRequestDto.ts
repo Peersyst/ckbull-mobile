@@ -1,10 +1,9 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { SignInRequestDto } from './SignInRequestDto';
 import type { TransactionDto } from './TransactionDto';
-
 export type CompleteTransactionRequestDto = {
     id: number;
     transactionToken: string;
@@ -14,3 +13,4 @@ export type CompleteTransactionRequestDto = {
     expiresAt: string;
     signInRequest: SignInRequestDto;
 };
+

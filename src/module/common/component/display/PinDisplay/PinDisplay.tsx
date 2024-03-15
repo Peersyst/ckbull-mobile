@@ -1,5 +1,5 @@
 import PinItem from "./PinItem/PinItem";
-import { PinDisplayRoot } from "./PinDisplay.styles";
+import { AnimatedPinDisplayRoot } from "./PinDisplay.styles";
 import { useEffect, useRef } from "react";
 import { Animated, Easing } from "react-native";
 import { Typography } from "@peersyst/react-native-components";
@@ -39,7 +39,7 @@ const PinDisplay = ({ length, error, placeholder }: PinDisplayProps): JSX.Elemen
     }, [error]);
 
     return (
-        <PinDisplayRoot style={{ transform: [{ translateX: errorAnimation }] }}>
+        <AnimatedPinDisplayRoot style={{ transform: [{ translateX: errorAnimation }] }}>
             {length || !placeholder ? (
                 [...Array(4)].map((_, i) => <PinItem key={i} active={i < length} />)
             ) : (
@@ -47,7 +47,7 @@ const PinDisplay = ({ length, error, placeholder }: PinDisplayProps): JSX.Elemen
                     {placeholder}
                 </Typography>
             )}
-        </PinDisplayRoot>
+        </AnimatedPinDisplayRoot>
     );
 };
 

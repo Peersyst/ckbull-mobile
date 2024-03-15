@@ -1,12 +1,12 @@
-import { Row, SelectItem, Theme, useSelected } from "@peersyst/react-native-components";
-import Balance from "module/wallet/component/display/Balance/Balance";
+import { Col, Row, SelectItem, Theme, useSelected } from "@peersyst/react-native-components";
+
 import { DAOUnlockableAmount } from "ckb-peersyst-sdk";
-import { DepositItemText } from "./DepositItem.styles";
-import { getAPC } from "module/dao/utils/getAPC";
-import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
 import { useTranslate } from "module/common/hook/useTranslate";
 import useFormatTimeDAORemainingCycle from "module/transaction/component/hook/UseFormatTimeDAORemainingCycle/useFormatTimeDAORemaningCycle";
+import { DepositItemBalance, DepositItemText } from "./DepositItem.styles";
+import { convertShannonsToCKB } from "module/wallet/utils/convertShannonsToCKB";
 import { config } from "config";
+import { getAPC } from "module/dao/utils/getAPC";
 
 export interface DepositItemProps {
     deposit: DAOUnlockableAmount;
@@ -32,38 +32,38 @@ const DepositItem = ({ value, selectedIndex, deposit }: DepositItemProps): JSX.E
 
     return (
         <SelectItem value={value} key={value}>
-            <Row justifyContent="flex-start">
-                <DepositItemText
-                    type={type}
-                    as={Balance}
-                    unlockable={unlockable}
-                    selected={isSelected}
-                    balance={convertShannonsToCKB(amount)}
-                    variant="body1"
-                    units={config.tokenName}
-                />
-                <DepositItemText type={type} unlockable={unlockable} selected={isSelected} variant="body1">
-                    {" (APC: " + getAPC({ daoCompensation: compensation, daoDeposit: amount }) + "%)"}
-                </DepositItemText>
-            </Row>
-            <Row justifyContent="flex-start">
-                <DepositItemText type={type} unlockable={unlockable} selected={isSelected} variant="body2">
-                    {translate("compensation") + ": "}
-                </DepositItemText>
-                <DepositItemText
-                    type={type}
-                    as={Balance}
-                    unlockable={unlockable}
-                    selected={isSelected}
-                    balance={convertShannonsToCKB(compensation)}
-                    variant="body2"
-                />
-            </Row>
-            <Row justifyContent="flex-start">
-                <DepositItemText type={type} unlockable={unlockable} selected={isSelected} variant="body2">
-                    {unlockable ? translate("available") : translate("remaining_time") + ": " + formatTimeDAORemainingCycle(deposit)}
-                </DepositItemText>
-            </Row>
+            <Col flex={1}>
+                <Row>
+                    <DepositItemBalance
+                        type={type}
+                        unlockable={unlockable}
+                        selected={isSelected}
+                        balance={convertShannonsToCKB(amount)}
+                        variant="body1"
+                        units={config.tokenName}
+                    />
+                    <DepositItemText type={type} unlockable={unlockable} selected={isSelected} variant="body1">
+                        {" (APC: " + getAPC({ daoCompensation: compensation, daoDeposit: amount }) + "%)"}
+                    </DepositItemText>
+                </Row>
+                <Col flex={1}>
+                    <Row>
+                        <DepositItemText type={type} unlockable={unlockable} selected={isSelected} variant="body2">
+                            {translate("compensation") + ": "}
+                        </DepositItemText>
+                        <DepositItemBalance
+                            type={type}
+                            unlockable={unlockable}
+                            selected={isSelected}
+                            balance={convertShannonsToCKB(compensation)}
+                            variant="body2"
+                        />
+                    </Row>
+                    <DepositItemText type={type} unlockable={unlockable} selected={isSelected} variant="body2">
+                        {unlockable ? translate("available") : translate("remaining_time") + ": " + formatTimeDAORemainingCycle(deposit)}
+                    </DepositItemText>
+                </Col>
+            </Col>
         </SelectItem>
     );
 };

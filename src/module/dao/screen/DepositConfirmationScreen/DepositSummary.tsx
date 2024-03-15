@@ -1,13 +1,13 @@
 import { formatHash } from "@peersyst/react-utils";
 import { Col, Typography } from "@peersyst/react-native-components";
 import BaseSendSummary, {
-    BaseSendSummaryProps,
+    BaseTransactionSummaryFullProps,
 } from "../../../transaction/component/display/BaseTransactionSummary/BaseTransactionSummary";
 import SummaryField from "../../../transaction/component/display/SummaryField/SummaryField";
 import useGetDaoInfo from "module/dao/query/useGetDaoInfo";
 import { useTranslate } from "module/common/hook/useTranslate";
 
-export interface DepositSummaryProps extends Omit<BaseSendSummaryProps, "token" | "nft"> {
+export interface DepositSummaryProps extends Omit<BaseTransactionSummaryFullProps, "token" | "nft" | "children"> {
     senderName: string;
     senderAddress: string;
 }

@@ -2,7 +2,7 @@ import * as Genesys from "@peersyst/react-native-components";
 import { envConfigs } from "config/config";
 import BaseMock, { MockFnType } from "mocks/common/base.mock";
 
-export interface UseConfigMock {
+export interface IUseConfigMock {
     config: Genesys.Config;
     useConfig: MockFnType;
     key: keyof Genesys.Config;
@@ -14,7 +14,7 @@ export interface UseConfigMockOptions {
     key?: keyof Genesys.Config;
 }
 
-export class UseConfigMock extends BaseMock implements UseConfigMock {
+export class UseConfigMock extends BaseMock implements IUseConfigMock {
     config: Genesys.Config;
     useConfig: MockFnType;
     key: keyof Genesys.Config;

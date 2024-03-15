@@ -12,7 +12,7 @@ const useDepositInDAO = (index: number) => {
 
     return useMutation(async (params: Omit<DepositInDAOParams, "mnemonic">) => {
         const mnemonic = await WalletStorage.getMnemonic(index);
-        const hash = await serviceInstance.depositInDAO({ ...params, mnemonic: mnemonic! });
+        const hash = await serviceInstance?.depositInDAO({ ...params, mnemonic: mnemonic! });
         if (hash) await addUncommittedTransaction(index, network, hash);
     });
 };

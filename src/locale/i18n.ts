@@ -1,14 +1,6 @@
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 
-// Polyfill Intl as it is not included in RN
-import "intl";
-import "intl/locale-data/jsonp/en";
-import "intl/locale-data/jsonp/es";
-import "intl/locale-data/jsonp/zh";
-import "intl/locale-data/jsonp/pt";
-import "intl/locale-data/jsonp/fr";
-import "intl/locale-data/jsonp/el";
 import LanguageDetectorPlugin from "./pluguins/LanguageDetectorPlugin/LanguageDetectorPlugin";
 import { el, fr, pt, en, es, zh } from "./locales";
 
@@ -23,7 +15,7 @@ export const resources = {
     fr,
 } as const;
 
-i18next
+export const i18nexInitializationPromise = i18next
     .use(initReactI18next)
     .use(LanguageDetectorPlugin)
     .init({

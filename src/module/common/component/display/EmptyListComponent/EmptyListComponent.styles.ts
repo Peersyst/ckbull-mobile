@@ -1,4 +1,3 @@
-import { Typography } from "@peersyst/react-native-components";
 import styled from "@peersyst/react-native-styled";
 import { Image } from "react-native";
 
@@ -8,11 +7,5 @@ export const EmptyListComponentImage = styled(Image)(({ dimensions: { height } }
         height: height * ASPECT_RATIO,
         width: height * ASPECT_RATIO,
         marginTop: -height * ASPECT_RATIO * 0.1,
-    };
-});
-
-export const EmptyListComponentText = styled(Typography)(({ theme }) => {
-    return {
-        color: theme.palette.darkGray2,
     };
 });

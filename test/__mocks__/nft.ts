@@ -19,7 +19,7 @@ export const tempNft: Nft = {
         reference: null,
         reference_hash: null,
     },
-};
+} as Nft;
 
 export const nft: OldNft = {
     tokenId: "1",
