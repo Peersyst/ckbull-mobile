@@ -27,7 +27,7 @@ export default function TransactionCellDetails({ data, title }: TransactionCellD
         return _cellMap;
     }, [data]);
 
-    const cells = Object.keys(cellMap);
+    const cells = Array.from(cellMap.keys());
 
     return (
         <TransactionDetail title={title}>

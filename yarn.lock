@@ -2085,10 +2085,10 @@
     "@peersyst/react-utils" "^2.2.4"
     react-native-safe-area-context "4.4.1"
 
-"@peersyst/react-native-transak@1.0.0-alpha.4":
-  version "1.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@peersyst/react-native-transak/-/react-native-transak-1.0.0-alpha.4.tgz#97b8762dcf7fc9bfb3e2e7318f65d9e93aeb2a5a"
-  integrity sha512-HkuggHO57LoeMk8FsQAapb5ED2UuNPCqAaixNkHmfO1d5/NhssQ9OlvRZqwV1Y/x1ZCbGTh6Zp5zyRrPwm0aTQ==
+"@peersyst/react-native-transak@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@peersyst/react-native-transak/-/react-native-transak-1.0.0.tgz#f781519b6a97b4a4033720b9125d926b3e4421b0"
+  integrity sha512-7/wLUT+cAfR/IGq1XgmiDU8wopLF06JFz1bjKbB0bW8b1ZgS51rsO73zgHvimtw6LZ4oQUB7nKrb0Nnir1dpTg==
 
 "@peersyst/react-native-utils@^1.2.0":
   version "1.2.0"

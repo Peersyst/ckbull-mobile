@@ -33,7 +33,7 @@
         "@peersyst/react-hooks": "^2.2.7",
         "@peersyst/react-native-components": "^2.5.0",
         "@peersyst/react-native-styled": "^2.1.2",
-        "@peersyst/react-native-transak": "1.0.0-alpha.4",
+        "@peersyst/react-native-transak": "1.0.0",
         "@peersyst/react-types": "^1.5.5",
         "@peersyst/react-utils": "^2.2.4",
         "@rather-labs/nrc-721-sdk": "0.0.16",
