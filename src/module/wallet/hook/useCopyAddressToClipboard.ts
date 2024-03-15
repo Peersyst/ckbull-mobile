@@ -1,9 +1,9 @@
-import useServiceInstance from "module/wallet/hook/useServiceInstance";
 import useCopyToClipboard from "module/common/hook/useCopyToClipboard";
+import useWalletAddress from "./useWalletAddress";
 
 export default function (): () => void {
-    const { serviceInstance } = useServiceInstance();
+    const walletAddress = useWalletAddress();
     const copyToClipboard = useCopyToClipboard();
 
-    return () => copyToClipboard(serviceInstance?.getAddress() || "");
+    return () => copyToClipboard(walletAddress || "");
 }

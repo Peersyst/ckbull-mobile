@@ -220,5 +220,10 @@
     "expiresAt": "Expires at {{date}}",
     "signInRequest": "Sign in request",
     "disconnectDAppConfirmation": "By disconnecting your account, you will no longer be able to use this dApp.",
-    "dAppDisconnected": "dApp disconnected!"
+    "dAppDisconnected": "dApp disconnected!",
+    "buyCKB": "Buy CKB",
+    "purchase": "Purchase",
+    "edit": "Edit",
+    "purchaseCompleted": "Purchase completed!",
+    "orderCompletedText": "Remember that it will take a few minutes for your account balance to reflect the new amount."
 }

@@ -46,6 +46,12 @@ jest.mock("react-native/Libraries/LogBox/LogBox", () => ({
     },
 }));
 
+jest.mock("react-native-webview", () => {
+    return {
+        WebView: <></>,
+    };
+});
+
 jest.mock("@peersyst/react-native-components", () => {
     const MockBackdrop = ({ children, onOpen, onClose, onExited, onEntered }: BackdropProps) => {
         const handleClose = () => {
@@ -60,6 +66,22 @@ jest.mock("@peersyst/react-native-components", () => {
         __esModule: true,
         ...jest.requireActual("@peersyst/react-native-components"),
         Backdrop: MockBackdrop,
+    };
+});
+
+jest.mock("@peersyst/react-native-transak", () => {
+    return {
+        __esModule: true,
+        ...jest.requireActual("@peersyst/react-native-transak"),
+        TransakOnRampWebView: () => <></>,
+    };
+});
+
+jest.mock("@peersyst/react-native-transak", () => {
+    return {
+        __esModule: true,
+        ...jest.requireActual("@peersyst/react-native-transak"),
+        TransakOnRampWebView: () => <></>,
     };
 });
 
